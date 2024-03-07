@@ -4,7 +4,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>TMT</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg">THE MANILA TIMES</span>
+      <span class="logo-lg">TMT Foods Inc</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">

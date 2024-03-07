@@ -25,7 +25,7 @@
 <div class="login-box ">
   	<div class="login-logo">
 	  <img src="../images/manila-logo-main.png" alt="tmt" class="imgcenter">
-  		<!-- <b >THE MANILA TIMES</b> -->
+  		<!-- <b >TMT Foods Incorporated</b> -->
   	</div>
   
   	<div class="login-box-body">
