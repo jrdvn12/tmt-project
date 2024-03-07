@@ -11,12 +11,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Main Inventory
+        User List
       </h1>
       <!-- <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Employees</li>
-        <li class="active">Employee List</li>
+        <li class="active">User</li>
       </ol> -->
     </section>
     <!-- Main content -->
@@ -47,11 +46,12 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header with-border">
-               <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
+              <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
             </div>
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
+                  
                   <th>Product ID</th>
                   <th>Photo</th>
                   <th>Name</th>
@@ -61,29 +61,19 @@
                   <th>Remaining Stock</th>
                   <th>Date of Stock</th>
                   <th>Tools</th>
+                  
                 </thead>
                 <tbody>
                   <?php
                     $sql = "SELECT * FROM main_inventory";
-                     $query = $conn->query($sql);
+                    $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
-                      ?>
+                      $image = (!empty($row['photo'])) ? '../images/'.$row['photo'] : '../images/noproduct.jpg';
+                      echo "
                         <tr>
                           
                           <td><?php echo $row['product_number']; ?></td>
-
-                          <td>
-                          <?php
-                                  // Assuming $row['photo'] contains the filename of the uploaded photo
-                                  $photo_src = (!empty($row['photo'])) ? '../images/' . $row['photo'] : '../images/noproduct.jpg';
-                                  ?>
-
-                                  <img src="<?php echo $photo_src; ?>" width="150px" height="300px">
-
-
-                              </td>
-
-
+                          <td><img src="<?php echo (!empty($row['photo']))? '../images/'.$row['photo']:'../images/noproduct.jpg'; ?>"width="150px" height="300px"> <a href="#edit_photo" data-toggle="modal" class="pull-right photo" data-id="<?php echo $row['id']; ?>"><span class="fa fa-edit"></span></a></td>
                           <td><?php echo $row['product_name']; ?></td>
                           <td><?php echo $row['price']; ?></td>
                           <td><?php echo $row['qty']; ?></td>
@@ -92,13 +82,12 @@
                           
                           <td><?php echo date('M d, Y', strtotime($row['dateofstock'])) ?></td>
                           <td>
-                            <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['id']; ?>"><i class="fa fa-edit"></i> Edit  </button>
-                           
-                            <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['id']; ?>"><i class="fa fa-trash"></i> Delete</button>
-                            
+                            <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
+                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
                           </td>
+                          
                         </tr>
-                      <?php
+                      ";
                     }
                   ?>
                 </tbody>
@@ -115,38 +104,22 @@
 </div>
 <?php include 'includes/scripts.php'; ?>
 <script>
-
-function redirectToPage2(tdElement) {
-            // Get the ID attribute of the clicked <td> element
-            var tdId = tdElement.id;
-
-            // Construct the URL for the next PHP page with the ID as a query parameter
-            var nextPageURL = "employee_my_id.php?id=" + encodeURIComponent(tdId);
-
-            // Redirect to the next PHP page
-            window.location.href = nextPageURL;
-        }
 $(function(){
-  $('.edit').click(function(e){
+  $(document).on('click', '.edit', function(e){
     e.preventDefault();
     $('#edit').modal('show');
     var id = $(this).data('id');
     getRow(id);
   });
 
-  $('.delete').click(function(e){
+  $(document).on('click', '.delete', function(e){
     e.preventDefault();
     $('#delete').modal('show');
     var id = $(this).data('id');
     getRow(id);
   });
-  $('.edit_employee_password').click(function(e){
-    e.preventDefault();
-    $('#edit_employee_password').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
-  $('.photo').click(function(e){
+
+  $(document).on('click', '.photo', function(e){
     e.preventDefault();
     var id = $(this).data('id');
     getRow(id);
@@ -157,16 +130,17 @@ $(function(){
 function getRow(id){
   $.ajax({
     type: 'POST',
-    url: 'main_inventory_row.php',
+    url: 'user_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){
-      $('.id').val(response.empid);
-      $('.caid').html(response.product_name); 
-      $('.product_name').val(response.product_name);
-    
-      
-
+      $('.id').val(response.id);
+      $('#edit_username').val(response.username);
+      $('#edit_firstname').val(response.firstname);
+      $('#edit_lastname').val(response.lastname);
+      $('#edit_password').val(response.password);    
+      $('.fullname').html(response.firstname+' '+response.lastname);
+      $('#position_val').html(response.position);
     }
   });
 }

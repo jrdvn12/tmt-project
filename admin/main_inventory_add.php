@@ -19,7 +19,7 @@
 		$sql = "INSERT INTO main_inventory (product_number, photo, product_name, price, qty,soldstock,balance,dateofstock) 
         VALUES ('$product_number', '$filename', '$product_name', '$product_price', '$product_quantity', '$soldstock', '$balance', '$dateofstock')";
 		if($conn->query($sql)){
-			$_SESSION['success'] = 'New product added successfully';
+			$_SESSION['success'] = 'New product added successfully!';
 		}
 		else{
 			$_SESSION['error'] = $conn->error;
