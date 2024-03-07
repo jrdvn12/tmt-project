@@ -53,7 +53,7 @@ body {
 /* Changing the background color for tab/pills */
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     color: #fff;
-    background-color: #ff6707;
+    background-color: #0ee6e6;
 }
 
 /* Display the suggestions list on top of other elements */
