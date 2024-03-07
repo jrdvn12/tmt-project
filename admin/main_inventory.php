@@ -74,7 +74,7 @@
                           
                           <td>".$row['product_number']."</td>
                           <td>
-                            <img src='".$image."' width='30px' height='30px'>
+                            <img src='".$image."' width='100px' height='200px'>
                             <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
                           </td>
                           <td>".$row['product_name']."</td>
