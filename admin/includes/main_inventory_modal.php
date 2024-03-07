@@ -8,7 +8,7 @@
             	<h4 class="modal-title"><b>Add New Product</b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="main_inventory_add.php">
+            	<form class="form-horizontal" method="POST" action="main_inventory_add.php" enctype="multipart/form-data">
           		    <div class="form-group">
                         <label for="product_number" class="col-sm-3 control-label">Product Number</label>
 
@@ -77,6 +77,21 @@
                       <input type="text" class="form-control" id="edit_amount" name="amount" required>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="edit_amount" class="col-sm-3 control-label">Amount</label>
+
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="edit_amount" name="amount" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="edit_amount" class="col-sm-3 control-label">Amount</label>
+
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="edit_amount" name="amount" required>
+                    </div>
+                </div>
+                
           	</div>
           	<div class="modal-footer">
             	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
