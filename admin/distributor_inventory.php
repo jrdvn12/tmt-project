@@ -11,7 +11,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Main 
+        User List
       </h1>
       <!-- <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -54,9 +54,7 @@
                   
                   <th>Product ID</th>
                   <th>Photo</th>
-                  <th>Piece Code</th>
-                  <th>Case Code</th>
-                  <th>SKU</th>
+                  <th>Name</th>
                   <th>Price</th>
                   <th>Quantity</th>
                   <th>Sold Stock</th>
@@ -74,24 +72,15 @@
                       echo "
                         <tr>
                           
-                          <td >".$row['product_number']."</td>
-                          <td align='center'>
-                            <img src='".$image."' width='150px' height='200px' align='center'>
+                          <td>".$row['product_number']."</td>
+                          <td>
+                            <img src='".$image."' width='150px' height='200px'>
                             <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
                           </td>
-
-                          <td  align='center'>
-                            <img src='../images/piececode.png' width='150px' height='80px'>
-                            <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
-                          </td>
-
-                          <td align='center'>
-                            <img src='../images/casecode.png' width='150px' height='80px' class='center'>
-                            <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
-                          </td>
-
                           <td>".$row['product_name']."</td>
                           <td>".$row['price']."</td>
+                          
+                          
                           <td>".$row['qty']."</td>
                           <td>". $row['soldstock']."</td>
                           <td>". $row['balance']."</td>
