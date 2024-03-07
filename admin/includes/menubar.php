@@ -44,7 +44,8 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="main_inventory.php"><i class="fa fa-circle-o"></i> Main Inventory</a></li>    
-            <li><a href="#"><i class="fa fa-circle-o"></i> Distributor Inventory</a></li>
+            
+            <li><a href="distributor_inventory.php"><i class="fa fa-circle-o"></i> Distributor Inventory</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> Seller Inventory</a></li>
           </ul>
         </li>
