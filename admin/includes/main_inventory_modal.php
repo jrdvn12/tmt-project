@@ -65,7 +65,7 @@
           	<div class="modal-header">
             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
               		<span aria-hidden="true">&times;</span></button>
-            	<h4 class="modal-title"><b><span class="date"></span> - <span class="employee_name"></span></b></h4>
+            	<h4 class="modal-title"><b><span class="date"></span>  <span class="product_name"></span></b></h4>
           	</div>
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="cashadvance_edit.php">
@@ -100,8 +100,8 @@
             	<form class="form-horizontal" method="POST" action="cashadvance_delete.php">
             		<input type="hidden" class="caid" name="id">
             		<div class="text-center">
-	                	<p>DELETE CASH ADVANCE</p>
-	                	<h2 class="employee_name bold"></h2>
+	                	<p>DELETE PRODUCT</p>
+	                	<h2 class="product_name bold"></h2>
 	            	</div>
           	</div>
           	<div class="modal-footer">

@@ -83,8 +83,7 @@
                           <td>".$row['position']."</td>
                           <td>".$row['created_on']."</td>
                           <td>
-                          <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                          <button class='btn btn-success btn-sm edit_user_password btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Password</button>
+                            <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
                             <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
                           </td>
                           
@@ -120,12 +119,6 @@ $(function(){
     var id = $(this).data('id');
     getRow(id);
   });
-  $('.edit_user_password').click(function(e){
-    e.preventDefault();
-    $('#edit_user_password').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
 
   $(document).on('click', '.photo', function(e){
     e.preventDefault();
@@ -146,8 +139,7 @@ function getRow(id){
       $('#edit_username').val(response.username);
       $('#edit_firstname').val(response.firstname);
       $('#edit_lastname').val(response.lastname);
-      $('#edit_password').val(response.password); 
-      $('.del_employee_name').html(response.firstname+' '+response.lastname);   
+      $('#edit_password').val(response.password);    
       $('.fullname').html(response.firstname+' '+response.lastname);
       $('#position_val').html(response.position);
     }

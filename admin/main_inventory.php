@@ -69,8 +69,9 @@
                     while($row = $query->fetch_assoc()){
                       ?>
                         <tr>
+                          
                           <td><?php echo $row['product_number']; ?></td>
-                          <td><img src="<?php echo (!empty($row['photo']))? '../images/'.$row['photo']:'../images/noproduct.jpg'; ?>"width="150px" height="150px"> <a href="#edit_photo" data-toggle="modal" class="pull-right photo" data-id="<?php echo $row['id']; ?>"><span class="fa fa-edit"></span></a></td>
+                          <td><img src="<?php echo (!empty($row['photo']))? '../images/'.$row['photo']:'../images/noproduct.jpg'; ?>"width="150px" height="300px"> <a href="#edit_photo" data-toggle="modal" class="pull-right photo" data-id="<?php echo $row['id']; ?>"><span class="fa fa-edit"></span></a></td>
                           <td><?php echo $row['product_name']; ?></td>
                           <td><?php echo $row['price']; ?></td>
                           <td><?php echo $row['qty']; ?></td>
@@ -79,7 +80,7 @@
                           
                           <td><?php echo date('M d, Y', strtotime($row['dateofstock'])) ?></td>
                           <td>
-                            <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['id']; ?>"><i class="fa fa-edit"></i> Edit        </button>
+                            <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['id']; ?>"><i class="fa fa-edit"></i> Edit  </button>
                            
                             <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['id']; ?>"><i class="fa fa-trash"></i> Delete</button>
                             
@@ -149,25 +150,9 @@ function getRow(id){
     dataType: 'json',
     success: function(response){
       $('.id').val(response.empid);
-      $('.admin').html(response.created_by);
-      $('#edit_employee_id').val(response.employee_id);
-      $('#edit_employee_rfid').val(response.employee_rfid);  
-      $('.del_employee_name').html(response.firstname+' '+response.lastname);
-      $('#employee_name').html(response.firstname+' '+response.lastname);
-      $('#edit_firstname').val(response.firstname);
-      $('#edit_lastname').val(response.lastname);
-      $('#edit_address').val(response.address);
-      $('#datepicker_edit').val(response.birthdate);
-      $('#edit_contact').val(response.contact_info);
-      $('#edit_email').val(response.email);
-      $('#edit_password').val(response.password);
-      $('#gender_val').val(response.gender).html(response.gender);
-      $('#position_val').val(response.position_id).html(response.description);
-      $('#schedule_val').val(response.schedule_id).html(response.time_in+' - '+response.time_out);
-      $('#dayoff_edit').val(response.day_off);
-      $('#edit_eleave').val(response.e_leave);   
-      $('#datepicker_employee_sedit').val(response.created_on);
-      $('#datepicker_employee_edit').val(response.end_contract);
+      $('.caid').html(response.product_name); 
+      $('.product_name').val(response.product_name);
+    
       
 
     }
