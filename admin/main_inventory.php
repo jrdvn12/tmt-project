@@ -144,7 +144,7 @@ $(function(){
 function getRow(id){
   $.ajax({
     type: 'POST',
-    url: 'inventory_main_row.php',
+    url: 'main_inventory_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){
