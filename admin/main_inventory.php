@@ -71,7 +71,19 @@
                         <tr>
                           
                           <td><?php echo $row['product_number']; ?></td>
-                          <td><img src="<?php echo (!empty($row['photo']))? '../images/'.$row['photo']:'../images/noproduct.jpg'; ?>"width="150px" height="300px"> <a href="#edit_photo" data-toggle="modal" class="pull-right photo" data-id="<?php echo $row['id']; ?>"><span class="fa fa-edit"></span></a></td>
+
+                          <td>
+                          <?php
+                                  // Assuming $row['photo'] contains the filename of the uploaded photo
+                                  $photo_src = (!empty($row['photo'])) ? '../images/' . $row['photo'] : '../images/noproduct.jpg';
+                                  ?>
+
+                                  <img src="<?php echo $photo_src; ?>" width="150px" height="300px">
+
+
+                              </td>
+
+
                           <td><?php echo $row['product_name']; ?></td>
                           <td><?php echo $row['price']; ?></td>
                           <td><?php echo $row['qty']; ?></td>
