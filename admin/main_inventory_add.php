@@ -3,7 +3,7 @@
 
 	if(isset($_POST['add'])){
 		$product_number = $_POST['product_number'];
-		//no photo upload means no image available but when someone uploads the right iumage will show
+		//no photo upload means no image available but when someone uploads, the right image will show.
 		$filename = $_FILES['photo']['name'];
 		$product_name = $_POST['product_name'];
         $product_price = $_POST['product_price'];
