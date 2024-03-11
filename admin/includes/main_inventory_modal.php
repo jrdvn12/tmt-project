@@ -62,45 +62,49 @@
 <div class="modal fade" id="edit">
     <div class="modal-dialog">
         <div class="modal-content">
-          	<div class="modal-header">
-            	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              		<span aria-hidden="true">&times;</span></button>
-            	<h4 class="modal-title"><b><span class="date"></span>  <span class="product_name"></span></b></h4>
-          	</div>
-          	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="cashadvance_edit.php">
-            		<input type="hidden" class="caid" name="id">
-                <div class="form-group">
-                    <label for="edit_amount" class="col-sm-3 control-label">Amount</label>
-
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_amount" name="amount" required>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title"><b><span class="date"></span>  <span class="product_name"></span></b></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" method="POST" action="main_inventory_edit.php">
+                    <input type="hidden" class="product_id" name="id">
+                    <div class="form-group">
+                        <label for="edit_product_number" class="col-sm-3 control-label">Product ID</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="edit_product_number" name="product_number" required>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit_amount" class="col-sm-3 control-label">Amount</label>
-
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_amount" name="amount" required>
+                    <div class="form-group">
+                        <label for="edit_sku" class="col-sm-3 control-label">SKU</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="edit_sku" name="sku" required>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit_amount" class="col-sm-3 control-label">Amount</label>
-
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_amount" name="amount" required>
+                    <div class="form-group">
+                        <label for="edit_amount" class="col-sm-3 control-label">Amount</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="edit_amount" name="amount" required>
+                        </div>
                     </div>
-                </div>
-                
-          	</div>
-          	<div class="modal-footer">
-            	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-            	<button type="submit" class="btn btn-success btn-flat" name="edit"><i class="fa fa-check-square-o"></i> Update</button>
-            	</form>
-          	</div>
+                    <div class="form-group">
+                        <label for="edit_quantity" class="col-sm-3 control-label">Quantity</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="edit_quantity" name="quantity" required>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+                <button type="submit" class="btn btn-success btn-flat" name="edit"><i class="fa fa-check-square-o"></i> Update</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
 
 <!-- Delete -->
 <div class="modal fade" id="delete">
