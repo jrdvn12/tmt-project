@@ -19,7 +19,7 @@
       </ol> -->
     </section>
     <!-- Main content -->
-    <section class="content"> 
+    <section class="content">
       <?php
         if(isset($_SESSION['error'])){
           echo "
@@ -146,7 +146,7 @@ $(function(){
 function getRow(id){
   $.ajax({
     type: 'POST',
-    url: 'main_inventory.php',
+    url: 'main_inventory_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){
