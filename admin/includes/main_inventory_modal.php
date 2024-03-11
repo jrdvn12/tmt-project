@@ -1,62 +1,67 @@
-<!-- Add -->
 <div class="modal fade" id="addnew">
     <div class="modal-dialog">
         <div class="modal-content">
-          	<div class="modal-header">
-            	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              		<span aria-hidden="true">&times;</span></button>
-            	<h4 class="modal-title"><b>Add New Product</b></h4>
-          	</div>
-          	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="main_inventory_add.php" enctype="multipart/form-data">
-          		    <div class="form-group">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title"><b>Add New Product</b></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" method="POST" action="main_inventory_add.php" enctype="multipart/form-data">
+                    <div class="form-group">
                         <label for="product_number" class="col-sm-3 control-label">Product Number</label>
-
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="product_number" name="product_number" required>
-                            </div>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="product_number" name="product_number" required placeholder="Enter product number">
+                        </div>
                     </div>
-                <div class="form-group">
-                    <label for="photo" class="col-sm-3 control-label">Photo</label>
-
-                    <div class="col-sm-9">
-                      <input type="file" name="photo" id="photo">
+                    <div class="form-group">
+                        <label for="photo" class="col-sm-3 control-label">Photo</label>
+                        <div class="col-sm-9">
+                            <input type="file" class="form-control" id="photo" name="photo">
+                        </div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="product_name" class="col-sm-3 control-label">Product Name</label>
-
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="product_name" name="product_name" required>
+                    <div class="form-group">
+                        <label for="casecode" class="col-sm-3 control-label">Case Code</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="casecode" name="casecode" required placeholder="Enter case code">
+                        </div>
                     </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="product_price" class="col-sm-3 control-label">Product Price</label>
-
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="product_price" name="product_price" required>
+                    <div class="form-group">
+                        <label for="piececode" class="col-sm-3 control-label">Piece Code</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="piececode" name="piececode" required placeholder="Enter piece code">
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="product_quantity" class="col-sm-3 control-label">Product Quantity</label>
-
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="product_quantity" name="product_quantity" required>
+                    <div class="form-group">
+                        <label for="product_name" class="col-sm-3 control-label">Product Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="product_name" name="product_name" required placeholder="Enter product name">
+                        </div>
                     </div>
-                </div>
-
-          	</div>
-          	<div class="modal-footer">
-            	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-            	<button type="submit" class="btn btn-primary btn-flat" name="add"><i class="fa fa-save"></i> Save</button>
-            	</form>
-          	</div>
+                    <div class="form-group">
+                        <label for="product_price" class="col-sm-3 control-label">Product Price</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="product_price" name="product_price" required placeholder="Enter product price">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="product_quantity" class="col-sm-3 control-label">Product Quantity</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="product_quantity" name="product_quantity" required placeholder="Enter product quantity">
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+                <button type="submit" class="btn btn-primary btn-flat" name="add"><i class="fa fa-save"></i> Save</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
 
 <!-- Edit -->
 <div class="modal fade" id="edit">
