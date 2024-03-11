@@ -8,7 +8,14 @@
 
 <?php include 'includes/header.php'; ?>
 <style>
-
+.login-page{
+    display: flex;
+        align-items: center;
+        background: url(../images/BG.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+	
+  }
 .imgcenter {
     display: block;
     margin-left: auto;
@@ -24,12 +31,12 @@
 <body class="hold-transition  login-page">
 <div class="login-box ">
   	<div class="login-logo">
-	  <img src="../images/manila-logo-main.png" alt="tmt" class="imgcenter">
+	 
   		<!-- <b >TMT Foods Incorporated</b> -->
   	</div>
   
   	<div class="login-box-body">
-	  
+	   <img src="../images/manila-logo-main.png" alt="tmt" class="imgcenter">
     	<p class="login-box-msg">Sign in to start your session</p>
 		
     	<form action="login.php" method="POST">
