@@ -8,8 +8,8 @@
             	<h4 class="modal-title"><b>Upload Attendance</b></h4>
           	</div>
           	<div class="modal-body">
-              <form class="form-horizontal" method="POST" action="home.php">
-            	<!-- <form class="form-horizontal" method="POST" action="files_upload.php">-->
+              <!-- <form class="form-horizontal" method="POST" action="home.php"> -->
+            	<form class="form-horizontal" method="POST" action="files_upload.php" enctype="multipart/form-data">
           		  <div class="form-group">
                   	<label for="f_upload" class="col-sm-3 control-label">Select File</label>
 

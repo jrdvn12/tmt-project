@@ -98,12 +98,15 @@
                                 <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
                             </td>
 
-                            <td align='center'>
-                                <img id='caseBarcode_".$row['id']."' src='' width='150px' height='80px'>
-                            </td>
-                            <td align='center'>
-                                <img id='pieceBarcode_".$row['id']."' src='' width='150px' height='80px'>
-                            </td>
+                          <td  align='center'>
+                            <img src='../images/piececode.png' width='150px' height='80px'>
+                            <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
+                          </td>
+
+                          <td align='center'>
+                            <img src='../images/casecode.png' width='150px' height='80px' class='center'>
+                            <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
+                          </td>
 
                             <td>".$row['product_name']."</td>
                             <td>".$row['price']."</td>
@@ -167,10 +170,12 @@ function getRow(id){
     dataType: 'json',
     success: function(response){
       $('.id').val(response.id);
-      $('#edit_product_name').val(response.product_name);
-      $('#edit_product_price').val(response.product_price);
-      $('#edit_product_quantity').val(response.product_quantity);
-      $('#edit_password').val(response.password);  
+      $('#edit_product_number').val(response.product_number);
+
+      $('#edit_product_name').val(response.product_number);
+      $('#edit_sku').val(response.product_name);
+      $('#edit_amount').val(response.price);
+      $('#edit_quantity').val(response.qty);
         
       // $('.fullname').html(response.firstname+' '+response.lastname);
       // $('#position_val').html(response.position);
