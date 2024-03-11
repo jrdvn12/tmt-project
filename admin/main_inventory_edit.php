@@ -80,15 +80,12 @@
                             <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
                           </td>
 
-                          <td  align='center'>
-                            <img src='../images/piececode.png' width='150px' height='80px'>
-                            <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
-                          </td>
-
                           <td align='center'>
-                            <img src='../images/casecode.png' width='150px' height='80px' class='center'>
-                            <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
-                          </td>
+                                <img id='caseBarcode_".$row['id']."' src='' width='150px' height='80px'>
+                            </td>
+                            <td align='center'>
+                                <img id='pieceBarcode_".$row['id']."' src='' width='150px' height='80px'>
+                            </td>
 
                           <td>".$row['product_name']."</td>
                           <td>".$row['price']."</td>

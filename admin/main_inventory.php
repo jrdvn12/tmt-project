@@ -89,7 +89,6 @@
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                         $image = (!empty($row['photo'])) ? '../images/'.$row['photo'] : '../images/noproduct.jpg';
-                        $image = (!empty($row['text'])) ? '../images/'.$row['text'] : '../images/noproduct.jpg';
                         echo "
                         <tr>
                             <td >".$row['product_number']."</td>
@@ -98,15 +97,14 @@
                                 <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
                             </td>
 
-                          <td  align='center'>
-                            <img src='../images/piececode.png' width='150px' height='80px'>
-                            <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
-                          </td>
+                            <td align='center'>
+                            <img id='caseBarcode_".$row['id']."' src='' width='150px' height='80px'>
+                            </td>
+                            <td align='center'>
+                                <img id='pieceBarcode_".$row['id']."' src='' width='150px' height='80px'>
+                            </td>
 
-                          <td align='center'>
-                            <img src='../images/casecode.png' width='150px' height='80px' class='center'>
-                            <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
-                          </td>
+                            
 
                             <td>".$row['product_name']."</td>
                             <td>".$row['price']."</td>
@@ -123,6 +121,11 @@
                         ";
                     }
                     ?>
+                    <br>
+                    <?php if(file_exists('barcode.jpg')):?>
+                      <img src="barcode.jpg?<?=rand(0,9999)?>" style="border: solid thin #888; width:100%">
+                    <?php endif?>
+
                 </tbody>
 
               </table>
@@ -188,15 +191,12 @@ function getRow(id){
           let inputElement = document.getElementById(inputId);
           let barcodeText = inputElement.value;
           let barcodeImage = document.getElementById(inputId + 'Barcode');
-
-          // You need to implement the barcode generation logic here
           let barcodeImageUrl = generateBarcodeImage(barcodeText);
           barcodeImage.src = barcodeImageUrl;
       }
 
       // This function generates the barcode image URL based on the input text
       function generateBarcodeImage(text) {
-          // For demonstration purposes, let's return a placeholder image URL
           return 'barcode.php' + text;
       }
 
