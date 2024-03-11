@@ -11,7 +11,7 @@
 .login-page{
     display: flex;
         align-items: center;
-        background: url(../images/BG.jpg);
+        background: url(../images/TMT_FOODS.png);
         background-repeat: no-repeat;
         background-size: cover;
 	
@@ -22,10 +22,21 @@
     margin-right: auto;
     width: 80%;
 	height: 80%;
-    /* border: solid 3px rgb(0, 0, 0); */
+    /* border: solid 1px rgb(0, 0, 0); */
     /* border-radius: 50%; */
-    /* background-color: rgba(245, 126, 126, 0.815); */
+    /* background-color: white; */
   }
+  .login-box-body{
+	margin-top:10em;
+	background-color: rgba(255, 255, 255, .0);
+	/* border: solid 1px rgb(0, 0, 0); */
+	/* box-shadow: 5px 10px black; */
+  }
+    .oval-button {
+        border-radius: 50px; /* Adjust the value to change the oval shape */
+        
+    }
+</style>
   
 </style>
 <body class="hold-transition  login-page">
@@ -51,6 +62,7 @@
       		<div class="row">
     			<div class="col-xs-4">
           			<button type="submit" class="btn btn-primary btn-block btn-flat" name="login"><i class="fa fa-sign-in"></i> Sign In</button>
+					
         		</div>
       		</div>
     	</form>
