@@ -74,8 +74,8 @@
                 <h4 class="modal-title"><b><span class="date"></span>  <span class="product_name"></span></b></h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" method="POST" action="1main_inventory_edit.php">
-                    <input type="hidden" class="id" name="id">
+                <form class="form-horizontal" method="POST" action="main_inventory_edit.php">
+                    <input type="hidden" class="product_id" name="id">
                     <div class="form-group">
                         <label for="edit_product_number" class="col-sm-3 control-label">Product ID</label>
                         <div class="col-sm-9">

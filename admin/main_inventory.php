@@ -183,23 +183,22 @@ function getRow(id){
   });
 }
 
-<!-- JavaScript -->
-<script>
-    function generateBarcode(inputId) {
-        let inputElement = document.getElementById(inputId);
-        let barcodeText = inputElement.value;
-        let barcodeImage = document.getElementById(inputId + 'Barcode');
+  <!-- JavaScript -->
+      function generateBarcode(inputId) {
+          let inputElement = document.getElementById(inputId);
+          let barcodeText = inputElement.value;
+          let barcodeImage = document.getElementById(inputId + 'Barcode');
 
-        // You need to implement the barcode generation logic here
-        let barcodeImageUrl = generateBarcodeImage(barcodeText);
-        barcodeImage.src = barcodeImageUrl;
-    }
+          // You need to implement the barcode generation logic here
+          let barcodeImageUrl = generateBarcodeImage(barcodeText);
+          barcodeImage.src = barcodeImageUrl;
+      }
 
-    // This function generates the barcode image URL based on the input text
-    function generateBarcodeImage(text) {
-        // For demonstration purposes, let's return a placeholder image URL
-        return 'barcode.php' + text;
-    }
+      // This function generates the barcode image URL based on the input text
+      function generateBarcodeImage(text) {
+          // For demonstration purposes, let's return a placeholder image URL
+          return 'barcode.php' + text;
+      }
 
 </script>
 </body>
