@@ -66,6 +66,7 @@
                     while($row = $query->fetch_assoc()){
                       echo "
                         <tr>
+                          <td class='hidden'></td>
                           <td>".date('M d, Y', strtotime($row['audit_date']))."</td>
                           <td>".date('h:i A', strtotime($row['audit_time']))."</td>
                           <td>".$row['user']."</td>
@@ -111,6 +112,7 @@ function getRow(id){
       
       $('#audit_description').val(response.description);
       $('#empid').val(response.empid);
+      $('.empid').val(response.empid);
 
 
     var auditDate = moment(response.audit_date).format('MMM D, YYYY');
