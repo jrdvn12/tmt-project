@@ -180,6 +180,9 @@ function getRow(id){
       $('#edit_sku').val(response.product_name);
       $('#edit_amount').val(response.price);
       $('#edit_quantity').val(response.qty);
+
+      // delete
+      $('.productname').html(response.product_name);
         
       // $('.fullname').html(response.firstname+' '+response.lastname);
       // $('#position_val').html(response.position);
