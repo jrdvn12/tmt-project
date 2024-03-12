@@ -93,7 +93,7 @@
                         <tr>
                             <td >".$row['product_number']."</td>
                             <td align='center'>
-                                <img src='".$image."' width='150px' height='200px' align='center'>
+                                <img src='".$image."' width='150px' height='200px' align='center'><br>
                                 <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
                             </td>
 
@@ -112,19 +112,13 @@
                                 <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
                                 <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
                                 <button class='btn btn-primary btn-sm view btn-flat' data-id='".$row['id']."'><i class='fa fa-eye'></i> View</button>
-                                <button class='btn btn-primary btn-sm btn-flat 'id='".$row['id']."'onclick='redirectToPage2(this)' ><i class='fa fa-eye'></i> Pic</button>
-
-
-                               
+                              
                             </td>
                         </tr>
                         ";
                     }
                     ?>
-                    <br>
-                    <?php if(file_exists('barcode.jpg')):?>
-                      <img src="barcode.jpg?<?=rand(0,9999)?>" style="border: solid thin #888; width:100%">
-                    <?php endif?>
+                   
 
                 </tbody>
 
@@ -170,6 +164,7 @@ $(function(){
     $('#view').modal('show');
     var id = $(this).data('id');
     getRow(id);
+    
   });
 
 });
@@ -198,10 +193,16 @@ function getRow(id){
       $('.idproduct').val(response.photo);
       
       $('.imagelink').attr('src', response.photo);
+      updateImage();
     }
   });
 }
-//
+// new 
+
+//window.onclick = function() {
+    //        updateImage();
+  //      };
+
  //JavaScript
       function generateBarcode(inputId) {
           let inputElement = document.getElementById(inputId);

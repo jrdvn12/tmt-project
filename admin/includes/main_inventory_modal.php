@@ -180,24 +180,34 @@
                         <input type="hidden" class="idproduct" id="idproduct" name="ids">
                         <!-- Set a more descriptive alt attribute -->
                         <img class="imgcenter" id="profile_picture" class="img-circle" alt="Product Image" width='150px' height='200px' align='center'>
-
-
-
                         
-                            
-
-                <br>
-                <b>Product Name <br>
-                <b><span class="view_product_number "></span> <br>
-                Piece Barcode : <span class="view_piece_baracode "> </span> <br>
-                Box Barcode : <span class="view_box_baracode "> </span> <br>
+                        <b><span class="view_product_number "></span> <br>
+                        Piece Barcode : <span class="view_piece_baracode "> </span> <br>
+                        Box Barcode : <span class="view_box_baracode "> </span> <br>
           	</div>
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="#">
             		
                 <h4><b>Transaction History</b></h4>
                 <div class="form-group">
-                
+                    <div class="box-body">
+                        <table id="example1" class="table table-bordered">
+                            <thead>
+                            <th>Piece Code</th>
+                            <th>Case Code</th>
+                            <th>SKU</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Sold</th>
+                            <th>Balance</th>
+                            <th>Date of Stock</th>
+                            </thead>
+
+                            <tbody>
+                            </tbody>
+
+                        </table>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -222,7 +232,6 @@
             var inputValue = document.getElementById('idproduct').value;
             var imgElement = document.getElementById('profile_picture');
             var imageFolder = "../images/";
-            var imageUrl = imageFolder + '640px-Cappuccino_at_Sightglass_Coffee.jpg';
             var imageUrl = imageFolder + inputValue;
             imgElement.src = imageUrl;
             // Check if the image is loaded successfully, if not, set a default image
@@ -233,7 +242,7 @@
         }
 
         // Call the updateImage function when the page is loaded
-        window.onload = function() {
+        /*window.onclick = function() {
             updateImage();
-        };
+        };*/
     </script>
