@@ -116,6 +116,7 @@
                             <td>
                                 <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
                                 <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
+                                <button class='btn btn-primary btn-sm view btn-flat' data-id='".$row['id']."'><i class='fa fa-eye'></i> View</button>
                               
                             </td>
                         </tr>
@@ -163,6 +164,12 @@ $(function(){
     var id = $(this).data('id');
     getRow(id);
   });
+  $('.view').click(function(e){
+    e.preventDefault();
+    $('#view').modal('show');
+    var id = $(this).data('id');
+    getRow(id);
+  });
 
 });
 
@@ -183,7 +190,12 @@ function getRow(id){
 
       // delete
       $('.productname').html(response.product_name);
-        
+      // view
+      $('.view_product_number').html(response.product_name);
+      $('.view_piece_baracode').html(response.piececode);
+      $('.view_box_baracode').html(response.boxcode);
+      $('.look').val(response.id);
+      
       // $('.fullname').html(response.firstname+' '+response.lastname);
       // $('#position_val').html(response.position);
     }

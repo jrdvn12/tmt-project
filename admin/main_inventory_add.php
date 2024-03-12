@@ -20,7 +20,24 @@
         VALUES ('$product_number', '$filename', '$product_name', '$product_price', '$product_quantity', '$soldstock', '$balance', '$dateofstock')";
 		if($conn->query($sql)){
 			// AUDIT
-			$_SESSION['success'] = 'New product added successfully!';
+			// audit trail mapping
+			$timezone = 'Asia/Manila';
+			date_default_timezone_set($timezone);
+			
+			$unique=$product_number;	
+			$auditdate = date('Y-m-d');
+			$audittime = date('H:i:s');
+			$audituser = $user['firstname'].' '.$user['lastname'];
+			$auditdescription = 'Added new Product #'.$unique.' date '.$auditdate;
+
+			$sqlaudit = "INSERT INTO audit_trail_record (audit_date,audit_time, user, description) 
+			VALUES ('$auditdate', '$audittime', '$audituser', '$auditdescription')";
+			if ($conn->query($sqlaudit)) {
+				$_SESSION['success'] = 'New product added successfully!';
+			} else {
+				$_SESSION['error'] = $conn->error;
+			}
+			
 		}
 		else{
 			$_SESSION['error'] = $conn->error;

@@ -167,4 +167,55 @@
     </div>
 </div>
 
-     
+<!-- View -->
+<div class="modal fade" id="view">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          	<div class="modal-header">
+            	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              		<span aria-hidden="true">&times;</span></button>
+            	<h4 class="modal-title">
+                    <div class='look'></div>
+                    <?php  
+                    
+                    $sql = "SELECT * FROM main_inventory WHERE id like '20' ";
+                    $query = $conn->query($sql);
+                    while($row = $query->fetch_assoc()){
+                        $image = (!empty($row['photo'])) ? '../images/'.$row['photo'] : '../images/noproduct.jpg';
+                        
+                        }?>
+                <img src='".$image."' width='150px' height='200px' alt='TMT FOOD'>
+                <br>
+              <b>Product Name <br>
+              <b><span class="view_product_number "></span> <br>
+              Piece Barcode : <span class="view_piece_baracode "> </span> <br>
+              Box Barcode : <span class="view_box_baracode "> </span> <br>
+              
+          	</div>
+          	<div class="modal-body">
+            	<form class="form-horizontal" method="POST" action="#">
+            		<input type="hidden" id="id" name="id">
+                <h4><b>Transaction History</b></h4>
+                <div class="form-group">
+                  <label for="audit_description" class="col-sm-2 control-label"></label> 
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <textarea class="form-control" id="audit_description" name="audit_description" readonly style="height: 300px;resize:none;"></textarea>
+                    </div>
+                </div>
+
+               
+
+          	</div>
+          	<div class="modal-footer">
+            	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+            	
+            	</form>
+          	</div>
+        </div>
+    </div>
+</div>
+
+
