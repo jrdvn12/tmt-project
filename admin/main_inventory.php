@@ -116,6 +116,7 @@
                             <td>
                                 <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
                                 <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
+                              
                             </td>
                         </tr>
                         ";
@@ -135,9 +136,9 @@
       </div>
     </section>   
   </div>
-    
-  <?php include 'includes/footer.php'; ?>
   <?php include 'includes/main_inventory_modal.php'; ?>
+  <?php include 'includes/footer.php'; ?>
+ 
 </div>
 
 <?php include 'includes/scripts.php'; ?>
@@ -149,7 +150,7 @@ $(function(){
     var id = $(this).data('id');
     getRow(id);
   });
-
+  
   $(document).on('click', '.delete', function(e){
     e.preventDefault();
     $('#delete').modal('show');

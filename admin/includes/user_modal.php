@@ -146,7 +146,7 @@ include 'includes/conn.php';
               <form class="form-horizontal" method="POST" action="user_delete.php">
                 <input type="hidden" class="id" name="id">
                 <div class="text-center">
-                    <p>USER VOTER</p>
+                    <p>USER DELETE</p>
                     <h2 class="bold fullname"></h2>
                 </div>
             </div>
