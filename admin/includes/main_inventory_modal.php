@@ -174,26 +174,41 @@
           	<div class="modal-header">
             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
               		<span aria-hidden="true">&times;</span></button>
-            	<h4 class="modal-title">
-                 
+            	        <h4 class="modal-title">
 
-                    <?php  
-                    $look =20;
-                    $sql = "SELECT * FROM main_inventory WHERE id LIKE '$look'";
-                    $query = $conn->query($sql);
+                        <?php
+                            $sql = "SELECT id FROM main_inventory";
+                            $query = $conn->query($sql);
 
-                    while($row = $query->fetch_assoc()) {
-                        $image = (!empty($row['photo'])) ? '../images/' . $row['photo'] : '../images/noproduct.jpg';
-                        echo "<img src='" . $image . "' width='150px' height='200px' align='center'><br>";
-                    }
-                    ?>
+                            if ($query) {
+                                $row = $query->fetch_assoc();
+                                $overall_id = $row['id'];
+
+                                $sql_image = "SELECT * FROM main_inventory WHERE id = '$overall_id'";
+                                $query_image = $conn->query($sql_image);
+
+                                if ($query_image) {
+                                    if ($query_image->num_rows > 0) {
+                                        $row_image = $query_image->fetch_assoc();
+                                        $image = (!empty($row_image['photo'])) ? '../images/' . $row_image['photo'] : '../images/noproduct.jpg';
+                                        echo "<img src='" . $image . "' width='150px' height='200px' align='center'><br>";
+                                    }
+                                } else {
+                                    // Error handling for the second query
+                                    echo "Error fetching image data: " . $conn->error;
+                                }
+                            } else {
+                                // Error handling for the first query
+                                echo "Error fetching overall ID: " . $conn->error;
+                            }
+                        ?>
+
 
                 <br>
-              <b>Product Name <br>
-              <b><span class="view_product_number "></span> <br>
-              Piece Barcode : <span class="view_piece_baracode "> </span> <br>
-              Box Barcode : <span class="view_box_baracode "> </span> <br>
-              
+                <b>Product Name <br>
+                <b><span class="view_product_number "></span> <br>
+                Piece Barcode : <span class="view_piece_baracode "> </span> <br>
+                Box Barcode : <span class="view_box_baracode "> </span> <br>
           	</div>
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="#">
@@ -208,9 +223,6 @@
                         <textarea class="form-control" id="audit_description" name="audit_description" readonly style="height: 300px;resize:none;"></textarea>
                     </div>
                 </div>
-
-               
-
           	</div>
           	<div class="modal-footer">
             	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
