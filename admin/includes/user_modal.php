@@ -57,15 +57,7 @@ include 'includes/conn.php';
                         <option value="Admin">Admin</option>
                         <option value="Accountant">Accountant</option>
                         <option value="Human Resources">Human Resources</option>
-                        <!-- <?php
-                          $sql = "SELECT * FROM admin_position";
-                          $query = $conn->query($sql);
-                          while($prow = $query->fetch_assoc()){
-                            echo "
-                              <option value='".$prow['position']."'>".$prow['position']."</option>
-                            ";
-                          }
-                        ?> -->
+          
                       </select>
                     </div>
                 </div>
@@ -124,14 +116,7 @@ include 'includes/conn.php';
                         <option value="Admin">Admin</option>
                         <option value="Accountant">Accountant</option>
                         <option value="Human Resources">Human Resources</option>
-                        <!-- <?php
-                          $sql = "SELECT * FROM admin_position";
-                          $query = $conn->query($sql);
-                          while($prow = $query->fetch_assoc()){
-                            echo "
-                              <option value='".$prow['position']."'>".$prow['position']."</option>";
-                          }
-                        ?> -->
+                       
                       </select>
                     </div>
                 </div>
