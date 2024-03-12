@@ -17,7 +17,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header"></li>
-        <li class=""><a href="home.php"><i class="fa fa-home"></i> <span>Home</span></a></li>
+        <li class=""><a href="home"><i class="fa fa-home"></i> <span>Home</span></a></li>
         <li class="header">MANAGE</li>   
               
               <li class="treeview">
@@ -43,9 +43,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="main_inventory.php"><i class="fa fa-circle-o"></i> Main Inventory</a></li>    
+            <li><a href="main_inventory"><i class="fa fa-circle-o"></i> Main Inventory</a></li>    
             
-            <li><a href="distributor_inventory.php"><i class="fa fa-circle-o"></i> Distributor Inventory</a></li>
+            <li><a href="distributor_inventory"><i class="fa fa-circle-o"></i> Distributor Inventory</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> Seller Inventory</a></li>
           </ul>
         </li>
@@ -57,8 +57,8 @@
         <!--  -->
       
 
-        <li><a href="user.php"><i class="fa fa-user"></i> <span>User</span></a></li>
-        <li><a href="audit.php"><i class="fa fa-history"></i> <span>Audit Trail Record</span></a></li>
+        <li><a href="user"><i class="fa fa-user"></i> <span>User</span></a></li>
+        <li><a href="audit"><i class="fa fa-history"></i> <span>Audit Trail Record</span></a></li>
         <li class="header">PRINTABLES</li>
         <li><a href="#"><i class="fa fa-bar-chart"></i> <span>Sales</span></a></li>
         <li><a href="#"><i class="fa fa-dropbox"></i> <span>Inventory</span></a></li>
