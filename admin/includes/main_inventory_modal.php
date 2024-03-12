@@ -175,16 +175,19 @@
             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
               		<span aria-hidden="true">&times;</span></button>
             	<h4 class="modal-title">
-                    <div class='look'></div>
+                 
+
                     <?php  
-                    
-                    $sql = "SELECT * FROM main_inventory WHERE id like '20' ";
+                    $look =20;
+                    $sql = "SELECT * FROM main_inventory WHERE id LIKE '$look'";
                     $query = $conn->query($sql);
-                    while($row = $query->fetch_assoc()){
-                        $image = (!empty($row['photo'])) ? '../images/'.$row['photo'] : '../images/noproduct.jpg';
-                        
-                        }?>
-                <img src='".$image."' width='150px' height='200px' alt='TMT FOOD'>
+
+                    while($row = $query->fetch_assoc()) {
+                        $image = (!empty($row['photo'])) ? '../images/' . $row['photo'] : '../images/noproduct.jpg';
+                        echo "<img src='" . $image . "' width='150px' height='200px' align='center'><br>";
+                    }
+                    ?>
+
                 <br>
               <b>Product Name <br>
               <b><span class="view_product_number "></span> <br>

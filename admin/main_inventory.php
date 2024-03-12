@@ -195,7 +195,7 @@ function getRow(id){
       $('.view_piece_baracode').html(response.piececode);
       $('.view_box_baracode').html(response.boxcode);
       $('.look').val(response.id);
-      
+      $('.$look').data('id', response.id);
       // $('.fullname').html(response.firstname+' '+response.lastname);
       // $('#position_val').html(response.position);
     }
