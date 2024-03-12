@@ -97,15 +97,10 @@
                                 <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
                             </td>
 
-                            <td align='center'>
-                            <img id='caseBarcode_".$row['id']."' src='' width='150px' height='80px'>
-                            </td>
-                            <td align='center'>
-                                <img id='pieceBarcode_".$row['id']."' src='' width='150px' height='80px'>
-                            </td>
+                      
 
-                            
-
+                            <td>".$row['piececode']."</td>
+                            <td>".$row['boxcode']."</td>
                             <td>".$row['product_name']."</td>
                             <td>".$row['price']."</td>
                             <td>".$row['qty']."</td>
@@ -117,7 +112,10 @@
                                 <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
                                 <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
                                 <button class='btn btn-primary btn-sm view btn-flat' data-id='".$row['id']."'><i class='fa fa-eye'></i> View</button>
-                              
+                                <button class='btn btn-primary btn-sm btn-flat 'id='".$row['id']."'onclick='redirectToPage2(this)' ><i class='fa fa-eye'></i> Pic</button>
+
+
+                               
                             </td>
                         </tr>
                         ";
@@ -144,6 +142,9 @@
 
 <?php include 'includes/scripts.php'; ?>
 <script>
+
+
+
 $(function(){
   $(document).on('click', '.edit', function(e){
     e.preventDefault();
@@ -194,15 +195,14 @@ function getRow(id){
       $('.view_product_number').html(response.product_name);
       $('.view_piece_baracode').html(response.piececode);
       $('.view_box_baracode').html(response.boxcode);
-      $('.look').val(response.id);
-      $('.$look').data('id', response.id);
-      // $('.fullname').html(response.firstname+' '+response.lastname);
-      // $('#position_val').html(response.position);
+      $('.idproduct').val(response.photo);
+      
+      $('.imagelink').attr('src', response.photo);
     }
   });
 }
-
-  <!-- JavaScript -->
+//
+ //JavaScript
       function generateBarcode(inputId) {
           let inputElement = document.getElementById(inputId);
           let barcodeText = inputElement.value;
@@ -217,5 +217,7 @@ function getRow(id){
       }
 
 </script>
+
+
 </body>
 </html>

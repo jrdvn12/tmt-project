@@ -176,33 +176,15 @@
               		<span aria-hidden="true">&times;</span></button>
             	        <h4 class="modal-title">
 
-                        <?php
-                            $sql = "SELECT id FROM main_inventory";
-                            $query = $conn->query($sql);
+                        
+                        <input type="hidden" class="idproduct" id="idproduct" name="ids">
+                        <!-- Set a more descriptive alt attribute -->
+                        <img class="imgcenter" id="profile_picture" class="img-circle" alt="Product Image" width='150px' height='200px' align='center'>
 
-                            if ($query) {
-                                $row = $query->fetch_assoc();
-                                $overall_id = $row['id'];
 
-                                $sql_image = "SELECT * FROM main_inventory WHERE id = '$overall_id'";
-                                $query_image = $conn->query($sql_image);
 
-                                if ($query_image) {
-                                    if ($query_image->num_rows > 0) {
-                                        $row_image = $query_image->fetch_assoc();
-                                        $image = (!empty($row_image['photo'])) ? '../images/' . $row_image['photo'] : '../images/noproduct.jpg';
-                                        echo "<img src='" . $image . "' width='150px' height='200px' align='center'><br>";
-                                    }
-                                } else {
-                                    // Error handling for the second query
-                                    echo "Error fetching image data: " . $conn->error;
-                                }
-                            } else {
-                                // Error handling for the first query
-                                echo "Error fetching overall ID: " . $conn->error;
-                            }
-                        ?>
-
+                        
+                            
 
                 <br>
                 <b>Product Name <br>
@@ -212,10 +194,10 @@
           	</div>
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="#">
-            		<input type="hidden" id="id" name="id">
+            		
                 <h4><b>Transaction History</b></h4>
                 <div class="form-group">
-                  <label for="audit_description" class="col-sm-2 control-label"></label> 
+                
                 </div>
 
                 <div class="form-group">
@@ -233,4 +215,25 @@
     </div>
 </div>
 
+<script>
+        // Assuming the script is already included and executed after the HTML elements are loaded
 
+        function updateImage() {
+            var inputValue = document.getElementById('idproduct').value;
+            var imgElement = document.getElementById('profile_picture');
+            var imageFolder = "../images/";
+            var imageUrl = imageFolder + '640px-Cappuccino_at_Sightglass_Coffee.jpg';
+            var imageUrl = imageFolder + inputValue;
+            imgElement.src = imageUrl;
+            // Check if the image is loaded successfully, if not, set a default image
+            imgElement.onerror = function() {
+                imgElement.src = "../images/noproduct.jpg"; // Change to the path of your default image
+                imgElement.alt = "Default Product Image";
+            };
+        }
+
+        // Call the updateImage function when the page is loaded
+        window.onload = function() {
+            updateImage();
+        };
+    </script>
