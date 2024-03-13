@@ -202,7 +202,35 @@
 
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <textarea class="form-control" id="audit_description" name="audit_description" readonly style="height: 300px;resize:none;"></textarea>
+                    <div class="box-body">
+              <table id="example1" class="table table-bordered">
+                <thead>
+                  
+                 
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Sold</th>
+                  <th>Balance</th>
+                  <th>Date of Stock</th>
+                 
+                  
+                </thead>
+
+                <tbody>
+                    <?php
+                    
+                        echo "
+                        
+                        ";
+                    
+                    ?>
+                    <br>
+                  
+
+                </tbody>
+
+              </table>
+            </div>
                     </div>
                 </div>
           	</div>
@@ -223,7 +251,7 @@
             var imgElement = document.getElementById('profile_picture');
             var imageFolder = "../images/";
             var imageUrl = imageFolder + '640px-Cappuccino_at_Sightglass_Coffee.jpg';
-            var imageUrl = imageFolder + inputValue;
+            //var imageUrl = imageFolder + inputValue;
             imgElement.src = imageUrl;
             // Check if the image is loaded successfully, if not, set a default image
             imgElement.onerror = function() {
