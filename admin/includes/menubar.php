@@ -19,7 +19,7 @@
         <li class="header"></li>
         <li class=""><a href="home"><i class="fa fa-home"></i> <span>Home</span></a></li>
         <li class="header">MANAGE</li>   
-              
+        <li><a href="order"><i class="fa fa-shopping-cart"></i> <span>Order</span></a></li>     
               <li class="treeview">
                 <a href="#">
                   <i class="fa fa-bar-chart"></i>
@@ -46,17 +46,46 @@
             <li><a href="main_inventory"><i class="fa fa-circle-o"></i> Main Inventory</a></li>    
             
             <li><a href="distributor_inventory"><i class="fa fa-circle-o"></i> Distributor Inventory</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Seller Inventory</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Transaction History Inventory</a></li>
           </ul>
         </li>
-        <!--  -->
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-shopping-basket"></i>
+            <span>Raw Materials</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="main_raw_materials"><i class="fa fa-circle-o"></i> Main Raw Materials</a></li>    
+            <li><a href="raw_materials"><i class="fa fa-circle-o"></i> Raw Materials Inventory</a></li>
+            <!-- <li><a href="raw_materials_inventory"><i class="fa fa-circle-o"></i> Raw Materials Inventory</a></li> -->
+            
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa fa-cogs"></i>
+            <span>Product Management</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+          <li><a href="costing"><i class="fa fa-circle-o"></i> <span>Costing Raw Materials</span></a></li>
+          <li><a href="lost"><i class="fa fa-circle-o"></i> <span>Loss</span></a></li>
+          <li><a href="freebies"><i class="fa fa-circle-o"></i> <span>Freebies</span></a></li>
+          <li><a href="production"><i class=" fa fa-circle-o"></i> <span>Production</span></a></li>
+          
+            
+          </ul>
+        </li>
+
 
         
-        <!--  -->
         
-        <!--  -->
-      
-
         <li><a href="user"><i class="fa fa-user"></i> <span>User</span></a></li>
         <li><a href="audit"><i class="fa fa-history"></i> <span>Audit Trail Record</span></a></li>
         <li class="header">PRINTABLES</li>
