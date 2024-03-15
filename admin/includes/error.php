@@ -5,11 +5,11 @@
 <style>div { display:none; }</style>
 </noscript>
 
-<body >
-    
+
+<!-- <body >  --><body oncontextmenu="return false"> 
 </body>
 <script>
-/*<body oncontextmenu="return false">*/
+
 document.onkeydown = function(e) {
     if(event.keyCode == 123) {
        return false;

@@ -149,7 +149,7 @@
               <h4 class="modal-title"><b><span class="fullname"></span></b></h4>
             </div>
             <div class="modal-body">
-              <form class="form-horizontal" method="POST" action="user_photo.php" enctype="multipart/form-data">
+              <form class="form-horizontal" method="POST" action="main_inventory_photo.php" enctype="multipart/form-data">
                 <input type="hidden" class="id" name="id">
                 <div class="form-group">
                     <label for="photo" class="col-sm-3 control-label">Photo</label>
@@ -189,7 +189,7 @@
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="#">
             		
-                <h4><b>Transaction History</b></h4>
+                <h4><b>Inventory History</b></h4>
                 <div class="form-group">
                     <div class="box-body">
                         <table id="example1" class="table table-bordered">

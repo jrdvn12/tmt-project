@@ -55,6 +55,7 @@
                   <th>Material Code</th>
                   <th>Name</th>
                   <th>Batch</th>
+                  <th>Status</th>
                   <th>Expiration</th>
                   <th>Date</th>
 
@@ -98,7 +99,7 @@
   </div>
     
   <?php include 'includes/footer.php'; ?>
-  <?php include 'includes/modal_production.php'; ?>
+  <?php include 'includes/production_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>
 <script>
