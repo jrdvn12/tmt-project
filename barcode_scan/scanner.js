@@ -29,6 +29,7 @@ Quagga.init({
 
 // Process barcode detection
 Quagga.onDetected(function(result) {
+    
     const barcode = result.codeResult.code;
     const barcodeResultElement = document.getElementById('barcode-result');
     barcodeResultElement.innerHTML = 'Scanned EAN-13 Barcode: ' + barcode;
@@ -47,6 +48,11 @@ Quagga.onDetected(function(result) {
         // Display server response on the page
         const serverResponseElement = document.getElementById('server-response');
         serverResponseElement.innerHTML = data;
+        const inputValue = document.getElementById('textboxbarcode');
+        
+        inputValue.value = data;
+        
+
     })
     .catch(error => console.error('Error:', error));
 });
