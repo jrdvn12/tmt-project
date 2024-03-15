@@ -74,10 +74,13 @@
             </span>
           </a>
           <ul class="treeview-menu">
+          <li><a href="product"><i class=" fa fa-circle-o"></i> <span>Product</span></a></li>
+          <li><a href="product_needs"><i class=" fa fa-circle-o"></i> <span>Product Needs</span></a></li>
+          <li><a href="production"><i class=" fa fa-circle-o"></i> <span>Production</span></a></li>
           <li><a href="costing"><i class="fa fa-circle-o"></i> <span>Costing Raw Materials</span></a></li>
           <li><a href="lost"><i class="fa fa-circle-o"></i> <span>Loss</span></a></li>
-          <li><a href="freebies"><i class="fa fa-circle-o"></i> <span>Freebies</span></a></li>
-          <li><a href="production"><i class=" fa fa-circle-o"></i> <span>Production</span></a></li>
+          <li><a href="freebies"><i class="fa fa-circle-o"></i> <span>Gift</span></a></li>
+          
           
             
           </ul>

@@ -11,7 +11,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Main Inventory
+        Product
       </h1>
       <!-- <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -62,9 +62,9 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
-            <!-- <div class="box-header with-border">
+            <div class="box-header with-border">
               <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
-            </div> -->
+            </div>
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
@@ -94,7 +94,7 @@
                             <td >".$row['product_number']."</td>
                             <td align='center'>
                                 <img src='".$image."' width='150px' height='200px' align='center'><br>
-                               
+                                <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
                             </td>
 
                       
@@ -109,7 +109,8 @@
                             <td>". date('M d, Y', strtotime($row['dateofstock']))."</td>
 
                             <td>
-                               
+                                <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
+                                <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
                                 <button class='btn btn-primary btn-sm view btn-flat' data-id='".$row['id']."'><i class='fa fa-eye'></i> View</button>
                               
                             </td>
@@ -117,9 +118,7 @@
                         ";
                     }
                     ?>
-                    <!--  <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
-                      <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                                <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button> -->
+                   
 
                 </tbody>
 
