@@ -53,7 +53,7 @@
 	   <img src="../images/manila-logo-main.png" alt="tmt" class="imgcenter">
     	<p class="login-box-msg">SCAN YOUR BARCODE</p>
 		
-    	<form action="login.php" method="POST">
+    	<form action="#" method="POST">
         <video id="video" width="100%" height="fill" autoplay></video>
       		<div class="form-group has-feedback">
               
