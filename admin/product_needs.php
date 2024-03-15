@@ -19,23 +19,6 @@
       </ol> -->
     </section>
     <!-- Main content -->
-
-              <?php include 'includes/barcode.php';
-                if($_SERVER['REQUEST_METHOD'] == 'POST')
-                {
-                  if(isset($_POST['clear']))
-                  {
-                    if(file_exists('barcode.jpg'))
-                      unlink('barcode.jpg');
-                  }else{
-
-                    $text = trim($_POST['text']);
-                    $barcode = new Barcode();
-              
-                    $barcode->generate($text);
-                  }
-                }
-              ?>
     <section class="content">
       <?php
         if(isset($_SESSION['error'])){
@@ -59,59 +42,64 @@
           unset($_SESSION['success']);
         }
       ?>
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
+        <div class="row">
+    <div class="col-xs-12">
+        <div class="box">
             <div class="box-header with-border">
-              <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
+                <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
             </div>
             <div class="box-body">
-              <table id="example1" class="table table-bordered">
-                <thead>
-                  
-                  <th>Product ID</th>
-                  <th>Product Name</th>
-                  <th>Item Needs</th>
-                  <th>Kilo</th>
-                  <th>Tools</th>
-                  
-                </thead>
-
-                <tbody>
-                    <?php
-                    $sql = "SELECT * FROM product";
-                    $query = $conn->query($sql);
-                    while($row = $query->fetch_assoc()){
-                        
-                        echo "
+                <table id="example1" class="table table-bordered">
+                    <thead>
                         <tr>
-                            <td >".$row['product_number']."</td>
-
-                      
-
-                            <td>".$row['piececode']."</td>
-                            <td>".$row['boxcode']."</td>
-                            <td>". date('M d, Y', strtotime($row['dateofstock']))."</td>
-
-                            <td>
-                                <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                                <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
-                                <button class='btn btn-primary btn-sm view btn-flat' data-id='".$row['id']."'><i class='fa fa-eye'></i> View</button>
-                              
-                            </td>
+                            <th>Product ID</th>
+                            <th>Product Name</th>
+                            <th>Item Needs</th>
+                            <th>Loads</th>
+                            <th>Tools</th>
                         </tr>
-                        ";
-                    }
-                    ?>
-                   
+                    </thead>
 
-                </tbody>
+                    <tbody>
+                        <?php
+                        $sql = "SELECT * FROM product_needs ORDER BY product_id";
+                        $query = $conn->query($sql);
+                        $merged_rows = array();
 
-              </table>
+                        while($row = $query->fetch_assoc()) {
+                            $product_id = $row['product_id'];
+                            if (!isset($merged_rows[$product_id])) {
+                                // First occurrence of this product ID, start a new row
+                                $merged_rows[$product_id] = $row;
+                            } else {
+                                // Already encountered this product ID, merge the data
+                                $merged_rows[$product_id]['item_need'] .= '<br> ' . $row['item_need'];
+                                $merged_rows[$product_id]['loads'] .= '<br> ' .$row['loads']; // Merge the loads, for example
+                                // Merge other fields as needed
+                            }
+                        }
+
+                        // Output merged rows
+                        foreach ($merged_rows as $row) {
+                            echo "<tr>";
+                            echo "<td>".$row['product_id']."</td>";
+                            echo "<td>".$row['product_name']."</td>";
+                            echo "<td>".$row['item_need']."</td>";
+                            echo "<td>".$row['loads']."</td>";
+                            echo "<td>
+                                    <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
+                                    <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
+                                  </td>";
+                            echo "</tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+</div>
+
     </section>   
   </div>
   <?php include 'includes/product_needs_modal.php'; ?>

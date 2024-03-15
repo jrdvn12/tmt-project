@@ -9,15 +9,20 @@
                 <h4 class="modal-title"><b>Add New Needs</b></h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" method="POST" action="product_add.php" >
+                <form class="form-horizontal" method="POST" action="product_needs_add.php" >
                     <div class="form-group">
                         <label for="product_number" class="col-sm-3 control-label">Product Name</label>
                         <div class="col-sm-9">
-                            <select class="form-control" name="position" id="edit_position">
-                                <option selected id="position_val" disabled></option>
-                                <option value="Admin">CLASICO</option>
-                                <option value="Accountant">WHITE</option>
-                                <option value="Human Resources">BROWN</option>
+                            <select class="form-control" name="product_description" id="product_description">
+                            <?php
+                                $sql = "SELECT * FROM product";
+                                $query = $conn->query($sql);
+                                while($prow = $query->fetch_assoc()){
+                                    echo "
+                                    <option value='".$prow['id']."'>".$prow['product_name']."</option>
+                                    ";
+                                }
+                                ?>
                             
                             </select>
                         </div>
@@ -26,19 +31,26 @@
                     <div class="form-group">
                         <label for="casecode" class="col-sm-3 control-label">Item Need</label>
                         <div class="col-sm-9">
-                            <select class="form-control" name="position" id="edit_position" >
-                                <option selected id="position_val" disabled></option>
-                                <option value="Admin">SUGAR</option>
-                                <option value="Accountant">COFFEE</option>
-                                <option value="Human Resources">MILK</option>
+                            <select class="form-control" name="item_description" id="item_description" >
+                            <?php
+                                $sql = "SELECT * FROM raw_materials";
+                                $query = $conn->query($sql);
+                                while($prow = $query->fetch_assoc()){
+                                    echo "
+                                    <option value='".$prow['id']."'>".$prow['material_name']."</option>
+                                    ";
+                                }
+                                ?>
                             
                             </select>
                         </div>
                     </div>
-                    <div class="form-group" method="post" enctype="multipart/form-data">
-                        <label for="piececode" class="col-sm-3 control-label">Kilo</label>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">Loads</label>
+
                         <div class="col-sm-9">
-                            <input autocomplete="off" value="<?=$_POST['text'] ?? ''?>" name="text" class="form-control" id="piececode" name="piececode" required placeholder="Enter kilo">
+                        <input type="text" class="form-control" id="loads" name="loads" required>
                         </div>
                     </div>
 

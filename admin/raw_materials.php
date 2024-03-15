@@ -53,19 +53,18 @@
                 <thead>
                   
                   <th>Material Code</th>
-                  <th>Name</th>
-                  <th>Batch</th>
+                  <th>Material Type</th>
+                  <th>Material Name</th>
+                  <th>Material Batch</th>
+                  <th>Material Load</th>
+                  <th>Date Stock</th>
                   <th>Expiration</th>
-                  <th>Date</th>
-
-                  <th>Kilo</th>
-
                   <th>Tools</th>
                   
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT * FROM main_raw_materials";
+                    $sql = "SELECT * FROM raw_materials";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                      
@@ -73,15 +72,16 @@
                         <tr>
                           
                           <td>".$row['material_code']."</td>
-                          <td>".$row['name']."</td>
-                          <td>".$row['batch']."</td>  
-                          <td>".$row['expiration']."</td>
-                          <td>".$row['kilo']."</td>
-                          <td>".$row['kilo']."</td>
+                          <td>".$row['material_type']."</td>
+                          <td>".$row['material_name']."</td>  
+                          <td>".$row['material_batch']."</td> 
+                          <td>".$row['loads']."</td>
+                          <td>".$row['dateofstock']."</td>
+                          <td>".$row['date_expiration']."</td>
+                          
                           <td>
                           <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                          <button class='btn btn-success btn-sm edit_user_password btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Password</button>
-                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
+                          <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
                           </td>
                           
                         </tr>
@@ -98,7 +98,7 @@
   </div>
     
   <?php include 'includes/footer.php'; ?>
-  <?php include 'includes/user_modal.php'; ?>
+  <?php include 'includes/raw_materials_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>
 <script>
