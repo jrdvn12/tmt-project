@@ -175,7 +175,7 @@
                         
                         <input type="hidden" class="idproduct" id="idproduct" name="ids">
                         <!-- Set a more descriptive alt attribute -->
-                        <img class="imgcenter" id="profile_picture" class="img-circle" alt="Product Image" width='150px' height='200px' align='center'>
+                        <img class="imgcenter" id="profile_picture" class="img-circle" alt="Product Image" width='100px' height='200px' align='center'>
                         
                         <b><span class="view_product_number "></span> <br>
                         Piece Barcode : <span class="view_piece_baracode "> </span> <br>

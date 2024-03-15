@@ -52,7 +52,7 @@
                 <table id="example1" class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Product ID</th>
+                            <!-- <th>Product ID</th> -->
                             <th>Product Name</th>
                             <th>Item Needs</th>
                             <th>Loads</th>
@@ -82,7 +82,7 @@
                         // Output merged rows
                         foreach ($merged_rows as $row) {
                             echo "<tr>";
-                            echo "<td>".$row['product_id']."</td>";
+                           // echo "<td>".$row['product_id']."</td>";
                             echo "<td>".$row['product_name']."</td>";
                             echo "<td>".$row['item_need']."</td>";
                             echo "<td>".$row['loads']."</td>";

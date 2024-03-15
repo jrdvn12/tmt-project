@@ -6,6 +6,8 @@
 		//no photo upload means no image available but when someone uploads, the right image will show.
 		$filename = $_FILES['photo']['name'];
 		$product_name = $_POST['product_name'];
+		$piececode = $_POST['piececode'];
+		$boxcode = $_POST['boxcode'];
         $product_price = $_POST['product_price'];
         $product_quantity = $_POST['product_quantity'];
 		
@@ -15,8 +17,8 @@
         if(!empty($filename)){
 			move_uploaded_file($_FILES['photo']['tmp_name'], '../images/'.$filename);	
 		}
-		$sql = "INSERT INTO product (product_number, photo, product_name, price,dateofstock) 
-        VALUES ('$product_number', '$filename', '$product_name', '$product_price', '$dateofstock')";
+		$sql = "INSERT INTO product (product_number, photo,piececode,boxcode, product_name, price,dateofstock) 
+        VALUES ('$product_number', '$filename', '$piececode','$boxcode','$product_name', '$product_price', '$dateofstock')";
 		if($conn->query($sql)){
 			// AUDIT
 			// audit trail mapping
