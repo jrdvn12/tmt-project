@@ -53,6 +53,9 @@
                 <thead>
                   
                   <th>Material Code</th>
+
+                  <th>Material Needs</th>
+                  <th>Material Loads</th>
                   <th>Name</th>
                   <th>Batch</th>
                   <th>Status</th>
@@ -70,6 +73,7 @@
                     $sql = "SELECT * FROM production";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
+                      
                       if ($row['production_status'] == 'Preparing') {
                         $status = '<span class="label label-warning pull-right">Preparing</span>';
                       } elseif ($row['production_status'] == 'Onprocess') {
@@ -83,15 +87,28 @@
                       } else {
                           $status = '<span class="label label-primary pull-right"></span>';
                       }
+
+                      $product_need = $row['material_code'];
+                      $sproduct = "SELECT * FROM product_needs WHERE product_id = '$product_need'";
+                      $qproduct  = $conn->query($sproduct);
+                      $rproduct = $qproduct ->fetch_assoc();
+                      $item_need= $rproduct['item_need'];
+                      $loads= $rproduct['loads'];
+                      
+
+              
+
                       echo "
                         <tr>
                           
+                          <td>".$row['material_code']."</td>
+                          <td>".$row['material_code']."</td>
                           <td>".$row['material_code']."</td>
                           <td>".$row['product_name']."</td>
                           <td>".$row['product_batch']."</td>  
                           <td>".$status."</td>
                           <td>".$row['production_pieces']."</td>
-                          <td>".$row['production_kilo']."</td>a
+                          <td>".$row['production_kilo']."</td>
                           <td>".$row['production_date']."</td>
                           <td>".$row['production_expiration']."</td>
                           
