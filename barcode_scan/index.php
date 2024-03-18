@@ -26,8 +26,8 @@
   .login-box-body{
 	margin-top:5em;
 	background-color: rgba(255, 255, 255, .0);
-	/* border: solid 1px rgb(0, 0, 0); */
-	/* box-shadow: 5px 10px black; */
+	border: solid 1px rgb(0, 0, 0); */
+	/* box-shadow: 5px 10px black;
   }
     .oval-button {
         border-radius: 50px; /* Adjust the value to change the oval shape */
