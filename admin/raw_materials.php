@@ -57,6 +57,8 @@
                   <th>Material Name</th>
                   <th>Material Batch</th>
                   <th>Material Load</th>
+                  <th>Material Usage</th>
+                  <th>Material Remaining</th>
                   <th>Date Stock</th>
                   <th>Expiration</th>
                   <th>Tools</th>
@@ -76,6 +78,8 @@
                           <td>".$row['material_name']."</td>  
                           <td>".$row['material_batch']."</td> 
                           <td>".$row['loads']."</td>
+                          <td>".$row['material_usage']."</td>
+                          <td>".$row['material_remaining']."</td>
                           <td>".$row['dateofstock']."</td>
                           <td>".$row['date_expiration']."</td>
                           
