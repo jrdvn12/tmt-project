@@ -122,9 +122,12 @@
 
   .btn-primary:hover {
     background-color: #4F413E;
+<<<<<<< HEAD
   } */
   .skin-custom {
       background-color: #D9B495 !important;
+=======
+>>>>>>> a09b4041ecdcabb1c5351da9bab9002569d0342a
   }
 </style>
 
