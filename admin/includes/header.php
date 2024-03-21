@@ -123,9 +123,6 @@
   .btn-primary:hover {
     background-color: #4F413E;
   }
-  .skin-custom {
-      background-color: #D9B495 !important;
-  }
 </style>
 
     </style>
