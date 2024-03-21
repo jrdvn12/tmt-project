@@ -145,28 +145,19 @@ $(function(){
 function getRow(id){
   $.ajax({
     type: 'POST',
-    url: 'main_inventory_row.php',
+    url: 'propduct_need_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){
       $('.id').val(response.id);
       $('#edit_product_number').val(response.product_number);
-
-      $('#edit_product_name').val(response.product_number);
-      $('#edit_sku').val(response.product_name);
-      $('#edit_amount').val(response.price);
-      $('#edit_quantity').val(response.qty);
+      $('.product_id').val(response.product_id);
+      
 
       // delete
       $('.productname').html(response.product_name);
       // view
-      $('.view_product_number').html(response.product_name);
-      $('.view_piece_baracode').html(response.piececode);
-      $('.view_box_baracode').html(response.boxcode);
-      $('.idproduct').val(response.photo);
-      
-      $('.imagelink').attr('src', response.photo);
-      updateImage();
+    
     }
   });
 }

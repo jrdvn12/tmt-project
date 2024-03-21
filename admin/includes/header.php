@@ -107,21 +107,27 @@
   }
 
   /* Style for the buttons */
-  .btn {
+  /* .btn {
     padding: 5px 10px;
     text-decoration: none;
     color: #fff;
     border: none;
     cursor: pointer;
     border-radius: 3px;
-  }
+  } */
 
-  .btn-primary {
+  /* .btn-primary {
     background-color: #866252;
   }
 
   .btn-primary:hover {
     background-color: #4F413E;
+<<<<<<< HEAD
+  } */
+  .skin-custom {
+      background-color: #D9B495 !important;
+=======
+>>>>>>> a09b4041ecdcabb1c5351da9bab9002569d0342a
   }
 </style>
 

@@ -87,7 +87,7 @@
                       }
 
                       $product_need = $row['material_code'];
-                      $sproduct = "SELECT * FROM product_needs WHERE product_id = '$product_need'";
+                      $sproduct = "SELECT * FROM product_needs_history WHERE product_id = '$product_need'";
                       $qproduct  = $conn->query($sproduct);
                       $rproduct = $qproduct ->fetch_assoc();
 
@@ -103,7 +103,7 @@
                           <td>".$row['material_code']."</td>";
 
 
-                        $sqls = "SELECT * FROM product_needs ORDER BY product_id";
+                        $sqls = "SELECT * FROM product_needs_history ORDER BY product_id";
                         $querys = $conn->query($sqls);
                         $merged_rows = array();
 

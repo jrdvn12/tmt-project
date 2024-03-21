@@ -124,10 +124,11 @@
               <h4 class="modal-title"><b>Deleting...</b></h4>
             </div>
             <div class="modal-body">
-              <form class="form-horizontal" method="POST" action="product_delete.php">
+              <form class="form-horizontal" method="POST" action="product_needs_delete.php">
                 <input type="hidden" class="id" name="id">
+                <input type="hidden" class="product_id" name="product_id">
                 <div class="text-center">
-                    <p>PRODUCT DELETE</p>
+                    <p>DELETE PRODUCT NEEDS</p>
                     <h2 class="bold productname"></h2>
                 </div>
             </div>

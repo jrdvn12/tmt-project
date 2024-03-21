@@ -1,23 +1,24 @@
 .form-container {
     font-family: arial;
-    font-size: 24px;
-    margin: auto;
-    width: 350px;
+    font-size: 20px;
+    margin-top: 10em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+    text-align: center;
 }
 
 video {
     display: block;
-    margin-top: 10px;
+    width: 400px;
+    height: auto;
+    margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 10px;
 }
 
-label {
-    display: block;
-    margin: auto;
-}
-
-input[type="text"] {
+input {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
