@@ -1,14 +1,16 @@
 .form-container {
     font-family: arial;
     font-size: 20px;
-    margin: auto;
+    margin-top: 10em;
+    margin-left: auto;
+    margin-right: auto;
     width: 200px;
     text-align: center;
 }
 
 video {
     display: block;
-    width: 500px;
+    width: 400px;
     height: auto;
     margin-top: 5px;
     margin-left: auto;
