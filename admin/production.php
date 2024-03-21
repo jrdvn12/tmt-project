@@ -60,12 +60,10 @@
                   <th>Kilo</th>
                   <th>Date</th>
                   <th>Expiration</th>
-                 
-
                   <th>Tools</th>
-                  
                 </thead>
                 <tbody>
+
                   <?php
                     $sql = "SELECT * FROM production";
                     $query = $conn->query($sql);
@@ -91,7 +89,7 @@
                           <td>".$row['product_batch']."</td>  
                           <td>".$status."</td>
                           <td>".$row['production_pieces']."</td>
-                          <td>".$row['production_kilo']."</td>a
+                          <td>".$row['production_kilo']."</td>
                           <td>".$row['production_date']."</td>
                           <td>".$row['production_expiration']."</td>
                           
