@@ -5095,6 +5095,7 @@ table.text-center th {
 .bg-fuchsia-active,
 .bg-purple-active,
 .bg-maroon-active,
+.bg-tan-active,
 .bg-black-active,
 .callout.callout-danger,
 .callout.callout-warning,
@@ -5195,6 +5196,9 @@ table.text-center th {
 .bg-purple {
   background-color: #605ca8 !important;
 }
+.bg-tan {
+  background-color: #D9B495 !important;
+}
 .bg-maroon {
   background-color: #d81b60 !important;
 }
@@ -5254,6 +5258,9 @@ table.text-center th {
 .bg-purple-active {
   background-color: #555299 !important;
 }
+.bg-tan-active {
+  background-color: #D9B495 !important;
+}
 .bg-maroon-active {
   background-color: #ca195a !important;
 }
@@ -5305,6 +5312,9 @@ table.text-center th {
 }
 .text-purple {
   color: #605ca8 !important;
+}
+.text-tan {
+  color: #D9B495 !important;
 }
 .text-maroon {
   color: #d81b60 !important;
@@ -5424,6 +5434,16 @@ table.text-center th {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9491c4', endColorstr='#605ca8', GradientType=0) !important;
   color: #fff;
 }
+.bg-tan-gradient {
+  background: #D9B495 !important; /* Tan color */
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #D9B495), color-stop(1, #EAD3AE)) !important; /* Tan color */
+  background: -ms-linear-gradient(bottom, #D9B495, #EAD3AE) !important; /* Tan color */
+  background: -moz-linear-gradient(center bottom, #D9B495 0%, #EAD3AE 100%) !important; /* Tan color */
+  background: -o-linear-gradient(#EAD3AE, #D9B495) !important; /* Tan color */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EAD3AE', endColorstr='#D9B495', GradientType=0) !important; /* Tan color */
+  color: #fff;
+}
+
 .bg-green-gradient {
   background: #00a65a !important;
   background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #00a65a), color-stop(1, #00ca6d)) !important;
