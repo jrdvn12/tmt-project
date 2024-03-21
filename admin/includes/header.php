@@ -117,12 +117,14 @@
   }
 
   .btn-primary {
-    background-color: #007bff;
+    background-color: #866252;
   }
 
   .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #4F413E;
   }
+</style>
+
     </style>
 </head>
 <?php include 'includes/error.php'; ?>
