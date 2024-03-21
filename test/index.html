@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Webcam Barcode Scanner</title>
+        <script src="quagga.min.js"></script>
+        <script src="scanner.js"></script>
+    </head>
+<body>
+    <form id="barcodeForm" action="process.php" method="post">
+        <label for="barcodeInput">Scanned Barcode:</label>
+        <input type="text" id="barcodeInput" name="barcode" placeholder="Input Barcode">
+        <button type="button" onclick="manualSubmit()">Submit Manually</button>
+    </form>
+</body>
+</html>

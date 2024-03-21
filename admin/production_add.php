@@ -20,7 +20,7 @@
         $pproduct_id= $rpproduct['id'];
 
         $material_code = $rpproduct['product_id'];
-        $product_name = $product;
+        $product_name = $rproduct['product_name'];
         $product_batch = $production_batch;
         $production_status = "Preparing";
         $production_pieces = 0;

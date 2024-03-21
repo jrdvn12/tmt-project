@@ -53,6 +53,9 @@
                 <thead>
                   
                   <th>Material Code</th>
+
+                  <th>Material Needs</th>
+                  <th>Material Loads</th>
                   <th>Name</th>
                   <th>Batch</th>
                   <th>Status</th>
@@ -68,6 +71,7 @@
                     $sql = "SELECT * FROM production";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
+
                       if ($row['production_status'] == 'Preparing') {
                         $status = '<span class="label label-warning pull-right">Preparing</span>';
                       } elseif ($row['production_status'] == 'Onprocess') {
@@ -81,10 +85,52 @@
                       } else {
                           $status = '<span class="label label-primary pull-right"></span>';
                       }
+
+                      $product_need = $row['material_code'];
+                      $sproduct = "SELECT * FROM product_needs WHERE product_id = '$product_need'";
+                      $qproduct  = $conn->query($sproduct);
+                      $rproduct = $qproduct ->fetch_assoc();
+
+                      $item_need= $rproduct['item_need'];
+                      $loads= $rproduct['loads'];
+                      
+
+              
+
                       echo "
                         <tr>
                           
-                          <td>".$row['material_code']."</td>
+                          <td>".$row['material_code']."</td>";
+
+
+                        $sqls = "SELECT * FROM product_needs ORDER BY product_id";
+                        $querys = $conn->query($sqls);
+                        $merged_rows = array();
+
+                        while($rows = $querys->fetch_assoc()) {
+                            $product_id = $rproduct['product_id'];
+                            if (!isset($merged_rows[$product_id])) {
+                                // First occurrence of this product ID, start a new row
+                                $merged_rows[$product_id] = $rows;
+                            } else {
+                                // Already encountered this product ID, merge the data
+                                $merged_rows[$product_id]['item_need'] .= '<br> ' . $rproduct['item_need'];
+                                $merged_rows[$product_id]['loads'] .= '<br> ' .$rproduct['loads']; // Merge the loads, for example
+                                // Merge other fields as needed
+                            }
+                        }
+                        foreach ($merged_rows as $rproduct) {
+                        
+                       
+                          echo "<td>".$rproduct['item_need']."</td>";
+                          echo "<td>".$rproduct['loads']."</td>";
+                          
+                      }
+                       
+
+
+
+                          echo"
                           <td>".$row['product_name']."</td>
                           <td>".$row['product_batch']."</td>  
                           <td>".$status."</td>
