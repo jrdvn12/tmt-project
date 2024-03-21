@@ -1,5 +1,3 @@
-// scanner.js
-
 // Access the webcam and start scanning for barcodes
 navigator.mediaDevices.getUserMedia({ video: true })
   .then(function(stream) {
