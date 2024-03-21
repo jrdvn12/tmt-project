@@ -29,7 +29,9 @@ navigator.mediaDevices.getUserMedia({ video: true })
       Quagga.onDetected(function(result) {
         var barcodeValue = result.codeResult.code;
         document.getElementById("barcodeInput").value = barcodeValue;
-        document.getElementById("barcodeForm").submit();
+        setTimeout(function() {
+          document.getElementById("barcodeForm").submit();
+        }, 1000);
       });
     });
   })
