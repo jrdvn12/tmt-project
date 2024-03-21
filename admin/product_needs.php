@@ -42,7 +42,7 @@
           unset($_SESSION['success']);
         }
       ?>
-        <div class="row">
+<div class="row">
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header with-border">
@@ -53,45 +53,67 @@
                     <thead>
                         <tr>
                             <!-- <th>Product ID</th> -->
+                            <th>ID</th> <!-- Add this line -->
                             <th>Product Name</th>
                             <th>Item Needs</th>
                             <th>Loads</th>
                             <th>Tools</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         <?php
-                        $sql = "SELECT * FROM product_needs ORDER BY product_id";
+                        $sql = "SELECT *  FROM product_needs ";
+                      //$sql = "SELECT *, product_needs.product_id AS pnid, production.id AS mcid FROM production LEFT JOIN product_needs ON production.material_code=product_needs.product_id ORDER BY product_needs.product_id";
                         $query = $conn->query($sql);
                         $merged_rows = array();
-
+                          
+                       
+                        
                         while($row = $query->fetch_assoc()) {
+                          
                             $product_id = $row['product_id'];
                             if (!isset($merged_rows[$product_id])) {
                                 // First occurrence of this product ID, start a new row
                                 $merged_rows[$product_id] = $row;
                             } else {
                                 // Already encountered this product ID, merge the data
+                              
                                 $merged_rows[$product_id]['item_need'] .= '<br> ' . $row['item_need'];
+                               
                                 $merged_rows[$product_id]['loads'] .= '<br> ' .$row['loads']; // Merge the loads, for example
                                 // Merge other fields as needed
                             }
+                           
                         }
-
+                        
                         // Output merged rows
+                       
                         foreach ($merged_rows as $row) {
-                            echo "<tr>";
-                           // echo "<td>".$row['product_id']."</td>";
-                            echo "<td>".$row['product_name']."</td>";
-                            echo "<td>".$row['item_need']."</td>";
-                            echo "<td>".$row['loads']."</td>";
-                            echo "<td>
-                                    <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                                    <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
-                                  </td>";
-                            echo "</tr>";
-                        }
+                          echo "<tr>";
+                          echo "<td>".$row['id']."</td>"; // Display ID 
+                          echo "<td>".$row['product_name']."</td>";
+                          echo "<td>".$row['item_need']."</td>";
+                          echo "<td>";
+                      
+                          // Explode loads into an array
+                          $loads = explode('<br>', $row['loads']);
+                      
+                          // Loop through each load
+                          foreach ($loads as $load) {
+                              // Add the link HTML code before each load
+                             echo $load .'<a href="#edit_item" data-toggle="modal" class="pull-right edit_item" data-id='.$row['id'].'><span class="fa fa-edit"></span></a> <br>';
+                             // echo $load .'<br>';
+                          }
+                      
+                          echo "</td>";
+                          
+                          echo "<td>
+                                  
+                                  <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
+                       
+                                </td>";
+                          echo "</tr>";
+                      }
                         ?>
                     </tbody>
                 </table>
@@ -103,6 +125,7 @@
     </section>   
   </div>
   <?php include 'includes/product_needs_modal.php'; ?>
+
   <?php include 'includes/footer.php'; ?>
  
 </div>
@@ -113,9 +136,9 @@
 
 
 $(function(){
-  $(document).on('click', '.edit', function(e){
+  $(document).on('click', '.edit_item', function(e){
     e.preventDefault();
-    $('#edit').modal('show');
+    $('#edit_item').modal('show');
     var id = $(this).data('id');
     getRow(id);
   });
@@ -127,11 +150,7 @@ $(function(){
     getRow(id);
   });
 
-  $(document).on('click', '.photo', function(e){
-    e.preventDefault();
-    var id = $(this).data('id');
-    getRow(id);
-  });
+
   $('.view').click(function(e){
     e.preventDefault();
     $('#view').modal('show');
@@ -145,42 +164,30 @@ $(function(){
 function getRow(id){
   $.ajax({
     type: 'POST',
-    url: 'propduct_need_row.php',
+    url: 'product_need_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){
       $('.id').val(response.id);
-      $('#edit_product_number').val(response.product_number);
+      $('#edit_product_number').val(response.id);
+
+      
       $('.product_id').val(response.product_id);
       
-
+      //edit 
+      
+      $('#product_needs_id').val(response.id);
+      $('#product_needs_name').val(response.product_name);
+      $('#item_need_edit').val(response.item_need);
+      $('#item_loads_edit').val(response.loads);
       // delete
       $('.productname').html(response.product_name);
+      $('.productnames').html(response.product_name);
       // view
-    
+      
     }
   });
 }
-// new 
-
-//window.onclick = function() {
-    //        updateImage();
-  //      };
-
- //JavaScript
-      function generateBarcode(inputId) {
-          let inputElement = document.getElementById(inputId);
-          let barcodeText = inputElement.value;
-          let barcodeImage = document.getElementById(inputId + 'Barcode');
-          let barcodeImageUrl = generateBarcodeImage(barcodeText);
-          barcodeImage.src = barcodeImageUrl;
-      }
-
-      // This function generates the barcode image URL based on the input text
-      function generateBarcodeImage(text) {
-          return 'barcode.php' + text;
-      }
-
 </script>
 
 

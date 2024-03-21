@@ -63,15 +63,32 @@
                   <th>Kilo</th>
                   <th>Date</th>
                   <th>Expiration</th>
+                 
+
                   <th>Tools</th>
+                  
                 </thead>
                 <tbody>
-
                   <?php
-                    $sql = "SELECT * FROM production";
+                    $sql = "SELECT *, product_needs.product_id AS pnid, production.id AS mcid FROM production LEFT JOIN product_needs ON production.material_code=product_needs.product_id ORDER BY product_needs.product_id";
                     $query = $conn->query($sql);
-                    while($row = $query->fetch_assoc()){
+                    $merged_rows = array();
 
+                    while($row = $query->fetch_assoc()) {
+                        $product_id = $row['product_id'];
+                        if (!isset($merged_rows[$product_id])) {
+                            // First occurrence of this product ID, start a new row
+                            $merged_rows[$product_id] = $row;
+                        } else {
+                            // Already encountered this product ID, merge the data
+                            $merged_rows[$product_id]['item_need'] .= '<br> ' . $row['item_need'];
+                            $merged_rows[$product_id]['loads'] .= '<br> ' .$row['loads']; // Merge the loads, for example
+                            // Merge other fields as needed
+                        }
+                    }
+
+                    // Output merged rows
+                    foreach ($merged_rows as $row) {
                       if ($row['production_status'] == 'Preparing') {
                         $status = '<span class="label label-warning pull-right">Preparing</span>';
                       } elseif ($row['production_status'] == 'Onprocess') {
@@ -85,68 +102,25 @@
                       } else {
                           $status = '<span class="label label-primary pull-right"></span>';
                       }
-
-                      $product_need = $row['material_code'];
-                      $sproduct = "SELECT * FROM product_needs_history WHERE product_id = '$product_need'";
-                      $qproduct  = $conn->query($sproduct);
-                      $rproduct = $qproduct ->fetch_assoc();
-
-                      $item_need= $rproduct['item_need'];
-                      $loads= $rproduct['loads'];
-                      
-
-              
-
-                      echo "
-                        <tr>
-                          
-                          <td>".$row['material_code']."</td>";
-
-
-                        $sqls = "SELECT * FROM product_needs_history ORDER BY product_id";
-                        $querys = $conn->query($sqls);
-                        $merged_rows = array();
-
-                        while($rows = $querys->fetch_assoc()) {
-                            $product_id = $rproduct['product_id'];
-                            if (!isset($merged_rows[$product_id])) {
-                                // First occurrence of this product ID, start a new row
-                                $merged_rows[$product_id] = $rows;
-                            } else {
-                                // Already encountered this product ID, merge the data
-                                $merged_rows[$product_id]['item_need'] .= '<br> ' . $rproduct['item_need'];
-                                $merged_rows[$product_id]['loads'] .= '<br> ' .$rproduct['loads']; // Merge the loads, for example
-                                // Merge other fields as needed
-                            }
-                        }
-                        foreach ($merged_rows as $rproduct) {
+                        echo "<tr>";
+                       // echo "<td>".$row['product_id']."</td>";
+                        echo "<td>".$row['material_code']."</td>";
+                        echo "<td>".$row['item_need']."</td>";
+                        echo "<td>".$row['loads']."</td>";
+                        echo "";
+                        echo "<td>".$row['product_name']."</td>";
                         
-                       
-                          echo "<td>".$rproduct['item_need']."</td>";
-                          echo "<td>".$rproduct['loads']."</td>";
-                          
-                      }
-                       
-
-
-
-                          echo"
-                          <td>".$row['product_name']."</td>
-                          <td>".$row['product_batch']."</td>  
-                          <td>".$status."</td>
-                          <td>".$row['production_pieces']."</td>
-                          <td>".$row['production_kilo']."</td>
-                          <td>".$row['production_date']."</td>
-                          <td>".$row['production_expiration']."</td>
-                          
-                          <td>
-                          <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                        
-                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
-                          </td>
-                          
-                        </tr>
-                      ";
+                        echo "<td>".$row['product_batch']."</td>  ";
+                        echo "<td>".$status."</td>";
+                        echo "<td>".$row['production_pieces']."</td>";
+                        echo "<td>".$row['production_kilo']."</td>";
+                        echo "<td>".$row['production_date']."</td>";
+                        echo "<td>".$row['production_expiration']."</td>";
+                        echo "<td>
+                                <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['mcid']."'><i class='fa fa-edit'></i> Edit</button>
+                                <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['mcid']."'><i class='fa fa-trash'></i> Delete</button>
+                              </td>";
+                        echo "</tr>";
                     }
                   ?>
                 </tbody>

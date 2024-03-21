@@ -1,4 +1,4 @@
-
+<!-- Add -->
 <div class="modal fade" id="addnew">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -78,12 +78,7 @@
             <div class="modal-body">
                 <form class="form-horizontal" method="POST" action="product_edit.php">
                     <input type="hidden" class="product_id" name="id" aria-label="Product ID">
-                    <div class="form-group">
-                        <label for="edit_product_number" class="col-sm-3 control-label">Product Number</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="edit_product_number" name="product_number" required aria-required="true" placeholder="Enter product number">
-                        </div>
-                    </div>
+                   
                     <div class="form-group">
                         <label for="edit_sku" class="col-sm-3 control-label">SKU</label>
                         <div class="col-sm-9">
@@ -114,6 +109,7 @@
 
 
 
+
 <!-- Delete -->
 <div class="modal fade" id="delete">
     <div class="modal-dialog">
@@ -141,30 +137,53 @@
     </div>
 </div>
 
-<!-- Update Photo -->
-<div class="modal fade" id="edit_photo">
+<!-- Edit -->
+<div class="modal fade" id="edit_item">
+
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title"><b><span class="fullname"></span></b></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title"><h2 class="bold productnames"></h2></h4>
+
+                
+            
             </div>
             <div class="modal-body">
-              <form class="form-horizontal" method="POST" action="product_photo.php" enctype="multipart/form-data">
-                <input type="hidden" class="id" name="id">
-                <div class="form-group">
-                    <label for="photo" class="col-sm-3 control-label">Photo</label>
-
-                    <div class="col-sm-9">
-                      <input type="file" id="photo" name="photo" required>
+                <form class="form-horizontal" method="POST" action="product_needs_edit.php" >
+                    <div class="form-group">
+                        <label for="product_number" class="col-sm-3 control-label">Product Name</label>
+                        <div class="col-sm-9">
+                        <input type="hidden" class="form-control" id="product_needs_id" name="product_needs_id" >
+                            <input type="text" class="form-control" id="product_needs_name" name="product_needs_name" required readonly="TRUE">
+                        </div>
                     </div>
-                </div>
+                    
+                    <div class="form-group">
+                        <label for="casecode" class="col-sm-3 control-label">Item Need</label>
+
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="item_need_edit" name="item_need_edit" required readonly="TRUE">
+                        </div>
+                                            
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">Loads</label>
+
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="item_loads_edit" name="item_loads_edit" required>
+                        </div>
+                    </div>
+
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-              <button type="submit" class="btn btn-success btn-flat" name="upload"><i class="fa fa-check-square-o"></i> Update</button>
-              </form>
+                <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+                <button type="submit" class="btn btn-success btn-flat" name="edit"><i class="fa fa-edit"></i> Save</button>
+                <button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="fa fa-trash"></i> Delete</button>
+                </form>
             </div>
         </div>
     </div>
@@ -228,24 +247,3 @@
     </div>
 </div>
 
-<script>
-        // Assuming the script is already included and executed after the HTML elements are loaded
-
-        function updateImage() {
-            var inputValue = document.getElementById('idproduct').value;
-            var imgElement = document.getElementById('profile_picture');
-            var imageFolder = "../images/";
-            var imageUrl = imageFolder + inputValue;
-            imgElement.src = imageUrl;
-            // Check if the image is loaded successfully, if not, set a default image
-            imgElement.onerror = function() {
-                imgElement.src = "../images/noproduct.jpg"; // Change to the path of your default image
-                imgElement.alt = "Default Product Image";
-            };
-        }
-
-        // Call the updateImage function when the page is loaded
-        /*window.onclick = function() {
-            updateImage();
-        };*/
-    </script>

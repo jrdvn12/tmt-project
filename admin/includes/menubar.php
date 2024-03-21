@@ -60,6 +60,7 @@
           <ul class="treeview-menu">
             <li><a href="main_raw_materials"><i class="fa fa-circle-o"></i> Main Raw Materials</a></li>    
             <li><a href="raw_materials"><i class="fa fa-circle-o"></i> Raw Materials Inventory</a></li>
+            <li><a href="type_raw_materials"><i class="fa fa-circle-o"></i>  Raw Materials Type</a></li>
             <!-- <li><a href="raw_materials_inventory"><i class="fa fa-circle-o"></i> Raw Materials Inventory</a></li> -->
             
           </ul>

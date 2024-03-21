@@ -12,9 +12,9 @@ video {
     display: block;
     width: 400px;
     height: auto;
-    margin-top: 5px;
+    /* margin-top: 5px;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; */
     border-radius: 10px;
 }
 

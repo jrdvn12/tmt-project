@@ -15,7 +15,6 @@
       </h1>
       <!-- <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Employees</li>
         <li class="active">Schedules</li>
       </ol> -->
     </section>
@@ -50,15 +49,15 @@
               <a href="schedule_print.php" class="btn btn-success btn-sm btn-flat"><span class="glyphicon glyphicon-print"></span> Print</a>
             </div> -->
             <div class="box-body">
-              <table id="example1" class="table table-bordered">
-                <thead>
-                  <th>Date</th>
-                  <th>Time</th>
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th>Tools</th>
-                </thead>
-                <tbody>
+                  <table id="example1" class="table table-bordered">
+                        <thead>
+                          <th>Date</th>
+                          <th>Time</th>
+                          <th>Name</th>
+                          <th>Description</th>
+                          <th>Tools</th>
+                        </thead>
+                  <tbody>
                   <?php
                     //$sql = "SELECT * FROM audit_trail_record WHERE datefrom >= '$from' AND dateto <= '$to'";
                     $sql = "SELECT * FROM audit_trail_record ";
