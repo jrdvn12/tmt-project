@@ -11,26 +11,31 @@ include 'includes/conn.php';
               <h4 class="modal-title"><b>Add New Production</b></h4>
             </div>
             <div class="modal-body">
-              <form class="form-horizontal" method="POST" action="user_add.php" enctype="multipart/form-data">
+              <form class="form-horizontal" method="POST" action="production_add.php" enctype="multipart/form-data">
               <div class="form-group">
-                    <label for="position" class="col-sm-3 control-label">Product</label>
+                    <label for="product" class="col-sm-3 control-label">Product</label>
 
                     <div class="col-sm-9">
-                      <select class="form-control" name="position" id="position" required>
-                        <option value="" selected>- Select -</option>
-                        <option value="CLASICO">CLASICO</option>
-                        <option value="WHITE">WHITE</option>
-                        <option value="BROWN">BROWN</option>
+                      <select class="form-control" name="product" id="product" required>
+                      <?php
+                                $sql = "SELECT * FROM product";
+                                $query = $conn->query($sql);
+                                while($prow = $query->fetch_assoc()){
+                                    echo "
+                                    <option value='".$prow['id']."'>".$prow['product_name']."</option>
+                                    ";
+                                }
+                                ?>
           
                       </select>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="firstname" class="col-sm-3 control-label">Batch</label>
+                    <label for="production_batch" class="col-sm-3 control-label">Batch</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="firstname" name="firstname" required>
+                      <input type="text" class="form-control" id="production_batch" name="production_batch" required>
                     </div>
                 </div>
                

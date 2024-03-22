@@ -1,0 +1,40 @@
+.form-container {
+    font-family: arial;
+    font-size: 20px;
+    margin-top: 10em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+    text-align: center;
+}
+
+video {
+    display: block;
+    width: 400px;
+    height: auto;
+    /* margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto; */
+    border-radius: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}

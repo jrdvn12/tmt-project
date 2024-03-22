@@ -19,7 +19,6 @@
       </ol> -->
     </section>
     <!-- Main content -->
-
               <?php include 'includes/barcode.php';
                 if($_SERVER['REQUEST_METHOD'] == 'POST')
                 {
@@ -94,8 +93,6 @@
                                 <img src='".$image."' width='150px' height='200px' align='center'><br>
                                 <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
                             </td>
-
-                      
 
                             <td>".$row['piececode']."</td>
                             <td>".$row['boxcode']."</td>

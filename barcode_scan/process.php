@@ -1,18 +1,18 @@
 <?php
-
-$barcode = $_POST['barcode'];
-
-// File path to store scanned barcodes
-$filename = 'scanned_barcodes.txt';
-
-// Check if the barcode already exists in the file
-$fileContent = file_get_contents($filename);
-if (strpos($fileContent, $barcode) !== false) {
-    echo "Barcode already exists: " . $barcode;
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Check if the barcode field is set and not empty
+    if(isset($_POST["barcode"]) && !empty($_POST["barcode"])) {
+        $barcode = $_POST["barcode"];
+        
+        // Process the barcode data as needed
+        // For demonstration, let's simply echo the barcode value
+        echo "Scanned Barcode: " . $barcode;
+    } else {
+        // If barcode field is empty or not set, display an error message
+        echo "No barcode scanned.";
+    }
 } else {
-    // Save scanned barcode to the text file
-    file_put_contents($filename, $barcode . PHP_EOL, FILE_APPEND);
-    echo "Barcode saved: " . $barcode;
+    // If request method is not POST, display an error message
+    echo "Invalid request method.";
 }
-
 ?>

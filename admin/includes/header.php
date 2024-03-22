@@ -73,6 +73,64 @@
         height: 100%;
         border-radius: 5px;
       }
-  	</style>
+
+      tbody tr:nth-child(even) 
+      {
+      background-color: #ecf0f1; /* Light gray background for even rows */
+      }
+
+      tbody tr:nth-child(odd) {
+        background-color: #ffffff; /* White background for odd rows */
+      }
+
+      tbody tr:hover {
+        background-color: #d4e6f1; /* Light blue background on hover */
+        opacity: 1; /* Full opacity on hover */
+      }
+      table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  /* Style for the buttons */
+  /* .btn {
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+  } */
+
+  /* .btn-primary {
+    background-color: #866252;
+  }
+
+  .btn-primary:hover {
+    background-color: #4F413E;
+<<<<<<< HEAD
+  } */
+  .skin-custom {
+      background-color: #D9B495 !important;
+=======
+>>>>>>> a09b4041ecdcabb1c5351da9bab9002569d0342a
+  }
+</style>
+
+    </style>
 </head>
 <?php include 'includes/error.php'; ?>

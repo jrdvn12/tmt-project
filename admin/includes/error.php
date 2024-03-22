@@ -6,7 +6,7 @@
 </noscript>
 
 
-<!-- <body >  --><body oncontextmenu="return false"> 
+<body > <!--  <body oncontextmenu="return false"> -->
 </body>
 <script>
 

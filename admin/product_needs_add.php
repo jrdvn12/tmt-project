@@ -24,25 +24,33 @@
 		$sql = "INSERT INTO product_needs (product_id, product_name, item_need, loads) 
         VALUES ('$product_id', '$product_name', '$item_need', '$loads')";
 		if($conn->query($sql)){
-			// AUDIT
-			// audit trail mapping
-			$timezone = 'Asia/Manila';
-			date_default_timezone_set($timezone);
 			
-			$unique='Hi';	
-			$auditdate = date('Y-m-d');
-			$audittime = date('H:i:s');
-			$audituser = $user['firstname'].' '.$user['lastname'];
-			$auditdescription = 'Added new Need Materials #'.$unique.' date '.$auditdate;
+			$sql1 = "INSERT INTO product_needs_history (product_id, product_name, item_need, loads) 
+			VALUES ('$product_id', '$product_name', '$item_need', '$loads')";
+			if($conn->query($sql1)){
+				
+				// AUDIT
+				// audit trail mapping
+				$timezone = 'Asia/Manila';
+				date_default_timezone_set($timezone);
+				
+				$unique='Hi';	
+				$auditdate = date('Y-m-d');
+				$audittime = date('H:i:s');
+				$audituser = $user['firstname'].' '.$user['lastname'];
+				$auditdescription = 'Added new Need Materials #'.$unique.' date '.$auditdate;
 
-			$sqlaudit = "INSERT INTO audit_trail_record (audit_date,audit_time, user, description) 
-			VALUES ('$auditdate', '$audittime', '$audituser', '$auditdescription')";
-			if ($conn->query($sqlaudit)) {
-				$_SESSION['success'] = 'New need materials added successfully!';
-			} else {
+				$sqlaudit = "INSERT INTO audit_trail_record (audit_date,audit_time, user, description) 
+				VALUES ('$auditdate', '$audittime', '$audituser', '$auditdescription')";
+				if ($conn->query($sqlaudit)) {
+					$_SESSION['success'] = 'New need materials added successfully!';
+				} else {
+					$_SESSION['error'] = $conn->error;
+				}
+			}
+			else{
 				$_SESSION['error'] = $conn->error;
 			}
-			
 		}
 		else{
 			$_SESSION['error'] = $conn->error;
@@ -55,3 +63,5 @@
 	header('location: product_needs');
 
 ?>
+
+			

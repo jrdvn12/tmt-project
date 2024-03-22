@@ -1,52 +1,42 @@
-// Access the webcam stream
+// Access the webcam and start scanning for barcodes
 navigator.mediaDevices.getUserMedia({ video: true })
-    .then(function(stream) {
-        const video = document.getElementById('video');
-        video.srcObject = stream;
-        video.play();
-    })
-    .catch(function(err) {
-        console.error('Error accessing the webcam: ', err);
-    });
-
-// Configure QuaggaJS
-Quagga.init({
-    inputStream : {
+  .then(function(stream) {
+    var video = document.createElement('video');
+    document.body.appendChild(video);
+    video.srcObject = stream;
+    video.play();
+    
+    Quagga.init({
+      inputStream : {
         name : "Live",
         type : "LiveStream",
-        target: document.getElementById('video')
-    },
-    decoder: {
-        readers : ["ean_reader"]
-    }
-}, function(err) {
-    if (err) {
-        console.error('Error initializing Quagga: ', err);
+        target: video,
+        constraints: {
+          facingMode: "environment" // Use the rear camera (if available) for mobile devices
+        }
+      },
+      decoder : {
+        readers : ["ean_reader"] // Specify barcode types to scan (EAN-13)
+      }
+    }, function(err) {
+      if (err) {
+        console.error(err);
         return;
-    }
-    Quagga.start();
-});
+      }
+      Quagga.start();
+      
+      // Once barcode is detected, populate form field and submit form
+      Quagga.onDetected(function(result) {
+        var barcodeValue = result.codeResult.code;
+        document.getElementById("barcodeInput").value = barcodeValue;
+        document.getElementById("barcodeForm").submit();
+      });
+    });
+  })
+  .catch(function(err) {
+    console.error('Error accessing webcam: ', err);
+  });
 
-// Process barcode detection
-Quagga.onDetected(function(result) {
-    const barcode = result.codeResult.code;
-    const barcodeResultElement = document.getElementById('barcode-result');
-    barcodeResultElement.innerHTML = 'Scanned EAN-13 Barcode: ' + barcode;
-
-    // Send barcode data to PHP for further processing
-    fetch('process.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: 'barcode=' + encodeURIComponent(barcode)
-    })
-    .then(response => response.text())
-    .then(data => {
-        console.log('Server response:', data);
-        // Display server response on the page
-        const serverResponseElement = document.getElementById('server-response');
-        serverResponseElement.innerHTML = data;
-    })
-    .catch(error => console.error('Error:', error));
-});
+  function manualSubmit() {
+    document.getElementById("barcodeForm").submit();
+  }

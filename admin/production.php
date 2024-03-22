@@ -53,40 +53,74 @@
                 <thead>
                   
                   <th>Material Code</th>
+
+                  <th>Material Needs</th>
+                  <th>Material Loads</th>
                   <th>Name</th>
                   <th>Batch</th>
                   <th>Status</th>
-                  <th>Expiration</th>
-                  <th>Date</th>
-
+                  <th>Pieces</th>
                   <th>Kilo</th>
+                  <th>Date</th>
+                  <th>Expiration</th>
+                 
 
                   <th>Tools</th>
                   
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT * FROM main_raw_materials";
+                    $sql = "SELECT *, product_needs.product_id AS pnid, production.id AS mcid FROM production LEFT JOIN product_needs ON production.material_code=product_needs.product_id ORDER BY product_needs.product_id";
                     $query = $conn->query($sql);
-                    while($row = $query->fetch_assoc()){
-                     
-                      echo "
-                        <tr>
-                          
-                          <td>".$row['material_code']."</td>
-                          <td>".$row['name']."</td>
-                          <td>".$row['batch']."</td>  
-                          <td>".$row['expiration']."</td>
-                          <td>".$row['kilo']."</td>
-                          <td>".$row['kilo']."</td>
-                          <td>
-                          <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                          <button class='btn btn-success btn-sm edit_user_password btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Password</button>
-                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
-                          </td>
-                          
-                        </tr>
-                      ";
+                    $merged_rows = array();
+
+                    while($row = $query->fetch_assoc()) {
+                        $product_id = $row['product_id'];
+                        if (!isset($merged_rows[$product_id])) {
+                            // First occurrence of this product ID, start a new row
+                            $merged_rows[$product_id] = $row;
+                        } else {
+                            // Already encountered this product ID, merge the data
+                            $merged_rows[$product_id]['item_need'] .= '<br> ' . $row['item_need'];
+                            $merged_rows[$product_id]['loads'] .= '<br> ' .$row['loads']; // Merge the loads, for example
+                            // Merge other fields as needed
+                        }
+                    }
+
+                    // Output merged rows
+                    foreach ($merged_rows as $row) {
+                      if ($row['production_status'] == 'Preparing') {
+                        $status = '<span class="label label-warning pull-right">Preparing</span>';
+                      } elseif ($row['production_status'] == 'Onprocess') {
+                          $status = '<span class="label label-danger pull-right">Onprocess</span>';
+                      } elseif ($row['production_status'] == 'Packaging') {
+                        $status = '<span class="label label-info pull-right">Packaging</span>';
+                      } elseif ($row['production_status'] == 'Complete') {
+                        $status = '<span class="label label-primary pull-right">Complete</span>';
+                      } elseif ($row['production_status'] == '5') {
+                        $status = '<span class="label label-danger pull-right">absent</span>';
+                      } else {
+                          $status = '<span class="label label-primary pull-right"></span>';
+                      }
+                        echo "<tr>";
+                       // echo "<td>".$row['product_id']."</td>";
+                        echo "<td>".$row['material_code']."</td>";
+                        echo "<td>".$row['item_need']."</td>";
+                        echo "<td>".$row['loads']."</td>";
+                        echo "";
+                        echo "<td>".$row['product_name']."</td>";
+                        
+                        echo "<td>".$row['product_batch']."</td>  ";
+                        echo "<td>".$status."</td>";
+                        echo "<td>".$row['production_pieces']."</td>";
+                        echo "<td>".$row['production_kilo']."</td>";
+                        echo "<td>".$row['production_date']."</td>";
+                        echo "<td>".$row['production_expiration']."</td>";
+                        echo "<td>
+                                <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['mcid']."'><i class='fa fa-edit'></i> Edit</button>
+                                <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['mcid']."'><i class='fa fa-trash'></i> Delete</button>
+                              </td>";
+                        echo "</tr>";
                     }
                   ?>
                 </tbody>

@@ -1,0 +1,55 @@
+/*
+ * Skin: Tan
+ * ------------
+ */
+ @import "../../../bower_components/bootstrap/less/mixins.less";
+ @import "../../../bower_components/bootstrap/less/variables.less";
+ @import "../variables.less";
+ @import "../mixins.less";
+ 
+ .skin-tan {
+   //Navbar
+   .main-header {
+     .navbar {
+       .navbar-variant(@tan; #fff); /* Tan color */
+       .sidebar-toggle {
+         color: #fff;
+         &:hover {
+           background-color: darken(@tan, 5%); /* Tan color */
+         }
+       }
+       @media (max-width: @screen-header-collapse) {
+         .dropdown-menu {
+           li {
+             &.divider {
+               background-color: rgba(255, 255, 255, 0.1);
+             }
+             a {
+               color: #fff;
+               &:hover {
+                 background: darken(@tan, 5%); /* Tan color */
+               }
+             }
+           }
+         }
+       }
+     }
+     //Logo
+     .logo {
+       .logo-variant(darken(@tan, 5%)); /* Tan color */
+     }
+ 
+     li.user-header {
+       background-color: @tan; /* Tan color */
+     }
+   }
+ 
+   //Content Header
+   .content-header {
+     background: transparent;
+   }
+ 
+   //Create the sidebar skin
+   .skin-dark-sidebar(@tan); /* Tan color */
+ }
+ 
