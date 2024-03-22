@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 15, 2024 at 03:06 AM
+-- Generation Time: Mar 15, 2024 at 09:43 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -68,10 +68,17 @@ CREATE TABLE `audit_trail_record` (
 --
 
 INSERT INTO `audit_trail_record` (`id`, `audit_date`, `audit_time`, `user`, `description`) VALUES
-(408, '2024-03-12', '12:57:54', 'Angelo Cruz', 'Added new Product  date 2024-03-12'),
-(409, '2024-03-12', '13:00:05', 'Angelo Cruz', 'Added new Product 202325 date 2024-03-12'),
-(410, '2024-03-12', '13:24:04', 'Angelo Cruz', 'Added new Product #202325 date 2024-03-12'),
-(411, '2024-03-12', '14:09:36', 'Angelo Cruz', 'Added new Product #22341232 date 2024-03-12');
+(431, '2024-03-15', '15:59:31', 'Angelo Cruz', 'Added new Raw Materials # date 2024-03-15'),
+(432, '2024-03-15', '16:00:19', 'Angelo Cruz', 'Added new Raw Materials # date 2024-03-15'),
+(433, '2024-03-15', '16:01:12', 'Angelo Cruz', 'Added new Raw Materials # date 2024-03-15'),
+(434, '2024-03-15', '16:02:07', 'Angelo Cruz', 'Added new Raw Materials # date 2024-03-15'),
+(435, '2024-03-15', '16:05:16', 'Angelo Cruz', 'Added new Product #TMT48121 date 2024-03-15'),
+(436, '2024-03-15', '16:06:08', 'Angelo Cruz', 'Added new Product #TMT412542 date 2024-03-15'),
+(437, '2024-03-15', '16:07:01', 'Angelo Cruz', 'Added new Product #TMT457469 date 2024-03-15'),
+(438, '2024-03-15', '16:11:08', 'Angelo Cruz', 'Added new Product #202325 date 2024-03-15'),
+(439, '2024-03-15', '16:19:24', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-03-15'),
+(440, '2024-03-15', '16:19:31', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-03-15'),
+(441, '2024-03-15', '16:19:39', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-03-15');
 
 -- --------------------------------------------------------
 
@@ -93,14 +100,6 @@ CREATE TABLE `main_inventory` (
   `dateofstock` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `main_inventory`
---
-
-INSERT INTO `main_inventory` (`id`, `product_number`, `photo`, `piececode`, `boxcode`, `product_name`, `price`, `qty`, `soldstock`, `balance`, `dateofstock`) VALUES
-(20, 202325, '640px-Cappuccino_at_Sightglass_Coffee.jpg', '131313131', '12121213131', '12312', 333, 3333, 0, 3333, '2024-03-12'),
-(21, 22341232, '429919730_939506994364917_1308836679113185826_n.png', '31313131', '131313131', '31212312', 250, 500, 0, 500, '2024-03-12');
-
 -- --------------------------------------------------------
 
 --
@@ -116,6 +115,74 @@ CREATE TABLE `main_raw_materials` (
   `kilo` double NOT NULL,
   `dateofstock` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE `product` (
+  `id` int(255) NOT NULL,
+  `product_number` text NOT NULL,
+  `photo` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `piececode` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `boxcode` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `product_name` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `price` double NOT NULL,
+  `material_needs` text CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `dateofstock` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`id`, `product_number`, `photo`, `piececode`, `boxcode`, `product_name`, `price`, `material_needs`, `dateofstock`) VALUES
+(5, 'CGCC', 'clasico.png', '4806538456029', '4806538450111', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 10.5, '', '2024-03-15'),
+(6, 'CGB', 'brown.png', '4806538450012', '4806538450128', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Brown) ', 10.5, '', '2024-03-15'),
+(7, 'CGW', 'white.png', '4806538450005', '4806538450135', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (White) ', 10.5, '', '2024-03-15');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_needs`
+--
+
+CREATE TABLE `product_needs` (
+  `id` int(255) NOT NULL,
+  `product_id` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `product_name` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `item_need` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `loads` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `raw_materials`
+--
+
+CREATE TABLE `raw_materials` (
+  `id` int(255) NOT NULL,
+  `material_code` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `material_type` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `material_name` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `material_batch` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `loads` double NOT NULL,
+  `dateofstock` date NOT NULL,
+  `date_expiration` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `raw_materials`
+--
+
+INSERT INTO `raw_materials` (`id`, `material_code`, `material_type`, `material_name`, `material_batch`, `loads`, `dateofstock`, `date_expiration`) VALUES
+(5, 'TM44511', 'Creamer', 'Creamy Corp', '20', 300, '2024-03-15', '2024-10-31'),
+(6, 'TM45682', 'Salt', 'Salt Company', '5', 200, '2024-03-15', '2025-01-10'),
+(7, 'TM45123', 'Plastic', 'Made in China', '5', 400, '2024-03-15', '2025-09-06'),
+(8, 'TM156394', 'Pure Coffee', 'Thailand', '10', 900, '2024-03-15', '2024-09-30');
 
 --
 -- Indexes for dumped tables
@@ -146,6 +213,24 @@ ALTER TABLE `main_raw_materials`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_needs`
+--
+ALTER TABLE `product_needs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `raw_materials`
+--
+ALTER TABLE `raw_materials`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -159,7 +244,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `audit_trail_record`
 --
 ALTER TABLE `audit_trail_record`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=412;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=442;
 
 --
 -- AUTO_INCREMENT for table `main_inventory`
@@ -172,6 +257,24 @@ ALTER TABLE `main_inventory`
 --
 ALTER TABLE `main_raw_materials`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `product_needs`
+--
+ALTER TABLE `product_needs`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `raw_materials`
+--
+ALTER TABLE `raw_materials`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
