@@ -53,7 +53,7 @@
                     <thead>
                         <tr>
                             <!-- <th>Product ID</th> -->
-                            <th>ID</th> <!-- Add this line -->
+                         <!--   <th>ID</th>  Add this line -->
                             <th>Product Name</th>
                             <th>Item Needs</th>
                             <th>Loads</th>
@@ -62,6 +62,15 @@
                     </thead>
                     <tbody>
                         <?php
+
+                        $sqls = "SELECT * FROM product_needs";
+                        $querys = $conn->query($sqls);
+                        while($rowsss = $querys->fetch_assoc()){
+
+                          
+                          //echo "<td>".$rowsss['id']."</td>"; // Display ID 
+
+                        }
                         $sql = "SELECT *  FROM product_needs ";
                       //$sql = "SELECT *, product_needs.product_id AS pnid, production.id AS mcid FROM production LEFT JOIN product_needs ON production.material_code=product_needs.product_id ORDER BY product_needs.product_id";
                         $query = $conn->query($sql);
@@ -90,7 +99,6 @@
                        
                         foreach ($merged_rows as $row) {
                           echo "<tr>";
-                          echo "<td>".$row['id']."</td>"; // Display ID 
                           echo "<td>".$row['product_name']."</td>";
                           echo "<td>".$row['item_need']."</td>";
                           echo "<td>";
