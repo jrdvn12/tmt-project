@@ -52,7 +52,12 @@
                 <table id="example1" class="table table-bordered">
                     <thead>
                         <tr>
+<<<<<<< HEAD
                             <th>ID</th> <!-- Add this line -->
+=======
+                            <!-- <th>Product ID</th> -->
+                         <!--   <th>ID</th>  Add this line -->
+>>>>>>> 957da7855c30565afb3b4c645de71c60285aa0ba
                             <th>Product Name</th>
                             <th>Item Needs</th>
                             <th>Loads</th>
@@ -61,7 +66,21 @@
                     </thead>
                     <tbody>
                         <?php
+<<<<<<< HEAD
                         $sql = "SELECT * FROM product_needs ";
+=======
+
+                        $sqls = "SELECT * FROM product_needs";
+                        $querys = $conn->query($sqls);
+                        while($rowsss = $querys->fetch_assoc()){
+
+                          
+                          //echo "<td>".$rowsss['id']."</td>"; // Display ID 
+
+                        }
+                        $sql = "SELECT *  FROM product_needs ";
+                      //$sql = "SELECT *, product_needs.product_id AS pnid, production.id AS mcid FROM production LEFT JOIN product_needs ON production.material_code=product_needs.product_id ORDER BY product_needs.product_id";
+>>>>>>> 957da7855c30565afb3b4c645de71c60285aa0ba
                         $query = $conn->query($sql);
                         $merged_rows = array();
    
@@ -84,12 +103,21 @@
                         }
                         
                         // Output merged rows
+<<<<<<< HEAD
                         foreach ($merged_rows as $product_id => $row) {
                             echo "<tr>";
                             echo "<td>".$row['id']."</td>"; // Display ID 
                             echo "<td>".$row['product_name']."</td>";
                             echo "<td>".$row['item_need']."</td>";
                             echo "<td>";
+=======
+                       
+                        foreach ($merged_rows as $row) {
+                          echo "<tr>";
+                          echo "<td>".$row['product_name']."</td>";
+                          echo "<td>".$row['item_need']."</td>";
+                          echo "<td>";
+>>>>>>> 957da7855c30565afb3b4c645de71c60285aa0ba
                       
                             // Explode loads into an array
                             $loads = explode('<br>', $row['loads']);
