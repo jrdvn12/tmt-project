@@ -52,8 +52,12 @@
                 <table id="example1" class="table table-bordered">
                     <thead>
                         <tr>
+<<<<<<< HEAD
+                            <th>ID</th> <!-- Add this line -->
+=======
                             <!-- <th>Product ID</th> -->
                          <!--   <th>ID</th>  Add this line -->
+>>>>>>> 957da7855c30565afb3b4c645de71c60285aa0ba
                             <th>Product Name</th>
                             <th>Item Needs</th>
                             <th>Loads</th>
@@ -62,6 +66,9 @@
                     </thead>
                     <tbody>
                         <?php
+<<<<<<< HEAD
+                        $sql = "SELECT * FROM product_needs ";
+=======
 
                         $sqls = "SELECT * FROM product_needs";
                         $querys = $conn->query($sqls);
@@ -73,55 +80,61 @@
                         }
                         $sql = "SELECT *  FROM product_needs ";
                       //$sql = "SELECT *, product_needs.product_id AS pnid, production.id AS mcid FROM production LEFT JOIN product_needs ON production.material_code=product_needs.product_id ORDER BY product_needs.product_id";
+>>>>>>> 957da7855c30565afb3b4c645de71c60285aa0ba
                         $query = $conn->query($sql);
                         $merged_rows = array();
-                       
-                       
-                        
+   
                         while($row = $query->fetch_assoc()) {
-                          
                             $product_id = $row['product_id'];
                             if (!isset($merged_rows[$product_id])) {
                                 // First occurrence of this product ID, start a new row
-                                $merged_rows[$product_id] = $row;
+                                $merged_rows[$product_id] = array(
+                                    'id' => $row['id'], // Store the ID
+                                    'product_name' => $row['product_name'],
+                                    'item_need' => $row['item_need'],
+                                    'loads' => $row['loads']
+                                );
                             } else {
                                 // Already encountered this product ID, merge the data
-                              
                                 $merged_rows[$product_id]['item_need'] .= '<br> ' . $row['item_need'];
-                               
-                                $merged_rows[$product_id]['loads'] .= '<br> ' .$row['loads']; // Merge the loads, for example
+                                $merged_rows[$product_id]['loads'] .= '<br> ' .$row['loads'];
                                 // Merge other fields as needed
                             }
-                          
                         }
                         
                         // Output merged rows
+<<<<<<< HEAD
+                        foreach ($merged_rows as $product_id => $row) {
+                            echo "<tr>";
+                            echo "<td>".$row['id']."</td>"; // Display ID 
+                            echo "<td>".$row['product_name']."</td>";
+                            echo "<td>".$row['item_need']."</td>";
+                            echo "<td>";
+=======
                        
                         foreach ($merged_rows as $row) {
                           echo "<tr>";
                           echo "<td>".$row['product_name']."</td>";
                           echo "<td>".$row['item_need']."</td>";
                           echo "<td>";
+>>>>>>> 957da7855c30565afb3b4c645de71c60285aa0ba
                       
-                          // Explode loads into an array
-                          $loads = explode('<br>', $row['loads']);
+                            // Explode loads into an array
+                            $loads = explode('<br>', $row['loads']);
                       
-                          // Loop through each load
-                          foreach ($loads as $load) {
-                              // Add the link HTML code before each load
-                             echo $load .'<a href="#edit_item" data-toggle="modal" class="pull-right edit_item" data-id='.$row['id'].'><span class="fa fa-edit"></span></a> <br>';
-                             // echo $load .'<br>';
-                          }
+                            // Loop through each load
+                            foreach ($loads as $load) {
+                                // Add the link HTML code before each load
+                                echo $load .'<a href="#edit_item" data-toggle="modal" class="pull-right edit_item" data-id='.$row['id'].'><span class="fa fa-edit"></span></a> <br>';
+                            }
                       
-                          echo "</td>";
+                            echo "</td>";
                           
-                          echo "<td>
-                                  
-                                  <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
-                       
-                                </td>";
-                          echo "</tr>";
-                      }
+                            echo "<td>
+                                    <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
+                                  </td>";
+                            echo "</tr>";
+                        }
                         ?>
                     </tbody>
                 </table>
