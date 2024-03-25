@@ -13,7 +13,7 @@ include 'includes/conn.php';
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="raw_materials_add.php" enctype="multipart/form-data">
               <div class="form-group">
-                    <label for="material_code" class="col-sm-3 control-label">Material Code</label>
+                    <label for="material_code" class="col-sm-3 control-label">Batch Code</label>
 
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="material_code" name="material_code" required>
@@ -80,49 +80,84 @@ include 'includes/conn.php';
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title"><b>Edit User</b></h4>
+              <h4 class="modal-title"><b>Edit Raw Material</b></h4>
             </div>
             <div class="modal-body">
-              <form class="form-horizontal" method="POST" action="user_edit.php">
+              <form class="form-horizontal" method="POST" action="raw_materials_edit.php">
                 <input type="hidden" class="id" name="id">
-                <div class="form-group">
-                    <label for="edit_username" class="col-sm-3 control-label">Username</label>
+                  <div class="form-group">
+                      <label for="material_code_edit" class="col-sm-3 control-label">Batch Code</label>
 
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_username" name="username" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit_firstname" class="col-sm-3 control-label">Firstname</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="material_code_edit" name="material_code_edit" required>
+                      </div>
+                  </div>
 
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_firstname" name="firstname">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit_lastname" class="col-sm-3 control-label">Lastname</label>
+                  <div class="form-group">
+                      <label for="material_type_edit" class="col-sm-3 control-label">Material Type </label>
 
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_lastname" name="lastname">
-                    </div>
-                </div>
-                
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="material_type_edit" name="material_type_edit" required>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="material_name" class="col-sm-3 control-label">Material Name</label>
 
-                <div class="form-group">
-                    <label for="edit_position" class="col-sm-3 control-label">Position</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="material_name_edit" name="material_name_edit" required>
+                      </div>
+                  </div>
 
-                    <div class="col-sm-9">
-                      <select class="form-control" name="position" id="edit_position">
-                        <option selected id="position_val" disabled></option>
-                        <option value="Admin">Admin</option>
-                        <option value="Accountant">Accountant</option>
-                        <option value="Human Resources">Human Resources</option>
-                       
-                      </select>
-                    </div>
-                </div>
+                  <div class="form-group">
+                      <label for="material_batch_edit" class="col-sm-3 control-label">Material Batch</label>
 
-                
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="material_batch_edit" name="material_batch_edit" required>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="material_load_edit" class="col-sm-3 control-label">Material Load</label>
+
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="material_load_edit" name="material_load_edit" required>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="material_usege_edit" class="col-sm-3 control-label">Material Usage</label>
+
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="material_usege_edit" name="material_usege_edit" required>
+                      </div>
+                  </div>
+                  
+                  <div class="form-group">
+                      <label for="material_remaining_edit" class="col-sm-3 control-label">Material Remaining</label>
+
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="material_remaining_edit" name="material_remaining_edit" required>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="material_expiration_edit" class="col-sm-3 control-label">Date Stock</label>
+
+                      <div class="col-sm-9"> 
+                        <div class="date">
+                          <input type="text" class="form-control" id="datepicker_edit" name="material_expiration_edit" required>
+                        </div>
+                      </div>
+                  </div> 
+                  <div class="form-group">
+                      <label for="datepicker_raw_material_edit" class="col-sm-3 control-label">Material Expiration</label>
+
+                      <div class="col-sm-9"> 
+                        <div class="date">
+                          <input type="text" class="form-control" id="datepicker_raw_material_edit" name="datepicker_raw_material_edit" required>
+                        </div>
+                      </div>
+                  </div>   
             </div>
 
             <div class="modal-footer">

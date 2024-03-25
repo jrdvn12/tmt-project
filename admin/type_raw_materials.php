@@ -52,7 +52,7 @@
               <table id="example1" class="table table-bordered">
                 <thead>
                   
-                  <th>Material Code</th>
+                  <th>Batch Code</th>
                   <th>Material Type</th>
                   <th>Material Name</th>
                   <th>Material Batch</th>

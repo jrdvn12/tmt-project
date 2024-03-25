@@ -122,6 +122,18 @@ $(function(){
     format: 'yyyy-mm-dd'
   })
 
+
+//Date range picker dtr
+
+ $('#datepicker_raw_material_edit').datepicker({
+    autoclose: true,
+    format: 'yyyy-mm-dd'
+  })
+  $('#sasa').datepicker({
+    autoclose: true,
+    format: 'yyyy-mm-dd'
+  })
+
   //Timepicker
   $('.timepicker').timepicker({
     showInputs: false

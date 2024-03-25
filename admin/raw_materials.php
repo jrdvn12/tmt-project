@@ -52,7 +52,7 @@
               <table id="example1" class="table table-bordered">
                 <thead>
                   
-                  <th>Material Code</th>
+                  <th>Batch Code</th>
                   <th>Material Type</th>
                   <th>Material Name</th>
                   <th>Material Batch</th>
@@ -138,18 +138,21 @@ $(function(){
 function getRow(id){
   $.ajax({
     type: 'POST',
-    url: 'user_row.php',
+    url: 'raw_materials_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){
       $('.id').val(response.id);
-      $('#edit_username').val(response.username);
-      $('#edit_firstname').val(response.firstname);
-      $('#edit_lastname').val(response.lastname);
-      $('#edit_password').val(response.password); 
-      $('.del_employee_name').html(response.firstname+' '+response.lastname);   
-      $('.fullname').html(response.firstname+' '+response.lastname);
-      $('#position_val').html(response.position);
+      $('#material_code_edit').val(response.material_code);
+      $('#material_type_edit').val(response.material_type);
+      $('#material_name_edit').val(response.material_name);
+      $('#material_batch_edit').val(response.material_batch); 
+      $('#material_load_edit').val(response.loads);   
+      $('#material_usege_edit').val(response.material_usage);   
+      $('#material_remaining_edit').val(response.material_remaining);
+      $('#datepicker_edit').val(response.dateofstock);      
+      $('#fullname').val(response.dateofstock);
+      $('#datepicker_raw_material_edit').val(response.date_expiration);
     }
   });
 }

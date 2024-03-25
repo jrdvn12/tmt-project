@@ -11,11 +11,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Audit Trail Record
+      Audit Trail Record
       </h1>
       <!-- <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Schedules</li>
+        <li class="active">User</li>
       </ol> -->
     </section>
     <!-- Main content -->
@@ -46,37 +46,41 @@
         <div class="col-xs-12">
           <div class="box">
             <!-- <div class="box-header with-border">
-              <a href="schedule_print.php" class="btn btn-success btn-sm btn-flat"><span class="glyphicon glyphicon-print"></span> Print</a>
+              <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
             </div> -->
             <div class="box-body">
-                  <table id="example1" class="table table-bordered">
-                        <thead>
-                          <th>Date</th>
-                          <th>Time</th>
-                          <th>Name</th>
-                          <th>Description</th>
-                          <th>Tools</th>
-                        </thead>
-                  <tbody>
+              <table id="example1" class="table table-bordered">
+                <thead>
+                  
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Tools</th>
+                  
+                </thead>
+                <tbody>
                   <?php
-                    //$sql = "SELECT * FROM audit_trail_record WHERE datefrom >= '$from' AND dateto <= '$to'";
-                    $sql = "SELECT * FROM audit_trail_record ";
+                    $sql = "SELECT * FROM audit_trail_record";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
+                     
                       echo "
                         <tr>
-                          <td class='hidden'></td>
+                          
                           <td>".date('M d, Y', strtotime($row['audit_date']))."</td>
                           <td>".date('h:i A', strtotime($row['audit_time']))."</td>
                           <td>".$row['user']."</td>
                           <td>".$row['description']."</td>
-                          <td>
-                            <button class='btn btn-success btn-sm view btn-flat' data-id='".$row['id']."'><i class='fa fa-eye'></i> View</button>
+                          <td>    
+                            <a href='#view' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['id']."' onclick='getRow(".$row['id'].")'><i class='fa fa-eye'></i> View</a>
+
                           </td>
                         </tr>
                       ";
                     }
                   ?>
+                  <!--  -->
                 </tbody>
               </table>
             </div>
@@ -100,6 +104,7 @@ $(function(){
   });
 });
 
+
 function getRow(id){
   $.ajax({
     type: 'POST',
@@ -121,6 +126,7 @@ function getRow(id){
     }
   });
 }
+
 </script>
 </body>
 </html>
