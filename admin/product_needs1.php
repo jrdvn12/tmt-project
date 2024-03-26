@@ -13,10 +13,6 @@
       <h1>
         Product Needs
       </h1>
-      <!-- <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">User</li>
-      </ol> -->
     </section>
     <!-- Main content -->
     <section class="content">
@@ -52,7 +48,7 @@
                 <table id="example1" class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>ID</th> <!-- Add this line -->
+                            <th>Product ID</th>
                             <th>Product Name</th>
                             <th>Item Needs</th>
                             <th>Loads</th>
@@ -61,50 +57,57 @@
                     </thead>
                     <tbody>
                         <?php
-                        $sql = "SELECT * FROM product_needs ";
+                        // Fetch data from database
+                        $sql = "SELECT * FROM product_needs ORDER BY product_id";
                         $query = $conn->query($sql);
-                        $merged_rows = array();
-   
+
+                        // Initialize variables for previous product_id and merged data
+                        $prev_product_id = null;
+                        $merged_product_name = '';
+                        $merged_item_need = '';
+                        $merged_loads = '';
+
+                        // Loop through each row
                         while($row = $query->fetch_assoc()) {
-                          $product_id = $row['product_id'];
-                          if (!isset($merged_rows[$product_id])) {
-                              // First occurrence of this product ID, start a new row
-                              $merged_rows[$product_id] = $row;
-                          } else {
-                                // Already encountered this product ID, merge the data
-                                $merged_rows[$product_id]['item_need'] .= '<br> ' . $row['item_need'];
-                                $merged_rows[$product_id]['loads'] .= '<br> ' .$row['loads'];
-                                // Merge other fields as needed
+                            // Check if the product_id is the same as the previous row
+                            if ($row['product_id'] === $prev_product_id) {
+                                // Merge product_name, item_need, and loads
+                                $merged_product_name .= '<br>' . $row['product_name'];
+                                $merged_item_need .= '<br>' . $row['item_need'];
+                                $merged_loads .= '<br>' . $row['loads'];
+                            } else {
+                                // Output merged data from previous rows, if any
+                                if ($prev_product_id !== null) {
+                                    echo "<tr>";
+                                    echo "<td>".$prev_product_id."</td>"; // Display product_id
+                                    echo "<td>".$merged_product_name."</td>"; // Display merged product_name
+                                    echo "<td>".$merged_item_need."</td>"; // Display merged item_need
+                                    echo "<td>".$merged_loads."</td>"; // Display merged loads
+                                    // Output other fields as needed
+                                    echo "<td>
+                                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$prev_product_id."'><i class='fa fa-trash'></i> Delete</button>
+                                          </td>";
+                                    echo "</tr>";
+                                }
+
+                                // Start merging new data for the current row
+                                $prev_product_id = $row['product_id'];
+                                $merged_product_name = $row['product_name'];
+                                $merged_item_need = $row['item_need'];
+                                $merged_loads = $row['loads'];
                             }
                         }
-                        
-                        // Output merged rows
-                        foreach ($merged_rows as $product_id => $row) {
-                            echo "<tr>";
-                            echo "<td>".$row['id']."</td>"; // Display ID 
-                            echo "<td>".$row['product_name']."</td>";
-                            echo "<td>".$row['item_need']."</td>";
-                            echo "<td>";
-                      
-                            // Explode loads into an array
-                            $loads = explode('<br>', $row['loads']);
-                           
-                            // Loop through each load
-                            foreach ($loads as $load ) {
-                                // Add the link HTML code before each load
-                               
-                                  echo "<span>".$row['id']."</span>"; // Print the product ID
-                                  echo  $load .'<a href="#edit_item" data-toggle="modal" class="pull-right edit_item" data-id='.$row['id'].'><span class="fa fa-edit"></span></a> <br>';
-                               
-                             
-                            }
 
-                            
-                      
-                            echo "</td>";
-                          
+                        // Output the last row if there's any remaining merged data
+                        if ($prev_product_id !== null) {
+                            echo "<tr>";
+                            echo "<td>".$prev_product_id."</td>"; // Display product_id
+                            echo "<td>".$merged_product_name."</td>"; // Display merged product_name
+                            echo "<td>".$merged_item_need."</td>"; // Display merged item_need
+                            echo "<td>".$merged_loads."</td>"; // Display merged loads
+                            // Output other fields as needed
                             echo "<td>
-                                    <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
+                                    <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$prev_product_id."'><i class='fa fa-trash'></i> Delete</button>
                                   </td>";
                             echo "</tr>";
                         }
@@ -126,9 +129,6 @@
 
 <?php include 'includes/scripts.php'; ?>
 <script>
-
-
-
 $(function(){
   $(document).on('click', '.edit_item', function(e){
     e.preventDefault();

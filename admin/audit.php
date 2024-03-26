@@ -74,13 +74,14 @@
                           <td>".$row['description']."</td>
                           <td>    
                             <a href='#view' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['id']."' onclick='getRow(".$row['id'].")'><i class='fa fa-eye'></i> View</a>
-
+                         
                           </td>
                         </tr>
                       ";
                     }
                   ?>
-                  <!--  -->
+                  <!--   <button class='btn btn-primary btn-sm view btn-flat' data-id='".$row['id']."'><i class='fa fa-eye'></i> view</button>  -->
+                  
                 </tbody>
               </table>
             </div>

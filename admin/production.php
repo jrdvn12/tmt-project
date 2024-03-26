@@ -95,8 +95,10 @@
                           $status = '<span class="label label-danger pull-right">Onprocess</span>';
                       } elseif ($row['production_status'] == 'Packaging') {
                         $status = '<span class="label label-info pull-right">Packaging</span>';
-                      } elseif ($row['production_status'] == 'Complete') {
-                        $status = '<span class="label label-primary pull-right">Complete</span>';
+                      } elseif ($row['production_status'] == 'Completed') {
+                        $status = '<span class="label label-info pull-right">Packaging</span>';
+                      } elseif ($row['production_status'] == 'Checking') {
+                        $status = '<span class="label label-primary pull-right">Checking</span>';
                       } elseif ($row['production_status'] == '5') {
                         $status = '<span class="label label-danger pull-right">absent</span>';
                       } else {
@@ -107,7 +109,7 @@
                         echo "<td>".$row['material_code']."</td>";
                         echo "<td>".$row['item_need']."</td>";
                         echo "<td>".$row['loads']."</td>";
-                        echo "";
+                     
                         echo "<td>".$row['product_name']."</td>";
                         
                         echo "<td>".$row['product_batch']."</td>  ";
@@ -116,10 +118,19 @@
                         echo "<td>".$row['production_kilo']."</td>";
                         echo "<td>".$row['production_date']."</td>";
                         echo "<td>".$row['production_expiration']."</td>";
+                        if ($row['production_status']=="Preparing" ){
                         echo "<td>
-                                <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['mcid']."'><i class='fa fa-edit'></i> Edit</button>
-                                <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['mcid']."'><i class='fa fa-trash'></i> Delete</button>
+                                <a href='#edit' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['mcid']."' onclick='getRow(".$row['mcid'].")'><i class='fa fa-edit'></i> Edit</a>
+                                <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['mcid']."' onclick='getRow(".$row['mcid'].")'><i class='fa fa-trash'></i> Delete</a>
                               </td>";
+                        }    else{
+                        echo "<td>
+                                <a href='#edit' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['mcid']."' onclick='getRow(".$row['mcid'].")'><i class='fa fa-edit'></i> Edit</a>
+                              </td>";
+                        }
+                             
+                                
+                            
                         echo "</tr>";
                     }
                   ?>
@@ -169,18 +180,20 @@ $(function(){
 function getRow(id){
   $.ajax({
     type: 'POST',
-    url: 'user_row.php',
+    url: 'production_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){
       $('.id').val(response.id);
-      $('#edit_username').val(response.username);
-      $('#edit_firstname').val(response.firstname);
-      $('#edit_lastname').val(response.lastname);
-      $('#edit_password').val(response.password); 
-      $('.del_employee_name').html(response.firstname+' '+response.lastname);   
-      $('.fullname').html(response.firstname+' '+response.lastname);
-      $('#position_val').html(response.position);
+
+      // view
+      
+      $('#production_status').val(response.production_status);
+      $('.batch_code').html(response.product_batch);
+      // delete
+      
+      $('.production_code').val(response.id);
+      $('.production_code').html(response.product_batch);
     }
   });
 }

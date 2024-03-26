@@ -52,7 +52,7 @@
         </div>
 
         <div class="login-box-body">
-            <img src="../images/manila-logo-main.png" alt="tmt" class="imgcenter">
+            <img src="../images/TMTFOODs.png" alt="tmt" class="imgcenter">
             <p class="login-box-msg">Sign in to start your session</p>
 
             <form action="login.php" method="POST">
