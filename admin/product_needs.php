@@ -99,7 +99,7 @@
                              
                             }
 
-                            
+                             // Add the link HTML code before each load
                       
                             echo "</td>";
                           
