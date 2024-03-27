@@ -99,8 +99,12 @@
                              
                             }
 
-                             // Add the link HTML code before each load
-                      
+                             // Add the link HTML code before each load// Add the link HTML code before each load// Add the link HTML code before each load// Add the link HTML code before each load
+                            // Add the link HTML code before each load
+                            // Add the link HTML code before each load
+                            // Add the link HTML code before each load
+                            // Add the link HTML code before each load
+                            // Add the link HTML code before each load
                             echo "</td>";
                           
                             echo "<td>
