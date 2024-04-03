@@ -77,9 +77,9 @@
           <ul class="treeview-menu">
           <li><a href="product"><i class=" fa fa-circle-o"></i> <span>Product</span></a></li>
           <li><a href="product_needs"><i class=" fa fa-circle-o"></i> <span>Product Needs</span></a></li>
-          <li><a href="production"><i class=" fa fa-circle-o"></i> <span>Production</span></a></li>
+
           <li><a href="costing"><i class="fa fa-circle-o"></i> <span>Costing Raw Materials</span></a></li>
-          <li><a href="lost"><i class="fa fa-circle-o"></i> <span>Loss</span></a></li>
+          
           <li><a href="freebies"><i class="fa fa-circle-o"></i> <span>Gift</span></a></li>
           
           
@@ -87,7 +87,22 @@
           </ul>
         </li>
 
-
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-building-o"></i>
+            <span>Warehouse Management</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+          <li><a href="production"><i class=" fa fa-circle-o"></i> <span>Production</span></a></li>
+          <li><a href="lost"><i class="fa fa-circle-o"></i> <span>Loss</span></a></li>
+         
+          
+            
+          </ul>
+        </li>
         
         
         <li><a href="user"><i class="fa fa-user"></i> <span>User</span></a></li>
