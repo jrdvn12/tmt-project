@@ -79,9 +79,10 @@
                           <td>".$row['kilo']."</td>
                           <td>".$row['kilo']."</td>
                           <td>
-                          <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                          <button class='btn btn-success btn-sm edit_user_password btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Password</button>
-                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
+                          <a href='#edit' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['id']."' onclick='getRow(".$row['id'].")'><i class='fa fa-edit'></i> Edit</a>
+                          <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['id']."' onclick='getRow(".$row['id'].")'><i class='fa fa-trash'></i> Delete</a>
+
+                         
                           </td>
                           
                         </tr>
