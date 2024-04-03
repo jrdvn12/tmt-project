@@ -77,13 +77,14 @@
                             <td>";
                         foreach ($ids as $index => $id) {
                             echo $id. "<a href='#edit_item' data-toggle='modal' class='pull-right edit_item' data-id='".$id."'><span class='fa fa-edit'></span></a> ";
+//                            echo " <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$id."'><i class='fa fa-trash'></i> Delete</button>";
                             if ($index < count($ids) - 1) {
                                 echo "<br>";
                             }
                         }
                         echo "</td>
 
-                            <td>".$row['product_id']."</td>
+                            <td>".$row['product_id']."<button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['product_id']."'><i class='fa fa-trash'></i> Delete</button></td>
                             
                             <td>";
                         foreach ($item_needs as $index => $item_need) {
