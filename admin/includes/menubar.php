@@ -46,7 +46,7 @@
             <li><a href="main_inventory"><i class="fa fa-circle-o"></i> Main Inventory</a></li>    
             
             <li><a href="distributor_inventory"><i class="fa fa-circle-o"></i> Distributor Inventory</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Transaction History Inventory</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Inventory History</a></li>
           </ul>
         </li>
         <li class="treeview">
