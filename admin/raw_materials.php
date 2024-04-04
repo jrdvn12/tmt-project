@@ -1,7 +1,7 @@
 <?php include 'includes/session.php'; ?>
 <?php include 'includes/header.php'; ?>
-<body class="hold-transition skin-purple sidebar-mini">
-<div class="wrapper">
+<body class="hold-transition skin-yellow sidebar-mini">
+  <div class="wrapper">
 
   <?php include 'includes/navbar.php'; ?>
   <?php include 'includes/menubar.php'; ?>

@@ -9,7 +9,7 @@
   }
 ?>
 <?php include 'includes/header.php'; ?>
-<body class="hold-transition skin-purple sidebar-mini">
+<body class="hold-transition skin-yellow sidebar-mini">
 <div class="wrapper">
 
   	<?php include 'includes/navbar.php'; ?>
@@ -51,12 +51,10 @@
 
       <?php $posistion = $user['position']; ?>
       <!-- Small boxes (Stat box) -->
-      
       <div class="row">
-     
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-blue">
+          <div class="small-box bg-yellow">
             <div class="inner">
               <?php
                 $sql = "SELECT * FROM main_inventory";
@@ -64,7 +62,6 @@
 
                 echo "<h3>".$query->num_rows."</h3>";
               ?>
-
               <p>Total Employees</p>
             </div>
             <div class="icon">
@@ -72,6 +69,23 @@
             </div>
             <a href="employee.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
+
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <?php
+                $sql = "SELECT * FROM main_inventory";
+                $query = $conn->query($sql);
+
+                echo "<h3>".$query->num_rows."</h3>";
+              ?>
+              <p>Total Loss</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-stalker"></i>
+            </div>
+            <a href="employee.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
         </div>
         <!-- ./col -->
        

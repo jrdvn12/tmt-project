@@ -11,7 +11,7 @@
 .login-page {
     display: flex;
     align-items: center;
-    background: url(../images/TMT_FOODS.png);
+    background: url(../images/TMT_FOODSS.png);
     background-repeat: no-repeat;
     background-size: cover;
 
