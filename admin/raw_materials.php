@@ -144,6 +144,7 @@ function getRow(id){
     data: {id:id},
     dataType: 'json',
     success: function(response){
+      //view
       $('.id').val(response.id);
       $('#material_code_edit').val(response.material_code);
       $('#material_type_edit').val(response.material_type);
@@ -155,6 +156,9 @@ function getRow(id){
       $('#datepicker_edit').val(response.dateofstock);      
       $('#fullname').val(response.dateofstock);
       $('#datepicker_raw_material_edit').val(response.date_expiration);
+      // delete
+      $('.fullname').html(response.material_name);
+    
     }
   });
 }
