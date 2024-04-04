@@ -9,7 +9,7 @@
   <!-- Content Wrapper. Contains page content    -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header skin-yellow" >
+    <section class="content-header " >
       <h1>
         Product Needs
       </h1>
@@ -52,7 +52,7 @@
                 <table id="example1" class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>ID</th> <!-- Add this line -->
+                            <!--<th>ID</th>  Add this line -->
                            
                             <th>Product Name</th>
                             <th>Item Needs</th>
@@ -63,7 +63,7 @@
                     <tbody>
                         
                     <?php
-                    $sql = "SELECT product_id, GROUP_CONCAT(id) AS ids, GROUP_CONCAT(item_need) AS item_needs, GROUP_CONCAT(loads) AS loads 
+                    $sql = "SELECT product_id, product_name,GROUP_CONCAT(id) AS ids, GROUP_CONCAT(item_need) AS item_needs, GROUP_CONCAT(loads) AS loads 
                             FROM product_needs 
                             GROUP BY product_id";
                     $query = $conn->query($sql);
@@ -71,10 +71,11 @@
                         $ids = explode(',', $row['ids']);
                         $item_needs = explode(',', $row['item_needs']);
                         $loads = explode(',', $row['loads']);
-
-                        echo "
+                       
+                       /* echo "
                         <tr>
-                            <td>";
+                            
+                         <td>";
                         foreach ($ids as $index => $id) {
                             echo $id. "<a href='#edit_item' data-toggle='modal' class='pull-right edit_item' data-id='".$id."'><span class='fa fa-edit'></span></a> ";
 //                            echo " <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$id."'><i class='fa fa-trash'></i> Delete</button>";
@@ -82,11 +83,11 @@
                                 echo "<br>";
                             }
                         }
-                        echo "</td>
+                        echo "</td>*/
 
-                            <td>".$row['product_id']."<button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['product_id']."'><i class='fa fa-trash'></i> Delete</button></td>
-                            
-                            <td>";
+                        echo "
+                        <tr>
+                            <td>".$row['product_name']."<td>";
                         foreach ($item_needs as $index => $item_need) {
                             echo $item_need;
                             if ($index < count($item_needs) - 1) {
@@ -95,21 +96,21 @@
                         }
                         echo "</td>
 
-                            <td>";
-                        foreach ($loads as $index => $load ) {
-                            echo $load;
+                        <td>";
+                        foreach ($loads as $index => $load) {
+                           
+                            echo $load. "<a href='#edit_item' data-toggle='modal' class='pull-right edit_item' data-id='$ids[$index]'><span class='fa fa-edit'></span></a> ";
                             if ($index < count($loads) - 1) {
                                 echo "<br>";
                             }
                         }
-                      
                         echo "</td>
 
                         
                         
                             <td>
-                                <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['product_id']."'><i class='fa fa-trash'></i> Delete</button>
-                                <a href='#delete' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['item_needs']."' onclick='getRow(".$row['item_needs'].")'><i class='fa fa-eye'></i> View</a>
+                                
+                                <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['product_id']."' onclick='getRow(".$row['product_id'].")'><i class='fa fa-trash'></i> Delete</a>
                          
                             </td>
                         </tr>
