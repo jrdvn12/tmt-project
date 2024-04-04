@@ -1,4 +1,4 @@
-<header class="main-header" style="background-color: #f0f0f0;">
+<header class="main-header">
 
     <!-- Logo -->
     <a href="home" class="logo">
