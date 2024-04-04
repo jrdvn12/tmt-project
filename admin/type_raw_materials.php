@@ -52,36 +52,23 @@
               <table id="example1" class="table table-bordered">
                 <thead>
                   
-                  <th>Batch Code</th>
+                  
                   <th>Material Type</th>
-                  <th>Material Name</th>
-                  <th>Material Batch</th>
-                  <th>Material Load</th>
-                  <th>Material Usage</th>
-                  <th>Material Remaining</th>
-                  <th>Date Stock</th>
-                  <th>Expiration</th>
                   <th>Tools</th>
                   
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT * FROM raw_materials";
+                    $sql = "SELECT * FROM type_raw_materials";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                      
                       echo "
                         <tr>
                           
-                          <td>".$row['material_code']."</td>
+                      
                           <td>".$row['material_type']."</td>
-                          <td>".$row['material_name']."</td>  
-                          <td>".$row['material_batch']."</td> 
-                          <td>".$row['loads']."</td>
-                          <td>".$row['material_usage']."</td>
-                          <td>".$row['material_remaining']."</td>
-                          <td>".$row['dateofstock']."</td>
-                          <td>".$row['date_expiration']."</td>
+                          
                           
                           <td>
                           <a href='#edit' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['id']."' onclick='getRow(".$row['id'].")'><i class='fa fa-edit'></i> Edit</a>
@@ -104,7 +91,7 @@
   </div>
     
   <?php include 'includes/footer.php'; ?>
-  <?php include 'includes/raw_materials_modal.php'; ?>
+  <?php include 'includes/type_raw_materials_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>
 <script>
@@ -122,35 +109,23 @@ $(function(){
     var id = $(this).data('id');
     getRow(id);
   });
-  $('.edit_user_password').click(function(e){
-    e.preventDefault();
-    $('#edit_user_password').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
+  
 
-  $(document).on('click', '.photo', function(e){
-    e.preventDefault();
-    var id = $(this).data('id');
-    getRow(id);
-  });
+
 
 });
 
 function getRow(id){
   $.ajax({
     type: 'POST',
-    url: 'user_row.php',
+    url: 'type_raw_materials_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){
       $('.id').val(response.id);
-      $('#edit_username').val(response.username);
-      $('#edit_firstname').val(response.firstname);
-      $('#edit_lastname').val(response.lastname);
-      $('#edit_password').val(response.password); 
-      $('.del_employee_name').html(response.firstname+' '+response.lastname);   
-      $('.fullname').html(response.firstname+' '+response.lastname);
+      $('#material_type_edit').val(response.material_type);
+      
+      $('.fullname').html(response.material_type);
       $('#position_val').html(response.position);
     }
   });

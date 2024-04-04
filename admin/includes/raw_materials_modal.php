@@ -24,8 +24,20 @@ include 'includes/conn.php';
                     <label for="material_type" class="col-sm-3 control-label">Material Type </label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="material_type" name="material_type" required>
+                            <select class="form-control" name="material_type" id="material_type">
+                            <?php
+                                $sql = "SELECT * FROM type_raw_materials";
+                                $query = $conn->query($sql);
+                                while($prow = $query->fetch_assoc()){
+                                    echo "
+                                    <option value='".$prow['id']."'>".$prow['material_type']."</option>
+                                    ";
+                                }
+                                ?>
+                            
+                            </select>
                     </div>
+
                 </div>
                 <div class="form-group">
                     <label for="material_name" class="col-sm-3 control-label">Material Name</label>
@@ -96,9 +108,21 @@ include 'includes/conn.php';
                   <div class="form-group">
                       <label for="material_type_edit" class="col-sm-3 control-label">Material Type </label>
 
+                     
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="material_type_edit" name="material_type_edit" required>
-                      </div>
+                            <select class="form-control" name="material_type_edit" id="material_type_edit">
+                            <?php
+                                $sql = "SELECT * FROM type_raw_materials";
+                                $query = $conn->query($sql);
+                                while($prow = $query->fetch_assoc()){
+                                    echo "
+                                    <option value='".$prow['id']."'>".$prow['material_type']."</option>
+                                    ";
+                                }
+                                ?>
+                            
+                            </select>
+                    </div>
                   </div>
                   <div class="form-group">
                       <label for="material_name" class="col-sm-3 control-label">Material Name</label>
@@ -179,7 +203,7 @@ include 'includes/conn.php';
               <h4 class="modal-title"><b>Deleting...</b></h4>
             </div>
             <div class="modal-body">
-              <form class="form-horizontal" method="POST" action="user_delete.php">
+              <form class="form-horizontal" method="POST" action="raw_materials_delete.php">
                 <input type="hidden" class="id" name="id">
                 <div class="text-center">
                     <p>RAW MATERIAL DELETE</p>
