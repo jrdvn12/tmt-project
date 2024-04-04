@@ -109,8 +109,8 @@ $(function () {
     },
     {
       value    : 400,
-      color    : '#f39c12',
-      highlight: '#f39c12',
+      color    : '#794e09',
+      highlight: '#794e09',
       label    : 'FireFox'
     },
     {
