@@ -2267,12 +2267,12 @@ a:focus {
 }
 .btn-warning {
   background-color: #794e09;
-  border-color: #e08e0b;
+  border-color: #794e09;
 }
 .btn-warning:hover,
 .btn-warning:active,
 .btn-warning.hover {
-  background-color: #e08e0b;
+  background-color: #794e09;
 }
 .btn-outline {
   border: 1px solid #fff;
@@ -2404,7 +2404,7 @@ a:focus {
   border-color: #d73925;
 }
 .alert-warning {
-  border-color: #e08e0b;
+  border-color: #794e09;
 }
 .alert-info {
   border-color: #00acd6;
