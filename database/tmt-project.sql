@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2024 at 04:35 AM
+-- Generation Time: Apr 04, 2024 at 10:11 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -123,7 +123,40 @@ INSERT INTO `audit_trail_record` (`id`, `audit_date`, `audit_time`, `user`, `des
 (483, '2024-04-03', '17:40:33', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-03'),
 (484, '2024-04-03', '18:09:19', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-03'),
 (485, '2024-04-03', '18:09:23', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-03'),
-(486, '2024-04-03', '18:09:28', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-03');
+(486, '2024-04-03', '18:09:28', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-03'),
+(487, '2024-04-04', '14:08:28', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-04'),
+(488, '2024-04-04', '14:08:33', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-04'),
+(489, '2024-04-04', '14:08:36', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-04'),
+(490, '2024-04-04', '14:08:40', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-04'),
+(491, '2024-04-04', '14:13:41', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-04'),
+(492, '2024-04-04', '14:19:39', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-04'),
+(493, '2024-04-04', '14:19:45', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-04'),
+(494, '2024-04-04', '14:19:52', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-04'),
+(495, '2024-04-04', '14:19:58', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-04'),
+(496, '2024-04-04', '14:40:05', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-04'),
+(497, '2024-04-04', '14:43:27', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-04'),
+(498, '2024-04-04', '14:47:23', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-04'),
+(499, '2024-04-04', '14:47:33', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-04'),
+(500, '2024-04-04', '14:49:45', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-04'),
+(501, '2024-04-04', '15:05:20', 'Angelo Cruz', 'Product load needs updated Materials # Creamy Corp date 2024-04-04'),
+(502, '2024-04-04', '15:05:24', 'Angelo Cruz', 'Product load needs updated Materials # Creamy Corp date 2024-04-04'),
+(503, '2024-04-04', '15:06:07', 'Angelo Cruz', 'Added new Need Materials # Creamy Corp date 2024-04-04'),
+(504, '2024-04-04', '15:06:13', 'Angelo Cruz', 'Added new Need Materials # Made in China date 2024-04-04'),
+(505, '2024-04-04', '15:06:21', 'Angelo Cruz', 'Added new Need Materials # Creamy Corp date 2024-04-04'),
+(506, '2024-04-04', '15:06:28', 'Angelo Cruz', 'Product load needs updated Materials # Creamy Corp date 2024-04-04'),
+(507, '2024-04-04', '15:06:37', 'Angelo Cruz', 'Product load needs updated Materials # Creamy Corp date 2024-04-04'),
+(508, '2024-04-04', '15:06:42', 'Angelo Cruz', 'Product load needs updated Materials # Creamy Corp date 2024-04-04'),
+(509, '2024-04-04', '15:06:54', 'Angelo Cruz', 'Product load needs updated Materials # Creamy Corp date 2024-04-04'),
+(510, '2024-04-04', '15:07:03', 'Angelo Cruz', 'Product load needs updated Materials # Creamy Corp date 2024-04-04'),
+(511, '2024-04-04', '15:46:27', 'Angelo Cruz', 'Added new Type Raw Materials #Sugar date 2024-04-04'),
+(512, '2024-04-04', '15:47:48', 'Angelo Cruz', 'Added new Raw Materials # date 2024-04-04'),
+(513, '2024-04-04', '15:47:51', 'Angelo Cruz', 'User deleted  date 2024-04-04'),
+(514, '2024-04-04', '15:49:01', 'Angelo Cruz', 'User deleted  date 2024-04-04'),
+(515, '2024-04-04', '16:03:13', 'Angelo Cruz', 'Added new Type Raw Materials #Sugar date 2024-04-04'),
+(516, '2024-04-04', '16:03:42', 'Angelo Cruz', 'Added new Type Raw Materials #MILK date 2024-04-04'),
+(517, '2024-04-04', '16:06:21', 'Angelo Cruz', 'Added new Type Raw Materials #MILK date 2024-04-04'),
+(518, '2024-04-04', '16:07:34', 'Angelo Cruz', 'Added new Type Raw Materials #Sugar date 2024-04-04'),
+(519, '2024-04-04', '16:11:21', 'Angelo Cruz', 'Added new Type Raw Materials #Pure Coffee date 2024-04-04');
 
 -- --------------------------------------------------------
 
@@ -225,10 +258,10 @@ CREATE TABLE `product_needs` (
 --
 
 INSERT INTO `product_needs` (`id`, `product_id`, `product_name`, `item_need`, `loads`) VALUES
-(42, '7', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (White) ', 'Creamy Corp', 5),
-(45, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Creamy Corp', 20),
-(46, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Made in China', 1),
-(47, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Made in China', 1);
+(61, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Creamy Corp', 50),
+(62, '6', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Brown) ', 'Creamy Corp', 20),
+(63, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Made in China', 20),
+(64, '7', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (White) ', 'Creamy Corp', 20);
 
 -- --------------------------------------------------------
 
@@ -270,7 +303,24 @@ INSERT INTO `product_needs_history` (`id`, `product_id`, `product_name`, `item_n
 (19, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Creamy Corp', 1),
 (20, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Creamy Corp', 20),
 (21, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Made in China', 1),
-(22, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Made in China', 1);
+(22, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Made in China', 1),
+(23, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Creamy Corp', 5),
+(24, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Salt Company', 5),
+(25, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Creamy Corp', 5),
+(26, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Creamy Corp', 1),
+(27, '6', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Brown) ', 'Creamy Corp', 20),
+(28, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Creamy Corp', 5),
+(29, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Made in China', 20),
+(30, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Made in China', 20),
+(31, '6', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Brown) ', 'Creamy Corp', 5),
+(32, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Thailand', 5),
+(33, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Creamy Corp', 5),
+(34, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Creamy Corp', 1),
+(35, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Creamy Corp', 5),
+(36, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Creamy Corp', 5),
+(37, '6', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Brown) ', 'Creamy Corp', 20),
+(38, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Made in China', 20),
+(39, '7', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (White) ', 'Creamy Corp', 20);
 
 -- --------------------------------------------------------
 
@@ -300,6 +350,24 @@ INSERT INTO `raw_materials` (`id`, `material_code`, `material_type`, `material_n
 (6, 'TM45682', 'Salt', 'Salt Company', '5', 200, 0, 200, '2024-03-15', '2025-01-10'),
 (7, 'TM45123', 'Plastic', 'Made in China', '5', 400, 0, 400, '2024-03-15', '2025-09-06'),
 (8, 'TM156394', 'Pure Coffee', 'Thailand', '10', 900, 0, 900, '2024-03-15', '2024-09-30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `type_raw_materials`
+--
+
+CREATE TABLE `type_raw_materials` (
+  `id` int(11) NOT NULL,
+  `material_type` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `type_raw_materials`
+--
+
+INSERT INTO `type_raw_materials` (`id`, `material_type`) VALUES
+(6, 'Pure Coffee');
 
 --
 -- Indexes for dumped tables
@@ -360,6 +428,12 @@ ALTER TABLE `raw_materials`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `type_raw_materials`
+--
+ALTER TABLE `type_raw_materials`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -373,7 +447,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `audit_trail_record`
 --
 ALTER TABLE `audit_trail_record`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=487;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=520;
 
 --
 -- AUTO_INCREMENT for table `main_inventory`
@@ -403,19 +477,25 @@ ALTER TABLE `production`
 -- AUTO_INCREMENT for table `product_needs`
 --
 ALTER TABLE `product_needs`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `product_needs_history`
 --
 ALTER TABLE `product_needs_history`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `raw_materials`
 --
 ALTER TABLE `raw_materials`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `type_raw_materials`
+--
+ALTER TABLE `type_raw_materials`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
