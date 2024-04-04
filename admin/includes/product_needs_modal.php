@@ -48,11 +48,12 @@
 
                     <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">Loads</label>
-
                         <div class="col-sm-9">
-                        <input type="text" class="form-control" id="loads" name="loads" required>
-                        </div>
+                             <input type="text" class="form-control" id="loads" name="loads" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                        <div class="text-danger">Please enter numbers only.</div>
                     </div>
+                    </div>
+
 
             </div>
             <div class="modal-footer">

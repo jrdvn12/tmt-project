@@ -44,15 +44,17 @@
                     <div class="form-group">
                         <label for="product_price" class="col-sm-3 control-label">Product Price</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="product_price" name="product_price" required placeholder="Enter product price">
+                            <input type="text" class="form-control" id="product_price" name="product_price" required placeholder="Enter product price" oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label for="product_quantity" class="col-sm-3 control-label">Product Quantity</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="product_quantity" name="product_quantity" required placeholder="Enter product quantity">
+                            <input type="text" class="form-control" id="product_quantity" name="product_quantity" required placeholder="Enter product quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                         </div>
                     </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>

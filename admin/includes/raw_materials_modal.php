@@ -37,17 +37,15 @@ include 'includes/conn.php';
 
                 <div class="form-group">
                     <label for="material_batch" class="col-sm-3 control-label">Material Batch</label>
-
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="material_batch" name="material_batch" required>
+                        <input type="text" class="form-control" id="material_batch" name="material_batch" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="material_load" class="col-sm-3 control-label">Material Load</label>
-
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="material_load" name="material_load" required>
+                        <input type="text" class="form-control" id="material_load" name="material_load" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                     </div>
                 </div>
 

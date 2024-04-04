@@ -44,8 +44,10 @@
                     <div class="form-group">
                         <label for="product_price" class="col-sm-3 control-label">Product Price</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="product_price" name="product_price" required placeholder="Enter product price">
+                            <input type="text" class="form-control" id="product_price" name="product_price" required placeholder="Enter product price" oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
                         </div>
+                    </div>
+
                     </div>
 
             </div>
