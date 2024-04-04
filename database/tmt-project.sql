@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2024 at 05:40 AM
+-- Generation Time: Apr 04, 2024 at 04:35 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -118,7 +118,12 @@ INSERT INTO `audit_trail_record` (`id`, `audit_date`, `audit_time`, `user`, `des
 (478, '2024-03-26', '13:14:01', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-03-26'),
 (479, '2024-03-26', '14:25:59', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-03-26'),
 (480, '2024-03-26', '14:26:05', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-03-26'),
-(481, '2024-03-26', '14:33:17', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-03-26');
+(481, '2024-03-26', '14:33:17', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-03-26'),
+(482, '2024-04-03', '17:20:39', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-03'),
+(483, '2024-04-03', '17:40:33', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-03'),
+(484, '2024-04-03', '18:09:19', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-03'),
+(485, '2024-04-03', '18:09:23', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-03'),
+(486, '2024-04-03', '18:09:28', 'Angelo Cruz', 'Added new Need Materials #Hi date 2024-04-03');
 
 -- --------------------------------------------------------
 
@@ -220,9 +225,10 @@ CREATE TABLE `product_needs` (
 --
 
 INSERT INTO `product_needs` (`id`, `product_id`, `product_name`, `item_need`, `loads`) VALUES
-(40, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Creamy Corp', 20),
-(41, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Creamy Corp', 5),
-(42, '7', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (White) ', 'Creamy Corp', 5);
+(42, '7', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (White) ', 'Creamy Corp', 5),
+(45, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Creamy Corp', 20),
+(46, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Made in China', 1),
+(47, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Made in China', 1);
 
 -- --------------------------------------------------------
 
@@ -259,7 +265,12 @@ INSERT INTO `product_needs_history` (`id`, `product_id`, `product_name`, `item_n
 (14, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Salt Company', 20),
 (15, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Creamy Corp', 20),
 (16, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Creamy Corp', 5),
-(17, '7', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (White) ', 'Creamy Corp', 5);
+(17, '7', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (White) ', 'Creamy Corp', 5),
+(18, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Made in China', 20),
+(19, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Creamy Corp', 1),
+(20, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Creamy Corp', 20),
+(21, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Made in China', 1),
+(22, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 'Made in China', 1);
 
 -- --------------------------------------------------------
 
@@ -362,7 +373,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `audit_trail_record`
 --
 ALTER TABLE `audit_trail_record`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=482;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=487;
 
 --
 -- AUTO_INCREMENT for table `main_inventory`
@@ -392,13 +403,13 @@ ALTER TABLE `production`
 -- AUTO_INCREMENT for table `product_needs`
 --
 ALTER TABLE `product_needs`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `product_needs_history`
 --
 ALTER TABLE `product_needs_history`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `raw_materials`
