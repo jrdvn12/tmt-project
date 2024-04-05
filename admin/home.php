@@ -9,7 +9,7 @@
   }
 ?>
 <?php include 'includes/header.php'; ?>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition skin-custom sidebar-mini">
   <div class="wrapper">
 
   	<?php include 'includes/navbar.php'; ?>

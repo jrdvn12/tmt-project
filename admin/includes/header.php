@@ -49,6 +49,7 @@
      /* chart style*/
       #legend ul {
         list-style: none;
+         
       }
 
       #legend ul li {
@@ -57,6 +58,7 @@
         position: relative;
         margin-bottom: 4px;
         border-radius: 5px;
+       
         padding: 2px 8px 2px 28px;
         font-size: 14px;
         cursor: default;
@@ -67,6 +69,7 @@
       }
 
       #legend li span {
+        
         display: block;
         position: absolute;
         left: 0;
@@ -126,7 +129,8 @@
     background-color: #4F413E;
   } */
   .skin-custom {
-      background-color: #D9B495 !important;
+      /* background-color: #D9B495 !important; */
+      background:#D1B188;
   }
 </style>
 

@@ -1,9 +1,9 @@
 <?php $posistion = $user['position']; ?>
 
-
-<aside class="main-sidebar"  style="height:100%">
+<!-- style="background-color: black;" -->
+<aside class="main-sidebar"  style="height:100%; " >
     <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
+    <section class="sidebar" >
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
