@@ -26,7 +26,7 @@
         $production_pieces = 0;
         $production_kilo =0;
         $production_date = $datecreated;
-        $production_expiration =  $datecreated;
+        $production_expiration =   date('Y-m-d', strtotime('+12 months'));
 
 
 		$sql = "INSERT INTO production (material_code, product_name,product_batch,production_status, production_pieces, production_kilo,production_date,production_expiration) 

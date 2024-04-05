@@ -37,7 +37,7 @@
                                 $query = $conn->query($sql);
                                 while($prow = $query->fetch_assoc()){
                                     echo "
-                                    <option value='".$prow['id']."'>".$prow['material_name']."</option>
+                                    <option value='".$prow['id']."'>".$prow['material_code']."</option>
                                     ";
                                 }
                                 ?>
@@ -49,7 +49,7 @@
                     <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">Loads</label>
                         <div class="col-sm-9">
-                             <input type="text" class="form-control" id="loads" name="loads" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                             <input type="text" class="form-control" id="loads" name="loads" required oninput="this.value = this.value.replace(/[^0-9-.]/g, '');">
                     </div>
                     </div>
 

@@ -19,11 +19,11 @@
                 $sqlin = "SELECT * FROM raw_materials WHERE id = '$item_id'";
                 $queryin = $conn->query($sqlin);
                 $rowin = $queryin->fetch_assoc();
-                $item_need = $rowin['material_name'];
+                $item_need = $rowin['material_code'];
 
 		// searching the items in database of items need
 		$sqlpn = "SELECT * FROM product_needs WHERE product_id = '$product_id' AND item_need = '$item_need'";
-		$asql1 = "SELECT * FROM attendance WHERE time_out = '$timeoutvalue' AND date = '$date_now' AND employee_id = '$id'";
+		
 		$querypn = $conn->query($sqlpn);
 		$rowpn = $querypn->fetch_assoc();
 			

@@ -116,8 +116,9 @@
                         echo "<td>".$status."</td>";
                         echo "<td>".$row['production_pieces']."</td>";
                         echo "<td>".$row['production_kilo']."</td>";
-                        echo "<td>".$row['production_date']."</td>";
-                        echo "<td>".$row['production_expiration']."</td>";
+                        echo "<td>".date('M d, Y', strtotime($row['production_date']))."</td>";
+                        echo "<td>".date('M d, Y', strtotime($row['production_expiration']))."</td>";
+                        
                         if ($row['production_status']=="Preparing" ){
                         echo "<td>
                                 <a href='#edit' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['mcid']."' onclick='getRow(".$row['mcid'].")'><i class='fa fa-edit'></i> Edit</a>
