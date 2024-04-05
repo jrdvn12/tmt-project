@@ -82,7 +82,7 @@
                         } else {
                             // Already encountered this product ID, merge the data
                             $merged_rows[$product_id]['item_need'] .= '<br> ' . $row['item_need'];
-                            $merged_rows[$product_id]['loads'] .= '<br> ' .$row['loads']; // Merge the loads, for example
+                            $merged_rows[$product_id]['loads'] .= '<br> ' .$row['loads']; // Merge the loads, for example SUM(loads) AS total_loads,
                             // Merge other fields as needed
                         }
                     }
@@ -115,6 +115,7 @@
                         echo "<td>".$row['product_batch']."</td>  ";
                         echo "<td>".$status."</td>";
                         echo "<td>".$row['production_pieces']."</td>";
+
                         echo "<td>".$row['production_kilo']."</td>";
                         echo "<td>".date('M d, Y', strtotime($row['production_date']))."</td>";
                         echo "<td>".date('M d, Y', strtotime($row['production_expiration']))."</td>";
