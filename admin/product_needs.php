@@ -105,13 +105,8 @@
                             }
                         }
                         echo "</td>
-
-                        
-                        
-                            <td>
-                                
-                                <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['product_id']."' onclick='getRow(".$row['product_id'].")'><i class='fa fa-trash'></i> Delete</a>
-                         
+                            <td>                              
+                                <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['product_id']."' onclick='getRow(".$row['product_id'].")'><i class='fa fa-trash'></i> Delete</a>                        
                             </td>
                         </tr>
                         ";

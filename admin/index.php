@@ -11,7 +11,7 @@
 .login-page {
     display: flex;
     align-items: center;
-    background: url(../images/TMT_FOODSS.png);
+    background: url(../images/TMT-FOODS.png);
     background-repeat: no-repeat;
     background-size: cover;
 
@@ -52,7 +52,7 @@
         </div>
 
         <div class="login-box-body">
-            <img src="../images/TMTFOODs.png" alt="tmt" class="imgcenter">
+            <img src="../images/TMTFOOD.png" alt="tmt" class="imgcenter">
             <p class="login-box-msg">Sign in to start your session</p>
 
             <form action="login.php" method="POST">
