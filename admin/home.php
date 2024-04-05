@@ -9,8 +9,8 @@
   }
 ?>
 <?php include 'includes/header.php'; ?>
-<body class="hold-transition skin-yellow sidebar-mini">
-<div class="wrapper">
+<body class="hold-transition sidebar-mini">
+  <div class="wrapper">
 
   	<?php include 'includes/navbar.php'; ?>
   	<?php include 'includes/menubar.php'; ?>
@@ -70,21 +70,6 @@
             <a href="employee.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
 
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <?php
-                $sql = "SELECT * FROM main_inventory";
-                $query = $conn->query($sql);
-
-                echo "<h3>".$query->num_rows."</h3>";
-              ?>
-              <p>Total Loss</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-stalker"></i>
-            </div>
-            <a href="employee.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
 
         </div>
         <!-- ./col -->

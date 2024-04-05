@@ -25,15 +25,17 @@
                     <div class="form-group">
                         <label for="casecode" class="col-sm-3 control-label">Case Code</label>
                         <div class="col-sm-9">
-                            <input autocomplete="off" value="<?=$_POST['text'] ?? ''?>" name="text" class="form-control" id="casecode" name="casecode" required placeholder="Enter case code">
+                            <input autocomplete="off" value="<?= isset($_POST['casecode']) ? $_POST['casecode'] : '' ?>" name="casecode" class="form-control" id="casecode" required placeholder="Enter case code" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                         </div>
                     </div>
-                    <div class="form-group" method="post" enctype="multipart/form-data">
+
+                    <div class="form-group">
                         <label for="piececode" class="col-sm-3 control-label">Piece Code</label>
                         <div class="col-sm-9">
-                            <input autocomplete="off" value="<?=$_POST['text'] ?? ''?>" name="text" class="form-control" id="piececode" name="piececode" required placeholder="Enter piece code">
+                            <input autocomplete="off" value="<?= isset($_POST['piececode']) ? $_POST['piececode'] : '' ?>" name="piececode" class="form-control" id="piececode" required placeholder="Enter piece code" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                         </div>
                     </div>
+
 
                     <div class="form-group">
                         <label for="product_name" class="col-sm-3 control-label">Product Name</label>

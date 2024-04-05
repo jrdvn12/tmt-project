@@ -32,12 +32,12 @@ include 'includes/conn.php';
                 </div>
 
                 <div class="form-group">
-                    <label for="production_batch" class="col-sm-3 control-label">Batch</label>
+                  <label for="production_batch" class="col-sm-3 control-label">Batch</label>
+                  <div class="col-sm-9">
+                      <input type="text" class="form-control" id="production_batch" name="production_batch" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                  </div>
+              </div>
 
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="production_batch" name="production_batch" required>
-                    </div>
-                </div>
                
 
             </div>

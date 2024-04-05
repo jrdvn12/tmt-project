@@ -1,6 +1,6 @@
 <?php include 'includes/session.php'; ?>
 <?php include 'includes/header.php'; ?>
-<body class="hold-transition skin-black sidebar-mini">
+<body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
   <?php include 'includes/navbar.php'; ?>
@@ -9,7 +9,7 @@
   <!-- Content Wrapper. Contains page content    -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header " >
+    <section class="content-header" >
       <h1>
         Product Needs
       </h1>
