@@ -52,42 +52,56 @@
               <table id="example1" class="table table-bordered">
                 <thead>
                   
-                  <th>Material Code</th>
-                  <th>Name</th>
+                  <th>Material Type</th>
                   <th>Batch</th>
-                  <th>Expiration</th>
-                  <th>Date</th>
-
+                  <th>Name</th>
                   <th>Kilo</th>
-
-                  <th>Tools</th>
+                  <th>Usage</th>
+                  <th>Total</th>
+                  <th>Date Stock</th>
+                  <th>Expiration</th>
                   
                 </thead>
                 <tbody>
-                  <?php
-                    $sql = "SELECT * FROM main_raw_materials";
-                    $query = $conn->query($sql);
-                    while($row = $query->fetch_assoc()){
-                     
-                      echo "
-                        <tr>
-                          
-                          <td>".$row['material_code']."</td>
-                          <td>".$row['name']."</td>
-                          <td>".$row['batch']."</td>  
-                          <td>".$row['expiration']."</td>
-                          <td>".$row['kilo']."</td>
-                          <td>".$row['kilo']."</td>
-                          <td>
-                          <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                          <button class='btn btn-success btn-sm edit_user_password btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Password</button>
-                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
-                          </td>
-                          
-                        </tr>
-                      ";
-                    }
-                  ?>
+                <?php
+              $sql = "SELECT 
+                          mts,
+                          REPLACE(GROUP_CONCAT(material_batch), ',', '<br>') AS material_batches,
+                          REPLACE(GROUP_CONCAT(material_name), ',', '<br>') AS material_names,
+                          REPLACE(GROUP_CONCAT(loads), ',', '<br>') AS total_loads,
+                          REPLACE(GROUP_CONCAT(material_usage), ',', '<br>') AS total_usage,
+                          REPLACE(GROUP_CONCAT(material_remaining), ',', '<br>') AS total_remaining,
+                          REPLACE(GROUP_CONCAT(DATE_FORMAT(dateofstock, '%b %d %Y')), ',', '<br>\n') AS stock_dates,
+                          REPLACE(GROUP_CONCAT(DATE_FORMAT(date_expiration, '%b %d %Y')), ',', '<br>\n') AS expiration_dates
+                          FROM 
+                              (SELECT 
+                                  raw_materials.*, 
+                                  type_raw_materials.material_type AS mts 
+                              FROM 
+                                  raw_materials  
+                              LEFT JOIN 
+                                  type_raw_materials ON raw_materials.material_type = type_raw_materials.id) AS subquery
+                          GROUP BY 
+                              mts";
+
+                          $query = $conn->query($sql);
+                          while($row = $query->fetch_assoc()){
+                              echo "
+                              <tr>
+                                  <td>".$row['mts']."</td>
+                                  <td>".$row['material_batches']."</td>
+                                  <td>".$row['material_names']."</td>  
+                                  <td>".$row['total_loads']."</td>
+                                  <td>".$row['total_usage']."</td>
+                                  <td>".$row['total_remaining']."</td>
+                                  <td>".$row['stock_dates']."</td>
+                                  <td>".$row['expiration_dates']."</td>
+                              </tr>
+                              ";
+                          }
+                          ?>
+
+
                 </tbody>
               </table>
             </div>

@@ -70,7 +70,7 @@
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT *, product_needs.product_id AS pnid, production.id AS mcid FROM production LEFT JOIN product_needs ON production.material_code=product_needs.product_id ORDER BY product_needs.product_id";
+                    $sql = "SELECT *, product_needs.product_id AS pnid, production.id AS mcid FROM production LEFT JOIN product_needs  ON production.material_code=product_needs.product_id ORDER BY product_needs.product_id";
                     $query = $conn->query($sql);
                     $merged_rows = array();
 

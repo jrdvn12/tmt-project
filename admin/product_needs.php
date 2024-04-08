@@ -63,9 +63,7 @@
                     <tbody>
                         
                     <?php
-                    $sql = "SELECT product_id, product_name,GROUP_CONCAT(id) AS ids, GROUP_CONCAT(item_need) AS item_needs, GROUP_CONCAT(loads) AS loads 
-                            FROM product_needs 
-                            GROUP BY product_id";
+                    $sql = "SELECT product_id, product_name,GROUP_CONCAT(id) AS ids, GROUP_CONCAT(item_need) AS item_needs, GROUP_CONCAT(loads) AS loads FROM product_needs GROUP BY product_id";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                         $ids = explode(',', $row['ids']);
@@ -78,7 +76,7 @@
                          <td>";
                         foreach ($ids as $index => $id) {
                             echo $id. "<a href='#edit_item' data-toggle='modal' class='pull-right edit_item' data-id='".$id."'><span class='fa fa-edit'></span></a> ";
-//                            echo " <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$id."'><i class='fa fa-trash'></i> Delete</button>";
+                          //echo " <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$id."'><i class='fa fa-trash'></i> Delete</button>";
                             if ($index < count($ids) - 1) {
                                 echo "<br>";
                             }

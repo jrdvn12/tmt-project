@@ -9,7 +9,7 @@
   }
 ?>
 <?php include 'includes/header.php'; ?>
-<body class="hold-transition skin-custom sidebar-mini">
+<body class="hold-transition  sidebar-mini">
   <div class="wrapper">
 
   	<?php include 'includes/navbar.php'; ?>
@@ -50,24 +50,68 @@
       ?>
 
       <?php $posistion = $user['position']; ?>
+
       <!-- Small boxes (Stat box) -->
       <div class="row">
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-yellow">
+          <div class="small-box "style="background: #D1B188;">
             <div class="inner">
               <?php
-                $sql = "SELECT * FROM main_inventory";
+                $sql = "SELECT * FROM product";
                 $query = $conn->query($sql);
 
                 echo "<h3>".$query->num_rows."</h3>";
               ?>
-              <p>Total Employees</p>
+              <p>Total Product</p>
             </div>
             <div class="icon">
-              <i class="ion ion-person-stalker"></i>
+              <i class="fa fa-coffee"></i>
             </div>
-            <a href="employee.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="product" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box" style="background: #F75F6F;">
+            <div class="inner">
+              <?php
+                $sql = "SELECT * FROM raw_materials";
+                $query = $conn->query($sql);
+
+                echo "<h3>".$query->num_rows."</h3>";
+              ?>
+              <p>Total Raw Materials</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-shopping-basket"></i>
+            </div>
+            <a href="raw_materials" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+
+        </div>
+        <!-- ./col -->
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box" style="background: #B0B0B0;">
+            <div class="inner">
+              <?php
+                $sql = "SELECT * FROM production WHERE production_status LIKE 'Preparing'";
+                $query = $conn->query($sql);
+
+                echo "<h3>".$query->num_rows."</h3>";
+              ?>
+              <p>Total Production</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-cogs"></i>
+            </div>
+            <a href="production" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
 
 
