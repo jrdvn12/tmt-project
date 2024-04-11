@@ -60,7 +60,7 @@
                   <th>Total</th>
                   <th>Date Stock</th>
                   <th>Expiration</th>
-                  
+                  <th>Tools</th>
                 </thead>
                 <tbody>
                 <?php
@@ -96,6 +96,10 @@
                                   <td>".$row['total_remaining']."</td>
                                   <td>".$row['stock_dates']."</td>
                                   <td>".$row['expiration_dates']."</td>
+                                  <td>
+                                  <a href='#' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['mts']."' onclick='getRow(".$row['mts'].")'><i class='fa fa-eye'></i> View</a>
+                                  </td>
+                                  
                               </tr>
                               ";
                           }
