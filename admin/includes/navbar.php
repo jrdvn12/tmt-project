@@ -1,4 +1,4 @@
-<header class="main-header" >
+<header class="main-header" style="background-color: #D1B188;">
 
     <!-- Logo -->
     <a href="home" class="logo">
@@ -8,7 +8,7 @@
       <span class="logo-lg" style="color: black;">TMT Foods Inc</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
+    <nav class="navbar navbar-static-top" style="background-color: #D1B188;">
       <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" style="color: black;">
         <span class="sr-only" >Toggle navigation</span>

@@ -129,7 +129,6 @@
     background-color: #4F413E;
   } */
   .skin-custom {
-      /* background-color: #D9B495 !important; */
       background:#D1B188;
   }
 </style>
