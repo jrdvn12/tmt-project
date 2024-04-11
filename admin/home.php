@@ -128,7 +128,7 @@
             <div class="icon">
               <i class="fa fa-cogs"></i>
             </div>
-            <a href="production" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="lost" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
