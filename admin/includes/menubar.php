@@ -5,7 +5,7 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar" style="background-color: #D1B188;">
         <!-- Sidebar user panel -->
-        <div class="user-panel" style="color: black; background-color: white;">
+        <div class="user-panel" style="color: black; background: linear-gradient(0deg, rgba(187,142,69,1) 7%, rgba(230,202,142,1) 19%, rgba(187,142,69,1) 75%);">
             <div class="pull-left image">
                 <img src="<?php echo (!empty($user['photo'])) ? '../images/'.$user['photo'] : '../images/profile.jpg'; ?>" class="img-circle" alt="User Image">
             </div>
