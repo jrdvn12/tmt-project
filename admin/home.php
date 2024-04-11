@@ -126,7 +126,7 @@
               <p>Total Loss</p>
             </div>
             <div class="icon">
-              <i class="fa fa-cogs"></i>
+            <i class="fa-solid fa-chart-line-down"></i>
             </div>
             <a href="production" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
