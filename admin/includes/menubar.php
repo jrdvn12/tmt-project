@@ -68,7 +68,7 @@
         </li>
 
         <li class="treeview">
-          <a href="#"style="color: black;">
+          <a href="#">
             <i class="fa fa fa-cogs"></i>
             <span>Product Management</span>
             <span class="pull-right-container">
@@ -79,7 +79,7 @@
           <li><a href="product" style="color: black;"><i class=" fa fa-circle-o"></i> <span>Product</span></a></li>
           <li><a href="product_needs" style="color: black;"><i class=" fa fa-circle-o"></i> <span>Product Needs</span></a></li>
 
-          <li><a href="costing" style="color: black;"><i class="fa fa-circle-o"></i> <span>Costing Raw Materials</span></a></li>
+          <li><a href="costing"><i class="fa fa-circle-o"></i> <span>Costing Raw Materials</span></a></li>
           
           <li><a href="freebies" style="color: black;"><i class="fa fa-circle-o"></i> <span>Gift</span></a></li>
           

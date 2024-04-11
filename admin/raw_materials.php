@@ -66,7 +66,7 @@
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT * FROM raw_materials";
+                    $sql = "SELECT *, type_raw_materials.material_type AS mts FROM raw_materials  LEFT JOIN type_raw_materials ON raw_materials.material_type = type_raw_materials.id";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                      
@@ -74,14 +74,15 @@
                         <tr>
                           
                           <td>".$row['material_code']."</td>
-                          <td>".$row['material_type']."</td>
+                          <td>".$row['mts']."</td>
                           <td>".$row['material_name']."</td>  
                           <td>".$row['material_batch']."</td> 
                           <td>".$row['loads']."</td>
                           <td>".$row['material_usage']."</td>
                           <td>".$row['material_remaining']."</td>
-                          <td>".$row['dateofstock']."</td>
-                          <td>".$row['date_expiration']."</td>
+                          <td>".date('M d, Y', strtotime($row['dateofstock']))."</td>
+                          <td>".date('M d, Y', strtotime($row['date_expiration']))."</td>
+                          
                           
                           <td>
                           <a href='#edit' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['id']."' onclick='getRow(".$row['id'].")'><i class='fa fa-edit'></i> Edit</a>
@@ -122,18 +123,7 @@ $(function(){
     var id = $(this).data('id');
     getRow(id);
   });
-  $('.edit_user_password').click(function(e){
-    e.preventDefault();
-    $('#edit_user_password').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
-
-  $(document).on('click', '.photo', function(e){
-    e.preventDefault();
-    var id = $(this).data('id');
-    getRow(id);
-  });
+  
 
 });
 
