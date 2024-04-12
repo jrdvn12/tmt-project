@@ -131,8 +131,104 @@
   .skin-custom {
       background:#D1B188;
   }
+
+
+  /* Button */
+
+  .scroll-to-top {
+        position: fixed;
+        bottom: 20px; /* Adjust as needed */
+        right: 20px; /* Adjust as needed */
+        z-index: 9999; /* Ensure it's above other content */
+        background-color: transparent;
+        color: black;
+        padding: 10px;
+        border-radius: 10%;
+        /* border: 2px solid #D1B188; */
+        /* border-radius: 100%; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+
+    .scroll-to-top:hover {
+        background-color: #D1B188;
+        color: white;
+        border-color: transparent;
+        border-radius: 10%;
+    }
+
+    .scroll-to-top i {
+        margin-right: 5px;
+    }
+
+    /* Dropdown menu styles */
+    .dropdown-menu {
+        position: absolute;
+        bottom: 50px; /* Adjust as needed */
+        right: 10px; /* Adjust as needed */
+        background-color: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        padding: 10px;
+        display: none;
+    }
+
+    .dropdown-menu.show {
+        display: block;
+    }
+
+    .dropdown-menu a {
+        display: block;
+        padding: 5px 0;
+        color: #333;
+        text-decoration: none;
+    }
+
+    .dropdown-menu a:hover {
+        background-color: #f5f5f5;
+    }
+
 </style>
 
     </style>
 </head>
 <?php include 'includes/error.php'; ?>
+<ul class="scroll-to-top" data-widget="tree" style="background-color: #D1B188; color: black;">
+    <li class="treeview">
+        <a href="#" style="color: black;" class="fa fa-gear">
+        </a>
+        <ul class="treeview-menu" style="list-style-type: none;">
+            <li><a href="#" onclick="scrollToTop()" style="color: black;"><i class="fa fa-circle-o"></i> Top</a></li>
+            <li><a href="#" onclick="scrollToBottom()" style="color: black;"><i class="fa fa-circle-o"></i> Bottom</a></li>
+            <li><a href="#" onclick="scrollToTop()" style="color: black;"><i class="fa fa-circle-o"></i> Dark Mode</a></li>
+        </ul>
+    </li>
+</ul>
+
+
+
+<script>
+// Scroll to top function
+
+function scrollToBottom() {
+    window.scrollTo(0,document.body.scrollHeight);
+}
+  
+
+
+    // Handle actions after clicking the scroll-to-top button
+    function handleScrollToTop() {
+        // Animate scrolling to the top
+        scrollToTop();
+  
+    }
+
+    // Scroll to top function
+    function scrollToTop() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+    }
+</script>

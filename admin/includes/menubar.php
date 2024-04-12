@@ -1,5 +1,4 @@
 <?php $posistion = $user['position']; ?>
-
 <!-- style="background-color: black;" -->
 <aside class="main-sidebar" style="height:100%; background-color: #D1B188;">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -100,19 +99,13 @@
             <li><a href="#" style="color: black;"><i class="fa fa-bar-chart"></i> <span>Sales</span></a></li>
             <li><a href="#" style="color: black;"><i class="fa fa-dropbox"></i> <span>Inventory</span></a></li>
             <li><a href="#" style="color: black;"><i class="fa fa-truck"></i><span>Delivery</span></a></li>
-            <li class="header">Tools</li>
-            <li><a href="#" onclick="scrollToTop()" style="color: black;"><i class="fa fa-arrow-up"></i><span>Top</span></a></li>
+           
+          
         </ul>
-       
+        
     </section>
     <!-- /.sidebar -->
-    
+   
 </aside>
-<script>
-// Scroll to top function
-function scrollToTop() {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-}
-</script>
+
 
