@@ -51,13 +51,12 @@
                     </div>
 
                     </div>
-
-            </div>
-            <div class="modal-footer">
+                    <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
                 <button type="submit" class="btn btn-primary btn-flat" name="add"><i class="fa fa-save"></i> Save</button>
                 </form>
             </div>
+        </div>     
         </div>
     </div>
 </div>
