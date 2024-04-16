@@ -131,6 +131,11 @@
   .skin-custom {
       background:#D1B188;
   }
+  /* CSS for hover effect when not clicking */
+  .sidebar-menu .treeview:not(.active) > a:hover {
+        background-color: #d7bba6;
+        color: #d7bba6;
+  }
 </style>
 
 </style>
@@ -147,17 +152,14 @@
         </ul>
     </li>
 </ul>
-
+ 
 
 
 <script>
 // Scroll to top function
-
 function scrollToBottom() {
     window.scrollTo(0,document.body.scrollHeight);
 }
-  
-
 
     // Handle actions after clicking the scroll-to-top button
     function handleScrollToTop() {
@@ -165,7 +167,6 @@ function scrollToBottom() {
         scrollToTop();
   
     }
-
     // Scroll to top function
     function scrollToTop() {
         document.body.scrollTop = 0; // For Safari
