@@ -128,11 +128,12 @@
   .btn-primary:hover {
     background-color: #4F413E;
   } */
-  .skin-custom {
-      background:#D1B188;
-  }
-</style>
+    /* CSS for hover effect when not clicking */
+    .sidebar-menu .treeview:not(.active) > a:hover {
+        background-color: #d7bba6;
+        color: #d7bba6;
+    }
 
-    </style>
+</style>
 </head>
 <?php include 'includes/error.php'; ?>

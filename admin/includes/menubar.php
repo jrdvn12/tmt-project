@@ -1,10 +1,7 @@
-<?php $posistion = $user['position']; ?>
+<?php $position = $user['position']; ?>
 
-<!-- style="background-color: black;" -->
 <aside class="main-sidebar" style="height:100%; background-color: #D1B188;">
-    <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar" style="background-color: #D1B188;">
-        <!-- Sidebar user panel -->
         <div class="user-panel" style="color: black; background: linear-gradient(0deg, rgba(187,142,69,1) 7%, rgba(230,202,142,1) 19%, rgba(187,142,69,1) 75%);">
             <div class="pull-left image">
                 <img src="<?php echo (!empty($user['photo'])) ? '../images/'.$user['photo'] : '../images/profile.jpg'; ?>" class="img-circle" alt="User Image">
@@ -15,10 +12,10 @@
             </div>
         </div>
 
-        <!-- sidebar menu: : style can be found in sidebar.less -->
+    <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree" style="background-color: #D1B188; color: black;">
             <li class="header"></li>
-            <li class=""><a href="home" style="color: black;"><i class="fa fa-home"></i> <span>Home</span></a></li>
+            <li class="<?php echo ($position === 'home') ? 'active' : ''; ?>"><a href="home" style="color: black;"><i class="fa fa-home"></i> <span>Home</span></a></li>
             <li class="header">MANAGE</li>   
             <li><a href="order" style="color: black;"><i class="fa fa-shopping-cart"></i> <span>Order</span></a></li>     
             <li class="treeview" style="color: black;">
@@ -99,11 +96,8 @@
             <li class="header">PRINTABLES</li>
             <li><a href="#" style="color: black;"><i class="fa fa-bar-chart"></i> <span>Sales</span></a></li>
             <li><a href="#" style="color: black;"><i class="fa fa-dropbox"></i> <span>Inventory</span></a></li>
-            <li><a href="#" style="color: black;"><i class="fa fa-truck"></i
-
-><span>Delivery</span></a></li>
+            <li><a href="#" style="color: black;"><i class="fa fa-truck"></i><span>Delivery</span></a></li>
         </ul>
     </section>
-    <!-- /.sidebar -->
+    <!-- /.sidebar -->  
 </aside>
-

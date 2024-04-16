@@ -173,4 +173,9 @@
   $(window).on('load', function () {
     Plugin.call($(Selector.button))
   })
+  $(navbar).ready(function(){
+    $('#nav-icon2').click(function(){
+      $(this).toggleClass('open');
+    });
+  });
 }(jQuery)
