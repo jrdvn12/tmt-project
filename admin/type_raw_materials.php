@@ -130,6 +130,16 @@ function getRow(id){
     }
   });
 }
+
+// Scroll to top function
+function scrollToTop() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
 </script>
+
+<!-- Scroll to top button -->
+<button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top">Top</button>
+
 </body>
 </html>
