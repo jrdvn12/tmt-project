@@ -180,15 +180,15 @@ function scrollToBottom() {
     window.scrollTo(0,document.body.scrollHeight);
 }
 
-    // Handle actions after clicking the scroll-to-top button
-    function handleScrollToTop() {
-        // Animate scrolling to the top
-        scrollToTop();
-  
-    }
-    // Scroll to top function
-    function scrollToTop() {
-        document.body.scrollTop = 0; // For Safari
-        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
-    }
+// Handle actions after clicking the scroll-to-top button
+function handleScrollToTop() {
+    // Animate scrolling to the top
+    scrollToTop();
+
+}
+// Scroll to top function
+function scrollToTop() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+}
 </script>

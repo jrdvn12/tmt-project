@@ -103,19 +103,3 @@
     </section>
     <!-- /.sidebar -->  
 </aside>
-<script>
-    // JavaScript to handle the click event on treeview items
-    document.addEventListener('DOMContentLoaded', function() {
-        var treeviewItems = document.querySelectorAll('.sidebar-menu .treeview');
-        treeviewItems.forEach(function(item) {
-            item.addEventListener('click', function() {
-                // Remove "active" class from all treeview items
-                treeviewItems.forEach(function(element) {
-                    element.classList.remove('active');
-                });
-                // Add "active" class to the clicked treeview item
-                item.classList.add('active');
-            });
-        });
-    });
-</script>

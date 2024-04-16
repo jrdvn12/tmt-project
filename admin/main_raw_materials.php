@@ -119,6 +119,7 @@
   <?php include 'includes/user_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>
+
 <script>
 $(function(){
   $(document).on('click', '.edit', function(e){
