@@ -131,27 +131,46 @@
   .skin-custom {
       background:#D1B188;
   }
-  /* CSS for hover effect when not clicking */
-  .sidebar-menu .treeview:not(.active) > a:hover {
-        background-color: #d7bba6;
-        color: #d7bba6;
-  }
+  /* CSS for hover effect when not clicking*/
+.sidebar-menu .treeview:not(.active):hover > a,
+.sidebar-menu .treeview.active > a,
+.sidebar-menu li:hover > a,
+.sidebar-menu li.active > a {
+    background-color: #d7bba6;
+    color: #d7bba6;
+}
+/* CSS for hover effect when not clicking*/
+.sidebar-menu .treeview:not(.active):hover > a,
+.sidebar-menu .treeview-menu:not(.active) > li:hover > a {
+    background-color: #d7bba6;
+    color: #d7bba6;
+}
+
+
+  #lower-right-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+   }
 </style>
 
 </style>
 </head>
 <?php include 'includes/error.php'; ?>
-<ul class="scroll-to-top" data-widget="tree" style="background-color: #D1B188; color: black;">
-    <li class="treeview">
-        <a href="#" style="color: black;" class="fa fa-gear">
-        </a>
-        <ul class="treeview-menu" style="list-style-type: none;">
-            <li><a href="#" onclick="scrollToTop()" style="color: black;"><i class="fa fa-circle-o"></i> Top</a></li>
-            <li><a href="#" onclick="scrollToBottom()" style="color: black;"><i class="fa fa-circle-o"></i> Bottom</a></li>
-            <li><a href="#" onclick="scrollToTop()" style="color: black;"><i class="fa fa-circle-o"></i> Dark Mode</a></li>
-        </ul>
-    </li>
-</ul>
+
+   <!-- Container div for the code -->
+   <div id="lower-right-container">
+      <ul class="scroll-to-top" data-widget="tree" style="background-color: #D1B188; color: black;">
+         <li class="treeview">
+            <a href="#" style="color: black;" class="fa fa-gear"></a>
+            <ul class="treeview-menu" style="list-style-type: none;">
+               <li><a href="#" onclick="scrollToTop()" style="color: black;"><i class="fa fa-circle-o"></i> Top</a></li>
+               <li><a href="#" onclick="scrollToBottom()" style="color: black;"><i class="fa fa-circle-o"></i> Bottom</a></li>
+               <li><a href="#" onclick="scrollToTop()" style="color: black;"><i class="fa fa-circle-o"></i> Dark Mode</a></li>
+            </ul>
+         </li>
+      </ul>
+   </div>
  
 
 

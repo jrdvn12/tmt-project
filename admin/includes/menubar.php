@@ -14,41 +14,40 @@
 
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree" style="background-color: #D1B188; color: black;">
-            <li class="header"></li>
-            <li class="treeview <?php echo ($_SERVER['REQUEST_URI'] == '/home.php') ? 'active' : ''; ?>">
-                <a href="home" style="color: black;">
-                    <i class="fa fa-home"></i> <span>Home</span>
-                </a>            
-            <li class="header">MANAGE</li>   
-            <li><a href="order" style="color: black;"><i class="fa fa-shopping-cart"></i> <span>Order</span></a></li>     
-            <li class="treeview" style="color: black;">
-                <a href="#" style="color: black;">
-                    <i class="fa fa-bar-chart"></i>
-                    <span>Sales</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="#" style="color: black;"><i class="fa fa-circle-o" ></i> Main Sales</a></li>    
-                    <li><a href="#" style="color: black;"><i class="fa fa-circle-o"></i> Distributor Sales</a></li>
-                    <li><a href="#" style="color: black;"><i class="fa fa-circle-o"></i> Seller Sales</a></li>        
-                </ul>
-            </li> 
-            <li class="treeview">
-                <a href="#" style="color: black;">
-                    <i class="fa fa-dropbox"></i>
-                    <span>Inventory</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="main_inventory" style="color: black;"><i class="fa fa-circle-o"></i> Main Inventory</a></li>    
-                    <li><a href="distributor_inventory" style="color: black;"><i class="fa fa-circle-o"></i> Distributor Inventory</a></li>
-                    <li><a href="#" style="color: black;"><i class="fa fa-circle-o"></i> Inventory History</a></li>
-                </ul>
-            </li>
+    <li class="header"></li>
+    <li class="treeview"></li>
+    <li><a href="home.php" style="color: black;"><i class="fa fa-home"></i> <span>Home</span></a></li>          
+    <li class="header">MANAGE</li>   
+    <li><a href="order" style="color: black;"><i class="fa fa-shopping-cart"></i> <span>Order</span></a></li>     
+    <li class="treeview" style="color: black;">
+        <a href="#" style="color: black;">
+            <i class="fa fa-bar-chart"></i>
+            <span>Sales</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="#" style="color: black;"><i class="fa fa-circle-o"></i> Main Sales</a></li>    
+            <li><a href="#" style="color: black;"><i class="fa fa-circle-o"></i> Distributor Sales</a></li>
+            <li><a href="#" style="color: black;"><i class="fa fa-circle-o"></i> Seller Sales</a></li>        
+        </ul>
+    </li> 
+    <!-- Add "active" class to the clicked treeview item -->
+    <li class="treeview"> 
+        <a href="#" style="color: black;">
+            <i class="fa fa-dropbox"></i>
+            <span>Inventory</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="main_inventory" style="color: black;"><i class="fa fa-circle-o"></i> Main Inventory</a></li>    
+            <li><a href="distributor_inventory" style="color: black;"><i class="fa fa-circle-o"></i> Distributor Inventory</a></li>
+            <li><a href="#" style="color: black;"><i class="fa fa-circle-o"></i> Inventory History</a></li>
+        </ul>
+    </li>
             <li class="treeview">
                 <a href="#" style="color: black;">
                     <i class="fa fa-shopping-basket"></i>
@@ -104,3 +103,19 @@
     </section>
     <!-- /.sidebar -->  
 </aside>
+<script>
+    // JavaScript to handle the click event on treeview items
+    document.addEventListener('DOMContentLoaded', function() {
+        var treeviewItems = document.querySelectorAll('.sidebar-menu .treeview');
+        treeviewItems.forEach(function(item) {
+            item.addEventListener('click', function() {
+                // Remove "active" class from all treeview items
+                treeviewItems.forEach(function(element) {
+                    element.classList.remove('active');
+                });
+                // Add "active" class to the clicked treeview item
+                item.classList.add('active');
+            });
+        });
+    });
+</script>
