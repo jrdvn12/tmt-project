@@ -1,5 +1,13 @@
 <?php $position = $user['position']; ?>
+<style>
 
+    .li,span{
+        font-weight: bold;
+    }
+    .li,ul,li{
+        font-weight: bold;
+    }
+</style>
 <aside class="main-sidebar" style="height:100%; background-color: #D1B188;">
     <section class="sidebar" style="background-color: #D1B188;">
         <div class="user-panel" style="color: black; background: linear-gradient(0deg, rgba(187,142,69,1) 7%, rgba(230,202,142,1) 19%, rgba(187,142,69,1) 75%);">
