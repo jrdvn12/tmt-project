@@ -6,7 +6,7 @@
   	<title >TMT Foods Incorporated</title>
   	<!-- Tell the browser to be responsive to screen width -->
   	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link href="../images/logoff.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="../images/logo.ico" rel="shortcut icon" type="image/x-icon" />
   	<!-- Bootstrap 3.3.7 -->
   	<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
   	<!-- Font Awesome -->
@@ -111,6 +111,26 @@
     background-color: #f2f2f2;
   }
 
+  /* Style for the buttons */
+  /* .btn {
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+  } */
+
+  /* .btn-primary {
+    background-color: #866252;
+  }
+
+  .btn-primary:hover {
+    background-color: #4F413E;
+  } */
+  .skin-custom {
+      background:#D1B188;
+  }
   /* CSS for hover effect when not clicking*/
 .sidebar-menu .treeview:not(.active):hover > a,
 .sidebar-menu .treeview.active > a,
@@ -126,24 +146,50 @@
     color: #d7bba6;
 }
 
+
+  #lower-right-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+   }
 </style>
+
+    </style>
 </head>
+<?php include 'includes/error.php'; ?>
 
-<script>
-// Scroll to top function
-function scrollToBottom() {
-    window.scrollTo(0,document.body.scrollHeight);
-}
+   <!-- Container div for the code -->
+   <div id="lower-right-container">
+      <ul class="scroll-to-top" data-widget="tree" style="background-color: #D1B188; color: black;">
+         <li class="treeview">
+            <a href="#" style="color: black;" class="fa fa-gear"></a>
+            <ul class="treeview-menu" style="list-style-type: none;">
+               <li><a href="#" onclick="scrollToTop()" style="color: black;"><i class="fa fa-circle-o"></i> Top</a></li>
+               <li><a href="#" onclick="scrollToBottom()" style="color: black;"><i class="fa fa-circle-o"></i> Bottom</a></li>
+               <li><a href="#" onclick="scrollToTop()" style="color: black;"><i class="fa fa-circle-o"></i> Dark Mode</a></li>
+            </ul>
+         </li>
+      </ul>
+   </div>
+ 
 
-    // Handle actions after clicking the scroll-to-top button
-    function handleScrollToTop() {
-        // Animate scrolling to the top
-        scrollToTop();
-  
-    }
-    // Scroll to top function
-    function scrollToTop() {
-        document.body.scrollTop = 0; // For Safari
-        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
-    }
-</script>
+
+	<script>
+		// Scroll to top function
+		function scrollToTop() {
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth'
+			});
+		}
+
+		// Scroll to bottom function
+		function scrollToBottom() {
+			window.scrollTo({
+				top: document.body.scrollHeight,
+				behavior: 'smooth'
+			});
+		}
+	</script>
+</body>
+</html>
