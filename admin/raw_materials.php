@@ -87,7 +87,6 @@
                           <td>
                           <a href='#edit' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['id']."' onclick='getRow(".$row['id'].")'><i class='fa fa-edit'></i> Edit</a>
                           <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['id']."' onclick='getRow(".$row['id'].")'><i class='fa fa-trash'></i> Delete</a>
-                         
 
                           </td>
                           
@@ -156,13 +155,13 @@ function getRow(id){
 
 <?php
 // Fetch the product batch from the production table
-$query = "SELECT product_batch FROM production WHERE <product_batch>"; // Replace <condition> with your condition to select the appropriate row
+$query = "SELECT product_batch FROM production"; // Replace <condition> with your condition to select the appropriate row
 $result = mysqli_query($connection, $query);
 $row = mysqli_fetch_assoc($result);
 $product_batch = $row['product_batch'];
 
 // Get the load from the raw_materials table
-$loads = $row['loads'];
+$load = $row['loads'];
 
 // Deduct the product batch from the load to get the material usage
 $material_usage = $load - $product_batch;
