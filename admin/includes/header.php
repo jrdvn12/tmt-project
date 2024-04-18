@@ -197,6 +197,11 @@
 .hover-effect:hover {
   transform: scale(1.1);
 }
+
+
+
+</style>
+
     </style>
 </head>
 <?php include 'includes/error.php'; ?>

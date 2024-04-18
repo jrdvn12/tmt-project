@@ -107,6 +107,7 @@
   <?php include 'includes/footer.php'; ?>
   <?php include 'includes/raw_materials_modal.php'; ?>
 </div>
+
 <?php include 'includes/scripts.php'; ?>
 <script>
 $(function(){
@@ -141,7 +142,7 @@ function getRow(id){
       $('#material_name_edit').val(response.material_name);
       $('#material_batch_edit').val(response.material_batch); 
       $('#material_load_edit').val(response.loads);   
-      $('#material_usege_edit').val(response.material_usage);   
+      $('#material_usage_edit').val(response.material_usage);   
       $('#material_remaining_edit').val(response.material_remaining);
       $('#datepicker_edit').val(response.dateofstock);      
       $('#fullname').val(response.dateofstock);
@@ -153,12 +154,30 @@ function getRow(id){
   });
 }
 
+<?php
+// Fetch the product batch from the production table
+$query = "SELECT product_batch FROM production WHERE <product_batch>"; // Replace <condition> with your condition to select the appropriate row
+$result = mysqli_query($connection, $query);
+$row = mysqli_fetch_assoc($result);
+$product_batch = $row['product_batch'];
+
+// Get the load from the raw_materials table
+$loads = $row['loads'];
+
+// Deduct the product batch from the load to get the material usage
+$material_usage = $load - $product_batch;
+
+// Output the material usage
+echo "<td>".$material_usage."</td>";
+?>
+
 // Scroll to top function
 function scrollToTop() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 </script>
+
 
 <!-- Scroll to top button -->
 <button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top">Top</button>
