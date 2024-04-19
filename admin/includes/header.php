@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>TMT Foods Incorporated</title>
@@ -15,21 +14,6 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
     <!-- Theme style -->
-=======
-  	<meta charset="utf-8">
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  	<title >TMT Foods Incorporated</title>
-  	<!-- Tell the browser to be responsive to screen width -->
-  	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link href="../images/logoo.ico" rel="shortcut icon" type="image/x-icon" />
-  	<!-- Bootstrap 3.3.7 -->
-  	<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
-  	<!-- Font Awesome -->
-  	<link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
-  	<!-- Ionicons -->
-  	<link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
-  	<!-- Theme style -->
->>>>>>> e4b14dcd5f931c339db9cdcffd4fd9127d1d22fc
     <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
     <!-- <link rel="stylesheet" href="../dist/css/modern-AdminLTE.min.css"> -->
     <!-- DataTables -->
@@ -43,7 +27,6 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
-<<<<<<< HEAD
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <style type="text/css">
@@ -111,103 +94,6 @@
         }
         /* Style for the buttons */
         /* .btn {
-=======
-
-  	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  	<!--[if lt IE 9]>
-  	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  	<![endif]-->
-
-  	<!-- Google Font -->
-  	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
-  	<style type="text/css">
-  		.mt20{
-  			margin-top:20px;
-  		}
-      .bold{
-        font-weight:bold;
-      }
-
-     /* chart style*/
-      #legend ul {
-        list-style: none;
-         
-      }
-
-      #legend ul li {
-        display: inline;
-        padding-left: 30px;
-        position: relative;
-        margin-bottom: 4px;
-        border-radius: 5px;
-       
-        padding: 2px 8px 2px 28px;
-        font-size: 14px;
-        cursor: default;
-        -webkit-transition: background-color 200ms ease-in-out;
-        -moz-transition: background-color 200ms ease-in-out;
-        -o-transition: background-color 200ms ease-in-out;
-        transition: background-color 200ms ease-in-out;
-      }
-
-      #legend li span {
-        
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 20px;
-        height: 100%;
-        border-radius: 5px;
-      }
-
-      tbody tr:nth-child(even) 
-      {
-      background-color: #ecf0f1; /* Light gray background for even rows */
-      }
-
-      tbody tr:nth-child(odd) {
-        background-color: #ffffff; /* White background for odd rows */
-      }
-
-      tbody tr:hover {
-        background-color: #d4e6f1; /* Light blue background on hover */
-        opacity: 1; /* Full opacity on hover */
-      }
-      table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-
-  th {
-    background-color: #f2f2f2;
-  }
-
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-
-  /* CSS for hover effect when not clicking*/
-  .sidebar-menu .treeview:not(.active):hover > a,
-  .sidebar-menu .treeview.active > a,
-  .sidebar-menu li:hover > a,
-  .sidebar-menu li.active > a {
-    background-color: #d7bba6;
-    color: #d7bba6;
-  }
-
-  /* Style for the buttons */
-  /* .btn {
->>>>>>> e4b14dcd5f931c339db9cdcffd4fd9127d1d22fc
     padding: 5px 10px;
     text-decoration: none;
     color: #fff;
@@ -293,7 +179,6 @@
         <a href="#" onclick="scrollToBottom()" style="color: black;" class="scroll-btn scrolldownbtn hover-effect"><i class="fa fa-arrow-down"></i></a>
     </div>
 </div>
-<<<<<<< HEAD
 <!-- Your other HTML content goes here -->
 <?php include 'includes/error.php'; ?>
 <script>
@@ -312,30 +197,5 @@
         });
     }
 </script>
-=======
-
-
-
-	<!-- Your other HTML content goes here -->
-
-	<script>
-		// Scroll to top function
-		function scrollToTop() {
-			window.scrollTo({
-				top: 0,
-				behavior: 'smooth'
-			});
-		}
-
-		// Scroll to bottom function
-		function scrollToBottom() {
-			window.scrollTo({
-        top: document.body.scrollHeight,
-				bottom: document.body.scrollHeight,
-				behavior: 'smooth'
-			});
-		}
-	</script>
->>>>>>> e4b14dcd5f931c339db9cdcffd4fd9127d1d22fc
 </body>
 </html>
