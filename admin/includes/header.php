@@ -108,8 +108,7 @@
     background-color: #4F413E;
   } */
 
-
-  /* CSS for hover effect when not clicking/*/
+/* CSS for hover effect when not clicking/*/
 .sidebar-menu .treeview:not(.active):hover > a,
 .sidebar-menu .treeview.active > a,
 .sidebar-menu li:hover > a,
@@ -130,6 +129,7 @@
       bottom: 20px;
       right: 20px;
    }
+  
         .skin-custom {
             background: #d1b188;
         }
