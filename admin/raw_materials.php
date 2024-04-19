@@ -154,8 +154,8 @@ function getRow(id){
 }
 
 <?php
-// Fetch the product batch from the production table
-$query = "SELECT product_batch FROM production"; // Replace <condition> with your condition to select the appropriate row
+// Fetch the product batch from the production table what to put in the condition
+$query = "SELECT product_batch FROM production WHERE <condition>"; // Replace <condition> with your condition to select the appropriate row
 $result = mysqli_query($connection, $query);
 $row = mysqli_fetch_assoc($result);
 $product_batch = $row['product_batch'];
