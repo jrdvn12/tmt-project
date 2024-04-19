@@ -111,6 +111,15 @@
     background-color: #f2f2f2;
   }
 
+  /* CSS for hover effect when not clicking*/
+  .sidebar-menu .treeview:not(.active):hover > a,
+  .sidebar-menu .treeview.active > a,
+  .sidebar-menu li:hover > a,
+  .sidebar-menu li.active > a {
+    background-color: #d7bba6;
+    color: #d7bba6;
+  }
+
   /* Style for the buttons */
   /* .btn {
     padding: 5px 10px;
@@ -229,6 +238,7 @@
 		// Scroll to bottom function
 		function scrollToBottom() {
 			window.scrollTo({
+        top: document.body.scrollHeight,
 				bottom: document.body.scrollHeight,
 				behavior: 'smooth'
 			});
