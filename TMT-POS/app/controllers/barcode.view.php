@@ -23,7 +23,7 @@ $pdf->AddPage();
 
 // Set font
 $pdf->SetFont('helvetica', '', 12);
-$pdf->SetTitle('TUP Manila Multi-Purpose Cooperative');
+$pdf->SetTitle('TMT Foods Incorporated');
 // Add some text
 $pdf->Cell(0, 10, 'Product Barcode ', 0, 1, 'C');
 

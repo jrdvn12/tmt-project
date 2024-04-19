@@ -1,4 +1,4 @@
 <?php 
 
 
-define("APP_NAME", "TUP Manila Multi-Purpose Cooperative");
+define("APP_NAME", "TMT Foods Incorporated");
