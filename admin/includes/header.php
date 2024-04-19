@@ -107,6 +107,14 @@
   .btn-primary:hover {
     background-color: #4F413E;
   } */
+        /* CSS for hover effect when not clicking*/
+        .sidebar-menu .treeview:not(.active):hover > a,
+        .sidebar-menu .treeview.active > a,
+        .sidebar-menu li:hover > a,
+        .sidebar-menu li.active > a {
+            background-color: #d7bba6;
+            color: #d7bba6;
+        }
         .skin-custom {
             background: #d1b188;
         }
