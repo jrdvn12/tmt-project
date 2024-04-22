@@ -160,9 +160,7 @@
             border-color: transparent;
             border-radius: 10%;
         }
-        .scroll-to-top i {
-            margin-right: 5px;
-        }
+        
         /* Dropdown menu styles */
         .dropdown-menu {
             position: absolute;
