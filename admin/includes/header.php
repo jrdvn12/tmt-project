@@ -204,20 +204,39 @@
 <!-- Your other HTML content goes here -->
 <?php include 'includes/error.php'; ?>
 <script>
-    // Scroll to top function
-    function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+// Custom smooth scroll function
+function customSmoothScroll(targetY, duration) {
+    const startingY = window.scrollY;
+    const diff = targetY - startingY;
+    let start;
+
+    // Use requestAnimationFrame for smooth animation
+    function step(timestamp) {
+        if (!start) start = timestamp;
+        const time = timestamp - start;
+        const percent = Math.min(time / duration, 1);
+
+        window.scrollTo(0, startingY + diff * percent);
+
+        if (time < duration) {
+            window.requestAnimationFrame(step);
+        }
     }
-    // Scroll to bottom function
-    function scrollToBottom() {
-        window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: 'smooth'
-        });
-    }
+
+    // Start the animation
+    window.requestAnimationFrame(step);
+}
+
+// Scroll to top function
+function scrollToTop() {
+    customSmoothScroll(0, 500); // Adjust duration as needed
+}
+
+// Scroll to bottom function
+function scrollToBottom() {
+    const targetY = document.body.scrollHeight - window.innerHeight;
+    customSmoothScroll(targetY, 500); // Adjust duration as needed
+}
 </script>
 </body>
 </html>
