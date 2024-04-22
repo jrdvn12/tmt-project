@@ -24,7 +24,7 @@
 		// searching the items in database of items need
 		$sqlpn = "SELECT * FROM product_needs WHERE product_id = '$product_id' AND item_need = '$item_need'";
 		
-		$querypn = $conn->query($sqlpn);
+		$querypn = $conn->query($sqlpn);	
 		$rowpn = $querypn->fetch_assoc();
 			
 
