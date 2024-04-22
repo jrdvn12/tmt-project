@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2024 at 10:26 AM
+-- Generation Time: Apr 22, 2024 at 11:12 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -229,7 +229,9 @@ INSERT INTO `audit_trail_record` (`id`, `audit_date`, `audit_time`, `user`, `des
 (589, '2024-04-05', '15:40:20', '1234 1234', 'Added new Need Materials # ASK date 2024-04-05'),
 (590, '2024-04-05', '15:41:14', '1234 1234', 'Added new Type Raw Materials #Sugar B date 2024-04-05'),
 (591, '2024-04-05', '15:41:37', '1234 1234', 'Added new Raw Materials # date 2024-04-05'),
-(592, '2024-04-05', '15:41:54', '1234 1234', 'Added new Need Materials # SGR-B578903 date 2024-04-05');
+(592, '2024-04-05', '15:41:54', '1234 1234', 'Added new Need Materials # SGR-B578903 date 2024-04-05'),
+(593, '2024-04-08', '15:15:26', 'Angelo Cruz', 'Added new Raw Materials # date 2024-04-08'),
+(594, '2024-04-22', '15:40:59', 'Angelo Cruz', 'Added new Vendor #TMTTMT FOODS date 2024-04-22');
 
 -- --------------------------------------------------------
 
@@ -317,7 +319,7 @@ CREATE TABLE `production` (
 --
 
 INSERT INTO `production` (`id`, `material_code`, `product_name`, `product_batch`, `production_status`, `production_pieces`, `production_kilo`, `production_date`, `production_expiration`) VALUES
-(20, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', '55565465', 'Preparing', 0, 0, '2024-04-05', '2025-04-05'),
+(20, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', '55565465', 'Onprocess', 0, 0, '2024-04-05', '2025-04-05'),
 (21, '7', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (White) ', '100', 'Preparing', 0, 0, '2024-04-05', '2025-04-05');
 
 -- --------------------------------------------------------
@@ -497,7 +499,8 @@ INSERT INTO `raw_materials` (`id`, `material_code`, `material_type`, `material_n
 (31, 'BOX-00', '17', 'Brand Name', '66542137', 5000, 0, 0, '2024-04-05', '2026-02-01'),
 (32, 'PPK-0145', '16', 'Brand Name', '88451230', 5000, 0, 0, '2024-04-05', '2026-02-01'),
 (33, 'MLK-704217', '21', 'Brand Name', '33125947', 10000, 0, 0, '2024-04-05', '2024-08-01'),
-(34, 'SGR-B578903', '22', 'Brand Name', '4458712', 10000, 0, 0, '2024-04-05', '2024-11-02');
+(34, 'SGR-B578903', '22', 'Brand Name', '4458712', 10000, 0, 0, '2024-04-05', '2024-11-02'),
+(35, 'ASK1', '18', 'Name', '4646465', 10000, 0, 0, '2024-04-08', '2024-06-29');
 
 -- --------------------------------------------------------
 
@@ -528,6 +531,32 @@ INSERT INTO `type_raw_materials` (`id`, `material_type`) VALUES
 (20, 'FL Roasted Coffee '),
 (21, 'Powdered Milk'),
 (22, 'Sugar B');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor`
+--
+
+CREATE TABLE `vendor` (
+  `id` int(255) NOT NULL,
+  `vendor_name` text NOT NULL,
+  `company_name` text NOT NULL,
+  `vendor_address` text NOT NULL,
+  `city` text NOT NULL,
+  `province` text NOT NULL,
+  `zip_code` text NOT NULL,
+  `country` text NOT NULL,
+  `phone_number` text NOT NULL,
+  `email_address` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `vendor`
+--
+
+INSERT INTO `vendor` (`id`, `vendor_name`, `company_name`, `vendor_address`, `city`, `province`, `zip_code`, `country`, `phone_number`, `email_address`) VALUES
+(1, 'TMT', 'TMT FOODS', '4F SITIO GRANDE', 'MANILA', 'METRO MANILA', '1002', 'PHILIPPINES', '094848561651', 'TMTFOODSTMT@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -594,6 +623,12 @@ ALTER TABLE `type_raw_materials`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `vendor`
+--
+ALTER TABLE `vendor`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -607,7 +642,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `audit_trail_record`
 --
 ALTER TABLE `audit_trail_record`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=593;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=595;
 
 --
 -- AUTO_INCREMENT for table `main_inventory`
@@ -649,13 +684,19 @@ ALTER TABLE `product_needs_history`
 -- AUTO_INCREMENT for table `raw_materials`
 --
 ALTER TABLE `raw_materials`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `type_raw_materials`
 --
 ALTER TABLE `type_raw_materials`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `vendor`
+--
+ALTER TABLE `vendor`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

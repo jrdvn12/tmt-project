@@ -126,9 +126,29 @@
               <p>Total Loss</p>
             </div>
             <div class="icon">
-            <i class="fa-solid fa-chart-line-down"></i>
+            <i class="fa fa-dropbox"></i>
             </div>
             <a href="lost" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box" style="background: #6BABD1;">
+            <div class="inner">
+              <?php
+                $sql = "SELECT * FROM vendor ";
+                $query = $conn->query($sql);
+
+                echo "<h3>".$query->num_rows."</h3>";
+              ?>
+              <p>Total Vendor</p>
+            </div>
+            <div class="icon">
+            <i class="fa fa-users"></i>
+            </div>
+            <a href="vendor" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->

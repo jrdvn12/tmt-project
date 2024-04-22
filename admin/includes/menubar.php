@@ -24,9 +24,10 @@
         <ul class="sidebar-menu" data-widget="tree" style="background-color: #D1B188; color: black;">
     <li class="header"></li>
     <li class="treeview"></li>
-    <li><a href="home.php" style="color: black;"><i class="fa fa-home"></i> <span>Home</span></a></li>          
+    <li><a href="home" style="color: black;"><i class="fa fa-home"></i> <span>Home</span></a></li>          
     <li class="header">MANAGE</li>   
     <li><a href="order" style="color: black;"><i class="fa fa-shopping-cart"></i> <span>Order</span></a></li>     
+    <li><a href="vendor" style="color: black;"><i class="fa fa-users"></i> <span>Vendor</span></a></li>     
     <li class="treeview" style="color: black;">
         <a href="#" style="color: black;">
             <i class="fa fa-bar-chart"></i>
