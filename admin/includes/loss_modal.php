@@ -66,6 +66,7 @@ include 'includes/conn.php';
 
                       <div class="col-sm-9">
                               <select class="form-control" name="batch_code" id="batch_code">
+                              <option value='' selected>- SELECT BATCH CODE -</option>
                               <?php
                                 $sql = "SELECT * FROM production WHERE production_status LIKE 'Completed'";
                                   $query = $conn->query($sql);

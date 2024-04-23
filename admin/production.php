@@ -164,18 +164,7 @@ $(function(){
     var id = $(this).data('id');
     getRow(id);
   });
-  $('.edit_user_password').click(function(e){
-    e.preventDefault();
-    $('#edit_user_password').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
 
-  $(document).on('click', '.photo', function(e){
-    e.preventDefault();
-    var id = $(this).data('id');
-    getRow(id);
-  });
 
 });
 
