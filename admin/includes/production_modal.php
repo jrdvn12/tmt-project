@@ -124,3 +124,66 @@ include 'includes/conn.php';
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var productionStatusInput = document.getElementById("production_status");
+        var editStatusSelect = document.getElementById("edit_stasus");
+        var preparingOption = editStatusSelect.querySelector("option[value='Preparing']");
+
+        // Check if the production status matches the 'Preparing' option
+        if (productionStatusInput.value.trim() === "Preparing") {
+            // If matches, disable or remove the 'Preparing' option
+            preparingOption.disabled = true;
+            // Alternatively, to remove the option entirely, use:
+            // editStatusSelect.removeChild(preparingOption);
+        }
+    });
+</script>
+
+<!-- <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var productionStatusInput = document.getElementById("production_status");
+        var editStatusSelect = document.getElementById("edit_stasus");
+
+        var preparingOption1 = editStatusSelect.querySelector("option[value='Preparing']");
+        var preparingOption2 = editStatusSelect.querySelector("option[value='Checking']");
+        var preparingOption3 = editStatusSelect.querySelector("option[value='Onprocess']");
+        var preparingOption4 = editStatusSelect.querySelector("option[value='Packaging']");
+        var preparingOption5 = editStatusSelect.querySelector("option[value='Completed']");
+
+        // Check if the production status matches the 'Preparing' option
+        if (productionStatusInput.value.trim() === "Preparing") {
+            // If matches, disable or remove the 'Preparing' option
+            // Option 1: Disable the option
+            preparingOption1.disabled = true;
+            // Option 2: Remove the option
+            editStatusSelect.removeChild(preparingOption1);
+        }
+
+        elseif (productionStatusInput.value.trim() === "Checking") {
+            // If matches, disable or remove the 'Preparing' option
+            // Option 1: Disable the option
+            preparingOption1.disabled = true;
+            preparingOption2.disabled = true;
+            // Option 2: Remove the option
+            // editStatusSelect.removeChild(preparingOption);
+        }
+
+        elseif (productionStatusInput.value.trim() === "Onprocess") {
+            
+            preparingOption.disabled = true;
+          
+        }
+        elseif (productionStatusInput.value.trim() === "Packaging") {
+           
+            preparingOption.disabled = true;
+           
+        }
+        elseif (productionStatusInput.value.trim() === "Completed") {
+          
+            preparingOption.disabled = true;
+           
+        }
+    });
+</script> -->
