@@ -196,31 +196,28 @@
 
                 <div class="form-group">          
                     <label for="country" class="col-sm-2 control-label">Country</label>
-
-                    <div class="col-sm-4"> 
-                        <input type="text" class="form-control" id="country" name="country" required placeholder="Country">                        
-                    </div>
-
-                    <div class="form-group">          
-                        <label for="phone_number" class="col-sm-2 control-label">Phone Number</label>
+                        <div class="col-sm-4"> 
+                            <input type="text" class="form-control" id="country" name="country" required placeholder="Country">                        
+                        </div>                        
+                    <label for="phone_number" class="col-sm-2 control-label">Phone Number</label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="phone_number" name="phone_number" required placeholder="Phone Number" maxlength="11">
-                        </div>
-                    </div>
+                        </div>     
+                </div>
 
-                    <div class="form-group">          
-                        <label for="email_address" class="col-sm-2 control-label">Email Address</label>
+                <div class="form-group">          
+                    <label for="email_address" class="col-sm-2 control-label">Email Address</label>
                         <div class="col-sm-4"> 
                             <input type="email" class="form-control" id="email_address" name="email_address" required placeholder="Email Address">                        
                         </div>
-                    </div>
+                </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
                         <button type="submit" class="btn btn-primary btn-flat" name="add" onclick="validateForm()"><i class="fa fa-save"></i> Save</button>
                     </div>
                     </form>
-                </div>
+                
             </div>
         </div>    
     </div>
