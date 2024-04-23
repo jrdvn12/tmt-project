@@ -201,25 +201,24 @@
                         <input type="text" class="form-control" id="country" name="country" required placeholder="Country">                        
                     </div>
 
-                    <label for="phone_number" class="col-sm-2 control-label">Phone Number</label>
-
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="phone_number" name="phone_number" required placeholder="Phone Number">
+                    <div class="form-group">          
+                        <label for="phone_number" class="col-sm-2 control-label">Phone Number</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="phone_number" name="phone_number" required placeholder="Phone Number" maxlength="11">
+                        </div>
                     </div>
-                   
-                </div>
 
-                <div class="form-group">          
-                    <label for="email_address" class="col-sm-2 control-label">Email Address</label>
-
-                    <div class="col-sm-4"> 
-                        <input type="text" class="form-control" id="email_address" name="email_address" required placeholder="Email Address">                        
+                    <div class="form-group">          
+                        <label for="email_address" class="col-sm-2 control-label">Email Address</label>
+                        <div class="col-sm-4"> 
+                            <input type="email" class="form-control" id="email_address" name="email_address" required placeholder="Email Address">                        
+                        </div>
                     </div>
-                </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-                    <button type="submit" class="btn btn-primary btn-flat" name="add"><i class="fa fa-save"></i> Save</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+                        <button type="submit" class="btn btn-primary btn-flat" name="add" onclick="validateForm()"><i class="fa fa-save"></i> Save</button>
+                    </div>
                     </form>
                 </div>
             </div>
@@ -227,7 +226,7 @@
     </div>
 </div>
 
-<!-- Add -->
+<!-- Edit -->
 <div class="modal fade" id="edit">
     <div class="modal-dialog  modal-lg">
         <div class="modal-content">
@@ -442,11 +441,12 @@
 
                 <div class="form-group">          
                     <label for="edit_email_address" class="col-sm-2 control-label">Email Address</label>
-
                     <div class="col-sm-4"> 
-                        <input type="text" class="form-control" id="edit_email_address" name="edit_email_address" required placeholder="Email Address">                        
+                        <input type="email" class="form-control" id="edit_email_address" name="edit_email_address" required placeholder="Email Address">
+                        <small id="emailHelp" class="form-text text-muted">Please enter a valid email address ending with @gmail.com or @yahoo.com</small>
                     </div>
                 </div>
+
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
@@ -487,3 +487,23 @@
 
 
 
+<script>
+function validateForm() {
+    var phone_number = document.getElementById("phone_number").value;
+    var email_address = document.getElementById("email_address").value;
+
+    // Phone number validation
+    if (phone_number.length !== 11 || phone_number.substring(0, 2) !== "09" || isNaN(phone_number)) {
+        alert("Phone number must be 11 digits and start with '09'");
+        return false;
+    }
+
+    // Email address validation
+    if (!email_address.endsWith("@gmail.com") && !email_address.endsWith("@yahoo.com")) {
+        alert("Email address must end with @gmail.com or @yahoo.com");
+        return false;
+    }
+
+    return true;
+}
+</script>
