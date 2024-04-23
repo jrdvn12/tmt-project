@@ -64,7 +64,7 @@
             border-radius: 5px;
         }
         tbody tr:nth-child(even) {
-            background-color: #ecf0f1;
+            background-color: #faf7f3;
             /* Light gray background for even rows */
         }
         tbody tr:nth-child(odd) {
@@ -72,7 +72,7 @@
             /* White background for odd rows */
         }
         tbody tr:hover {
-            background-color: #d4e6f1;
+            background-color: #d6b994;
             /* Light blue background on hover */
             opacity: 1;
             /* Full opacity on hover */
@@ -87,7 +87,7 @@
             text-align: center;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #faf7f3;
         }
         tr:nth-child(even) {
             background-color: #f2f2f2;
@@ -192,6 +192,18 @@
         .hover-effect:hover {
             transform: scale(1.1);
         }
+        .dropdown.user.user-menu:hover > a {
+        background-color: #bc9f7a !important;
+    }
+    .dropdown.user.user-menu:hover > .dropdown-toggle {
+        background-color: #bc9f7a!important;
+    }
+    .navbar-nav > .dropdown.user.user-menu:hover > .dropdown-menu {
+        background-color: #bc9f7a !important;
+    }
+    .navbar-custom-menu:hover {
+        background-color: #bc9f7a !important;
+    }
     </style>
 </head>
 <body>

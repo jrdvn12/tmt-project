@@ -109,6 +109,6 @@
             <li><a href="#" style="color: black;"><i class="fa fa-dropbox"></i> <span>Inventory</span></a></li>
             <li><a href="#" style="color: black;"><i class="fa fa-truck"></i><span>Delivery</span></a></li>
         </ul>
-    </section>
+    </section> 
     <!-- /.sidebar -->  
 </aside>
