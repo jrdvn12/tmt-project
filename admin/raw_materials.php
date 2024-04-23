@@ -170,16 +170,7 @@ $material_usage = $load - $product_batch;
 echo "<td>".$material_usage."</td>";
 ?>
 
-// Scroll to top function
-function scrollToTop() {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-}
 </script>
-
-
-<!-- Scroll to top button -->
-<button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top">Top</button>
 
 </body>
 </html>
