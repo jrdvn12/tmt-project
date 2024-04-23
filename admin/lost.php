@@ -99,7 +99,7 @@
   </div>
     
   <?php include 'includes/footer.php'; ?>
-  <?php include 'includes/modal_production.php'; ?>
+  <?php include 'includes/loss_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>
 <script>

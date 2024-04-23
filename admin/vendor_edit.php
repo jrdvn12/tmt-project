@@ -2,25 +2,21 @@
 	include 'includes/session.php';
 
 	if(isset($_POST['edit'])){
-		$id = $_POST['id'];
-        $username = $_POST['username'];
-		$firstname = $_POST['firstname'];
-		$lastname = $_POST['lastname'];
-		$password = $_POST['password'];
-        $position = $_POST['position'];
-        
-		$sql = "SELECT * FROM admin WHERE id = $id";
-		$query = $conn->query($sql);
-		$row = $query->fetch_assoc();
+		$id = $_POST['vendor_id'];
+        $edit_vendor_name = $_POST['edit_vendor_name'];
+		$edit_company_name = $_POST['edit_company_name'];
+		$edit_vendor_address = $_POST['edit_vendor_address'];
+		$edit_city = $_POST['edit_city'];
+        $edit_province = $_POST['edit_province'];
+        $edit_zip_code = $_POST['edit_zip_code'];
+		$edit_country = $_POST['edit_country'];
+        $edit_phone_number = $_POST['edit_phone_number'];
+		$edit_email_address = $_POST['edit_email_address'];
+     
 
-		if($password == $row['password']){
-			$password = $row['password'];
-		}
-		else{
-			$password = password_hash($password, PASSWORD_DEFAULT);
-		}
-
-		$sql = "UPDATE admin SET username ='$username',firstname = '$firstname', lastname = '$lastname',position ='$position'  WHERE id = '$id'";
+		
+		$sql = "UPDATE vendor SET vendor_name ='$edit_vendor_name',company_name = '$edit_company_name', vendor_address = '$edit_vendor_address',city ='$edit_city' 
+		,province ='$edit_province',zip_code ='$edit_zip_code',country ='$edit_country',phone_number ='$edit_phone_number',email_address ='$edit_email_address' WHERE id = '$id'";
 		if($conn->query($sql)){
 			
 
@@ -31,12 +27,12 @@
 			$auditdate = date('Y-m-d');
 			$audittime = date('H:i:s');
 			$audituser = $user['firstname'].' '.$user['lastname'];
-			$auditdescription = 'User updated '.$username .' date '.$auditdate;
+			$auditdescription = 'Vendor updated '.$edit_vendor_name .' date '.$auditdate;
 
 			$sqlaudit = "INSERT INTO audit_trail_record (audit_date,audit_time, user, description) 
 			VALUES ('$auditdate', '$audittime', '$audituser', '$auditdescription')";
 			if ($conn->query($sqlaudit)) {
-				$_SESSION['success'] = 'User updated successfully';
+				$_SESSION['success'] = 'Vendor updated successfully';
 			} else {
 				$_SESSION['error'] = $conn->error;
 			}
@@ -49,6 +45,6 @@
 		$_SESSION['error'] = 'Fill up edit form first';
 	}
 
-	header('location: user.php');
+	header('location: vendor');
 
 ?>
