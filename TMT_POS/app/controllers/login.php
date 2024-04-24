@@ -24,5 +24,5 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 
 }
 
-require views_path('...../auth/login');
+require views_path('auth/login');
 
