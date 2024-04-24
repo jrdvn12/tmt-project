@@ -5,7 +5,7 @@
 
 		$selectedOption = $_POST['edit_stasus'];
 
-
+		//For Preparing
 		if ($selectedOption === 'Preparing') {
 			$edit_stasus = $_POST['edit_stasus'];
 			$sql = "UPDATE production SET production_status ='$edit_stasus'  WHERE id = '$id'";
@@ -18,6 +18,7 @@
 			header('location: production');
 		}
 
+		//For Checking
 		elseif ($selectedOption === 'Checking') {
 			$edit_stasus = $_POST['edit_stasus'];
 			$sql = "UPDATE production SET production_status ='$edit_stasus'  WHERE id = '$id'";
@@ -28,6 +29,8 @@
 				$_SESSION['error'] = $conn->error;
 			}
 		}
+
+		//For Onprocess
 		elseif ($selectedOption === 'Onprocess') {
 			$edit_stasus = $_POST['edit_stasus'];
 			$sql = "UPDATE production SET production_status ='$edit_stasus'  WHERE id = '$id'";
@@ -38,6 +41,8 @@
 				$_SESSION['error'] = $conn->error;
 			}
 		}
+
+		//For Packaging
 		elseif ($selectedOption === 'Packaging') {
 			$edit_stasus = $_POST['edit_stasus'];
 			$sql = "UPDATE production SET production_status ='$edit_stasus'  WHERE id = '$id'";
@@ -48,6 +53,7 @@
 				$_SESSION['error'] = $conn->error;
 			}
 		}
+		//For Completed
 		elseif ($selectedOption === 'Completed') {
 			$edit_stasus = $_POST['edit_stasus'];
 			$sql = "UPDATE production SET production_status ='$edit_stasus'  WHERE id = '$id'";
