@@ -96,11 +96,10 @@
                       } elseif ($row['production_status'] == 'Packaging') {
                         $status = '<span class="label label-info pull-right">Packaging</span>';
                       } elseif ($row['production_status'] == 'Completed') {
-                        $status = '<span class="label label-info pull-right">Packaging</span>';
+                        $status = '<span class="label label-info pull-right">Completed</span>';
                       } elseif ($row['production_status'] == 'Checking') {
                         $status = '<span class="label label-primary pull-right">Checking</span>';
-                      } elseif ($row['production_status'] == '5') {
-                        $status = '<span class="label label-danger pull-right">absent</span>';
+                     
                       } else {
                           $status = '<span class="label label-primary pull-right"></span>';
                       }

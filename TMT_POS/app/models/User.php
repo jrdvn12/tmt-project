@@ -17,6 +17,7 @@ class User extends Model
 				'gender',
 				'image',
 				'date',
+				'void_code',
 			];
 
 

@@ -23,15 +23,27 @@ $pdf->AddPage();
 
 // Set font
 $pdf->SetFont('helvetica', '', 12);
-$pdf->SetTitle('TMT Foods Incorporated');
+$pdf->SetTitle('TUP Manila Multi-Purpose Cooperative');
+
 // Add some text
-$pdf->Cell(0, 10, 'Product Barcode ', 0, 1, 'C');
+$pdf->Cell(0, 10, 'TUP Manila Multi-Purpose Cooperative', 0, 0, 'C');
+$pdf->Ln();
+$pdf->Cell(0, 10, 'TUPMMPC Product Barcode List', 0, 1, 'C');
 
 // Fetch data from the products table
 $query = "SELECT barcode, description, amount FROM products";
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
+    // Start the table
+    $pdf->SetFont('helvetica', 'B', 12);
+    $pdf->SetFillColor(200, 220, 255); // Set table header background color
+    $pdf->Cell(90, 10, 'Product', 0, 0, 'L');
+    $pdf->Cell(90, 10, 'Barcode', 0, 1, 'L');
+
+    // Set font back to regular for the table content
+    $pdf->SetFont('helvetica', '', 12);
+
     // Loop through the records
     while ($row = $result->fetch_assoc()) {
         // Extract data from the current row
@@ -39,9 +51,8 @@ if ($result->num_rows > 0) {
         $description = $row['description'];
         $amount = $row['amount'];
 
-        // Add product information to the PDF
-        $pdf->MultiCell(0, 10, "Description: $description\nPrice: $amount", 0, 'L');
-
+        // Add product information to the table
+        $pdf->Cell(90, 10, $description . "\nPrice: $amount", 0, 0, 'L');
         
         // Add a 1D barcode (CODE 39)
         $style = array(
@@ -63,7 +74,7 @@ if ($result->num_rows > 0) {
         );
         $pdf->write1DBarcode($barcodeValue, 'C128', '', '', '', 18, 0.4, $style, 'N');
 
-        // Add a new line between products
+        // Add a new line for the next row
         $pdf->Ln();
     }
 

@@ -10,40 +10,41 @@ if(!empty($raw_data))
 	$OBJ = json_decode($raw_data,true);
 	if(is_array($OBJ))
 	{
-		if ($OBJ['data_type'] == "search") {
+		if($OBJ['data_type'] == "search")
+		{
+
 			$productClass = new Product();
 			$limit = 20;
-		
-			if (!empty($OBJ['text'])) {
-				// Search
+
+			if(!empty($OBJ['text']))
+			{
+				//search
 				$barcode = $OBJ['text'];
-				$text = "%" . $OBJ['text'] . "%";
-				$query = "SELECT * FROM products WHERE description LIKE :find OR barcode = :barcode ORDER BY views DESC LIMIT $limit";
-				$rows = $productClass->query($query, ['find' => $text, 'barcode' => $barcode]);
-		
-				if (empty($rows)) {
-					// Search term not found or item not available
-					$info['data_type'] = "search";
-					$info['data'] = [];
-					echo json_encode($info);
-					exit;
-				}
-			} else {
-				// Get all
+				$text = "%".$OBJ['text']."%";
+				$query = "select * from products where description like :find || barcode = :barcode order by views desc limit $limit";
+				$rows = $productClass->query($query,['find'=>$text,'barcode'=>$barcode]);
+
+			}else{
+				//get all
 				//$limit = 10,$offset = 0,$order = "desc",$order_column = "id"
-				$rows = $productClass->getAll($limit, 0, 'desc', 'views');
+				$rows = $productClass->getAll($limit,0,'desc','views');
 			}
-		
-			// Process the search results or all products
-			foreach ($rows as $key => $row) {
-				$rows[$key]['description'] = strtoupper($row['description']);
-				$rows[$key]['image'] = crop($row['image']);
+			
+			if($rows){
+
+				foreach ($rows as $key => $row) {
+					
+					$rows[$key]['description'] = strtoupper($row['description']);
+					$rows[$key]['image'] = crop($row['image']);
+				}
+
+				$info['data_type'] = "search";
+				$info['data'] = $rows;
+				
+				echo json_encode($info);
+
 			}
-		
-			$info['data_type'] = "search";
-			$info['data'] = $rows;
-		
-			echo json_encode($info);
+
 		}
 		else
 		if($OBJ['data_type'] == "checkout")

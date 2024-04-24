@@ -6,18 +6,18 @@
 	    Table View
 	</a>
   </li>
-  <li class="nav-item">
+  <!-- <li class="nav-item">
     <a class="nav-link <?=($section =='graph') ? 'active':''?>" href="index.php?pg=admin&tab=sales&s=graph">
 	    Graph View
 	</a>
-  </li>
+  </li> -->
   
 </ul>
 
 <br>
 
 <?php if($section == 'table'):?>
-
+<a href="../app/views/admin/sales_report.php"><button style="background-color: orange; border-radius: 5px;  color: white; border-color: white; padding: 7px;">SALES REPORTS</button></a>
 <div>
 	<form class="row float-end" >
 			<div class="col">
@@ -44,7 +44,8 @@
 	<h2>Today's Total: ₱<?=number_format($sales_total,2)?></h2>
 	<table class="table table-striped table-hover">
 		<tr>
-			<th>Barcode</th><th>Receipt No</th><th>Description</th><th>Qty</th><th>Amount</th><th>Total</th><th>Cashier</th><th>Date</th><th>Payment Method</th>
+			<th>Barcode</th><th>Receipt No</th><th>Description</th><th>Qty</th><th>Amount</th><th>Total</th><th>Cashier</th><th>Date</th>
+			
 			<th>
 				<a href="index.php?pg=home">
 					<button class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add new</button>
@@ -80,7 +81,6 @@
 				</td>
 		
 				<td><?=date("jS M, Y",strtotime($sale['date']))?></td>
-				<td><?=esc($sale['payment_method'])?></td>
 				<td>
 					<a href="index.php?pg=sale-edit&id=<?=$sale['id']?>">
 						<button class="btn btn-success btn-sm">Edit</button>

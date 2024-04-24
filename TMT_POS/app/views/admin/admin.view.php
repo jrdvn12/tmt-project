@@ -12,7 +12,7 @@
 			  		<li class="list-group-item <?=$tab=='users'?'active':''?>"><i class="fa fa-users"></i> Users</li>
 				</a>
 			  	<a href="index.php?pg=admin&tab=products">
-			  		<li class="list-group-item <?=$tab=='products'?'active':''?>"><i class="fa fa-hamburger"></i> Products</li>
+			  		<li class="list-group-item <?=$tab=='products'?'active':''?>"><i class="fa fa-hamburger"></i> Inventory</li>
 				</a>
 				
 				<a href="index.php?pg=admin&tab=sales">

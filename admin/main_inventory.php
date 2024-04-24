@@ -71,6 +71,7 @@
                   
                   <th>Product ID</th>
                   <th>Photo</th>
+                  <th>Batch</th>
                   <th>Piece Code</th>
                   <th>Case Code</th>
                   <th>SKU</th>
@@ -98,7 +99,7 @@
                             </td>
 
                       
-
+                            <td>".$row['batch']."</td>
                             <td>".$row['piececode']."</td>
                             <td>".$row['boxcode']."</td>
                             <td>".$row['product_name']."</td>

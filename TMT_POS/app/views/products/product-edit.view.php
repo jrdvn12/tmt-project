@@ -24,6 +24,36 @@
 					<small class="text-danger"><?=$errors['description']?></small>
 				<?php endif;?>
 			</div>
+
+			<div class="mb-3">
+			<label for="Category" class="form-label">Category</label>
+			<select name="category" class="form-select <?= !empty($errors['category']) ? 'border-danger' : '' ?>" id="Category">
+				<option value="">Select a category</option>
+				<option <?= ($row['category'] == 'School Supplies') ? 'selected' : '' ?>>School Supplies</option>
+				<option <?= ($row['category'] == 'Clothing') ? 'selected' : '' ?>>Clothing</option>
+				<option <?= ($row['category'] == 'Baked Goods') ? 'selected' : '' ?>>Baked Goods</option>
+				<option <?= ($row['category'] == 'Beverages') ? 'selected' : '' ?>>Beverages</option>
+				<option <?= ($row['category'] == 'Canned Goods') ? 'selected' : '' ?>>Canned Goods</option>
+				<option <?= ($row['category'] == 'Dairy Products') ? 'selected' : '' ?>>Dairy Products</option>
+				<option <?= ($row['category'] == 'Desserts') ? 'selected' : '' ?>>Desserts</option>
+				<option <?= ($row['category'] == 'Detergent') ? 'selected' : '' ?>>Detergent</option>
+				<option <?= ($row['category'] == 'Frozen Foods') ? 'selected' : '' ?>>Frozen Foods</option>
+				<option <?= ($row['category'] == 'Fruits') ? 'selected' : '' ?>>Fruits</option>
+				<option <?= ($row['category'] == 'Grains') ? 'selected' : '' ?>>Grains</option>
+				<option <?= ($row['category'] == 'Meat & Poultry') ? 'selected' : '' ?>>Meat & Poultry</option>
+				<option <?= ($row['category'] == 'Pasta & Noodles') ? 'selected' : '' ?>>Pasta & Noodles</option>
+				<option <?= ($row['category'] == 'Seafood') ? 'selected' : '' ?>>Seafood</option>
+				<option <?= ($row['category'] == 'Snacks') ? 'selected' : '' ?>>Snacks</option>
+				<option <?= ($row['category'] == 'Sauces') ? 'selected' : '' ?>>Sauces</option>
+				<option <?= ($row['category'] == 'Vegetables') ? 'selected' : '' ?>>Vegetables</option>
+				<!-- Add more categories as needed -->
+			</select>
+			<?php if (!empty($errors['category'])): ?>
+				<small class="text-danger"><?= $errors['category'] ?></small>
+			<?php endif; ?>
+		</div>
+
+
 			
 			<div class="mb-3">
 			  <label for="barcodeControlInput1" class="form-label">Barcode <small class="text-muted">(optional)</small></label>

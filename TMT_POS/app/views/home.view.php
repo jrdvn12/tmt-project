@@ -1,5 +1,37 @@
-<?php require views_path('partials/header');?>
+<?php
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "pos_db";
 
+// Create connection
+$conn = new mysqli($servername, $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Retrieve void_code values from the database
+$sql = "SELECT void_code FROM users";
+$result = $conn->query($sql);
+
+// Initialize an array to store void_code values
+$void_codes = array();
+
+if ($result->num_rows > 0) {
+    // Fetch each row and store void_code in the array
+    while($row = $result->fetch_assoc()) {
+        $void_codes[] = $row['void_code'];
+    }
+}
+
+// Close connection
+$conn->close();
+?>
+
+<?php require views_path('partials/header');?>
 	<style>
 		
 		.hide{
@@ -17,7 +49,7 @@
 		<div style="max-height:800px;" class="shadow-sm col-7 p-4">
 			
 			<div class="input-group mb-3"><h3> Items </h3>
-			  <input onkeyup="check_for_enter_key(event)" oninput="search_item(event)" type="text" class="ms-4 form-control js-search" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" autofocus>
+			  <input onkeyup="check_for_enter_key(event)" oninput="search_item(event)" type="text" class="ms-4 form-control js-search" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" autofocus id='searchitem'>
 			  <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
 			</div>
 
@@ -60,7 +92,19 @@
 		<div style="width:500px;min-height:200px;background-color:white;padding:10px;margin:auto;margin-top:100px">
 			<h4>Checkout <button role="close-button" onclick="hide_modal(event,'amount-paid')" class="btn btn-danger float-end p-0 px-2">X</button></h4>
 			<br>
+			<h4>Payment</h4 >
 			<input onkeyup="if(event.keyCode == 13)validate_amount_paid(event)" type="text" class="js-amount-paid-input form-control" placeholder="Enter amount paid">
+			<br>
+			<!----><h4>Payment Method</h4 >
+				<select class="js-method-paid-input form-control" name="payment_status" id="payment_status">
+
+                      <option value ="CASH">CASH</option>
+                      <option value ="G-CASH">G-CASH</option>
+
+                </select>
+			<br>
+			<h4>Reference Number for G-CASH</h4 >
+			<input id="reference_number" onkeyup="if(event.keyCode == 13)validate_amount_paid(event)" type="label" class="js-amount-ref-input form-control" placeholder="Enter last 6 reference number ">
 			<br>
 			<button role="close-button" onclick="hide_modal(event,'amount-paid')" class="btn btn-secondary">Cancel</button>
 			<button onclick="validate_amount_paid(event)" class="btn btn-primary float-end">Next</button>
@@ -108,7 +152,9 @@
 
 	function send_data(data)
 	{
-
+		data.payment_status = document.getElementById('payment_status').value;
+		data.payment_reference = document.getElementById('reference_number').value;
+		
 		var ajax = new XMLHttpRequest();
 
 		ajax.addEventListener('readystatechange',function(e){
@@ -118,15 +164,16 @@
 				
 				if(ajax.status == 200)
 				{
+					
 					if(ajax.responseText.trim() != ""){
 						handle_result(ajax.responseText);
 					}else{
 						if(BARCODE){
-							alert("that item was not found");
+							//alert("that item was not found");
+							handle_result(ajax.responseText);
 						}
 					}
 				}else{
-
 					console.log("An error occured. Err Code:"+ajax.status+" Err message:"+ajax.statusText);
 					console.log(ajax);
 				}
@@ -258,6 +305,7 @@
 			temp.qty = 1;
 
 			ITEMS.push(temp);
+			search_item({ target: { value: "" } });
 			refresh_items_display();
 			}
 
@@ -295,26 +343,39 @@
 
 	}
 
+	var voidCodes = <?php echo json_encode($void_codes); ?>;
+
 	function clear_all()
 	{
+		var code = prompt("Are you sure you want to clear all items in the list??!!");
 
-		if(!confirm("Are you sure you want to clear all items in the list??!!"))
-			return;
-
-		ITEMS = [];
-		refresh_items_display();
-
+		// Check if the code matches
+		if (code === null || code.trim() === '') {
+			return; // User canceled or entered empty code
+		} else if (voidCodes.includes(code.trim())) {
+			ITEMS = [];
+			refresh_items_display();
+			setTimeout(function () {
+				location.reload();
+				},100);
+		} else {
+			alert("Incorrect code. Item not removed.");
+		}
 	}
 	
-	function clear_item(index)
-	{
+	// Function to clear item
+	function clear_item(index) {
+		var code = prompt("Please enter the code to remove the item:");
 
-		if(!confirm("Remove item??!!"))
-			return;
-
-		ITEMS.splice(index,1);
-		refresh_items_display();
-
+		// Check if the code matches
+		if (code === null || code.trim() === '') {
+			return; // User canceled or entered empty code
+		} else if (voidCodes.includes(code.trim())) {
+			ITEMS.splice(index, 1);
+			refresh_items_display();
+		} else {
+			alert("Incorrect code. Item not removed.");
+		}
 	}
 
 	function change_qty(direction,e)
@@ -375,6 +436,7 @@
 		{
 			BARCODE = true;
 			search_item(e);
+			search_item({ target: { value: "" } });
 		}
 	}
 
@@ -387,12 +449,14 @@
 
 				alert("Please add at least one item to the cart");
 				return;
+				
 			}
 			var mydiv = document.querySelector(".js-amount-paid-modal");
 			mydiv.classList.remove("hide");
 
 			mydiv.querySelector(".js-amount-paid-input").value = "";
 			mydiv.querySelector(".js-amount-paid-input").focus();
+			document.getElementById('searchitem').focus();
 		}else
 		if(modal == "change"){
  
@@ -401,8 +465,9 @@
 
 			mydiv.querySelector(".js-change-input").innerHTML = CHANGE;
 			mydiv.querySelector(".js-btn-close-change").focus();
+			document.getElementById('searchitem').focus();
 		}
-		
+		document.getElementById('searchitem').focus();
 
 	}
 	
@@ -418,10 +483,13 @@
 			if(modal == "change"){
 				var mydiv = document.querySelector(".js-change-modal");
 				mydiv.classList.add("hide");
+				setTimeout(function () {
+            location.reload();
+            },100);
 			}			
 					
 		}
-	
+		//document.getElementById('searchitem').focus();
 	}
 
 	function validate_amount_paid(e)
@@ -456,7 +524,7 @@
 			var tmp = {};
 			tmp.id = ITEMS[i]['id'];
 			tmp.qty = ITEMS[i]['qty'];
-
+			
 			ITEMS_NEW.push(tmp);
 		}
 
@@ -492,7 +560,7 @@
 	{
 		var vars = JSON.stringify(obj);
 
-		RECEIPT_WINDOW = window.open('index.php?pg=print&vars='+vars,'printpage',"width=500px;");
+		RECEIPT_WINDOW = window.open('index.php?pg=print&vars='+vars,'printpage',"width=100px;");
 
 		setTimeout(close_receipt_window,2000);
 		
@@ -509,7 +577,16 @@
 		text:""
 	});
 
-
+	window.onload = function() {
+            
+            document.getElementById('searchitem').focus();
+            
+          }
+		  setTimeout(function () {
+			document.getElementById('searchitem').value = '<?php echo''; ?>';
+			document.getElementById('searchitem').focus();
+            }, 1000);
+			document.getElementById('searchitem').focus();
 </script>
 
 <?php require views_path('partials/footer');?>

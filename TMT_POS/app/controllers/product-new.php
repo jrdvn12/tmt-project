@@ -11,12 +11,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 	$_POST['user_id'] = auth("id");
 
 	$_POST['barcode'] = empty($_POST['barcode']) ? $product->generate_barcode():$_POST['barcode'];
-	//creating barcode
+	/*creating barcode
 		
 		$numbers = '1234567890';
 		
 		$_POST['barcode'] = substr(str_shuffle($numbers), 0, 9);
-		//
+		*/
 	if(!empty($_FILES['image']['name']))
 	{
 		$_POST['image'] = $_FILES['image'];

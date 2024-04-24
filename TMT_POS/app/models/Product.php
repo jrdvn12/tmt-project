@@ -19,6 +19,8 @@ class Product extends Model
 				'image',
 				'date',
 				'views',
+				'encoder',
+				'category',
 			];
 
 
@@ -37,10 +39,6 @@ class Product extends Model
 			}
 
 			//check stock
-			if(empty($data['stock']))
-			{
-				$errors['stock'] = "Product stock is required";
-			}else
 			if(!preg_match('/^[0-9]+$/', $data['stock']))
 			{
 				$errors['stock'] = "stock must be a number";
@@ -87,7 +85,7 @@ class Product extends Model
 	public function generate_barcode()
 	{
 
-		return "2222" . rand(1000,999999999);
+		return "2223" . rand(1000,999999999);
 	}
 
 	public function generate_filename($ext = "jpg")

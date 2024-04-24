@@ -24,6 +24,10 @@ class Auth
 			$db = new Database();
 			if($db->query("select * from users where email = :email limit 1",['email'=>$_SESSION['USER']['email']]))
 			{
+				if(!isset($_SESSION['login_success'])){
+					echo "<script>alert('Login successful!');</script>";
+					$_SESSION['login_success'] = true; // Set the session variable
+				}
 				return true;
 			}
 		}

@@ -73,9 +73,16 @@ if(!empty($_SESSION['referer'])){
 					<small class="text-danger"><?=$errors['role']?></small>
 				<?php endif;?>
 			</div>
+
+			<div class="mb-3">
+			  <label for="exampleFormControlInput1" class="form-label">Void Code</label>
+			  <input value="<?=set_value('void_code',$row['void_code'])?>" name="void_code" type="text" class="form-control <?=!empty($errors['void_code']) ? 'border-danger':''?>" id="exampleFormControlInput1" placeholder="Void Code">
+				<?php if(!empty($errors['void_code'])):?>
+					<small class="text-danger"><?=$errors['void_code']?></small>
+				<?php endif;?>
+			</div>
 			<?php endif;?>
 			
-
 			<div class="input-group mb-3">
 			  <span class="input-group-text" id="basic-addon1">Password</span>
 			  <input value="<?=set_value('password','')?>" name="password" type="text" class="form-control  <?=!empty($errors['password']) ? 'border-danger':''?>" placeholder="Password(leave empty to not change)" aria-label="Password" aria-describedby="basic-addon1">

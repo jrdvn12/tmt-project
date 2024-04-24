@@ -5,6 +5,8 @@
 		<form method="post" enctype="multipart/form-data">
 
 			<h5 class="text-primary"><i class="fa fa-hamburger"></i> Add Product</h5>
+
+			<input name="encoder" type="hidden" value="<?php echo $_SESSION['USER']['username'];?>">
 			
 			<div class="mb-3">
 			  <label for="formFile" class="form-label">Product Image</label>
@@ -21,6 +23,36 @@
 					<small class="text-danger"><?=$errors['description']?></small>
 				<?php endif;?>
 			</div>
+
+			<div class="mb-3">
+				<label for="Category" class="form-label">Category</label>
+				<select name="category" class="form-select <?= !empty($errors['category']) ? 'border-danger' : '' ?>" id="Category">
+					<option value="">Select a category</option>
+					<option>School Supplies</option>
+					<option>Clothing</option>
+					<option>Baked Goods</option>
+					<option>Beverages</option>
+					<option>Canned Goods</option>
+					<option>Dairy Products</option>
+					<option>Desserts</option>
+					<option>Detergent</option>
+					<option>Frozen Foods</option>
+					<option>Fruits</option>
+					<option>Grains</option>
+					<option>Meat & Poultry</option>
+					<option>Pasta & Noodles</option>
+					<option>Sauces</option>
+					<option>Seafood</option>
+					<option>Snacks</option>
+					<option>Vegetables</option>
+
+					<!-- Add more options as needed -->
+				</select>
+				<?php if (!empty($errors['category'])): ?>
+					<small class="text-danger"><?= $errors['category'] ?></small>
+				<?php endif; ?>
+			</div>
+
 			
 			<div class="mb-3">
 			  <label for="barcodeControlInput1" class="form-label">Barcode <small class="text-muted">(Optional)</small></label>
