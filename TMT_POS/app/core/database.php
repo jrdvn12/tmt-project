@@ -10,7 +10,7 @@ class Database
 	private function db_connect(){
 
 		$DBHOST = "localhost";
-		$DBNAME = "pos_db";
+		$DBNAME = "tmt-project";
 		$DBUSER = "root";
 		$DBPASS = "";
 		$DBDRIVER = "mysql";
