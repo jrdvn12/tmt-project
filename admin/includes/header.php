@@ -155,10 +155,11 @@
             transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
         .scroll-to-top:hover {
-            background-color: #d1b188;
+            
             color: white;
             border-color: transparent;
             border-radius: 10%;
+            
         }
         
         /* Dropdown menu styles */
