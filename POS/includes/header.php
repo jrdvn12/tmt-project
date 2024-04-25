@@ -92,22 +92,7 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
-        /* Style for the buttons */
-        /* .btn {
-    padding: 5px 10px;
-    text-decoration: none;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    border-radius: 3px;
-  } */
-        /* .btn-primary {
-    background-color: #866252;
-  }
-  .btn-primary:hover {
-    background-color: #4F413E;
-  } */
-
+       
 /* CSS for hover effect when not clicking/*/
 .sidebar-menu .treeview:not(.active):hover > a,
 .sidebar-menu .treeview.active > a,
