@@ -11,7 +11,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Main Inventory
+        History Inventory
       </h1>
       <!-- <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -81,66 +81,41 @@
                   <th>Balance</th>
                   <th>Date of Stock</th>
                   <th>Date of Expirtion</th>
-                  <!-- <th>Tools</th> -->
+                  
                   
                 </thead>
 
                 <tbody>
-                <?php
-                      $sql = "SELECT 
-                      id,
-                      product_number,
-                      photo,
-                      GROUP_CONCAT(batch SEPARATOR '<br>') AS batches,
-                      GROUP_CONCAT(piececode SEPARATOR '<br>') AS piececodes,
-                      GROUP_CONCAT(boxcode SEPARATOR '<br>') AS boxcodes,
-                      GROUP_CONCAT(product_name SEPARATOR '<br>') AS product_names,
-                      GROUP_CONCAT(price SEPARATOR '<br>') AS prices,
-                      GROUP_CONCAT(qty SEPARATOR '<br>') AS qtys,
-                      GROUP_CONCAT(soldstock SEPARATOR '<br>') AS soldstocks,
-                      GROUP_CONCAT(balance SEPARATOR '<br>') AS balances,
-                      GROUP_CONCAT(dateofstock SEPARATOR '<br>') AS dateofstocks,
-                      GROUP_CONCAT(product_expiration SEPARATOR '<br>') AS product_expirations
-                      FROM main_inventory
-                      GROUP BY product_number";
-                      $query = $conn->query($sql);
-                      while($row = $query->fetch_assoc()){
-                          // Accessing the photo field directly within the loop
-                          $image = (!empty($row['photo'])) ? '../images/'.$row['photo'] : '../images/noproduct.jpg';
-                          // Assuming other parts of your code remain the same
-                          // For simplicity, I'll just show a part of your HTML table with modified fields
-                          echo "
-                          <tr>
-                              <td>".$row['product_number']."</td>
-                              <td>
-                                  <img src='".$image."' width='150px' height='200px' align='center'><br>
-                              </td>
-                              <td>".$row['batches']."</td>
-                              <td>".$row['piececodes']."</td>
-                              <td>".$row['boxcodes']."</td>
-                              <td>".$row['product_names']."</td>
-                              <td>".$row['prices']."</td>
-                              <td>".$row['qtys']."</td>
-                              <td>".$row['soldstocks']."</td>
-                              <td>".$row['balances']."</td>
-                              <td>".$row['dateofstocks']."</td>
-                              <td>".$row['product_expirations']."</td>
-                              
-                          </tr>
-                          ";
-                      }
-                      ?>
+                    <?php
+                    $sql = "SELECT * FROM main_inventory";
+                    $query = $conn->query($sql);
+                    while($row = $query->fetch_assoc()){
+                        $image = (!empty($row['photo'])) ? '../images/'.$row['photo'] : '../images/noproduct.jpg';
+                        echo "
+                        <tr>
+                            <td >".$row['product_number']."</td>
+                            <td align='center'>
+                                <img src='".$image."' width='150px' height='200px' align='center'><br>
+                               
+                            </td>
 
+                      
+                            <td>".$row['batch']."</td>
+                            <td>".$row['piececode']."</td>
+                            <td>".$row['boxcode']."</td>
+                            <td>".$row['product_name']."</td>
+                            <td>".$row['price']."</td>
+                            <td>".$row['qty']."</td>
+                            <td>". $row['soldstock']."</td>
+                            <td>". $row['balance']."</td>
+                            <td>". date('M d, Y', strtotime($row['dateofstock']))."</td>
+                            <td>". date('M d, Y', strtotime($row['product_expiration']))."</td>
 
-                    <!-- 
-                      <td>
-                                  <button class='btn btn-primary btn-sm view btn-flat' data-id='".$row['id']."'><i class='fa fa-eye'></i> View</button>
-                              </td>
-                    
-                    
-                    <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
-                      <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                                <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button> -->
+                           
+                        </tr>
+                        ";
+                    }
+                    ?>     
 
                 </tbody>
 
@@ -219,28 +194,6 @@ function getRow(id){
     }
   });
 }
-// new 
-
-//window.onclick = function() {
-    //        updateImage();
-  //      };
-
- //JavaScript
-      function generateBarcode(inputId) {
-          let inputElement = document.getElementById(inputId);
-          let barcodeText = inputElement.value;
-          let barcodeImage = document.getElementById(inputId + 'Barcode');
-          let barcodeImageUrl = generateBarcodeImage(barcodeText);
-          barcodeImage.src = barcodeImageUrl;
-      }
-
-      // This function generates the barcode image URL based on the input text
-      function generateBarcodeImage(text) {
-          return 'barcode.php' + text;
-      }
-
 </script>
-
-
 </body>
 </html>
