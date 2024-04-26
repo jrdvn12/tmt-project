@@ -14,10 +14,13 @@
 
   	<?php include 'includes/navbar.php'; ?>
   	<?php include 'includes/menubar.php'; ?>
-
+    
   <!-- Content Wrapper. Contains page content -->
+  
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
+    <?php $position = $user['position']; ?>
+    <?php if($position == 'Admin' ){?>
     <section class="content-header">
       <h1>
         HOME
@@ -49,7 +52,7 @@
         }
       ?>
 
-      <?php $posistion = $user['position']; ?>
+
 
       <!-- Small boxes (Stat box) -->
       <div class="row">
@@ -70,9 +73,27 @@
             </div>
             <a href="product" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
-
-
         </div>
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box "style="background: #FAA8FA;">
+            <div class="inner">
+              <?php
+                $sql = "SELECT * FROM main_inventory";
+                $query = $conn->query($sql);
+
+                echo "<h3>".$query->num_rows."</h3>";
+              ?>
+              <p>Total Inventory</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-dropbox"></i>
+            </div>
+            <a href="main_inventory" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
@@ -208,7 +229,10 @@
 
 </div>
 <!-- ./wrapper -->
-
+<?php
+}else{
+ include 'includes/autorize.php';
+}?>
 
 <?php include 'includes/scripts.php'; ?>
 <script>

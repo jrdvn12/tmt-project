@@ -54,13 +54,11 @@ include 'includes/conn.php';
                     <div class="col-sm-9">
                       <select class="form-control" name="position" id="position" required>
                         <option value="" selected>- Select -</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Supervisor">Supervisor</option>
+                       
                         <option value="Distributor Admin">Distributor Admin</option>
-                        <option value="Sales">Sales</option>
-                        <option value="Cashier">Cashier</option>
-                        <option value="Worker">Worker</option>
-          
+                        <option value="Distributor Supervisor">Distributor Supervisor</option>
+                        <option value="Distributor Cashier">Distributor Cashier</option>
+                        <option value="Distributor Worker">Distributor Worker</option>
                       </select>
                     </div>
                 </div>
@@ -116,12 +114,10 @@ include 'includes/conn.php';
                     <div class="col-sm-9">
                       <select class="form-control" name="position" id="edit_position">
                         <option selected value =" " id="position_val" disabled></option>
-                        <option value="Admin">Admin</option>
-                        <option value="Supervisor">Supervisor</option>
                         <option value="Distributor Admin">Distributor Admin</option>
-                        <option value="Sales">Sales</option>
-                        <option value="Cashier">Cashier</option>
-                        <option value="Worker">Worker</option>
+                        <option value="Distributor Supervisor">Distributor Supervisor</option>
+                        <option value="Distributor Cashier">Distributor Cashier</option>
+                        <option value="Distributor Worker">Distributor Worker</option>
                        
                       </select>
                     </div>

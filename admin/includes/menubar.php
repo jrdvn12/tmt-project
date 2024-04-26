@@ -103,6 +103,7 @@
             </li>
 
             <li><a href="user" style="color: black;"><i class="fa fa-user"></i> <span>User</span></a></li>
+            <li><a href="user_distributor" style="color: black;"><i class="fa fa-user"></i> <span>User Distributor</span></a></li>
             <li><a href="audit" style="color: black;"><i class="fa fa-history"></i> <span>Audit Trail Record</span></a></li>
             <li class="header">PRINTABLES</li>
             <li><a href="#" style="color: black;"><i class="fa fa-bar-chart"></i> <span>Sales</span></a></li>
