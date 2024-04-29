@@ -60,7 +60,7 @@
     <div class="form-group">
         <input type="text" id="searchInput" class="form-control" placeholder="Search...">
     </div>
-    
+    <!-- Table -->
     <!-- Table -->
     <table id="example1" class="table table-bordered">
         <tbody>
