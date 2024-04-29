@@ -45,21 +45,21 @@
         // Set the timeout duration in milliseconds (1 second = 1000 milliseconds)
         var timeoutDuration = 3600000;
 
-        // Function to log the user out after the specified timeout
-        function logoutUser() {
-            window.location.href = "logout.php"; // Replace with your logout script
-        }
+    // Function to log the user out after the specified timeout
+    function logoutUser() {
+        window.location.href = "logout.php"; // Replace with your logout script
+    }
 
-        // Set up a timeout event when the page loads
-        var timeoutID = setTimeout(logoutUser, timeoutDuration);
+    // Set up a timeout event when the page loads
+    var timeoutID = setTimeout(logoutUser, timeoutDuration);
 
-        // Reset the timeout event on user activity (mouse or touch)
-        function resetTimeout() {
-            clearTimeout(timeoutID);
-            timeoutID = setTimeout(logoutUser, timeoutDuration);
-        }
+    // Reset the timeout event on user activity (mouse or touch)
+    function resetTimeout() {
+        clearTimeout(timeoutID);
+        timeoutID = setTimeout(logoutUser, timeoutDuration);
+    }
 
-        // Add event listeners for mouse and touch events
-        window.addEventListener("mousemove", resetTimeout);
-        window.addEventListener("touchstart", resetTimeout);
-    </script>
+    // Add event listeners for mouse and touch events
+    window.addEventListener("mousemove", resetTimeout);
+    window.addEventListener("touchstart", resetTimeout);
+</script>
