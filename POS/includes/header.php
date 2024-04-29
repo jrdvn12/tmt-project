@@ -190,6 +190,27 @@
     .navbar-custom-menu:hover {
         background-color: #bc9f7a !important;
     }
+
+
+
+/* POS */
+/* CSS to style the cards and their container */
+.table tbody {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Adjust the gap between cards as needed */
+}
+
+.card {
+    width: 200px; /* Adjust the width of each card as needed */
+    margin: 10px; /* Add space around each card */
+}
+
+.card-body {
+    text-align: center;
+}
+
     </style>
 </head>
 <body>

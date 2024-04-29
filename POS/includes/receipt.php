@@ -1,4 +1,4 @@
-<div class="col-md-3">
+<div class="col-md-3 ">
   <div class="box box-solid" style="box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">
     <div class="box-body">
       <!-- Add content for receipt here -->

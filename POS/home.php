@@ -58,27 +58,27 @@
 <div class="box-body">
     <!-- Search bar -->
     <div class="form-group">
-        <input type="text" id="searchInput" class="form-control" placeholder="Search...">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search..." oninput="filterProducts()">
     </div>
     <!-- Table -->
-    <!-- Table -->
     <table id="example1" class="table table-bordered">
-        <tbody>
+        <tbody id="productTableBody">
             <?php
-            $sql = "SELECT * FROM main_inventory";
+            $sql = "SELECT * FROM product";
             $query = $conn->query($sql);
             while ($row = $query->fetch_assoc()) {
                 // Accessing the photo field directly within the loop
                 $image = (!empty($row['photo'])) ? '../images/' . $row['photo'] : '../images/noproduct.jpg';
-                // Assuming other parts of your code remain the same
-                // For simplicity, I'll just show a part of your HTML table with modified fields
                 echo "
-                <tr>
+                <tr class='productRow'>
                     <td>
-                        <div>".$row['product_number']."<br>
-                        <img src='".$image."' width='100px' height='150px' align='center'><br>
-                        ".$row['product_number']."<br>
-                        Price : ".$row['price']."<br>
+                        <div class='card'>
+                            <div class='card-body'>
+                                <p> ".$row['product_number']."</p>
+                                <img src='".$image."' width='100px' height='150px' align='center'><br>
+                                <p> ".$row['product_name']."</p>
+                                <p>Price: ".$row['price']."</p>
+                            </div>
                         </div>
                     </td>
                 </tr>
@@ -133,6 +133,30 @@
             }       
         }
     });
+
+    function filterProducts() {
+        // Declare variables
+        var input, filter, table, tbody, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("example1");
+        tbody = document.getElementById("productTableBody");
+        tr = tbody.getElementsByClassName("productRow");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0]; // Assuming the product info is in the first td of each row
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
 </script>
 </body>
 </html>
