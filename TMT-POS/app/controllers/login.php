@@ -21,7 +21,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
  		$errors['email'] = "wrong email";
  	}
 
-
 }
 
 require views_path('auth/login');

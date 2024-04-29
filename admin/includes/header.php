@@ -6,7 +6,7 @@
     <title>TMT Foods Incorporated</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link href="../images/logo.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="../images/logoo.ico" rel="shortcut icon" type="image/x-icon" />
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->

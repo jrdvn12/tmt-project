@@ -59,3 +59,6 @@ h4 ~ p {
 .example-content-widget{
   margin-bottom: 2px;
 }
+body a{
+	text-decoration: none;
+}
