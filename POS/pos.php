@@ -1,10 +1,10 @@
 
 <?php include 'includes/session.php'; ?>
-<head>
+<!-- <head>
 <link rel="stylesheet" type="text/css" href="includes/assets/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="includes/assets/css/all.min.css">
 	<link rel="stylesheet" type="text/css" href="includes/assets/css/main.css">
-</head>
+</head> -->
 <?php 
   include '../timezone.php'; 
   $today = date('Y-m-d');
