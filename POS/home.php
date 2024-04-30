@@ -62,6 +62,7 @@ include 'includes/header.php';
                                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                                 </div>                                     
                             </div>
+
                             <div style="border: 2px solid #ccc; padding: 5px;">
                                 <div style="max-height: 700px; overflow-y: auto;">
                                     <table id="example1" class="table table-bordered">
@@ -94,24 +95,27 @@ include 'includes/header.php';
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-3">
-                      <div class="box box-solid" style="box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">
-                          <div class="box-header with-border">
-                              <h3 class="box-title">Receipt</h3>
-                          </div>
-                          <div class="box-body" id="receiptContent" style="height: 600px; overflow-y: scroll;">
-                              <!-- Receipt content will be added here -->
-                          </div>
-                          <div class="box-footer clearfix">
-                            <div class="pull-left" id="totalDisplay">
-                              <strong>Total: ₱ 0.00</strong>
+                        <div class="box box-solid" style="box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Receipt</h3>
                             </div>
-                            <div class="pull-right">
-                                <button class="btn btn-primary">Checkout</button>
+                            <div class="box-body" id="receiptContent" style="height: 600px; overflow-y: scroll;">
+                                <!-- Receipt content will be added here -->
+                            </div>
+                            <div class="box-footer clearfix">
+                                <div class="pull-left" id="totalDisplay">
+                                    <strong>Total: ₱ 0.00</strong>
+                                </div>
+                                <div class="pull-right">
+                                    <button class="btn btn-success">Checkout</button>
+                                    <button class="btn btn-info my-2 w-100" onclick="clearReceipt()">Clear All</button>
+                                </div>
                             </div>
                         </div>
-                      </div>
-                  </div>
+                    </div>
+
 
                 </div>
             </section>
@@ -122,7 +126,7 @@ include 'includes/header.php';
     <?php include 'includes/scripts.php'; ?>
 
 
-    <script>
+<script>
 
 function getRow(id) {
     $.ajax({
@@ -265,6 +269,34 @@ function calculateTotal() {
             var totalHtml = "<hr><p>Total: ₱ " + total.toFixed(2) + "</p>";
             receiptContent.innerHTML += totalHtml;
         }
+
+    function clearReceipt() {
+        // Clear the content of the receipt
+        document.getElementById("receiptContent").innerHTML = "";
+        // Update the total display to show 0.00
+        document.getElementById("totalDisplay").innerHTML = "<strong>Total: ₱ 0.00</strong>";
+    }
+
+    var voidCodes = <?php echo json_encode($void_codes); ?>;
+
+    function clearReceipt() {
+        var code = prompt("Are you sure you want to clear all items in the list??!!");
+
+        // Check if the code matches
+        if (code === null || code.trim() === '') {
+            return; // User canceled or entered empty code
+        } else if (voidCodes.includes(code.trim())) {
+            ITEMS = [];
+            refresh_items_display();
+            setTimeout(function () {
+                location.reload();
+            }, 100);
+        } else {
+            alert("Incorrect code. Items not removed.");
+        }
+
+    }
+
     </script>
 </body>
 </html>
