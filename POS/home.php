@@ -70,9 +70,9 @@
                 // Accessing the photo field directly within the loop
                 $image = (!empty($row['photo'])) ? '../images/' . $row['photo'] : '../images/noproduct.jpg';
                 echo "
-                <tr class='productRow'>
+                <tr>
                     <td>
-                        <div class='card'>
+                        <div class='card text-right'> <!-- Added 'text-right' class to align the card to the right -->
                             <div class='card-body'>
                                 <p> ".$row['product_number']."</p>
                                 <img src='".$image."' width='100px' height='150px' align='center'><br>
@@ -90,7 +90,8 @@
 </div>
 
 
-        </div>
+
+</div>
         
         
         <!-- Right side wrapper for receipt -->
