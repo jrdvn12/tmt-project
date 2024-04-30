@@ -8,7 +8,7 @@ if (isset($_POST['searchText'])) {
     $searchText = mysqli_real_escape_string($conn, $_POST['searchText']);
 
     // Construct SQL query to fetch table data based on the search input
-    $sql = "SELECT * FROM main_inventory WHERE product_name LIKE '%$searchText%'"; // Example query, adjust as needed
+    $sql = "SELECT * FROM product WHERE product_name LIKE '%$searchText%'"; // Example query, adjust as needed
 
     // Execute the query
     $result = mysqli_query($conn, $sql);

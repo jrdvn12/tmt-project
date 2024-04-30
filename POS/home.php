@@ -107,7 +107,9 @@ include 'includes/header.php';
                               <strong>Total: ₱ 0.00</strong>
                             </div>
                             <div class="pull-right">
-                                <button class="btn btn-primary">Checkout</button>
+                                
+                                <a href='#check' data-toggle='modal' class='btn btn-primary ' ><i class='fa  fa-check-circle-o'></i> Checkout</a>
+
                             </div>
                         </div>
                       </div>
@@ -116,6 +118,7 @@ include 'includes/header.php';
                 </div>
             </section>
             <?php include 'includes/footer.php'; ?>
+            <?php include 'includes/checkout_modal.php'; ?>
             <?php } else { include 'includes/autorize.php'; }?>
         </div>
     </div>
@@ -154,31 +157,6 @@ function getRow(id) {
 }
 /////////////////
 
-$(document).ready(function() {
-    // Add event listener to the search input
-    $('#searchInput').on('input', function() {
-        // Call a function to reload the table data
-        reloadTableData();
-    });
-});
-
-function reloadTableData() {
-    // Perform AJAX request to reload the table data
-    $.ajax({
-        type: 'POST',
-        url: 'reload_table_data.php', // Replace 'reload_table_data.php' with the appropriate URL
-        data: { searchText: $('#searchInput').val() }, // Send the search input value to the server
-        dataType: 'html', // Assuming the server returns HTML for the table
-        success: function(response) {
-            // Update the table with the new data
-            $('#example1').html(response);
-        },
-        error: function(xhr, status, error) {
-            // Handle any errors that occur during the AJAX request
-            console.error(xhr.responseText);
-        }
-    });
-}
 
 ///////////////////////
 function calculateTotal() {
