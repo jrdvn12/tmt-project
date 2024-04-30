@@ -97,21 +97,19 @@ include 'includes/header.php';
                     </div>
 
                     <div class="col-md-3">
-                        <div class="box box-solid" style="box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Receipt</h3>
+                      <div class="box box-solid" style="box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">
+                          <div class="box-header with-border">
+                              <h3 class="box-title">Receipt</h3>
+                          </div>
+                          <div class="box-body" id="receiptContent" style="height: 600px; overflow-y: scroll;">
+                              <!-- Receipt content will be added here -->
+                          </div>
+                          <div class="box-footer clearfix">
+                            <div class="pull-left" id="totalDisplay">
+                              <strong>Total: ₱ 0.00</strong>
                             </div>
-                            <div class="box-body" id="receiptContent" style="height: 600px; overflow-y: scroll;">
-                                <!-- Receipt content will be added here -->
-                            </div>
-                            <div class="box-footer clearfix">
-                                <div class="pull-left" id="totalDisplay">
-                                    <strong>Total: ₱ 0.00</strong>
-                                </div>
-                                <div class="pull-right">
-                                    <button class="btn btn-success">Checkout</button>
-                                    <button class="btn btn-info my-2 w-100" onclick="clearReceipt()">Clear All</button>
-                                </div>
+                            <div class="pull-right">
+                                <button class="btn btn-primary">Checkout</button>
                             </div>
                         </div>
                     </div>
@@ -120,6 +118,7 @@ include 'includes/header.php';
                 </div>
             </section>
             <?php include 'includes/footer.php'; ?>
+            <?php include 'includes/checkout_modal.php'; ?>
             <?php } else { include 'includes/autorize.php'; }?>
         </div>
     </div>
@@ -158,31 +157,6 @@ function getRow(id) {
 }
 /////////////////
 
-$(document).ready(function() {
-    // Add event listener to the search input
-    $('#searchInput').on('input', function() {
-        // Call a function to reload the table data
-        reloadTableData();
-    });
-});
-
-function reloadTableData() {
-    // Perform AJAX request to reload the table data
-    $.ajax({
-        type: 'POST',
-        url: 'reload_table_data.php', // Replace 'reload_table_data.php' with the appropriate URL
-        data: { searchText: $('#searchInput').val() }, // Send the search input value to the server
-        dataType: 'html', // Assuming the server returns HTML for the table
-        success: function(response) {
-            // Update the table with the new data
-            $('#example1').html(response);
-        },
-        error: function(xhr, status, error) {
-            // Handle any errors that occur during the AJAX request
-            console.error(xhr.responseText);
-        }
-    });
-}
 
 ///////////////////////
 function calculateTotal() {
