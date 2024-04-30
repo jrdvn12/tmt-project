@@ -109,6 +109,8 @@ include 'includes/header.php';
                             <div class="pull-right">
                                 
                                 <a href='#check' data-toggle='modal' class='btn btn-primary ' ><i class='fa  fa-check-circle-o'></i> Checkout</a>
+                                <button class="btn btn-info my-2 w-100" onclick="clearReceipt()">Clear All</button>
+
 
                             </div>
                         </div>
@@ -156,7 +158,12 @@ function getRow(id) {
     });
 }
 /////////////////
-
+function clearReceipt() {
+        // Clear the content of the receipt
+        document.getElementById("receiptContent").innerHTML = "";
+        // Update the total display to show 0.00
+        document.getElementById("totalDisplay").innerHTML = "<strong>Total: ₱ 0.00</strong>";
+    }
 
 ///////////////////////
 function calculateTotal() {
