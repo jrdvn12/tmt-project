@@ -4,39 +4,6 @@ include '../timezone.php';
 include 'includes/header.php'; 
 ?>
 
-<?php
-// Establish connection to your database
-$servername = "localhost";
-$username = "root";
-$password = " ";
-$dbname = "tmt-project";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Query to retrieve the authentication code
-$sql = "SELECT void_codes FROM admin"; // Update your_table_name with the actual table name
-
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    // Output data of each row
-    $row = $result->fetch_assoc();
-    $authenticationCode = $row["void_codes"];
-
-    // Send the authentication code to the client-side JavaScript
-    echo $authenticationCode;
-} else {
-    echo "0 results";
-}
-$conn->close();
-?>
-
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <?php include 'includes/navbar.php'; ?>
@@ -140,7 +107,9 @@ $conn->close();
                               <strong>Total: ₱ 0.00</strong>
                             </div>
                             <div class="pull-right">
-                                <button class="btn btn-primary">Checkout</button>
+                                
+                                <a href='#check' data-toggle='modal' class='btn btn-primary ' ><i class='fa  fa-check-circle-o'></i> Checkout</a>
+
                             </div>
                         </div>
                       </div>
@@ -274,34 +243,6 @@ function calculateTotal() {
             var totalHtml = "<hr><p>Total: ₱ " + total.toFixed(2) + "</p>";
             receiptContent.innerHTML += totalHtml;
         }
-
-    function clearReceipt() {
-        // Clear the content of the receipt
-        document.getElementById("receiptContent").innerHTML = "";
-        // Update the total display to show 0.00
-        document.getElementById("totalDisplay").innerHTML = "<strong>Total: ₱ 0.00</strong>";
-    }
-
-    var voidCodes = <?php echo json_encode($void_codes); ?>;
-
-    function clearReceipt() {
-        var code = prompt("Are you sure you want to clear all items in the list??!!");
-
-        // Check if the code matches
-        if (code === null || code.trim() === '') {
-            return; // User canceled or entered empty code
-        } else if (voidCodes.includes(code.trim())) {
-            ITEMS = [];
-            refresh_items_display();
-            setTimeout(function () {
-                location.reload();
-            }, 100);
-        } else {
-            alert("Incorrect code. Items not removed.");
-        }
-
-    }
-
     </script>
 </body>
 </html>
