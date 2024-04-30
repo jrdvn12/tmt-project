@@ -56,41 +56,6 @@
 
           
 
-<<<<<<< HEAD
-<div class="box-body">
-    <!-- Search bar -->
-    <div class="form-group">
-        <input type="text" id="searchInput" class="form-control" placeholder="Search..." oninput="filterProducts()">
-    </div>
-    <!-- Table -->
-    <table id="example1" class="table table-bordered">
-        <tbody id="productTableBody">
-            <?php
-            $sql = "SELECT * FROM product";
-            $query = $conn->query($sql);
-            while ($row = $query->fetch_assoc()) {
-                // Accessing the photo field directly within the loop
-                $image = (!empty($row['photo'])) ? '../images/' . $row['photo'] : '../images/noproduct.jpg';
-                echo "
-                <tr>
-                    <td>
-                        <div class='card text-right'> <!-- Added 'text-right' class to align the card to the right -->
-                            <div class='card-body'>
-                                <p> ".$row['product_number']."</p>
-                                <img src='".$image."' width='100px' height='150px' align='center'><br>
-                                <p> ".$row['product_name']."</p>
-                                <p>Price: ".$row['price']."</p>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                ";
-            }
-            ?>
-        </tbody>
-    </table>
-</div>
-=======
         <div class="box-body">
           <div class="form-group">
                 <label for="vendor_name" class="col-sm-2 control-label">Vendor Name</label>
@@ -149,7 +114,6 @@
                   </div>
                 </div>
               </div>
->>>>>>> e18b36166e7d2c1e4511a39fd0791b5892e61b78
 
 
 
