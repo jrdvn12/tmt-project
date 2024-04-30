@@ -95,7 +95,6 @@ $conn->close();
                                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                                 </div>                                     
                             </div>
-
                             <div style="border: 2px solid #ccc; padding: 5px;">
                                 <div style="max-height: 700px; overflow-y: auto;">
                                     <table id="example1" class="table table-bordered">
@@ -128,7 +127,6 @@ $conn->close();
                             </div>
                         </div>
                     </div>
-
                     <div class="col-md-3">
                       <div class="box box-solid" style="box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">
                           <div class="box-header with-border">
@@ -143,11 +141,10 @@ $conn->close();
                             </div>
                             <div class="pull-right">
                                 <button class="btn btn-primary">Checkout</button>
-                                <button class="btn btn-info my-2 w-100" onclick="clearReceipt()">Clear All</button>
                             </div>
                         </div>
-                    </div>
-
+                      </div>
+                  </div>
 
                 </div>
             </section>
@@ -159,7 +156,7 @@ $conn->close();
     <?php include 'includes/scripts.php'; ?>
 
 
-<script>
+    <script>
 
 function getRow(id) {
     $.ajax({
@@ -278,35 +275,32 @@ function calculateTotal() {
             receiptContent.innerHTML += totalHtml;
         }
 
-        function clearReceipt() {
-    // Prompt for authentication
-    var authenticationCode = prompt("Are you sure you want to clear all items in the list??!!");
-    
-    // Fetch authentication code from the server
-    fetch('/getAuthenticationCode')
-        .then(response => response.text())
-        .then(void_code => {
-            console.log("Retrieved code from the server:", void_code);
-            console.log("Input code:", authenticationCode);
-            
-            // Check if the authentication code is correct
-            if (authenticationCode.trim() === void_code.trim()) {
-                // Clear the content of the receipt
-                document.getElementById("receiptContent").innerHTML = "";
-                // Update the total display to show 0.00
-                document.getElementById("totalDisplay").innerHTML = "<strong>Total: ₱ 0.00</strong>";
-            } else {
-                // Alert for incorrect code
-                alert("Incorrect code. Items not removed.");
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching authentication code:', error);
-        });
-}
+    function clearReceipt() {
+        // Clear the content of the receipt
+        document.getElementById("receiptContent").innerHTML = "";
+        // Update the total display to show 0.00
+        document.getElementById("totalDisplay").innerHTML = "<strong>Total: ₱ 0.00</strong>";
+    }
 
+    var voidCodes = <?php echo json_encode($void_codes); ?>;
 
+    function clearReceipt() {
+        var code = prompt("Are you sure you want to clear all items in the list??!!");
 
+        // Check if the code matches
+        if (code === null || code.trim() === '') {
+            return; // User canceled or entered empty code
+        } else if (voidCodes.includes(code.trim())) {
+            ITEMS = [];
+            refresh_items_display();
+            setTimeout(function () {
+                location.reload();
+            }, 100);
+        } else {
+            alert("Incorrect code. Items not removed.");
+        }
+
+    }
 
     </script>
 </body>
