@@ -136,27 +136,28 @@ function getRow(id) {
         data: { id: id },
         dataType: 'json',
         success: function(response) {
-            $('.id').val(response.id);
-
-            //edit
-            $('.vendor_name').html(response.vendor_name);
-
-            $('#edit_email_address').val(response.email_address);
-
-            // Update the receipt content with the product details
-            var receiptContent = document.getElementById("receiptContent");
-            var itemHtml = "<p>" + response.product_number + ": ₱ " + response.price + "</p>";
-            receiptContent.insertAdjacentHTML('beforeend', itemHtml);
-
-            
-
+            // Check if the product already exists in the receipt
+            var existingProduct = $("#receiptContent p[data-product-id='" + response.id + "']");
+            if (existingProduct.length > 0) {
+                // If the product exists, update its quantity and price
+                var quantity = parseInt(existingProduct.attr('data-quantity')) + 1;
+                existingProduct.attr('data-quantity', quantity);
+                var totalPrice = quantity * response.price;
+                existingProduct.text(response.product_name + " (x" + quantity + "): ₱ " + totalPrice.toFixed(2));
+            } else {
+                // If the product does not exist, add it to the receipt
+                var itemHtml = "<p data-product-id='" + response.id + "' data-quantity='1'>" + response.product_name + ": ₱ " + response.price + "</p>";
+                $('#receiptContent').append(itemHtml);
+            }
+            // Recalculate the total
+            calculateTotal();
             // Clear search box and refocus
-            document.getElementById("searchInput").value = "";
-            document.getElementById("searchInput").focus();
+            $('#searchInput').val('');
+            $('#searchInput').focus();
         }
-
     });
 }
+
 /////////////////
 function clearReceipt() {
         // Clear the content of the receipt
