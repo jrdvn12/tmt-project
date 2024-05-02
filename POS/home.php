@@ -238,18 +238,21 @@ function calculateTotal() {
             document.getElementById("searchInput").focus();
         }
  
-        // Function to calculate the total price in the receipt
-        function calculateTotal() {
-            var total = 0;
-            var receiptItems = document.querySelectorAll("#receiptContent p");
-            receiptItems.forEach(function(item) {
-                var price = parseFloat(item.textContent.split(": $")[1]);
-                total += price;
-            });
+        
+        // Function to update the receipt section with product details
+        function updateReceipt(productDetails) {
             var receiptContent = document.getElementById("receiptContent");
-            var totalHtml = "<hr><p>Total: ₱ " + total.toFixed(2) + "</p>";
-            receiptContent.innerHTML += totalHtml;
+            var itemHtml = "<p>" + productDetails.product_name + ": ₱ " + productDetails.price + "</p>";  
+            receiptContent.insertAdjacentHTML('beforeend', itemHtml);
+            calculateTotal();
+            calculateCheckoutTotal(); // Update the total checkout amount
+            document.getElementById("searchInput").focus();
         }
+
+        // When the modal is shown
+        $('#check').on('shown.bs.modal', function() {
+            calculateCheckoutTotal();
+        });
     </script>
 </body>
 </html>

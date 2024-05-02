@@ -8,20 +8,18 @@
               <h4 class="modal-title"><b>Check Out</b></h4>
             </div>
             <div class="modal-body">
-              <form class="form-horizontal" method="POST" action="#">
-                <input type="hidden" class="id" name="id">
-                
-                    <div class="text-center">
+                <form class="form-horizontal" method="POST" action="#">
+                    <input type="hidden" class="id" name="id">
                     
-                        <h1><b> Total Amount ₱ 0.00<b></h1>
-                        
+                    <div class="text-center">
+                        <h1><b>Total Amount: ₱ <span id="checkoutTotal">0.00</span></b></h1>
                         <h2 class="bold fullname"></h2>
-                        <h1><b> Enter Amount<b></h1>
-                        <b><input type="text" class="form-control" id="amount" name="amount" required style="text-align: center; height: 100px;font-size: 80px;"></b>
-                        
+                        <h1><b>Enter Amount</b></h1>
+                        <input type="text" class="form-control" id="amount" name="amount" required style="text-align: center; height: 100px;font-size: 80px;">
                     </div>
-                
+                </form>
             </div>
+
             <div class="modal-footer">
               <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
               <button type="submit" class="btn btn-success btn-flat" name="delete"><i class="fa fa-arrow-right"></i> Proceed</button>
@@ -30,3 +28,17 @@
         </div>
     </div>
 </div>
+
+<script>
+function calculateCheckoutTotal() {
+    var receiptItems = document.querySelectorAll("#receiptContent p");
+    var total = 0;
+    for (var i = 0; i < receiptItems.length; i++) {
+        var price = parseFloat(receiptItems[i].textContent.split("₱")[1]); // Extract price from each item
+        total += price;
+    }
+    // Update the total amount display in the "Check Out" modal
+    document.getElementById("checkoutTotal").textContent = total.toFixed(2);
+}
+
+</script>
