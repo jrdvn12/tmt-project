@@ -143,7 +143,8 @@ function getRow(id) {
                 var quantity = parseInt(existingProduct.attr('data-quantity')) + 1;
                 existingProduct.attr('data-quantity', quantity);
                 var totalPrice = quantity * response.price;
-                existingProduct.text(response.product_name + " (x" + quantity + "): ₱ " + totalPrice.toFixed(2));
+               
+                existingProduct.text(response.product_name + " (x" + quantity +"): ₱ " + totalPrice.toFixed(2));
             } else {
                 // If the product does not exist, add it to the receipt
                 var itemHtml = "<p data-product-id='" + response.id + "' data-quantity='1'>" + response.product_name + ": ₱ " + response.price + "</p>";
