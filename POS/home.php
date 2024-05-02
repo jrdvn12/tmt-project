@@ -109,7 +109,7 @@ include 'includes/header.php';
                             <div class="pull-right">
                                 
                                 <a href='#check' data-toggle='modal' class='btn btn-primary ' ><i class='fa  fa-check-circle-o'></i> Checkout</a>
-                                <button class="btn btn-info my-2 w-100" onclick="clearReceipt()">Clear All</button>
+                                <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa  fa-trash'></i> Clear All</button>
 
 
                             </div>
