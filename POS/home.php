@@ -116,22 +116,12 @@ include 'includes/header.php';
                                 </div>
                                 <div class="js-gtotal alert alert-success" style="font-size:25px; font-weight:bold;">Total: ₱0.00</div>
 
-<<<<<<< HEAD
                         <div class="text-center"> <!-- Wrapping the buttons in a div with the text-center class -->
                             <button class="btn btn-success my-2 w-100" onclick="invoice_no()"><i class='fa fa-plus'></i> New</button>
                             <a href='#check' data-toggle='modal' class='btn btn-primary'><i class='fa fa-check-circle-o'></i> Checkout</a>
                             &nbsp;
                             <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
                         </div> 
-=======
-                                <div class="text-center"> <!-- Wrapping the buttons in a div with the text-center class -->
-                                    <a href='#check' data-toggle='modal' class='btn btn-primary' onclick="getRow(id)"><i class='fa fa-check-circle-o'></i> Checkout</a>
-                                    &nbsp;
-                                    <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
-                                </div> 
-                            </div>
-                        </div>
->>>>>>> 8427216fca3065bf7e6a47502696f1fe65d2cda5
                     </div>
 
             </div>
@@ -145,7 +135,6 @@ include 'includes/header.php';
     <?php include 'includes/scripts.php'; ?>
 
 
-<<<<<<< HEAD
     <script>
 function invoice_no(){
     
@@ -153,10 +142,6 @@ function invoice_no(){
     
                 $('#receiptContent').append(randomNumber);
 }
-=======
-<script>
-
->>>>>>> 8427216fca3065bf7e6a47502696f1fe65d2cda5
 function getRow(id) {
     $.ajax({
         type: 'POST',
