@@ -94,28 +94,38 @@ include 'includes/header.php';
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                      <div class="box box-solid" style="box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">
-                          <div class="box-header with-border">
-                              <h3 class="box-title">Receipt</h3>
-                          </div>
-                          <div class="box-body" id="receiptContent" style="height: 600px; overflow-y: scroll;">
-                              <!-- Receipt content will be added here -->
-                          </div>
-                          <div class="box-footer clearfix">
-                            <div class="pull-left" id="totalDisplay">
-                              <strong>Total: ₱ 0.00</strong>
-                            </div>
-                            <div class="pull-right">
-                                
-                                <a href='#check' data-toggle='modal' class='btn btn-primary ' ><i class='fa  fa-check-circle-o'></i> Checkout</a>
-                                <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa  fa-trash'></i> Clear All</button>
 
-
-                            </div>
+            <div class="col-md-3">
+                <div class="box box-solid" style="box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">
+                    <div class="box-body" id="receiptContent">
+                        <!-- Replace this comment with the provided HTML code -->
+                        
+                        <div><center><h3>Receipt</h3></center></div>
+                        <div class="table-responsive" style="height:400px;overflow-y: scroll;">
+                            <table class="table table-striped table-hover">
+                                <tr>
+                                    <th>Image</th><th>Description</th><th>Stock</th><th>Amount</th>
+                                </tr>
+                                <tbody class="js-items">
+                                <!-- This tbody will contain dynamically added items -->
+                                </tbody>
+                            </table>
                         </div>
-                      </div>
-                  </div>
+                        <div class="js-gtotal alert alert-success" style="font-size:25px; font-weight:bold;">Total: ₱0.00</div>
+
+                        <div class="text-center"> <!-- Wrapping the buttons in a div with the text-center class -->
+                            <a href='#check' data-toggle='modal' class='btn btn-primary'><i class='fa fa-check-circle-o'></i> Checkout</a>
+                            &nbsp;
+                            <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+
+
+
+                  <!-- <a href='#check' data-toggle='modal' class='btn btn-primary ' ><i class='fa  fa-check-circle-o'></i> Checkout</a>
+                <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa  fa-trash'></i> Clear All</button> -->
 
                 </div>
             </section>
