@@ -114,6 +114,7 @@ include 'includes/header.php';
                         <div class="js-gtotal alert alert-success" style="font-size:25px; font-weight:bold;">Total: ₱0.00</div>
 
                         <div class="text-center"> <!-- Wrapping the buttons in a div with the text-center class -->
+                            <button class="btn btn-success my-2 w-100" onclick="invoice_no()"><i class='fa fa-plus'></i> New</button>
                             <a href='#check' data-toggle='modal' class='btn btn-primary'><i class='fa fa-check-circle-o'></i> Checkout</a>
                             &nbsp;
                             <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
@@ -138,7 +139,12 @@ include 'includes/header.php';
 
 
     <script>
-
+function invoice_no(){
+    
+    var randomNumber= rand(1, 100);
+    
+                $('#receiptContent').append(randomNumber);
+}
 function getRow(id) {
     $.ajax({
         type: 'POST',
