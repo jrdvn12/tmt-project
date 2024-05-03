@@ -95,39 +95,38 @@ include 'includes/header.php';
                         </div>
                     </div>
 
-            <div class="col-md-3">
-                <div class="box box-solid" style="box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">
-                    <div class="box-body" id="receiptContent">
-                        <!-- Replace this comment with the provided HTML code -->
-                        
-                        <div><center><h3>Receipt</h3></center></div>
-                        <div class="table-responsive" style="height:400px;overflow-y: scroll;">
-                            <table class="table table-striped table-hover">
-                                <tr>
-                                    <th>Image</th><th>Description</th><th>Stock</th><th>Amount</th>
-                                </tr>
-                                <tbody class="js-items">
-                                <!-- This tbody will contain dynamically added items -->
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="js-gtotal alert alert-success" style="font-size:25px; font-weight:bold;">Total: ₱0.00</div>
+                    <div class="col-md-3">
+                        <div class="box box-solid" style="box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">
+                            <div class="box-body" id="receiptContent">
+                                <!-- Replace this comment with the provided HTML code -->
+                                
+                                <div><center><h3>Receipt</h3></center></div>
+                                <div class="table-responsive" style="height:400px;overflow-y: scroll;">
+                                    <table class="table table-striped table-hover">
+                                        <tr>
+                                            <th style="padding-right: 20px;">Image</th>
+                                            <th style="padding-right: 20px;">Description</th>
+                                            <th style="padding-right: 20px;">Stock</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                        <tbody class="js-items">
+                                        <!-- This tbody will contain dynamically added items -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="js-gtotal alert alert-success" style="font-size:25px; font-weight:bold;">Total: ₱0.00</div>
 
-                        <div class="text-center"> <!-- Wrapping the buttons in a div with the text-center class -->
-                            <a href='#check' data-toggle='modal' class='btn btn-primary'><i class='fa fa-check-circle-o'></i> Checkout</a>
-                            &nbsp;
-                            <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
-                        </div> 
+                                <div class="text-center"> <!-- Wrapping the buttons in a div with the text-center class -->
+                                    <a href='#check' data-toggle='modal' class='btn btn-primary' onclick="getRow(id)"><i class='fa fa-check-circle-o'></i> Checkout</a>
+                                    &nbsp;
+                                    <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
+                                </div> 
+                            </div>
+                        </div>
                     </div>
-                </div>
+
             </div>
 
-
-
-                  <!-- <a href='#check' data-toggle='modal' class='btn btn-primary ' ><i class='fa  fa-check-circle-o'></i> Checkout</a>
-                <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa  fa-trash'></i> Clear All</button> -->
-
-                </div>
             </section>
             <?php include 'includes/footer.php'; ?>
             <?php include 'includes/checkout_modal.php'; ?>
@@ -137,7 +136,7 @@ include 'includes/header.php';
     <?php include 'includes/scripts.php'; ?>
 
 
-    <script>
+<script>
 
 function getRow(id) {
     $.ajax({
@@ -265,6 +264,9 @@ function calculateTotal() {
         $('#check').on('shown.bs.modal', function() {
             calculateCheckoutTotal();
         });
+
+
+        
     </script>
 </body>
 </html>
