@@ -63,7 +63,11 @@
                     <tbody>
                         
                     <?php
-                    $sql = "SELECT product_id, product_name,GROUP_CONCAT(id) AS ids, GROUP_CONCAT(item_need) AS item_needs, GROUP_CONCAT(loads) AS loads FROM product_needs GROUP BY product_id";
+                    $sql = "SELECT product_id, product_name,GROUP_CONCAT(id) AS ids,
+                    GROUP_CONCAT(item_need) AS item_needs, 
+                    GROUP_CONCAT(loads) AS loads
+                    FROM product_needs
+                    GROUP BY product_id";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                         $ids = explode(',', $row['ids']);
