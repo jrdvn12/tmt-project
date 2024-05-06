@@ -58,7 +58,7 @@ include 'includes/header.php';
                                 </div>
                                 
                                 <div class="input-group">        
-                                    <input type="text" id="searchInput" class="form-control" placeholder="Search..." oninput="filterProducts()">
+                                    <input type="text" id="searchInput" onkeyup="getRow('CGB')" class="form-control" placeholder="Search..." oninput="filterProducts()">
                                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                                 </div>                                     
                             </div>
@@ -99,7 +99,7 @@ include 'includes/header.php';
                             <div class="box-header with-border">
                                 <h3 class="box-title">Receipt</h3>
                             </div>
-                            <div class="box-body" id="receiptContent" style="height: 650px; overflow-y: scroll;">
+                            <div class="box-body" id="receiptContent" style="height: 560px; overflow-y: scroll;">
                                 <!-- Receipt content will be added here -->
                             </div>
                             <div class="box-footer clearfix">
@@ -154,39 +154,84 @@ function getRow(id) {
                 var totalPrice = quantity * response.price;
                 var totalDisplay = existingProduct.find('.total-price');
                 totalDisplay.text("Total: ₱" + totalPrice.toFixed(2));
+
+                // Set focus on the quantity input field
+                quantityElement.focus();
             } else {
                 // If the product does not exist, add it to the receipt
                 var imageSrc = response.photo ? '../images/' + response.photo : '../images/noproduct.jpg';
                 var itemHtml = `
-                <div class="card" data-product-id="${response.id}" data-quantity="1">
-                    <div class="card-body text-center"> <!-- Center-align the card body content -->
-                        <img src="${imageSrc}" width="150px" height="200px" align="center">
-                        <p>${response.product_number} Price: ₱${response.price}</p>
-                        <div class="input-group">
-                            <span class="input-group-btn">
-                                <button class="btn btn-sm btn-danger remove-product">-</button>
-                            </span>
-                            <input type="text" class="form-control text-center quantity" value="1" readonly> <!-- Center-align the quantity textbox -->
-                            <span class="input-group-btn">
-                                <button class="btn btn-sm btn-danger add-product">+</button>
-                            </span>
+                    <div class="card" data-product-id="${response.id}" data-quantity="1" tabindex="0">
+                        <div class="card-body text-center"> <!-- Center-align the card body content -->
+                            <img src="${imageSrc}" width="150px" height="200px" align="center">
+                            <p>${response.product_number} Price: ₱${response.price}</p>
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-danger remove-product">-</button>
+                                </span>
+                                <input type="text" class="form-control text-center quantity" value="1" readonly> <!-- Center-align the quantity textbox -->
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-danger add-product">+</button>
+                                </span>
+                            </div>
+                            <div class="total-price">Total: ₱${response.price}</div>
                         </div>
-                        <div class="total-price">Total: ₱${response.price}</div>
-                    </div>
-                </div>`;
+                    </div>`;
                 $('#receiptContent').append(itemHtml);
+
+                // Set focus on the quantity input field
+                $('#receiptContent .card').last().find('.quantity').focus();
             }
+            
             // Recalculate the total
             calculateTotal();
             // Clear search box and refocus
             $('#searchInput').val('');
             $('#searchInput').focus();
-           
         }
     });
 }
 
+// Function to maintain focus when user clicks "more"
+$('.more-button').click(function() {
+    $('#searchInput').focus();
+});
 
+
+function checkForEnterKey(e) {
+    if (e.keyCode === 13) {
+        e.preventDefault();
+        searchItem(e);
+    }
+}
+
+function searchItem(e) {
+    var text = e.target.value.trim();
+    var data = {};
+    data.data_type = "search";
+    data.text = text;
+    send_data(data);
+}
+
+function send_data(data) {
+    // Implement your AJAX logic to send data to the server
+    // Example AJAX call:
+ 
+    $.ajax({
+        type: 'POST',
+        url: 'your_server_endpoint.php',
+        data: data,
+        dataType: 'json',
+        success: function(response) {
+            // Handle response from the server
+        },
+        error: function(xhr, status, error) {
+            // Handle error
+            console.error(error);
+        }
+    });
+
+}
 
 
 
@@ -211,12 +256,11 @@ function calculateTotal() {
     // Display the total amount in the totalDisplay div
     var totalDisplay = document.getElementById("totalDisplay");
     totalDisplay.textContent = "Total: ₱" + total.toFixed(2);
-
+    
+    var checkoutTotal = document.getElementById("checkoutTotal");
+    checkoutTotal.textContent =  total.toFixed(2);
+    
 }
-
-
-
-
 
         // JavaScript for filtering table rows
         function filterProducts() {

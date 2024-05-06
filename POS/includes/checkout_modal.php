@@ -30,15 +30,20 @@
 </div>
 
 <script>
-function calculateCheckoutTotal() {
-    var receiptItems = document.querySelectorAll("#receiptContent p");
+function calculateTotal() {
+    var receiptItems = document.querySelectorAll("#receiptContent .total-price");
     var total = 0;
     for (var i = 0; i < receiptItems.length; i++) {
         var price = parseFloat(receiptItems[i].textContent.split("₱")[1]); // Extract price from each item
         total += price;
     }
-    // Update the total amount display in the "Check Out" modal
-    document.getElementById("checkoutTotal").textContent = total.toFixed(2);
+    // Display the total amount in the totalDisplay div
+    var totalDisplay = document.getElementById("totalDisplay");
+    totalDisplay.textContent = "Total: ₱" + total.toFixed(2);
+    
+    var checkoutTotal = document.getElementById("checkoutTotal");
+    checkoutTotal.textContent =  total.toFixed(2);
+    
 }
 
 </script>
