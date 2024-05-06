@@ -165,7 +165,7 @@ function getRow(id) {
                         <div class="card-body text-center">
                             
                             
-                                <img src="${imageSrc}" width="50px" height="100px" align="center">
+                                <img src="${imageSrc}" width="200px" height="350px" align="center">
                                 <h3 >${response.product_number} Price : ₱${response.price}</h3>
                           
                                 
