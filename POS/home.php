@@ -19,7 +19,7 @@ include 'includes/header.php';
 
             <section class="content">
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-9">
                         <?php
                         if(isset($_SESSION['error'])){
                             echo "
@@ -64,7 +64,7 @@ include 'includes/header.php';
                             </div>
                             <div style="border: 2px solid #ccc; padding: 5px;">
                                 <div style="max-height: 700px; overflow-y: auto;">
-                                    <table id="example1" class="table table-bordered" style="width: 100%;">
+                                    <table id="example1" class="table table-bordered">
                                         <tbody id="productTableBody">
                                             <?php
                                             $sql = "SELECT * FROM product";
@@ -92,42 +92,30 @@ include 'includes/header.php';
                                     </table>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
-                    <div class="col-md-5" style="margin-top: 58px;">
+                    <div class="col-md-3">
                         <div class="box box-solid" style="box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">
-                            <div class="box-body" id="receiptContent">
-                                <div><center><h3>Receipt</h3></center></div>
-                                <div class="table-responsive" style="height: 400px; overflow-y: scroll;">
-                                    <table class="table table-striped table-hover">
-                                        <thead> <!-- Added thead element -->
-                                            <tr>
-                                                <th>Description</th>
-                                                <th>Stock</th>
-                                                <th>Amount</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="js-items">
-                                            <!-- This tbody will contain dynamically added items -->
-                                        </tbody>
-                                    </table>
-                                </div>
-
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Receipt</h3>
                             </div>
+                            <div class="box-body" id="receiptContent" style="height: 650px; overflow-y: scroll;">
+                                <!-- Receipt content will be added here -->
+                            </div>
+                            <div class="box-footer clearfix">
+                                <div class="pull-left">
+                                <div class="js-gtotal alert alert-success" id="totalDisplay" style="font-size:25px; font-weight:bold;">Total: ₱0.00</div>
+                                </div>
+                                <div class="pull-right">
+                                <a href='#check' data-toggle='modal' class='btn btn-primary' onclick='calculateAndDisplayTotal()'><i class='fa fa-check-circle-o'></i> Checkout</a>
 
-                                <div class="js-gtotal alert alert-success" style="font-size:25px; font-weight:bold;">Total: ₱0.00</div>
-
-                                <div class="text-center"> <!-- Wrapping the buttons in a div with the text-center class -->
-                                    <button class="btn btn-success my-2 w-100" onclick="invoice_no()"><i class='fa fa-plus'></i> New</button>
-                                    <a href='#check' data-toggle='modal' class='btn btn-primary'><i class='fa fa-check-circle-o'></i> Checkout</a>
-                                    &nbsp;
-                                    <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
-                                </div> 
+                                <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    
+
             </div>
 
             </section>
@@ -140,6 +128,9 @@ include 'includes/header.php';
 
 
     <script>
+
+
+
 function invoice_no(){
     
     var randomNumber= rand(1, 100);
@@ -154,17 +145,35 @@ function getRow(id) {
         dataType: 'json',
         success: function(response) {
             // Check if the product already exists in the receipt
-            var existingProduct = $("#receiptContent p[data-product-id='" + response.id + "']");
+            var existingProduct = $("#receiptContent .card[data-product-id='" + response.id + "']");
             if (existingProduct.length > 0) {
                 // If the product exists, update its quantity and price
-                var quantity = parseInt(existingProduct.attr('data-quantity')) + 1;
-                existingProduct.attr('data-quantity', quantity);
+                var quantityElement = existingProduct.find('.quantity');
+                var quantity = parseInt(quantityElement.val()) + 1;
+                quantityElement.val(quantity);
                 var totalPrice = quantity * response.price;
-               
-                existingProduct.text(response.product_name + " (x" + quantity +"): ₱ " + totalPrice.toFixed(2));
+                var totalDisplay = existingProduct.find('.total-price');
+                totalDisplay.text("Total: ₱" + totalPrice.toFixed(2));
             } else {
                 // If the product does not exist, add it to the receipt
-                var itemHtml = "<p data-product-id='" + response.id + "' data-quantity='1'>" + response.product_name + ": ₱ " + response.price + "</p>";
+                var imageSrc = response.photo ? '../images/' + response.photo : '../images/noproduct.jpg';
+                var itemHtml = `
+                <div class="card" data-product-id="${response.id}" data-quantity="1">
+                    <div class="card-body text-center"> <!-- Center-align the card body content -->
+                        <img src="${imageSrc}" width="150px" height="200px" align="center">
+                        <p>${response.product_number} Price: ₱${response.price}</p>
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-danger remove-product">-</button>
+                            </span>
+                            <input type="text" class="form-control text-center quantity" value="1" readonly> <!-- Center-align the quantity textbox -->
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-danger add-product">+</button>
+                            </span>
+                        </div>
+                        <div class="total-price">Total: ₱${response.price}</div>
+                    </div>
+                </div>`;
                 $('#receiptContent').append(itemHtml);
             }
             // Recalculate the total
@@ -172,9 +181,14 @@ function getRow(id) {
             // Clear search box and refocus
             $('#searchInput').val('');
             $('#searchInput').focus();
+           
         }
     });
 }
+
+
+
+
 
 /////////////////
 function clearReceipt() {
@@ -182,20 +196,25 @@ function clearReceipt() {
         document.getElementById("receiptContent").innerHTML = "";
         // Update the total display to show 0.00
         document.getElementById("totalDisplay").innerHTML = "<strong>Total: ₱ 0.00</strong>";
+
+ 
     }
 
 ///////////////////////
 function calculateTotal() {
-    var receiptItems = document.querySelectorAll("#receiptContent p");
+    var receiptItems = document.querySelectorAll("#receiptContent .total-price");
     var total = 0;
     for (var i = 0; i < receiptItems.length; i++) {
         var price = parseFloat(receiptItems[i].textContent.split("₱")[1]); // Extract price from each item
         total += price;
     }
-    // Display the total amount in the receipt
+    // Display the total amount in the totalDisplay div
     var totalDisplay = document.getElementById("totalDisplay");
     totalDisplay.textContent = "Total: ₱" + total.toFixed(2);
+
 }
+
+
 
 
 
