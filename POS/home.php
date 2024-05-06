@@ -57,10 +57,11 @@ include 'includes/header.php';
                                     </select>
                                 </div>
                                 
+                               
                                 <div class="input-group">        
-                                    <input type="text" id="searchInput" onkeyup="getRow('CGB')" class="form-control" placeholder="Search..." oninput="filterProducts()">
+                                    <input type="text" id="searchInput" class="form-control" placeholder="Search..." onkeydown="searchAndAddToReceipt(event)">
                                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                </div>                                     
+                                </div>                                  
                             </div>
                             <div style="border: 2px solid #ccc; padding: 5px;">
                                 <div style="max-height: 700px; overflow-y: auto;">
@@ -95,25 +96,24 @@ include 'includes/header.php';
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="box box-solid" style="box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Receipt</h3>
-                            </div>
-                            <div class="box-body" id="receiptContent" style="height: 560px; overflow-y: scroll;">
-                                <!-- Receipt content will be added here -->
-                            </div>
-                            <div class="box-footer clearfix">
-                                <div class="pull-left">
-                                <div class="js-gtotal alert alert-success" id="totalDisplay" style="font-size:25px; font-weight:bold;">Total: ₱0.00</div>
-                                </div>
-                                <div class="pull-right">
-                                <a href='#check' data-toggle='modal' class='btn btn-primary' onclick='calculateAndDisplayTotal()'><i class='fa fa-check-circle-o'></i> Checkout</a>
-
-                                <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="box box-solid" style="box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">
+        <div class="box-header with-border">
+            <h3 class="box-title">Receipt</h3>
+        </div>
+        <div class="box-body" id="receiptContent" style="height: 560px; overflow-y: scroll;">
+            <!-- Receipt content will be added here -->
+        </div>
+        <div class="box-footer clearfix">
+            <div class="pull-left">
+                <div class="js-gtotal alert alert-success" id="totalDisplay" style="font-size:25px; font-weight:bold;">Total: ₱0.00</div>
+            </div>
+            <div class="pull-right">
+                <a href='#check' data-toggle='modal' class='btn btn-primary' onclick='calculateAndDisplayTotal()'><i class='fa fa-check-circle-o'></i> Checkout</a>
+                <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
+            </div>
+        </div>
+    </div>
+</div> 
                     
 
             </div>
@@ -198,41 +198,36 @@ $('.more-button').click(function() {
 });
 
 
-function checkForEnterKey(e) {
-    if (e.keyCode === 13) {
-        e.preventDefault();
-        searchItem(e);
+//////////////////
+function searchAndAddToReceipt(event) {
+    if (event.key === 'Enter') {
+        var searchInput = document.getElementById("searchInput");
+        var searchedItem = searchInput.value.trim().toUpperCase();
+        
+        // Filter products and add to receipt
+        var products = document.querySelectorAll(".productRow");
+        for (var i = 0; i < products.length; i++) {
+            var product = products[i].querySelector(".card-body").innerText.toUpperCase();
+            if (product.includes(searchedItem)) {
+                addToReceipt(products[i].innerHTML);
+            }
+        }
+        
+        // Clear search input
+        searchInput.value = '';
     }
 }
 
-function searchItem(e) {
-    var text = e.target.value.trim();
-    var data = {};
-    data.data_type = "search";
-    data.text = text;
-    send_data(data);
+function addToReceipt(item) {
+    var receiptContent = document.getElementById('receiptContent');
+    
+    // Create a new div element for the item
+    var newItem = document.createElement('div');
+    newItem.innerHTML = item;
+    
+    // Append the new item to the receipt content
+    receiptContent.appendChild(newItem);
 }
-
-function send_data(data) {
-    // Implement your AJAX logic to send data to the server
-    // Example AJAX call:
- 
-    $.ajax({
-        type: 'POST',
-        url: 'your_server_endpoint.php',
-        data: data,
-        dataType: 'json',
-        success: function(response) {
-            // Handle response from the server
-        },
-        error: function(xhr, status, error) {
-            // Handle error
-            console.error(error);
-        }
-    });
-
-}
-
 
 
 /////////////////
