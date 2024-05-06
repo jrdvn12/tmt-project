@@ -59,7 +59,7 @@ include 'includes/header.php';
                                 
                                
                                 <div class="input-group">        
-                                    <input type="text" id="searchInput" class="form-control" placeholder="Search..." onkeydown="searchAndAddToReceipt(event)">
+                                    <input type="text" id="searchInput" class="form-control" placeholder="Search..." oninput="filterProducts()" onkeydown="searchAndAddToReceipt(event)">
                                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                                 </div>                                  
                             </div>
@@ -73,7 +73,7 @@ include 'includes/header.php';
                                             while ($row = $query->fetch_assoc()) {
                                                 $image = (!empty($row['photo'])) ? '../images/' . $row['photo'] : '../images/noproduct.jpg';
                                                 echo "
-                                                    <tr class='productRow' onclick='getRow(" . $row['id'] . ")'>
+                                                <tr class='productRow' onclick='getRow(" . $row['id'] . ")'>
                                                         <td>
                                                             <div class='card'>
                                                                 <div class='card-body'>
@@ -103,12 +103,12 @@ include 'includes/header.php';
         <div class="box-body" id="receiptContent" style="height: 560px; overflow-y: scroll;">
             <!-- Receipt content will be added here -->
         </div>
-        <div class="box-footer clearfix">
+        <div class="box-footer">
             <div class="pull-left">
-                <div class="js-gtotal alert alert-success" id="totalDisplay" style="font-size:25px; font-weight:bold;">Total: ₱0.00</div>
+                <div class="js-gtotal alert alert-success" id="totalDisplay" style="font-size:18px; font-weight:bold;">Total: ₱0.00</div>
             </div>
             <div class="pull-right">
-                <a href='#check' data-toggle='modal' class='btn btn-primary' onclick='calculateAndDisplayTotal()'><i class='fa fa-check-circle-o'></i> Checkout</a>
+                <a href='#' data-toggle='modal' class='btn btn-primary' onclick='openCheckModal()'><i class='fa fa-check-circle-o'></i> Checkout</a>
                 <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
             </div>
         </div>
@@ -162,17 +162,27 @@ function getRow(id) {
                 var imageSrc = response.photo ? '../images/' + response.photo : '../images/noproduct.jpg';
                 var itemHtml = `
                     <div class="card" data-product-id="${response.id}" data-quantity="1" tabindex="0">
-                        <div class="card-body text-center"> <!-- Center-align the card body content -->
-                            <img src="${imageSrc}" width="150px" height="200px" align="center">
-                            <p>${response.product_number} Price: ₱${response.price}</p>
+                        <div class="card-body text-center">
+                            
+                            
+                                <img src="${imageSrc}" width="50px" height="100px" align="center">
+                                <h3 >${response.product_number} Price : ₱${response.price}</h3>
+                          
+                                
+                              
                             <div class="input-group">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-sm btn-danger remove-product">-</button>
+                                    <button class="btn btn-sm btn-primary remove-product">-</button>
                                 </span>
-                                <input type="text" class="form-control text-center quantity" value="1" readonly> <!-- Center-align the quantity textbox -->
-                                <span class="input-group-btn"> <button class="btn btn-sm btn-danger add-product">+</button></span>
+
+                                <input type="text" class="form-control text-center quantity" value="1" readonly>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-primary add-product">+</button>
+                                </span>
                             </div>
-                            <div class="total-price">Total: ₱${response.price}</div>
+                            <div class="total-price">Total : ₱${response.price}</div>
+                            <button class="btn btn-danger my-2 w-100 remove-item-button"><i class='fa fa-trash'></i> REMOVE ITEM</button>
+
                         </div>
                     </div>`;
                 $('#receiptContent').append(itemHtml);
@@ -190,43 +200,46 @@ function getRow(id) {
     });
 }
 
-// Function to maintain focus when user clicks "more"
-$('.more-button').click(function() {
-    $('#searchInput').focus();
-});
+
 
 //////////////////
 //////////////////
 //////////////////
 function searchAndAddToReceipt(event) {
+    console.log("searchAndAddToReceipt function called"); // Add this line for debugging
     if (event.key === 'Enter') {
         var searchInput = document.getElementById("searchInput");
+        var searchInputId = document.getElementById("searchInput").value;
         var searchedItem = searchInput.value.trim().toUpperCase();
         
         // Filter products and add to receipt
         var products = document.querySelectorAll(".productRow");
-        for (var i = 0; i < products.length; i++) {
-            var product = products[i].querySelector(".card-body").innerText.toUpperCase();
-            if (product.includes(searchedItem)) {
-                addToReceipt(products[i].innerHTML);
+
+        if(searchInput.value ===''){
+            searchInput.value = '';
+            filterProducts();
+        }else{
+            for (var i = 0; i < products.length; i++) {
+                var product = products[i].querySelector(".card-body").innerText.toUpperCase();
+                if (product.includes(searchedItem)) {
+                    //var ids = products[i].getAttribute('data-product-id');
+                    //addToReceipt(ids[i].innerHTML);
+                    //addToReceipt(searchInputId); 
+                    getRow(searchInputId);
+                   
+                }
             }
         }
         
         // Clear search input
         searchInput.value = '';
+        filterProducts();
     }
 }
 
-function addToReceipt(item) {
-    var receiptContent = document.getElementById('receiptContent');
-    
-    // Create a new div element for the item
-    var newItem = document.createElement('div');
-    newItem.innerHTML = item;
-    
-    // Append the new item to the receipt content
-    receiptContent.appendChild(newItem);
-}
+
+
+
 
 
 /////////////////
@@ -234,7 +247,7 @@ function clearReceipt() {
         // Clear the content of the receipt
         document.getElementById("receiptContent").innerHTML = "";
         // Update the total display to show 0.00
-        document.getElementById("totalDisplay").innerHTML = "<strong>Total: ₱ 0.00</strong>";
+        document.getElementById("totalDisplay").innerHTML = "<strong>Total : ₱ 0.00</strong>";
 
  
     }
@@ -285,6 +298,22 @@ function calculateTotal() {
             document.getElementById("searchInput").focus();
         };
 
+ /*
+ 
+ // Function to maintain focus when user clicks "more"
+$('.more-button').click(function() {
+    $('#searchInput').focus();
+});
+ function addToReceipt(item) {
+    var receiptContent = document.getElementById('receiptContent');
+    
+    // Create a new div element for the item
+    var newItem = document.createElement('div');
+    newItem.innerHTML = item;
+    
+    // Append the new item to the receipt content
+    receiptContent.appendChild(newItem);
+}
         // Function to handle product click event
         function redirectToProductDetails(productId) {
 
@@ -306,7 +335,7 @@ function calculateTotal() {
         }
 
         // Function to update the receipt section with product details
-        function updateReceipt(productDetails) {
+       function updateReceipt(productDetails) {
             var receiptContent = document.getElementById("receiptContent");
             var itemHtml = "<p>" + productDetails.product_name + ": ₱ " + productDetails.price + "</p>";  
             receiptContent.insertAdjacentHTML('beforeend', itemHtml);
@@ -328,10 +357,67 @@ function calculateTotal() {
         // When the modal is shown
         $('#check').on('shown.bs.modal', function() {
             calculateCheckoutTotal();
-        });
+        });*/
+
+//new
+function openCheckModal() {
+        // Clear the value of the input field with id "amount"
+        document.getElementById("total_amount_gross").value = "";
+
+        // Open the modal
+        $('#check').modal('show');
+    }
 
 
+
+        // Add an event listener to the "REMOVE ITEM" button
+        document.addEventListener('click', function(event) {
+    if (event.target && event.target.classList.contains('remove-item-button')) {
         
+        var card = event.target.closest('.card');
+       
+        console.log("Attempting to remove card element...");
+      
+        if (okayToRemoveCard()) {
+            
+            card.remove();      
+            calculateTotal();
+        } else {
+      
+        }
+    }
+});
+
+function okayToRemoveCard() {
+   
+    return confirm("Are you sure you want to remove this item?");
+}
+
+
+
+// Add event listener for removing a product
+document.addEventListener('click', function(event) {
+    if (event.target && event.target.classList.contains('remove-product')) {
+        var quantityInput = event.target.parentElement.nextElementSibling;
+        var quantity = parseInt(quantityInput.value);
+        if (quantity > 1) {
+            quantityInput.value = quantity - 1;
+            // Recalculate total
+            calculateTotal();
+        }
+    }
+});
+
+// Add event listener for adding a product
+document.addEventListener('click', function(event) {
+    if (event.target && event.target.classList.contains('add-product')) {
+        var quantityInput = event.target.parentElement.previousElementSibling;
+        var quantity = parseInt(quantityInput.value);
+        quantityInput.value = quantity + 1;
+        // Recalculate total
+        calculateTotal();
+    }
+});
     </script>
 </body>
 </html>
