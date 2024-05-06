@@ -19,7 +19,7 @@ include 'includes/header.php';
 
             <section class="content">
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-7">
                         <?php
                         if(isset($_SESSION['error'])){
                             echo "
@@ -64,7 +64,7 @@ include 'includes/header.php';
                             </div>
                             <div style="border: 2px solid #ccc; padding: 5px;">
                                 <div style="max-height: 700px; overflow-y: auto;">
-                                    <table id="example1" class="table table-bordered">
+                                    <table id="example1" class="table table-bordered" style="width: 100%;">
                                         <tbody id="productTableBody">
                                             <?php
                                             $sql = "SELECT * FROM product";
@@ -92,38 +92,42 @@ include 'includes/header.php';
                                     </table>
                                 </div>
                             </div>
+
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-5" style="margin-top: 58px;">
                         <div class="box box-solid" style="box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">
                             <div class="box-body" id="receiptContent">
-                                <!-- Replace this comment with the provided HTML code -->
-                                
                                 <div><center><h3>Receipt</h3></center></div>
-                                <div class="table-responsive" style="height:400px;overflow-y: scroll;">
+                                <div class="table-responsive" style="height: 400px; overflow-y: scroll;">
                                     <table class="table table-striped table-hover">
-                                        <tr>
-                                            <th style="padding-right: 20px;">Image</th>
-                                            <th style="padding-right: 20px;">Description</th>
-                                            <th style="padding-right: 20px;">Stock</th>
-                                            <th>Amount</th>
-                                        </tr>
+                                        <thead> <!-- Added thead element -->
+                                            <tr>
+                                                <th>Description</th>
+                                                <th>Stock</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
                                         <tbody class="js-items">
-                                        <!-- This tbody will contain dynamically added items -->
+                                            <!-- This tbody will contain dynamically added items -->
                                         </tbody>
                                     </table>
                                 </div>
+
+                            </div>
+
                                 <div class="js-gtotal alert alert-success" style="font-size:25px; font-weight:bold;">Total: ₱0.00</div>
 
-                        <div class="text-center"> <!-- Wrapping the buttons in a div with the text-center class -->
-                            <button class="btn btn-success my-2 w-100" onclick="invoice_no()"><i class='fa fa-plus'></i> New</button>
-                            <a href='#check' data-toggle='modal' class='btn btn-primary'><i class='fa fa-check-circle-o'></i> Checkout</a>
-                            &nbsp;
-                            <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
-                        </div> 
+                                <div class="text-center"> <!-- Wrapping the buttons in a div with the text-center class -->
+                                    <button class="btn btn-success my-2 w-100" onclick="invoice_no()"><i class='fa fa-plus'></i> New</button>
+                                    <a href='#check' data-toggle='modal' class='btn btn-primary'><i class='fa fa-check-circle-o'></i> Checkout</a>
+                                    &nbsp;
+                                    <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
+                                </div> 
+                            </div>
+                        </div>
                     </div>
-
             </div>
 
             </section>
