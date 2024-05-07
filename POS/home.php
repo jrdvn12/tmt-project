@@ -77,6 +77,7 @@ include 'includes/header.php';
                                                         <td>
                                                             <div class='card'>
                                                                 <div class='card-body'>
+                                                                    <p id='productId'>". $row['id'] ."</p> <!-- Assigned an ID here -->
                                                                     <p>" . $row['product_number'] . "</p>
                                                                     <img src='" . $image . "' width='100px' height='150px' align='center'><br>
                                                                     <p>" . $row['product_name'] . "</p>
@@ -127,9 +128,7 @@ include 'includes/header.php';
     <?php include 'includes/scripts.php'; ?>
 
 
-    <script>
-
-
+<script>
 
 function invoice_no(){
     
@@ -211,9 +210,10 @@ function searchAndAddToReceipt(event) {
         var searchInput = document.getElementById("searchInput");
         var searchInputId = document.getElementById("searchInput").value;
         var searchedItem = searchInput.value.trim().toUpperCase();
-        
+        var searchInputId = document.getElementById("searchInput").value;
         // Filter products and add to receipt
         var products = document.querySelectorAll(".productRow");
+        var productId = document.getElementById('productId').value; 
 
         if(searchInput.value ===''){
             searchInput.value = '';
@@ -222,10 +222,10 @@ function searchAndAddToReceipt(event) {
             for (var i = 0; i < products.length; i++) {
                 var product = products[i].querySelector(".card-body").innerText.toUpperCase();
                 if (product.includes(searchedItem)) {
-                    //var ids = products[i].getAttribute('data-product-id');
-                    //addToReceipt(ids[i].innerHTML);
+                    var ids = products[i].getAttribute('data-product-id');
+                    addToReceipt(productId);
                     //addToReceipt(searchInputId); 
-                    getRow(searchInputId);
+                    //getRow(searchInputId);
                    
                 }
             }
@@ -298,12 +298,13 @@ function calculateTotal() {
             document.getElementById("searchInput").focus();
         };
 
- /*
+ 
  
  // Function to maintain focus when user clicks "more"
 $('.more-button').click(function() {
     $('#searchInput').focus();
 });
+
  function addToReceipt(item) {
     var receiptContent = document.getElementById('receiptContent');
     
@@ -313,7 +314,7 @@ $('.more-button').click(function() {
     
     // Append the new item to the receipt content
     receiptContent.appendChild(newItem);
-}
+}/*
         // Function to handle product click event
         function redirectToProductDetails(productId) {
 
