@@ -103,16 +103,33 @@ include 'includes/header.php';
             <h3 class="box-title">Receipt</h3>
         </div>
         <div class="box-body" id="receiptContent" style="height: 560px; overflow-y: scroll;">
-            <!-- Receipt content will be added here -->
-        </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Photo</th>
+                <th>Product Number</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="receiptTableBody">
+            <!-- Receipt items will be added here -->
+        </tbody>
+    </table>
+</div>
+
         <div class="box-footer">
             <div class="pull-left">
                 <div class="js-gtotal alert alert-success" id="totalDisplay" style="font-size:18px; font-weight:bold;">Total: ₱0.00</div>
             </div>
             <div class="pull-right">
-                <a href='#' data-toggle='modal' class='btn btn-primary' onclick='getAllDataFromReceiptContent()'><i class='fa fa-check-circle-o'></i> Checkout</a>
+                <!-- <a href='#' data-toggle='modal' class='btn btn-primary' onclick='getAllDataFromReceiptContent()'><i class='fa fa-check-circle-o'></i> Checkout</a> -->
+                <a href='#' data-toggle='modal' class='btn btn-primary' onclick='openCheckModal()'><i class='fa fa-check-circle-o'></i> Checkout</a>
                 <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
                 <button type="submit" class="btn btn-success btn-flat" name="delete" onclick='getAllDataFromReceiptContent()'><i class="fa fa-arrow-right"></i> Proceed</button>
+                
             </div>
         </div>
     </div>
@@ -150,60 +167,38 @@ function getRow(id) {
         dataType: 'json',
         success: function(response) {
             // Check if the product already exists in the receipt
-            var existingProduct = $("#receiptContent .card[data-product-id='" + response.id + "']");
-            if (existingProduct.length > 0) {
+            var existingRow = $("#receiptTableBody tr[data-product-id='" + response.id + "']");
+            if (existingRow.length > 0) {
                 // If the product exists, update its quantity and price
-                var quantityElement = existingProduct.find('.quantity');
-                var quantity = parseInt(quantityElement.val()) + 1;
-                quantityElement.val(quantity);
+                var quantityCell = existingRow.find('.quantity');
+                var quantity = parseInt(quantityCell.text()) + 1;
+                quantityCell.text(quantity);
+
+                var totalPriceCell = existingRow.find('.total-price');
                 var totalPrice = quantity * response.price;
-                var totalDisplay = existingProduct.find('.total-price');
-                totalDisplay.text("Total: ₱" + totalPrice.toFixed(2));
-
-                // Set focus on the quantity input field
-                quantityElement.focus();
+                totalPriceCell.text("₱" + totalPrice.toFixed(2));
             } else {
-                // If the product does not exist, add it to the receipt
+                // If the product does not exist, add a new row to the table
                 var imageSrc = response.photo ? '../images/' + response.photo : '../images/noproduct.jpg';
-                var itemHtml = `
-                    <div class="card" data-product-id="${response.id}" data-quantity="1" tabindex="0">
-                        <div class="card-body text-center">
-                            
-                            
-                                <img src="${imageSrc}" width="200px" height="350px" align="center">
-                                <h3 >${response.product_number} Price : ₱${response.price}</h3>
-                          
-                                
-                              
-                            <div class="input-group">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary remove-product">-</button>
-                                </span>
-
-                                <input type="text" class="form-control text-center quantity" value="1" readonly>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary add-product">+</button>
-                                </span>
-                            </div>
-                            <div class="total-price">Total : ₱${response.price}</div>
-                            <button class="btn btn-danger my-2 w-100 remove-item-button"><i class='fa fa-trash'></i> REMOVE ITEM</button>
-
-                        </div>
-                    </div>`;
-                $('#receiptContent').append(itemHtml);
-
-                // Set focus on the quantity input field
-                $('#receiptContent .card').last().find('.quantity').focus();
+                
+                var newRow = `
+                    <tr data-product-id="${response.id}">
+                        <td><img src="${imageSrc}" width="80px" height="100px" align="center"></td>
+                        <td>${response.product_number}</td>
+                        <td>₱${response.price}</td>
+                        <td class="quantity">1</td>
+                        <td class="total-price">₱${response.price}</td>
+                        <td><button class="btn btn-danger remove-item-button"><i class='fa fa-trash'></i> Remove</button></td>
+                    </tr>`;
+                $("#receiptTableBody").append(newRow);
             }
             
             // Recalculate the total
             calculateTotal();
-            // Clear search box and refocus
-            $('#searchInput').val('');
-            $('#searchInput').focus();
         }
     });
 }
+
 
 
 
@@ -381,27 +376,24 @@ function openCheckModal() {
 
 
         // Add an event listener to the "REMOVE ITEM" button
-        document.addEventListener('click', function(event) {
+document.addEventListener('click', function(event) {
     if (event.target && event.target.classList.contains('remove-item-button')) {
+        var row = event.target.closest('tr');
+        var productId = row.getAttribute('data-product-id');
         
-        var card = event.target.closest('.card');
-       
-        console.log("Attempting to remove card element...");
-      
-        if (okayToRemoveCard()) {
-            
-            card.remove();      
+        console.log("Attempting to remove row element...");
+
+        if (okayToRemoveRow()) {
+            row.remove();
             calculateTotal();
-        } else {
-      
         }
     }
 });
 
-function okayToRemoveCard() {
-   
+function okayToRemoveRow() {
     return confirm("Are you sure you want to remove this item?");
 }
+
 
 
 

@@ -8,7 +8,7 @@ include 'includes/header.php';
     <div class="wrapper">
         <?php include 'includes/navbar.php'; ?>
 
-        <div class="content" >
+        <div class="content">
             <?php $position = $user['position']; ?>
             <?php if($position == 'Admin' ){?>
             <section class="content-header">
@@ -102,17 +102,37 @@ include 'includes/header.php';
         <div class="box-header with-border">
             <h3 class="box-title">Receipt</h3>
         </div>
-        <div class="box-body" id="receiptContent" style="height: 560px; overflow-y: scroll;">
-            <!-- Receipt content will be added here -->
-        </div>
+            <!-- <div class="box-body" id="receiptContent" style="height: 560px; overflow-y: scroll;">
+            Receipt content will be added here 
+            </div>-->
+            <div class="box-body" style="height: 560px; overflow-y: scroll;">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Total Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="receiptContent">
+                        <tr>
+                            <!-- Receipt content will be added here -->
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        
         <div class="box-footer">
             <div class="pull-left">
                 <div class="js-gtotal alert alert-success" id="totalDisplay" style="font-size:18px; font-weight:bold;">Total: ₱0.00</div>
             </div>
             <div class="pull-right">
-                <a href='#' data-toggle='modal' class='btn btn-primary' onclick='getAllDataFromReceiptContent()'><i class='fa fa-check-circle-o'></i> Checkout</a>
+                <a href='#check' data-toggle='modal' class='btn btn-primary' onclick='getAllDataFromReceiptContent()'><i class='fa fa-check-circle-o'></i> Checkout</a>
                 <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
-                <button type="submit" class="btn btn-success btn-flat" name="delete" onclick='getAllDataFromReceiptContent()'><i class="fa fa-arrow-right"></i> Proceed</button>
+                <button type="submit" class="btn btn-success btn-flat" name="delete" onclick='getRowS(5)'><i class="fa fa-arrow-right"></i> Proceed</button>
             </div>
         </div>
     </div>
@@ -135,7 +155,23 @@ include 'includes/header.php';
     
     console.log("All data from receiptContent:");
 }
+function getRowS(){
+    var newRow = `
+    <tr data-product-id="5">
+        <td>CGW</td>
+        <td class="quantity">1</td>
+        <td class="total-price">₱10.50</td>
+        <td>
+            <button class="btn btn-sm btn-primary remove-product">-</button>
+            <button class="btn btn-sm btn-primary add-product">+</button>
+            <button class="btn btn-danger my-2 w-100 remove-item-button"><i class='fa fa-trash'></i> REMOVE ITEM</button>
+        </td>
+    </tr>`;
+$('#receiptContent').append(newRow);
 
+                $('#receiptContent').append(newRow);
+               // getRowS(5);
+}
 function invoice_no(){
     
     var randomNumber= rand(1, 100);
@@ -144,66 +180,36 @@ function invoice_no(){
 }
 function getRow(id) {
     $.ajax({
-        type: 'POST',
-        url: 'product_row.php',
-        data: { id: id },
-        dataType: 'json',
-        success: function(response) {
-            // Check if the product already exists in the receipt
-            var existingProduct = $("#receiptContent .card[data-product-id='" + response.id + "']");
-            if (existingProduct.length > 0) {
-                // If the product exists, update its quantity and price
-                var quantityElement = existingProduct.find('.quantity');
-                var quantity = parseInt(quantityElement.val()) + 1;
-                quantityElement.val(quantity);
-                var totalPrice = quantity * response.price;
-                var totalDisplay = existingProduct.find('.total-price');
-                totalDisplay.text("Total: ₱" + totalPrice.toFixed(2));
-
-                // Set focus on the quantity input field
-                quantityElement.focus();
-            } else {
-                // If the product does not exist, add it to the receipt
-                var imageSrc = response.photo ? '../images/' + response.photo : '../images/noproduct.jpg';
-                var itemHtml = `
-                    <div class="card" data-product-id="${response.id}" data-quantity="1" tabindex="0">
-                        <div class="card-body text-center">
-                            
-                            
-                                <img src="${imageSrc}" width="200px" height="350px" align="center">
-                                <h3 >${response.product_number} Price : ₱${response.price}</h3>
-                          
-                                
-                              
-                            <div class="input-group">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary remove-product">-</button>
-                                </span>
-
-                                <input type="text" class="form-control text-center quantity" value="1" readonly>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary add-product">+</button>
-                                </span>
-                            </div>
-                            <div class="total-price">Total : ₱${response.price}</div>
-                            <button class="btn btn-danger my-2 w-100 remove-item-button"><i class='fa fa-trash'></i> REMOVE ITEM</button>
-
-                        </div>
-                    </div>`;
-                $('#receiptContent').append(itemHtml);
-
-                // Set focus on the quantity input field
-                $('#receiptContent .card').last().find('.quantity').focus();
-            }
-            
-            // Recalculate the total
-            calculateTotal();
-            // Clear search box and refocus
-            $('#searchInput').val('');
-            $('#searchInput').focus();
+    type: 'POST',
+    url: 'product_row.php',
+    data: { id: id },
+    dataType: 'json',
+    success: function(response) {
+        // Check if response contains the expected data
+        if (response && response.id && response.product_number && response.price) {
+            var newRow = `
+                <tr data-product-id="${response.id}">
+                    <td>${response.product_number}</td>
+                    <td ><input type="text" class="form-control text-center quantity" value="1" readonly></td>
+                    <td class="total-price">₱${response.price.toFixed(2)}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary remove-product">-</button>
+                        <button class="btn btn-sm btn-primary add-product">+</button>
+                        <button class="btn btn-danger my-2 w-100 remove-item-button"><i class='fa fa-trash'></i> REMOVE ITEM</button>
+                    </td>
+                </tr>`;
+            $('#receiptContent').append(newRow);
+        } else {
+            console.error("Invalid or incomplete data received in AJAX response");
         }
-    });
+    },
+    error: function(xhr, status, error) {
+        console.error("Error occurred in AJAX request:", error);
+    }
+});
+
 }
+
 
 
 
@@ -364,10 +370,10 @@ $('.more-button').click(function() {
             document.getElementById("searchInput").focus();
         }
 
-        // When the modal is shown
+        // When the modal is shown*/
         $('#check').on('shown.bs.modal', function() {
             calculateCheckoutTotal();
-        });*/
+        });
 
 //new
 function openCheckModal() {
