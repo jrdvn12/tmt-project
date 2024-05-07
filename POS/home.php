@@ -222,7 +222,7 @@ function searchAndAddToReceipt(event) {
                 var product = products[i].querySelector(".card-body").innerText.toUpperCase();
                 if (product.includes(searchedItem)) {
                     var productId = products[i].getAttribute('data-product-id'); // Retrieve product ID
-                    addToReceipt(productId);
+                    getRow(productId);
                 }
             }
         }

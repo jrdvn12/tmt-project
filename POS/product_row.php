@@ -3,7 +3,7 @@
 //OR product_number = '$id' 
 	if(isset($_POST['id'])){
 		$id = $_POST['id'];
-		$sql = "SELECT * FROM product WHERE id = '$id' or piececode ='$id'or boxcode ='$id'";
+		$sql = "SELECT * FROM product WHERE id = '$id'";
 		$query = $conn->query($sql);
 		$row = $query->fetch_assoc();
 
