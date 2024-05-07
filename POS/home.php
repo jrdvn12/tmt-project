@@ -77,7 +77,7 @@ include 'includes/header.php';
                                                     <td>
                                                         <div class="card">
                                                             <div class="card-body">
-                                                                <p id="productId"><?php echo htmlspecialchars($row['id'], ENT_QUOTES); ?></p> <!-- Assigned an ID here -->
+                                                                <p id="productId" style="display: none;"><?php echo htmlspecialchars($row['id'], ENT_QUOTES); ?></p> <!-- Assigned an ID here -->
                                                                 <p><?php echo htmlspecialchars($row['product_number'], ENT_QUOTES); ?></p>
                                                                 <img src="<?php echo htmlspecialchars($image, ENT_QUOTES); ?>" width="100px" height="150px" align="center"><br>
                                                                 <p><?php echo htmlspecialchars($row['product_name'], ENT_QUOTES); ?></p>
@@ -110,8 +110,9 @@ include 'includes/header.php';
                 <div class="js-gtotal alert alert-success" id="totalDisplay" style="font-size:18px; font-weight:bold;">Total: ₱0.00</div>
             </div>
             <div class="pull-right">
-                <a href='#' data-toggle='modal' class='btn btn-primary' onclick='openCheckModal()'><i class='fa fa-check-circle-o'></i> Checkout</a>
+                <a href='#' data-toggle='modal' class='btn btn-primary' onclick='getAllDataFromReceiptContent()'><i class='fa fa-check-circle-o'></i> Checkout</a>
                 <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
+                <button type="submit" class="btn btn-success btn-flat" name="delete" onclick='getAllDataFromReceiptContent()'><i class="fa fa-arrow-right"></i> Proceed</button>
             </div>
         </div>
     </div>
@@ -130,6 +131,10 @@ include 'includes/header.php';
 
 
 <script>
+  function getAllDataFromReceiptContent() {
+    
+    console.log("All data from receiptContent:");
+}
 
 function invoice_no(){
     
@@ -218,12 +223,21 @@ function searchAndAddToReceipt(event) {
             searchInput.value = '';
             filterProducts();
         } else {
+            var found = false; // Flag to track if a product has been found
             for (var i = 0; i < products.length; i++) {
                 var product = products[i].querySelector(".card-body").innerText.toUpperCase();
                 if (product.includes(searchedItem)) {
                     var productId = products[i].getAttribute('data-product-id'); // Retrieve product ID
                     getRow(productId);
+                    found = true; // Set flag to true indicating a product has been found
+                    break; // Exit the loop after adding the first matching product
                 }
+            }
+            // If no product was found, you can handle it here
+            if (!found) {
+                console.log("No matching product found.");
+                searchInput.value = '';
+                filterProducts();
             }
         }
         
@@ -232,7 +246,6 @@ function searchAndAddToReceipt(event) {
         filterProducts();
     }
 }
-
 
 
 
