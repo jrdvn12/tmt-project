@@ -98,25 +98,25 @@ include 'includes/header.php';
                         </div>
                     </div>
                     <div class="col-md-6">
-    <div class="box box-solid" style="box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">
-        <div class="box-header with-border">
-            <h3 class="box-title">Receipt</h3>
-        </div>
-        <div class="box-body" id="receiptContent" style="height: 560px; overflow-y: scroll;">
-            <!-- Receipt content will be added here -->
-        </div>
-        <div class="box-footer">
-            <div class="pull-left">
-                <div class="js-gtotal alert alert-success" id="totalDisplay" style="font-size:18px; font-weight:bold;">Total: ₱0.00</div>
-            </div>
-            <div class="pull-right">
-                <a href='#' data-toggle='modal' class='btn btn-primary' onclick='getAllDataFromReceiptContent()'><i class='fa fa-check-circle-o'></i> Checkout</a>
-                <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
-                <button type="submit" class="btn btn-success btn-flat" name="delete" onclick='getAllDataFromReceiptContent()'><i class="fa fa-arrow-right"></i> Proceed</button>
-            </div>
-        </div>
-    </div>
-</div> 
+                        <div class="box box-solid" style="box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Receipt</h3>
+                            </div>
+                            <div class="box-body" id="receiptContent" style="height: 560px; overflow-y: scroll;">
+                                <!-- Receipt content will be added here -->
+                            </div>
+                            <div class="box-footer">
+                                <div class="pull-left">
+                                    <div class="js-gtotal alert alert-success" id="totalDisplay" style="font-size:18px; font-weight:bold;">Total: ₱0.00</div>
+                                </div>
+                                <div class="pull-right">
+                                    <a href='#' data-toggle='modal' class='btn btn-primary' onclick='getAllDataFromReceiptContent()'><i class='fa fa-check-circle-o'></i> Checkout</a>
+                                    <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
+                                    <button type="submit" class="btn btn-success btn-flat" name="delete" onclick='getAllDataFromReceiptContent()'><i class="fa fa-arrow-right"></i> Proceed</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
                     
 
             </div>

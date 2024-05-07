@@ -103,17 +103,17 @@ include 'includes/header.php';
             <h3 class="box-title">Receipt</h3>
         </div>
         <div class="box-body" id="receiptContent" style="height: 560px; overflow-y: scroll;">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Photo</th>
-                <th>Product Number</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-                <th>Action</th>
-            </tr>
-        </thead>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <!-- <th>Photo</th>
+                    <th>Product Number</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Action</th> -->
+                </tr>
+            </thead>
         <tbody id="receiptTableBody">
             <!-- Receipt items will be added here -->
         </tbody>
@@ -159,6 +159,33 @@ function invoice_no(){
     
                 $('#receiptContent').append(randomNumber);
 }
+function showConsoleLogMessage(message) {
+    // Create a modal or a dialog box to display the console.log message
+    var modalContent = '<div id="consoleLogModal" class="modal" tabindex="-1" role="dialog">' +
+        '<div class="modal-dialog" role="document">' +
+        '<div class="modal-content">' +
+        '<div class="modal-body">' +
+        '<h1><center>' + message + '</center></h1>' +
+        '</div>' +
+        '<div class="modal-footer">' +
+        '<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
+
+    // Append the modal to the body
+    $('body').append(modalContent);
+
+    // Show the modal
+    $('#consoleLogModal').modal('show');
+
+    // Remove the modal from the DOM after it is closed
+    $('#consoleLogModal').on('hidden.bs.modal', function(e) {
+        $(this).remove();
+    });
+}
+
 function getRow(id) {
     $.ajax({
         type: 'POST',
@@ -170,35 +197,108 @@ function getRow(id) {
             var existingRow = $("#receiptTableBody tr[data-product-id='" + response.id + "']");
             if (existingRow.length > 0) {
                 // If the product exists, update its quantity and price
-                var quantityCell = existingRow.find('.quantity');
-                var quantity = parseInt(quantityCell.text()) + 1;
-                quantityCell.text(quantity);
-
-                var totalPriceCell = existingRow.find('.total-price');
-                var totalPrice = quantity * response.price;
-                totalPriceCell.text("₱" + totalPrice.toFixed(2));
+                var quantityInput = existingRow.find('.quantity');
+                var quantity = parseInt(quantityInput.val()) + 1;
+                if (quantity <= response.qty) {
+                    quantityInput.val(quantity);
+                    var totalPriceCell = existingRow.find('.total-price');
+                    var totalPrice = quantity * response.price;
+                    totalPriceCell.text("₱" + totalPrice.toFixed(2));
+                } else {
+                    showConsoleLogMessage("Cannot add more than available stock<br>Available Stock for this Items<br>" + response.qty);
+                }
             } else {
                 // If the product does not exist, add a new row to the table
                 var imageSrc = response.photo ? '../images/' + response.photo : '../images/noproduct.jpg';
-                
+
+                var price = parseFloat(response.price);
                 var newRow = `
                     <tr data-product-id="${response.id}">
                         <td><img src="${imageSrc}" width="80px" height="100px" align="center"></td>
                         <td>${response.product_number}</td>
-                        <td>₱${response.price}</td>
-                        <td class="quantity">1</td>
-                        <td class="total-price">₱${response.price}</td>
+                        <td>₱${price.toFixed(2)}</td>
+                        <td>
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-primary decrement-quantity"><i class="fa fa-minus"></i></button>
+                                </span>
+                                <input type="text" class="form-control text-center quantity" value="1">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-primary increment-quantity"><i class="fa fa-plus"></i></button>
+                                </span>
+                            </div>
+                        </td>
+                        <td>Stock : ${response.qty}</td>
+                        <td class="total-price">₱${price.toFixed(2)}</td>
                         <td><button class="btn btn-danger remove-item-button"><i class='fa fa-trash'></i> Remove</button></td>
                     </tr>`;
+
                 $("#receiptTableBody").append(newRow);
             }
-            
+
             // Recalculate the total
             calculateTotal();
+            // Clear search box and refocus
+            $('#searchInput').val('');
+            $('#searchInput').focus();
+
+            // Add event listeners for increment and decrement buttons
+            $('.decrement-quantity').click(function() {
+                var quantityInput = $(this).closest('tr').find('.quantity');
+                var quantity = parseInt(quantityInput.val()) - 1;
+                if (quantity > 0) {
+                    quantityInput.val(quantity);
+                    updateTotalPrice($(this).closest('tr'), quantity, response.price);
+                    calculateTotal();
+                }
+            });
+
+            $('.increment-quantity').click(function() {
+                var quantityInput = $(this).closest('tr').find('.quantity');
+                var quantity = parseInt(quantityInput.val()) + 1;
+                if (quantity <= response.qty) {
+                    quantityInput.val(quantity);
+                    updateTotalPrice($(this).closest('tr'), quantity, response.price);
+                    calculateTotal();
+                } else {
+                    showConsoleLogMessage("Cannot add more than available stock<br>Available Stock for this Items<br>" + response.qty);
+                }
+            });
+
+            // Add event listener for quantity input change
+            $('.quantity').on('input', function() {
+                var quantity = parseInt($(this).val());
+                if (!isNaN(quantity) && quantity > 0 && quantity <= response.qty) {
+                    updateTotalPrice($(this).closest('tr'), quantity, response.price);
+                    calculateTotal();
+                } else {
+                    showConsoleLogMessage("Invalid quantity or exceeding stock<br>Available Stock for this Items<br>" + response.qty);
+                }
+            });
         }
     });
 }
 
+function updateTotalPrice(row, quantity, price) {
+    var totalPriceCell = row.find('.total-price');
+    var totalPrice = quantity * price;
+    totalPriceCell.text("₱" + totalPrice.toFixed(2));
+}
+
+function calculateTotal() {
+    var total = 0;
+    $('#receiptTableBody tr').each(function() {
+        var totalPriceText = $(this).find('.total-price').text();
+        var totalPrice = parseFloat(totalPriceText.replace('₱', ''));
+        total += totalPrice;
+    });
+    $('#totalAmount').text("Total: ₱" + total.toFixed(2));
+}
+
+
+
+
+////////////////////// get data
 
 
 
