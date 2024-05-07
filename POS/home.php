@@ -67,29 +67,30 @@ include 'includes/header.php';
                                 <div style="max-height: 700px; overflow-y: auto;">
                                     <table id="example1" class="table table-bordered">
                                         <tbody id="productTableBody">
-                                            <?php
+                                        <?php
                                             $sql = "SELECT * FROM product";
                                             $query = $conn->query($sql);
                                             while ($row = $query->fetch_assoc()) {
                                                 $image = (!empty($row['photo'])) ? '../images/' . $row['photo'] : '../images/noproduct.jpg';
-                                                echo "
-                                                <tr class='productRow' onclick='getRow(" . $row['id'] . ")'>
-                                                        <td>
-                                                            <div class='card'>
-                                                                <div class='card-body'>
-                                                                    <p id='productId'>". $row['id'] ."</p> <!-- Assigned an ID here -->
-                                                                    <p>" . $row['product_number'] . "</p>
-                                                                    <img src='" . $image . "' width='100px' height='150px' align='center'><br>
-                                                                    <p>" . $row['product_name'] . "</p>
-                                                                    <p>" . $row['piececode'] . "</p>
-                                                                    <p>Price: " . $row['price'] . "</p>
-                                                                </div>
+                                                ?>
+                                                <tr class="productRow" data-product-id="<?php echo htmlspecialchars($row['id'], ENT_QUOTES); ?>" onclick="getRow(<?php echo htmlspecialchars($row['id'], ENT_QUOTES); ?>)">
+                                                    <td>
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <p id="productId"><?php echo htmlspecialchars($row['id'], ENT_QUOTES); ?></p> <!-- Assigned an ID here -->
+                                                                <p><?php echo htmlspecialchars($row['product_number'], ENT_QUOTES); ?></p>
+                                                                <img src="<?php echo htmlspecialchars($image, ENT_QUOTES); ?>" width="100px" height="150px" align="center"><br>
+                                                                <p><?php echo htmlspecialchars($row['product_name'], ENT_QUOTES); ?></p>
+                                                                <p><?php echo htmlspecialchars($row['piececode'], ENT_QUOTES); ?></p>
+                                                                <p>Price: <?php echo htmlspecialchars($row['price'], ENT_QUOTES); ?></p>
                                                             </div>
-                                                        </td>
-                                                    </tr>
-                                                ";
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <?php
                                             }
                                             ?>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -208,25 +209,20 @@ function searchAndAddToReceipt(event) {
     console.log("searchAndAddToReceipt function called"); // Add this line for debugging
     if (event.key === 'Enter') {
         var searchInput = document.getElementById("searchInput");
-        var searchInputId = document.getElementById("searchInput").value;
         var searchedItem = searchInput.value.trim().toUpperCase();
-        var searchInputId = document.getElementById("searchInput").value;
+        
         // Filter products and add to receipt
         var products = document.querySelectorAll(".productRow");
-        var productId = document.getElementById('productId').value; 
 
-        if(searchInput.value ===''){
+        if (searchInput.value === '') {
             searchInput.value = '';
             filterProducts();
-        }else{
+        } else {
             for (var i = 0; i < products.length; i++) {
                 var product = products[i].querySelector(".card-body").innerText.toUpperCase();
                 if (product.includes(searchedItem)) {
-                    var ids = products[i].getAttribute('data-product-id');
+                    var productId = products[i].getAttribute('data-product-id'); // Retrieve product ID
                     addToReceipt(productId);
-                    //addToReceipt(searchInputId); 
-                    //getRow(searchInputId);
-                   
                 }
             }
         }
