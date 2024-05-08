@@ -174,7 +174,7 @@ function showConsoleLogMessage(message) {
         '<h1><center>' + message + '</center></h1>' +
         '</div>' +
         '<div class="modal-footer">' +
-        '<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>' +
+        '<button id="okButton" type="button" class="btn btn-primary" data-dismiss="modal">OK</button>' +
         '</div>' +
         '</div>' +
         '</div>' +
@@ -189,9 +189,13 @@ function showConsoleLogMessage(message) {
     // Remove the modal from the DOM after it is closed
     $('#consoleLogModal').on('hidden.bs.modal', function(e) {
         $(this).remove();
+        // After modal is closed, focus on searchInput
+        $('#searchInput').val('');
+        $('#searchInput').focus();
     });
-    $('#searchInput').val('');
-    $('#searchInput').focus();
+
+    // Set focus to the OK button after modal is shown
+    $('#okButton').focus();
 }
 
 function getRow(id) {
@@ -252,7 +256,7 @@ function getRow(id) {
 
             $('.decrement-quantity').unbind('click');
             $('.increment-quantity').unbind('click');
-            
+
             // Add event listeners for increment and decrement buttons
             $('.decrement-quantity').click(function() {
                 var quantityInput = $(this).closest('tr').find('.quantity');
@@ -361,8 +365,20 @@ function searchAndAddToReceipt(event) {
 /////////////////
 function clearReceipt() {
     // Remove all rows from the table body
-    $('#receiptTableBody').empty();
+   
     // Update the total display to show 0.00
+    $('#searchInput').val('');
+    $('#searchInput').focus();
+
+    // Confirmation message before clearing receipt
+    if (okayToClearReceipt()) {
+        console.log("Receipt cleared successfully.");
+    }
+}
+
+function okayToClearReceipt() {
+    return confirm("Are you sure you want to clear the receipt?");
+    $('#receiptTableBody').empty();
     $('#totalAmount').text("Total: ₱ 0.00");
     $('#searchInput').val('');
     $('#searchInput').focus();
