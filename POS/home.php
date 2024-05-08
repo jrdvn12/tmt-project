@@ -108,20 +108,72 @@ include 'includes/header.php';
                                     <table class=" table-bordered">
                                         <thead>
                                             
-                                                <th>Photo</th>
-                                                <th>Code</th>
-                                                <th>Price</th>
+                                                <th style="width: 80px;">Photo</th>
+                                                <th style="width: 80px;">Code</th>
+                                                <th style="width: 80px;">Price</th>
                                                 <th style="width: 250px;">Quantity</th>
                                                 <th style="width: 100px;">Stock</th>
                                                 <th style="width: 150px;">Total</th>
-
-                                                <th>Action</th>
+                                                <th style="width: 80px;">Action</th>
                                            
                                         </thead>
                                             <tbody id="receiptTableBody">
                                                 <!-- Receipt items will be added here -->
                                                
-                                                  
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>2</td>
+                                                    <td>3</td>
+                                                    <td>4</td>
+                                                    <td>5</td>
+                                                    <td>6</td>
+                                                    <td>7</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>2</td>
+                                                    <td>3</td>
+                                                    <td>4</td>
+                                                    <td>5</td>
+                                                    <td>6</td>
+                                                    <td>7</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>2</td>
+                                                    <td>3</td>
+                                                    <td>4</td>
+                                                    <td>5</td>
+                                                    <td>6</td>
+                                                    <td>7</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>2</td>
+                                                    <td>3</td>
+                                                    <td>4</td>
+                                                    <td>5</td>
+                                                    <td>6</td>
+                                                    <td>7</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>2</td>
+                                                    <td>3</td>
+                                                    <td>4</td>
+                                                    <td>5</td>
+                                                    <td>6</td>
+                                                    <td>7</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>2</td>
+                                                    <td>3</td>
+                                                    <td>4</td>
+                                                    <td>5</td>
+                                                    <td>6</td>
+                                                    <td>7</td>
+                                                </tr>
                                                 
                                             </tbody>
                                     </table>
@@ -204,6 +256,8 @@ function showConsoleLogMessage(message) {
 
 
 function getRow(id) {
+    //$(this).closest('tr').find('.quantity');
+    $('.quantity').focus();
     $.ajax({
         type: 'POST',
         url: 'product_row.php',
@@ -212,11 +266,14 @@ function getRow(id) {
         success: function(response) {
             // Check if the product already exists in the receipt
             var existingRow = $("#receiptTableBody tr[data-product-id='" + response.id + "']");
+            //$("#receiptTableBody tr[data-product-id='" + response.id + "']").focus();
+           
             if (existingRow.length > 0) {
                 // If the product exists, update its quantity and price
                 var quantityInput = existingRow.find('.quantity');
                 var quantity = parseInt(quantityInput.val()) + 1;
                 if (quantity <= response.balance) {
+                    //$('.quantity').focus();
                     quantityInput.val(quantity);
                     var totalPriceCell = existingRow.find('.total-price');
                     var totalPrice = quantity * response.price;
@@ -231,9 +288,9 @@ function getRow(id) {
                 var price = parseFloat(response.price);
                 var newRow = `
                     <tr data-product-id="${response.id}">
-                        <td><img src="${imageSrc}" width="80px" height="100px" align="center"></td>
-                        <td>${response.product_number}</td>
-                        <td>₱${price.toFixed(2)}</td>
+                        <td style="width: 80px;"><img src="${imageSrc}" width="80px" height="100px" align="center"></td>
+                        <td style="width: 80px;">${response.product_number}</td>
+                        <td style="width: 80px;">₱${price.toFixed(2)}</td>
                         <td>
                             <div class="input-group">
                                 <span class="input-group-btn">
@@ -250,7 +307,7 @@ function getRow(id) {
                         </td>
                         <td style="font-weight: bold; font-size: 80px;">${response.balance}</td>
                         <td class="total-price">₱${price.toFixed(2)}</td>
-                        <td><button class="btn btn-danger remove-item-button"><i class='fa fa-trash'></i></button></td>
+                        <td style="width: 80px;"><button class="btn btn-danger remove-item-button"><i class='fa fa-trash'></i></button></td>
                     </tr>`;
 
                 $("#receiptTableBody").append(newRow);
@@ -284,7 +341,7 @@ function getRow(id) {
                     updateTotalPrice($(this).closest('tr'), quantity, response.price);
                     calculateTotal();
                 } else {
-                    showConsoleLogMessage("Cannot add more than available stock<br>Available Stock for this Items<br>" + response.balance);
+                    showConsoleLogMessage("Cannot add more than available stock<br>Available Stock for this Items<br>"+ response.product_number + "<br>" + response.balance);
                 }
             });
 
@@ -297,9 +354,19 @@ function getRow(id) {
                    
                     updateTotalPrice($(this).closest('tr'), quantity, response.price);
                     calculateTotal();
-                } else {
+                }
+                else if  (isNaN(quantity) || quantity <= 0 ) {
+                    showConsoleLogMessage("Invalid quantity<br>Available Stock for this Items<br>" + response.product_number + "<br>"+ response.balance);
+                    // Set the value of the quantity input field to the available balance
+                    var quantity = 1;
+                    $(this).closest('tr').find(".quantity").val(quantity);
                    
-                    showConsoleLogMessage("Invalid quantity or exceeding stock<br>Available Stock for this Items<br>" + response.product_number + "<br>"+ response.balance);
+                    updateTotalPrice($(this).closest('tr'), quantity, response.price);
+                    calculateTotal();
+                }
+                else {
+                   
+                    showConsoleLogMessage("Exceeding stock<br>Available Stock for this Items<br>" + response.product_number + "<br>"+ response.balance);
                     // Set the value of the quantity input field to the available balance
                     $(this).closest('tr').find(".quantity").val(response.balance);
                     var quantity = response.balance;
@@ -309,7 +376,7 @@ function getRow(id) {
                 }
             });
         }
-    });
+    }); 
 }
 
 function updateTotalPrice(row, quantity, price) {
