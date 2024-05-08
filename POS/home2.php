@@ -353,6 +353,8 @@ function clearReceipt() {
     $('#receiptTableBody').empty();
     // Update the total display to show 0.00
     $('#totalAmount').text("Total: ₱ 0.00");
+    $('#searchInput').val('');
+            $('#searchInput').focus();
 }
 
 
@@ -471,6 +473,8 @@ function openCheckModal() {
 
         // Open the modal
         $('#check').modal('show');
+        $('#searchInput').val('');
+            $('#searchInput').focus();
     }
 
 
