@@ -330,7 +330,8 @@ function searchAndAddToReceipt(event) {
             }
             // If no product was found, you can handle it here
             if (!found) {
-                console.log("No matching product found.");
+                showConsoleLogMessage("No matching product found.");
+                
                 searchInput.value = '';
                 filterProducts();
             }
@@ -348,13 +349,12 @@ function searchAndAddToReceipt(event) {
 
 /////////////////
 function clearReceipt() {
-        // Clear the content of the receipt
-        document.getElementById("receiptContent").innerHTML = "";
-        // Update the total display to show 0.00
-        document.getElementById("totalDisplay").innerHTML = "<strong>Total : ₱ 0.00</strong>";
+    // Remove all rows from the table body
+    $('#receiptTableBody').empty();
+    // Update the total display to show 0.00
+    $('#totalAmount').text("Total: ₱ 0.00");
+}
 
- 
-    }
 
 ///////////////////////
 function calculateTotal() {
@@ -481,8 +481,8 @@ document.addEventListener('click', function(event) {
         var row = event.target.closest('tr');
         var productId = row.getAttribute('data-product-id');
         
-        console.log("Attempting to remove row element...");
-
+        
+        showConsoleLogMessage("Attempting to remove row element...");
         if (okayToRemoveRow()) {
             row.remove();
             calculateTotal();
