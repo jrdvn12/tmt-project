@@ -106,18 +106,18 @@ include 'includes/header.php';
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <!-- <th>Photo</th>
+                    <th>Photo</th>
                     <th>Product Number</th>
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Total</th>
-                    <th>Action</th> -->
+                    <th>Action</th>
                 </tr>
             </thead>
-        <tbody id="receiptTableBody">
-            <!-- Receipt items will be added here -->
-        </tbody>
-    </table>
+                <tbody id="receiptTableBody">
+                    <!-- Receipt items will be added here -->
+                </tbody>
+        </table>
 </div>
 
         <div class="box-footer">
@@ -198,7 +198,7 @@ function getRow(id) {
             if (existingRow.length > 0) {
                 // If the product exists, update its quantity and price
                 var quantityInput = existingRow.find('.quantity');
-                var quantity = parseInt(quantityInput.val()) + 1;
+                var quantity = parseInt(quantityInput.val()) + 60;
                 if (quantity <= response.qty) {
                     quantityInput.val(quantity);
                     var totalPriceCell = existingRow.find('.total-price');
@@ -222,7 +222,7 @@ function getRow(id) {
                                 <span class="input-group-btn">
                                     <button class="btn btn-sm btn-primary decrement-quantity"><i class="fa fa-minus"></i></button>
                                 </span>
-                                <input type="text" class="form-control text-center quantity" value="1">
+                                <input type="text" class="form-control text-center quantity" value="60">
                                 <span class="input-group-btn">
                                     <button class="btn btn-sm btn-primary increment-quantity"><i class="fa fa-plus"></i></button>
                                 </span>
@@ -486,7 +486,7 @@ document.addEventListener('click', function(event) {
         var productId = row.getAttribute('data-product-id');
         
         
-        showConsoleLogMessage("Attempting to remove row element...");
+        //showConsoleLogMessage("Attempting to remove row element...");
         if (okayToRemoveRow()) {
             row.remove();
             calculateTotal();
