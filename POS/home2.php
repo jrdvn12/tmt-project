@@ -97,46 +97,52 @@ include 'includes/header.php';
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-    <div class="box box-solid" style="box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">
-        <div class="box-header with-border">
-            <h3 class="box-title">Receipt</h3>
-        </div>
-        <div class="box-body" id="receiptContent" style="height: 560px; overflow-y: scroll;">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Photo</th>
-                    <th>Product Number</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-                <tbody id="receiptTableBody">
-                    <!-- Receipt items will be added here -->
-                </tbody>
-        </table>
-</div>
 
-        <div class="box-footer">
-            <div class="pull-left">
-                <div class="js-gtotal alert alert-success" id="totalDisplay" style="font-size:18px; font-weight:bold;">Total: ₱0.00</div>
-            </div>
-            <div class="pull-right">
-                <!-- <a href='#' data-toggle='modal' class='btn btn-primary' onclick='getAllDataFromReceiptContent()'><i class='fa fa-check-circle-o'></i> Checkout</a> -->
-                <a href='#' data-toggle='modal' class='btn btn-primary' onclick='openCheckModal()'><i class='fa fa-check-circle-o'></i> Checkout</a>
-                <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
-                <button type="submit" class="btn btn-success btn-flat" name="delete" onclick='getAllDataFromReceiptContent()'><i class="fa fa-arrow-right"></i> Proceed</button>
-                
-            </div>
-        </div>
-    </div>
-</div> 
+                    
+                    <div class="col-md-6">
+                        <div class="box box-solid" style="box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Receipt</h3>
+                            </div>
+                                <div class="box-body" id="receiptContent" style="height: 560px; overflow-y: scroll;">
+                                    <table class=" table-bordered">
+                                        <thead>
+                                            
+                                                <th>Photo</th>
+                                                <th>Product Number</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                                <th>Stock</th>
+                                                <th>Total</th>
+                                                <th>Action</th>
+                                           
+                                        </thead>
+                                            <tbody id="receiptTableBody">
+                                                <!-- Receipt items will be added here -->
+                                               
+                                                  
+                                                
+                                            </tbody>
+                                    </table>
+                                </div>
+
+                                    <div class="box-footer">
+                                        <div class="pull-left">
+                                            <div class="js-gtotal alert alert-success" id="totalDisplay" style="font-size:18px; font-weight:bold;">Total: ₱0.00</div>
+                                        </div>
+                                        <div class="pull-right">
+                                            <!-- <a href='#' data-toggle='modal' class='btn btn-primary' onclick='getAllDataFromReceiptContent()'><i class='fa fa-check-circle-o'></i> Checkout</a> -->
+                                            <a href='#' data-toggle='modal' class='btn btn-primary' onclick='openCheckModal()'><i class='fa fa-check-circle-o'></i> Checkout</a>
+                                            <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
+                                            <button type="submit" class="btn btn-success btn-flat" name="delete" onclick='getAllDataFromReceiptContent()'><i class="fa fa-arrow-right"></i> Proceed</button>
+                                            
+                                        </div>
+                                    </div>
+                        </div>
+                    </div> 
                     
 
-            </div>
+</div>
 
             </section>
             <?php include 'includes/footer.php'; ?>
@@ -184,6 +190,8 @@ function showConsoleLogMessage(message) {
     $('#consoleLogModal').on('hidden.bs.modal', function(e) {
         $(this).remove();
     });
+    $('#searchInput').val('');
+    $('#searchInput').focus();
 }
 
 function getRow(id) {
@@ -198,7 +206,7 @@ function getRow(id) {
             if (existingRow.length > 0) {
                 // If the product exists, update its quantity and price
                 var quantityInput = existingRow.find('.quantity');
-                var quantity = parseInt(quantityInput.val()) + 60;
+                var quantity = parseInt(quantityInput.val()) + 1;
                 if (quantity <= response.qty) {
                     quantityInput.val(quantity);
                     var totalPriceCell = existingRow.find('.total-price');
@@ -222,15 +230,15 @@ function getRow(id) {
                                 <span class="input-group-btn">
                                     <button class="btn btn-sm btn-primary decrement-quantity"><i class="fa fa-minus"></i></button>
                                 </span>
-                                <input type="text" class="form-control text-center quantity" value="60">
+                                <input type="text" class="form-control text-center quantity" value="1">
                                 <span class="input-group-btn">
                                     <button class="btn btn-sm btn-primary increment-quantity"><i class="fa fa-plus"></i></button>
                                 </span>
                             </div>
                         </td>
-                        <td>Stock : ${response.qty}</td>
+                        <td>${response.qty}</td>
                         <td class="total-price">₱${price.toFixed(2)}</td>
-                        <td><button class="btn btn-danger remove-item-button"><i class='fa fa-trash'></i> Remove</button></td>
+                        <td><button class="btn btn-danger remove-item-button"><i class='fa fa-trash'></i></button></td>
                     </tr>`;
 
                 $("#receiptTableBody").append(newRow);
@@ -242,6 +250,9 @@ function getRow(id) {
             $('#searchInput').val('');
             $('#searchInput').focus();
 
+            $('.decrement-quantity').unbind('click');
+            $('.increment-quantity').unbind('click');
+            
             // Add event listeners for increment and decrement buttons
             $('.decrement-quantity').click(function() {
                 var quantityInput = $(this).closest('tr').find('.quantity');
@@ -354,7 +365,7 @@ function clearReceipt() {
     // Update the total display to show 0.00
     $('#totalAmount').text("Total: ₱ 0.00");
     $('#searchInput').val('');
-            $('#searchInput').focus();
+    $('#searchInput').focus();
 }
 
 
