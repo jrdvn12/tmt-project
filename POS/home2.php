@@ -213,13 +213,13 @@ function getRow(id) {
                 // If the product exists, update its quantity and price
                 var quantityInput = existingRow.find('.quantity');
                 var quantity = parseInt(quantityInput.val()) + 1;
-                if (quantity <= response.qty) {
+                if (quantity <= response.balance) {
                     quantityInput.val(quantity);
                     var totalPriceCell = existingRow.find('.total-price');
                     var totalPrice = quantity * response.price;
                     totalPriceCell.text("₱" + totalPrice.toFixed(2));
                 } else {
-                    showConsoleLogMessage("Cannot add more than available stock<br>Available Stock for this Items<br>" + response.qty);
+                    showConsoleLogMessage("Cannot add more than available stock<br>Available Stock for this Items<br>" + response.balance);
                 }
             } else {
                 // If the product does not exist, add a new row to the table
@@ -242,7 +242,7 @@ function getRow(id) {
                                 </span>
                             </div>
                         </td>
-                        <td>${response.qty}</td>
+                        <td>${response.balance}</td>
                         <td class="total-price">₱${price.toFixed(2)}</td>
                         <td><button class="btn btn-danger remove-item-button"><i class='fa fa-trash'></i></button></td>
                     </tr>`;
@@ -273,23 +273,23 @@ function getRow(id) {
             $('.increment-quantity').click(function() {
                 var quantityInput = $(this).closest('tr').find('.quantity');
                 var quantity = parseInt(quantityInput.val()) + 1;
-                if (quantity <= response.qty) {
+                if (quantity <= response.balance) {
                     quantityInput.val(quantity);
                     updateTotalPrice($(this).closest('tr'), quantity, response.price);
                     calculateTotal();
                 } else {
-                    showConsoleLogMessage("Cannot add more than available stock<br>Available Stock for this Items<br>" + response.qty);
+                    showConsoleLogMessage("Cannot add more than available stock<br>Available Stock for this Items<br>" + response.balance);
                 }
             });
 
             // Add event listener for quantity input change
             $('.quantity').on('input', function() {
                 var quantity = parseInt($(this).val());
-                if (!isNaN(quantity) && quantity > 0 && quantity <= response.qty) {
+                if (!isNaN(quantity) && quantity > 0 && quantity <= response.balance) {
                     updateTotalPrice($(this).closest('tr'), quantity, response.price);
                     calculateTotal();
                 } else {
-                    showConsoleLogMessage("Invalid quantity or exceeding stock<br>Available Stock for this Items<br>" + response.qty);
+                    showConsoleLogMessage("Invalid quantity or exceeding stock<br>Available Stock for this Items<br>" + response.balance);
                 }
             });
         }
@@ -366,25 +366,23 @@ function searchAndAddToReceipt(event) {
 
 /////////////////
 function clearReceipt() {
-    // Remove all rows from the table body
-   
-    // Update the total display to show 0.00
-    $('#searchInput').val('');
-    $('#searchInput').focus();
-
     // Confirmation message before clearing receipt
     if (okayToClearReceipt()) {
         console.log("Receipt cleared successfully.");
+        // Remove all rows from the table body
+        $('#receiptTableBody').empty();
+        // Update the total display to show 0.00
+        $('#totalAmount').text("Total: ₱ 0.00");
+        // Clear search input and focus on it
+        $('#searchInput').val('');
+        $('#searchInput').focus();
     }
 }
 
 function okayToClearReceipt() {
     return confirm("Are you sure you want to clear the receipt?");
-    $('#receiptTableBody').empty();
-    $('#totalAmount').text("Total: ₱ 0.00");
-    $('#searchInput').val('');
-    $('#searchInput').focus();
 }
+
 
 
 ///////////////////////

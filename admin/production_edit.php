@@ -107,6 +107,7 @@
 				$queryp = $conn->query($sqlp);
 				$rowp = $queryp->fetch_assoc();
 
+				$product_id = $rowp['id'];
 				$product_number = $rowp['product_number'];
 				$photo = $rowp['photo'];
 				$piececode = $rowp['piececode'];
@@ -115,12 +116,12 @@
 				$price = $rowp['price'];
 				$qty = 10980;
 				$soldstock = 0; 
-				$balance = 0;
+				$balance = 10980;
 				$dateofstock = date('Y-m-d');
 				$product_expiration = date('Y-m-d', strtotime('+1 year')); 
 
-				$sqli = "INSERT INTO main_inventory (product_number, photo, batch, piececode, boxcode, product_name, price, qty, soldstock, balance, dateofstock, product_expiration) 
-				VALUES ('$product_number', '$photo', '$product_batch', '$piececode', '$boxcode', '$product_name', '$price', '$qty', '$soldstock', '$balance', '$dateofstock', '$product_expiration')";
+				$sqli = "INSERT INTO main_inventory (product_id,product_number, photo, batch, piececode, boxcode, product_name, price, qty, soldstock, balance, dateofstock, product_expiration) 
+				VALUES ('$product_id','$product_number', '$photo', '$product_batch', '$piececode', '$boxcode', '$product_name', '$price', '$qty', '$soldstock', '$balance', '$dateofstock', '$product_expiration')";
 				if($conn->query($sqli)){
 
 
