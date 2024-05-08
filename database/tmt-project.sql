@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2024 at 09:59 AM
+-- Generation Time: May 08, 2024 at 08:49 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -244,7 +244,21 @@ INSERT INTO `audit_trail_record` (`id`, `audit_date`, `audit_time`, `user`, `des
 (604, '2024-04-26', '15:53:59', 'Angelo Cruz', 'User updated distributor date 2024-04-26'),
 (605, '2024-04-26', '15:54:05', 'Angelo Cruz', 'User updated distributor date 2024-04-26'),
 (606, '2024-04-26', '15:55:14', 'Angelo Cruz', 'User updated distributor date 2024-04-26'),
-(607, '2024-04-26', '15:55:18', 'Angelo Cruz', 'User updated distributor date 2024-04-26');
+(607, '2024-04-26', '15:55:18', 'Angelo Cruz', 'User updated distributor date 2024-04-26'),
+(608, '2024-04-30', '13:36:23', 'Angelo Cruz', 'Added new User sdasd date 2024-04-30'),
+(609, '2024-04-30', '13:36:31', 'Angelo Cruz', 'User deleted sdasd date 2024-04-30'),
+(610, '2024-04-30', '15:58:41', 'Angelo Cruz', 'Added new Vendor #MTMMTM date 2024-04-30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `before_sale`
+--
+
+CREATE TABLE `before_sale` (
+  `id` int(11) NOT NULL,
+  `invoice_id` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -254,6 +268,7 @@ INSERT INTO `audit_trail_record` (`id`, `audit_date`, `audit_time`, `user`, `des
 
 CREATE TABLE `main_inventory` (
   `id` int(255) NOT NULL,
+  `product_id` int(255) NOT NULL,
   `product_number` text NOT NULL,
   `photo` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `batch` text NOT NULL,
@@ -272,10 +287,10 @@ CREATE TABLE `main_inventory` (
 -- Dumping data for table `main_inventory`
 --
 
-INSERT INTO `main_inventory` (`id`, `product_number`, `photo`, `batch`, `piececode`, `boxcode`, `product_name`, `price`, `qty`, `soldstock`, `balance`, `dateofstock`, `product_expiration`) VALUES
-(36, 'CGCC', 'clasico.png', '13131', '4806538456029', '4806538450111', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 10.5, 10980, 0, 0, '2024-04-25', '2025-04-25'),
-(39, 'CGB', 'brown.png', '4234234', '4806538450012', '4806538450128', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Brown) ', 10.5, 10980, 0, 0, '2024-04-25', '2025-04-25'),
-(42, 'CGW', 'white.png', '2312312', '4806538450005', '4806538450135', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (White) ', 10.5, 10980, 0, 0, '2024-04-25', '2025-04-25');
+INSERT INTO `main_inventory` (`id`, `product_id`, `product_number`, `photo`, `batch`, `piececode`, `boxcode`, `product_name`, `price`, `qty`, `soldstock`, `balance`, `dateofstock`, `product_expiration`) VALUES
+(36, 5, 'CGCC', 'clasico.png', '13131', '4806538456029', '4806538450111', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 10.5, 10980, 0, 0, '2024-04-25', '2025-04-25'),
+(39, 6, 'CGB', 'brown.png', '4234234', '4806538450012', '4806538450128', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Brown) ', 10.5, 10980, 0, 0, '2024-04-25', '2025-04-25'),
+(42, 7, 'CGW', 'white.png', '2312312', '4806538450005', '4806538450135', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (White) ', 10.5, 10980, 0, 0, '2024-04-25', '2025-04-25');
 
 -- --------------------------------------------------------
 
@@ -351,7 +366,8 @@ INSERT INTO `production` (`id`, `material_code`, `product_name`, `product_batch`
 (36, '6', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Brown) ', '113131', 'Completed', 10980, 0, '2024-04-25', '2025-04-25'),
 (37, '7', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (White) ', '2312312', 'Completed', 10980, 0, '2024-04-25', '2025-04-25'),
 (38, '7', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (White) ', '21321312', 'Completed', 10980, 0, '2024-04-25', '2025-04-25'),
-(39, '7', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (White) ', '2321312', 'Completed', 10980, 0, '2024-04-25', '2025-04-25');
+(39, '7', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (White) ', '2321312', 'Completed', 10980, 0, '2024-04-25', '2025-04-25'),
+(40, '5', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', '4234234', 'Completed', 10980, 0, '2024-04-29', '2025-04-29');
 
 -- --------------------------------------------------------
 
@@ -519,17 +535,17 @@ CREATE TABLE `raw_materials` (
 
 INSERT INTO `raw_materials` (`id`, `material_code`, `material_type`, `material_name`, `material_batch`, `loads`, `material_usage`, `material_remaining`, `dateofstock`, `date_expiration`) VALUES
 (22, 'SGR-R', '7', 'Brand Name', '50', 10000, 0, 0, '2024-04-05', '2024-07-10'),
-(23, 'NDC', '8', 'Brand Name', '10235478', 10000, 1117.08, 8882.92, '2024-04-05', '2024-07-10'),
-(24, 'COF-HG50', '13', 'Brand Name', '145874', 10000, 120.42, 9879.58, '2024-04-05', '2024-09-01'),
-(25, 'COF-PB6', '14', 'Brand Name', '4573651', 10000, 120.42, 9879.58, '2024-04-05', '2024-10-01'),
-(26, 'COF-MF878968', '15', 'Brand Name', '45003697', 10000, 5.895, 9994.105, '2024-04-05', '2024-06-25'),
+(23, 'NDC', '8', 'Brand Name', '10235478', 10000, 1233.54, 8766.46, '2024-04-05', '2024-07-10'),
+(24, 'COF-HG50', '13', 'Brand Name', '145874', 10000, 135.42, 9864.58, '2024-04-05', '2024-09-01'),
+(25, 'COF-PB6', '14', 'Brand Name', '4573651', 10000, 135.42, 9864.58, '2024-04-05', '2024-10-01'),
+(26, 'COF-MF878968', '15', 'Brand Name', '45003697', 10000, 6.57, 9993.43, '2024-04-05', '2024-06-25'),
 (27, 'COF-FL578906', '19', 'Brand Name', '00236974', 10000, 3.915, 9996.085, '2024-04-05', '2025-01-01'),
-(28, 'COF-FL722092', '20', 'Brand Name', '00369745', 10000, 5.22, 9994.78, '2024-04-05', '2025-01-01'),
-(29, 'SLT-FI', '12', 'Brand Name', '11236954', 10000, 6.165, 9993.835, '2024-04-05', '2026-01-01'),
-(30, 'ASK', '18', 'Brand Name', '4456312', 10000, 1.935, 9998.065, '2024-04-05', '2024-05-30'),
+(28, 'COF-FL722092', '20', 'Brand Name', '00369745', 10000, 5.895, 9994.105, '2024-04-05', '2025-01-01'),
+(29, 'SLT-FI', '12', 'Brand Name', '11236954', 10000, 7.245, 9992.755, '2024-04-05', '2026-01-01'),
+(30, 'ASK', '18', 'Brand Name', '4456312', 10000, 2.04, 9997.96, '2024-04-05', '2024-05-30'),
 (31, 'BOX-00', '17', 'Brand Name', '66542137', 5000, 0, 0, '2024-04-05', '2026-02-01'),
 (32, 'PPK-0145', '16', 'Brand Name', '88451230', 5000, 0, 0, '2024-04-05', '2026-02-01'),
-(33, 'MLK-704217', '21', 'Brand Name', '33125947', 10000, 1.305, 9998.695, '2024-04-05', '2024-08-01'),
+(33, 'MLK-704217', '21', 'Brand Name', '33125947', 10000, 1.74, 9998.26, '2024-04-05', '2024-08-01'),
 (34, 'SGR-B578903', '22', 'Brand Name', '4458712', 10000, 1.35, 9998.65, '2024-04-05', '2024-11-02'),
 (35, 'ASK1', '18', 'Name', '4646465', 10000, 0, 0, '2024-04-08', '2024-06-29');
 
@@ -587,7 +603,8 @@ CREATE TABLE `vendor` (
 --
 
 INSERT INTO `vendor` (`id`, `vendor_name`, `company_name`, `vendor_address`, `city`, `province`, `zip_code`, `country`, `phone_number`, `email_address`) VALUES
-(1, 'TMT', 'TMT FOODS', '4F SITIO GRANDE', 'MANILA', 'METRO MANILA', '1002', 'PHILIPPINES', '094848561651', 'TMTFOODSTMT@gmail.com');
+(1, 'TMT', 'TMT FOODS', '4F SITIO GRANDE', 'MANILA', 'METRO MANILA', '1002', 'PHILIPPINES', '094848561651', 'TMTFOODSTMT@gmail.com'),
+(2, 'MTM', 'MTM', 'MTM', 'ANGELES', 'ABRA', '15555', 'MTM', '09445445455', 'MTM@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -603,6 +620,12 @@ ALTER TABLE `admin`
 -- Indexes for table `audit_trail_record`
 --
 ALTER TABLE `audit_trail_record`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `before_sale`
+--
+ALTER TABLE `before_sale`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -667,19 +690,25 @@ ALTER TABLE `vendor`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `audit_trail_record`
 --
 ALTER TABLE `audit_trail_record`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=608;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=611;
+
+--
+-- AUTO_INCREMENT for table `before_sale`
+--
+ALTER TABLE `before_sale`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `main_inventory`
 --
 ALTER TABLE `main_inventory`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `main_raw_materials`
@@ -697,7 +726,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `production`
 --
 ALTER TABLE `production`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `product_needs`
@@ -727,7 +756,7 @@ ALTER TABLE `type_raw_materials`
 -- AUTO_INCREMENT for table `vendor`
 --
 ALTER TABLE `vendor`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
