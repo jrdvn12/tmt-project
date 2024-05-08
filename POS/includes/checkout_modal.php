@@ -1,6 +1,5 @@
-
 <!-- Check Out -->
-<div class="modal fade" id="check">
+<div class="modal fade" id="check" >
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -14,9 +13,10 @@
                     
                     <div class="text-center">
                         <h1><b>Total Amount: ₱ <span id="checkoutTotal">0.00</span></b></h1>
+                        <h1><b>Change: ₱ <span id="changeAmount">0.00</span></b></h1> <!-- Added this line -->
                         <h2 class="bold fullname"></h2>
                         <h1><b>Enter Amount</b></h1>
-                        <input type="text" class="form-control" id="total_amount_gross" name="total_amount_gross" required style="text-align: center; height: 100px;font-size: 80px;">
+                        <input type="text" class="form-control" id="total_amount_gross" name="total_amount_gross" required style="text-align: center; height: 100px;font-size: 80px;" oninput="updateTotalAmount()" onkeypress="return isNumberKey(event)" placeholder="₱ 0.00">
                     </div>
                 </form>
             </div>
@@ -24,10 +24,58 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
               <button type="submit" class="btn btn-success btn-flat" name="delete" onclick="getAllDataFromReceiptContent()"><i class="fa fa-arrow-right"></i> Proceed</button>
-
-              </form>
             </div>
         </div>
     </div>
 </div>
 
+<script>
+    
+$(document).ready(function() {
+    $('#check').on('shown.bs.modal', function () {
+        initializeModal();
+    });
+});
+
+function initializeModal() {
+    // Set the initial value of the change amount to 0.00
+    //document.getElementById('changeAmount').value = "0.00";
+    document.getElementById('total_amount_gross').value = "₱ 10.00";
+    
+        var change =  0;
+    
+    // Update the total amount display
+    document.getElementById('changeAmount').innerText = change.toFixed(2);
+    
+
+}
+
+
+function updateTotalAmount() {
+    // Get the value entered by the user
+    var amount = parseFloat(document.getElementById('total_amount_gross').value.replace('₱', '').trim());
+    
+    // Get the total amount
+    var totalAmount = parseFloat(document.getElementById('checkoutTotal').innerText);
+    if(totalAmount == 0){
+        var change = isNaN(amount) ? 0.00 : totalAmount -  amount;
+    
+    // Update the total amount display
+    document.getElementById('changeAmount').innerText = change.toFixed(2);
+
+    }else{
+    // Calculate the change
+    var change = isNaN(amount) ? 0.00 : amount - totalAmount;
+    
+    // Update the total amount display
+    document.getElementById('changeAmount').innerText = change.toFixed(2);
+}
+}
+
+function isNumberKey(evt) {
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+</script>

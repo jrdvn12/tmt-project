@@ -104,16 +104,17 @@ include 'includes/header.php';
                             <div class="box-header with-border">
                                 <h3 class="box-title">Receipt</h3>
                             </div>
-                                <div class="box-body" id="receiptContent" style="height: 560px; overflow-y: scroll;">
+                                <div class="box-body" id="receiptContent" style="height: 450px; overflow-y: scroll;">
                                     <table class=" table-bordered">
                                         <thead>
                                             
                                                 <th>Photo</th>
-                                                <th>Product Number</th>
+                                                <th>Code</th>
                                                 <th>Price</th>
-                                                <th>Quantity</th>
-                                                <th>Stock</th>
-                                                <th>Total</th>
+                                                <th style="width: 250px;">Quantity</th>
+                                                <th style="width: 100px;">Stock</th>
+                                                <th style="width: 150px;">Total</th>
+
                                                 <th>Action</th>
                                            
                                         </thead>
@@ -127,10 +128,10 @@ include 'includes/header.php';
                                 </div>
 
                                     <div class="box-footer">
-                                        <div class="pull-left">
-                                            <div class="js-gtotal alert alert-success" id="totalDisplay" style="font-size:18px; font-weight:bold;">Total: ₱0.00</div>
-                                        </div>
-                                        <div class="pull-right">
+                                        
+                                            <div class="js-gtotal alert alert-success" id="totalDisplay" style="font-size:40px; font-weight:bold;">Total: ₱0.00</div>
+                                        
+                                        <div class="pull-right" >
                                             <!-- <a href='#' data-toggle='modal' class='btn btn-primary' onclick='getAllDataFromReceiptContent()'><i class='fa fa-check-circle-o'></i> Checkout</a> -->
                                             <a href='#' data-toggle='modal' class='btn btn-primary' onclick='openCheckModal()'><i class='fa fa-check-circle-o'></i> Checkout</a>
                                             <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
@@ -165,6 +166,7 @@ function invoice_no(){
     
                 $('#receiptContent').append(randomNumber);
 }
+// MODAL
 function showConsoleLogMessage(message) {
     // Create a modal or a dialog box to display the console.log message
     var modalContent = '<div id="consoleLogModal" class="modal" tabindex="-1" role="dialog">' +
@@ -186,6 +188,11 @@ function showConsoleLogMessage(message) {
     // Show the modal
     $('#consoleLogModal').modal('show');
 
+    // Set focus to the OK button after a short delay to ensure modal rendering
+    setTimeout(function() {
+        $('#okButton').focus();
+    }, 1);
+
     // Remove the modal from the DOM after it is closed
     $('#consoleLogModal').on('hidden.bs.modal', function(e) {
         $(this).remove();
@@ -193,12 +200,8 @@ function showConsoleLogMessage(message) {
         $('#searchInput').val('');
         $('#searchInput').focus();
     });
-
-    // Set focus to the OK button after modal is shown
-    $('#okButton').focus();
-
-    
 }
+
 
 function getRow(id) {
     $.ajax({
@@ -234,15 +237,18 @@ function getRow(id) {
                         <td>
                             <div class="input-group">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary decrement-quantity"><i class="fa fa-minus"></i></button>
+                                    <button style="height: 100px;" class="btn btn-sm btn-primary decrement-quantity"><i class="fa fa-minus"></i></button>
                                 </span>
-                                <input type="text" class="form-control text-center quantity" value="1">
+                                
+                                <input style="height: 100px; font-weight: bold; font-size: 80px;" type="text" class="form-control text-center quantity" value="1" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+
+
                                 <span class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary increment-quantity"><i class="fa fa-plus"></i></button>
+                                    <button style="height: 100px;" class="btn btn-sm btn-primary increment-quantity"><i class="fa fa-plus"></i></button>
                                 </span>
                             </div>
                         </td>
-                        <td>${response.balance}</td>
+                        <td style="font-weight: bold; font-size: 80px;">${response.balance}</td>
                         <td class="total-price">₱${price.toFixed(2)}</td>
                         <td><button class="btn btn-danger remove-item-button"><i class='fa fa-trash'></i></button></td>
                     </tr>`;
@@ -283,13 +289,23 @@ function getRow(id) {
             });
 
             // Add event listener for quantity input change
-            $('.quantity').on('input', function() {
+            //$('.quantity').on('input', function() {
+            $('#receiptTableBody tr:last-child .quantity').on('input', function() {
                 var quantity = parseInt($(this).val());
                 if (!isNaN(quantity) && quantity > 0 && quantity <= response.balance) {
+                    
+                   
                     updateTotalPrice($(this).closest('tr'), quantity, response.price);
                     calculateTotal();
                 } else {
-                    showConsoleLogMessage("Invalid quantity or exceeding stock<br>Available Stock for this Items<br>" + response.balance);
+                   
+                    showConsoleLogMessage("Invalid quantity or exceeding stock<br>Available Stock for this Items<br>" + response.product_number + "<br>"+ response.balance);
+                    // Set the value of the quantity input field to the available balance
+                    $(this).closest('tr').find(".quantity").val(response.balance);
+                    var quantity = response.balance;
+                    updateTotalPrice($(this).closest('tr'), quantity, response.price);
+                    calculateTotal();
+                    
                 }
             });
         }
@@ -302,7 +318,7 @@ function updateTotalPrice(row, quantity, price) {
     totalPriceCell.text("₱" + totalPrice.toFixed(2));
 }
 
-function calculateTotal() {
+/*function calculateTotal() {
     var total = 0;
     $('#receiptTableBody tr').each(function() {
         var totalPriceText = $(this).find('.total-price').text();
@@ -310,7 +326,7 @@ function calculateTotal() {
         total += totalPrice;
     });
     $('#totalAmount').text("Total: ₱" + total.toFixed(2));
-}
+}*/
 
 
 
@@ -447,68 +463,22 @@ $('.more-button').click(function() {
     
     // Append the new item to the receipt content
     receiptContent.appendChild(newItem);
-}/*
-        // Function to handle product click event
-        function redirectToProductDetails(productId) {
-
-          $_SESSION['success'] = 'Vendor updated successfully';
-            document.getElementById("searchInput").focus();
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "product_row.php?id=" + productId, true);
-           
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    var productDetails = JSON.parse(xhr.responseText);
-                    
-                    updateReceipt(productDetails);
-                    document.getElementById("searchInput").focus();
-                }
-            };
-            xhr.send();
-        }
-
-        // Function to update the receipt section with product details
-       function updateReceipt(productDetails) {
-            var receiptContent = document.getElementById("receiptContent");
-            var itemHtml = "<p>" + productDetails.product_name + ": ₱ " + productDetails.price + "</p>";  
-            receiptContent.insertAdjacentHTML('beforeend', itemHtml);
-            calculateTotal();
-            document.getElementById("searchInput").focus();
-        }
- 
-        
-        // Function to update the receipt section with product details
-        function updateReceipt(productDetails) {
-            var receiptContent = document.getElementById("receiptContent");
-            var itemHtml = "<p>" + productDetails.product_name + ": ₱ " + productDetails.price + "</p>";  
-            receiptContent.insertAdjacentHTML('beforeend', itemHtml);
-            calculateTotal();
-            calculateCheckoutTotal(); // Update the total checkout amount
-            document.getElementById("searchInput").focus();
-        }
-
-        // When the modal is shown
-        $('#check').on('shown.bs.modal', function() {
-            calculateCheckoutTotal();
-        });*/
-
+}
 //new
 function openCheckModal() {
         // Clear the value of the input field with id "amount"
         document.getElementById("total_amount_gross").value = "";
-
         // Open the modal
         $('#check').modal('show');
         $('#searchInput').val('');
-            $('#searchInput').focus();
-    }
+        $('#searchInput').focus();
+}
 
 
 
         // Add an event listener to the "REMOVE ITEM" button
 document.addEventListener('click', function(event) {
-    if (event.target && event.target.classList.contains('remove-item-button')) {
+if (event.target && event.target.classList.contains('remove-item-button')) {
         var row = event.target.closest('tr');
         var productId = row.getAttribute('data-product-id');
         
@@ -526,31 +496,6 @@ function okayToRemoveRow() {
 }
 
 
-
-
-// Add event listener for removing a product
-document.addEventListener('click', function(event) {
-    if (event.target && event.target.classList.contains('remove-product')) {
-        var quantityInput = event.target.parentElement.nextElementSibling;
-        var quantity = parseInt(quantityInput.value);
-        if (quantity > 1) {
-            quantityInput.value = quantity - 1;
-            // Recalculate total
-            calculateTotal();
-        }
-    }
-});
-
-// Add event listener for adding a product
-document.addEventListener('click', function(event) {
-    if (event.target && event.target.classList.contains('add-product')) {
-        var quantityInput = event.target.parentElement.previousElementSibling;
-        var quantity = parseInt(quantityInput.value);
-        quantityInput.value = quantity + 1;
-        // Recalculate total
-        calculateTotal();
-    }
-});
     </script>
 </body>
 </html>
