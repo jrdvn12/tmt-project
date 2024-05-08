@@ -196,6 +196,8 @@ function showConsoleLogMessage(message) {
 
     // Set focus to the OK button after modal is shown
     $('#okButton').focus();
+
+    
 }
 
 function getRow(id) {
