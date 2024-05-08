@@ -392,6 +392,9 @@ function clearReceipt() {
         // Clear search input and focus on it
         $('#searchInput').val('');
         $('#searchInput').focus();
+
+        calculateTotal();
+          
     }
 }
 
