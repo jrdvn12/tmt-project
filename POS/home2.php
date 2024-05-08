@@ -258,7 +258,7 @@ function getRow(id) {
 
             $('.decrement-quantity').unbind('click');
             $('.increment-quantity').unbind('click');
-
+            
             // Add event listeners for increment and decrement buttons
             $('.decrement-quantity').click(function() {
                 var quantityInput = $(this).closest('tr').find('.quantity');
