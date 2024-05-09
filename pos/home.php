@@ -158,6 +158,8 @@ include 'includes/header.php';
 document.addEventListener('click', function(event) {
     if (event.target && event.target.id === 'proceedBtn') {
         // Get the selected vendor value
+        $('#total_amount_gross').focus();
+        
         var selectedVendor = document.getElementById('vendor_name').value;
 
         // Get the selected payment value
@@ -209,10 +211,13 @@ document.addEventListener('click', function(event) {
                     //showConsoleLogMessage(response);
                     setTimeout(function() {
                         var receiptDataString = JSON.stringify(receiptData);
-                        window.location.href = 'receipt?receiptData=' + encodeURIComponent(receiptDataString) +'&selectedVendor=' + 
-                        encodeURIComponent(selectedVendor)+'&selectedPayment=' + encodeURIComponent(selectedPayment)
-                        +'&selectedAmount=' + encodeURIComponent(selectedAmount)
-                        +'&selectedChange=' + encodeURIComponent(selectedChange);
+                        var url = 'receipt?receiptData=' + encodeURIComponent(receiptDataString) +
+                            '&selectedVendor=' + encodeURIComponent(selectedVendor) +
+                            '&selectedPayment=' + encodeURIComponent(selectedPayment) +
+                            '&selectedAmount=' + encodeURIComponent(selectedAmount) +
+                            '&selectedChange=' + encodeURIComponent(selectedChange);
+                        window.open(url, '_blank');
+
                     }, 200);
 
                      // 2000 milliseconds = 2 seconds

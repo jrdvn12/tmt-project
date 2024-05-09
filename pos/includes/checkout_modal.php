@@ -9,11 +9,11 @@
             </div>
             <div class="modal-body">
                 <!-- <form class="form-horizontal" method="POST" action="reciept_generate.php"> -->
-                <form class="form-horizontal" method="POST">
+                <form class="form-horizontal" method="POST" id="checkoutForm">
                     <input type="hidden" class="id" name="id">
                     
                     <div class="text-center">
-                        <h1><b>Total Amount: ₱ <span name="checkoutTotal" id="checkoutTotal">0.00</span></b></h1>
+                        <h1><b>Total Amount: ₱ <span name="changeAmount" id="checkoutTotal">0.00</span></b></h1>
                         <h1><b>Change: ₱ <span name="changeAmount" id="changeAmount">0.00</span></b></h1> <!-- Added this line -->
                         <h2 class="bold fullname"></h2>
                         <h1><b>Enter Amount</b></h1>
@@ -36,6 +36,7 @@ $(document).ready(function() {
     $('#check').on('shown.bs.modal', function () {
         initializeModal();
     });
+   
 });
 
 function initializeModal() {
@@ -74,9 +75,27 @@ function updateTotalAmount() {
 }
 
 function isNumberKey(evt) {
+    if (event.keyCode === 13) {
+        // Trigger click event on the "Proceed" button
+        document.getElementById("proceedBtn").click();
+        return false; // Prevent form submission
+    }
     var charCode = (evt.which) ? evt.which : evt.keyCode;
     if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57))
         return false;
     return true;
 }
+
+$(document).ready(function() {
+    // Handle form submission
+    $('#checkoutForm').submit(function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Reload the page after a short delay
+        setTimeout(function() {
+            location.reload();
+        }, 200);
+    });
+});
+
 </script>
