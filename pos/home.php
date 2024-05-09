@@ -132,7 +132,8 @@ include 'includes/header.php';
                                             <!-- <a href='#' data-toggle='modal' class='btn btn-primary' onclick='getAllDataFromReceiptContent()'><i class='fa fa-check-circle-o'></i> Checkout</a> -->
                                             <a href='#' data-toggle='modal' class='btn btn-primary' onclick='openCheckModal()'><i class='fa fa-check-circle-o'></i> Checkout</a>
                                             <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
-                                           
+                                            
+                                            <a href='#' data-toggle='modal' class='btn btn-primary' id="proceedBtn"><i class='fa fa-check-circle-o'></i> Checkout</a>
                                             
                                         </div>
                                     </div>
@@ -152,6 +153,54 @@ include 'includes/header.php';
 
 
 <script>
+// Add an event listener to the proceed button
+document.addEventListener('click', function(event) {
+    if (event.target && event.target.id === 'proceedBtn') {
+        // Collect all data from the receipt table body
+        var receiptData = [];
+        var tableRows = document.querySelectorAll('#receiptTableBody tr');
+
+        tableRows.forEach(function(row) {
+            var rowData = {
+                
+                code: row.querySelector('td:nth-child(2)').textContent,
+                price: row.querySelector('td:nth-child(3)').textContent,
+                quantity: row.querySelector('td:nth-child(4) input').value,
+  
+            };
+            receiptData.push(rowData);
+        });
+
+        // Now, receiptData contains all the data from the receipt table body
+        // Check if the receiptData array is empty
+        if(receiptData.length === 0) {
+            // If receiptData is empty, display an error message
+            showConsoleLogMessage("Error: No receipt data received.");
+            return; // Exit the function
+        }
+        
+        // Send the data to reciept_generate.php using AJAX
+        $.ajax({
+                type: 'POST',
+                url: 'receipt_generate.php',
+                data: { receiptData: JSON.stringify(receiptData) },
+                success: function(response) {
+                    // Handle success response from the server
+                    //showConsoleLogMessage('Receipt data sent successfully');
+                    showConsoleLogMessage(response);
+                     // 2000 milliseconds = 2 seconds
+                    // Optionally, you can redirect the user or perform other actions here
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response from the server
+                    showConsoleLogMessage('Error sending receipt data:', error);
+                }
+            });
+
+    }
+});
+
+
 
 
   function getAllDataFromReceiptContent() {
@@ -484,11 +533,11 @@ $('.more-button').click(function() {
 //new
 function openCheckModal() {
         // Clear the value of the input field with id "amount"
-        document.getElementById("total_amount_gross").value = "";
+        /*document.getElementById("total_amount_gross").value = "";
         // Open the modal
         $('#check').modal('show');
         $('#searchInput').val('');
-        $('#searchInput').focus();
+        $('#searchInput').focus();*/
 
         window.location.href ="reciept_generate";
 }
