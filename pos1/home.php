@@ -132,11 +132,8 @@ include 'includes/header.php';
                                             <!-- <a href='#' data-toggle='modal' class='btn btn-primary' onclick='getAllDataFromReceiptContent()'><i class='fa fa-check-circle-o'></i> Checkout</a> -->
                                             <a href='#' data-toggle='modal' class='btn btn-primary' onclick='openCheckModal()'><i class='fa fa-check-circle-o'></i> Checkout</a>
                                             <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
-                                            <form id="receiptForm" action="./receipt_generate.php" method="post">
-                                                <button type="submit" class="btn btn-success btn-flat" name="proceed">
-                                                    <i class="fa fa-arrow-right"></i> Proceed
-                                                </button>
-                                            </form>
+                                           
+                                            
                                         </div>
                                     </div>
                         </div>
@@ -156,13 +153,7 @@ include 'includes/header.php';
 
 <script>
 
-document.getElementById("receiptForm").addEventListener("submit", function(event) {
-        // Prevent the default form submission
-        event.preventDefault();
-        
-        // Submit the form
-        this.submit();
-    });
+
   function getAllDataFromReceiptContent() {
     
     console.log("All data from receiptContent:");
@@ -498,6 +489,8 @@ function openCheckModal() {
         $('#check').modal('show');
         $('#searchInput').val('');
         $('#searchInput').focus();
+
+        window.location.href ="reciept_generate";
 }
 
 
