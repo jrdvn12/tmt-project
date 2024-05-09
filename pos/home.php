@@ -164,7 +164,7 @@ document.addEventListener('click', function(event) {
             var rowData = {
                 
                 code: row.querySelector('td:nth-child(2)').textContent,
-                price: row.querySelector('td:nth-child(3)').textContent,
+                price: row.querySelector('td:nth-child(3)').textContent.replace('₱', ''),
                 quantity: row.querySelector('td:nth-child(4) input').value,
   
             };
@@ -187,7 +187,12 @@ document.addEventListener('click', function(event) {
                 success: function(response) {
                     // Handle success response from the server
                     //showConsoleLogMessage('Receipt data sent successfully');
-                    showConsoleLogMessage(response);
+                    //showConsoleLogMessage(response);
+                    setTimeout(function() {
+                        var receiptDataString = JSON.stringify(receiptData);
+                        window.location.href = 'receipt.php?receiptData=' + encodeURIComponent(receiptDataString);
+                    }, 200);
+
                      // 2000 milliseconds = 2 seconds
                     // Optionally, you can redirect the user or perform other actions here
                 },
