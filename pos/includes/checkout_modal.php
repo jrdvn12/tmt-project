@@ -8,12 +8,13 @@
               <h4 class="modal-title"><b>Check Out</b></h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" method="POST" action="reciept_generate.php">
+                <!-- <form class="form-horizontal" method="POST" action="reciept_generate.php"> -->
+                <form class="form-horizontal" method="POST">
                     <input type="hidden" class="id" name="id">
                     
                     <div class="text-center">
-                        <h1><b>Total Amount: ₱ <span id="checkoutTotal">0.00</span></b></h1>
-                        <h1><b>Change: ₱ <span id="changeAmount">0.00</span></b></h1> <!-- Added this line -->
+                        <h1><b>Total Amount: ₱ <span name="checkoutTotal" id="checkoutTotal">0.00</span></b></h1>
+                        <h1><b>Change: ₱ <span name="changeAmount" id="changeAmount">0.00</span></b></h1> <!-- Added this line -->
                         <h2 class="bold fullname"></h2>
                         <h1><b>Enter Amount</b></h1>
                         <input type="text" class="form-control" id="total_amount_gross" name="total_amount_gross" required style="text-align: center; height: 100px;font-size: 80px;" oninput="updateTotalAmount()" onkeypress="return isNumberKey(event)" placeholder="₱ 0.00">
@@ -23,7 +24,7 @@
 
             <div class="modal-footer">
               <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-              <button type="submit" class="btn btn-success btn-flat" name="submit" ><i class="fa fa-arrow-right"></i> Proceed</button>
+              <button type="submit" id="proceedBtn" class="btn btn-success btn-flat" name="submit" ><i class="fa fa-arrow-right"></i> Proceed</button>
             </div>
         </div>
     </div>

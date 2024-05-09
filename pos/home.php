@@ -115,6 +115,7 @@ include 'includes/header.php';
                                                 <th style="width: 100px;">Stock</th>
                                                 <th style="width: 150px;">Total</th>
                                                 <th style="width: 80px;">Action</th>
+                                                <th class="hidden"></th>
                                            
                                         </thead>
                                             <tbody id="receiptTableBody">
@@ -156,6 +157,18 @@ include 'includes/header.php';
 // Add an event listener to the proceed button
 document.addEventListener('click', function(event) {
     if (event.target && event.target.id === 'proceedBtn') {
+        // Get the selected vendor value
+        var selectedVendor = document.getElementById('vendor_name').value;
+
+        // Get the selected payment value
+        var selectedPayment = document.getElementById('total_amount_gross').value;
+
+        // Get the selected amount value
+        var selectedAmount = document.getElementById('checkoutTotal').textContent;
+
+        // Get the selected change value
+        var selectedChange = document.getElementById('changeAmount').textContent;
+        
         // Collect all data from the receipt table body
         var receiptData = [];
         var tableRows = document.querySelectorAll('#receiptTableBody tr');
@@ -166,7 +179,8 @@ document.addEventListener('click', function(event) {
                 code: row.querySelector('td:nth-child(2)').textContent,
                 price: row.querySelector('td:nth-child(3)').textContent.replace('₱', ''),
                 quantity: row.querySelector('td:nth-child(4) input').value,
-  
+                total_amount: row.querySelector('td:nth-child(6)').textContent.replace('₱', ''),
+                description: row.querySelector('td:nth-child(8)').textContent,
             };
             receiptData.push(rowData);
         });
@@ -183,14 +197,22 @@ document.addEventListener('click', function(event) {
         $.ajax({
                 type: 'POST',
                 url: 'receipt_generate.php',
-                data: { receiptData: JSON.stringify(receiptData) },
+                data: { receiptData: JSON.stringify(receiptData),
+                        selectedVendor: selectedVendor,
+                        selectedPayment: selectedPayment,
+                        selectedAmount: selectedAmount,
+                        selectedChange: selectedChange,
+                     },
                 success: function(response) {
                     // Handle success response from the server
                     //showConsoleLogMessage('Receipt data sent successfully');
                     //showConsoleLogMessage(response);
                     setTimeout(function() {
                         var receiptDataString = JSON.stringify(receiptData);
-                        window.location.href = 'receipt.php?receiptData=' + encodeURIComponent(receiptDataString);
+                        window.location.href = 'receipt?receiptData=' + encodeURIComponent(receiptDataString) +'&selectedVendor=' + 
+                        encodeURIComponent(selectedVendor)+'&selectedPayment=' + encodeURIComponent(selectedPayment)
+                        +'&selectedAmount=' + encodeURIComponent(selectedAmount)
+                        +'&selectedChange=' + encodeURIComponent(selectedChange);
                     }, 200);
 
                      // 2000 milliseconds = 2 seconds
@@ -309,7 +331,8 @@ function getRow(id) {
                         <td style="font-weight: bold; font-size: 80px;">${response.balance}</td>
                         <td class="total-price">₱${price.toFixed(2)}</td>
                         <td style="width: 80px;"><button class="btn btn-danger remove-item-button"><i class='fa fa-trash'></i></button></td>
-                    </tr>`;
+                        <td class="hidden">${response.product_name}</td>
+                        </tr>`;
 
                 $("#receiptTableBody").append(newRow);
             }
@@ -538,13 +561,13 @@ $('.more-button').click(function() {
 //new
 function openCheckModal() {
         // Clear the value of the input field with id "amount"
-        /*document.getElementById("total_amount_gross").value = "";
+        /**/document.getElementById("total_amount_gross").value = "";
         // Open the modal
         $('#check').modal('show');
         $('#searchInput').val('');
-        $('#searchInput').focus();*/
+        $('#searchInput').focus();
 
-        window.location.href ="reciept_generate";
+       // window.location.href ="reciept_generate";
 }
 
 

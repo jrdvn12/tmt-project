@@ -1,9 +1,19 @@
 <?php
+include 'includes/session.php';
 // Check if the receiptData key exists in the $_POST array
 if(isset($_GET['receiptData'])) {
     // Decode the JSON data to PHP array
     $receiptData = json_decode($_GET['receiptData'], true);
-
+    $selectedVendor = json_decode($_GET['selectedVendor'], true);
+    
+    $date = date("F d, Y");
+   /*Employee Table Search For Employee ID*/
+   $sqlv = "SELECT * FROM vendor WHERE id = '$selectedVendor'";
+   $queryv = $conn->query($sqlv);
+   $rowv = $queryv->fetch_assoc();
+   $company_name = $rowv['company_name'];
+   $vendor_address = $rowv['vendor_address'] .' '. $rowv['city'].' '. $rowv['province'].' '. $rowv['zip_code'].' '. $rowv['country'];
+    
     // Now you can access the data in $receiptData array
     // Example usage:
     function generateRow($receiptData){
@@ -13,11 +23,58 @@ if(isset($_GET['receiptData'])) {
         foreach($receiptData as $item) {
             $contents .= 
             '<tr>
-                <td align="center">'. $item['code'] . '</td>
-                <td align="center">'. $item['price'] .' </td>
-                <td align="center">'. $item['quantity'] . '</td>
+                <td border="1" align="center">'. $item['quantity'] . '</td>
+                <td border="1" align="center">'. $item['code'] . '</td>
+                <td border="1" align="center">'. $item['description'] .' </td>
+                <td border="1" align="center">'. $item['price'] .' </td>
+                <td border="1" align="center">'. $item['total_amount'] .' </td>
+                
             </tr>';
+
+          
+
+
+
         }
+        $contents .=
+        '<tr>
+            <td border="1" align="center"></td>
+            <td border="1" align="center"></td>
+            <td border="1" align="right"></td>
+            <td border="1" align="center"></td>
+            <td border="1" align="center"> </td>
+            
+        </tr>';
+        $selectedAmount = json_decode($_GET['selectedAmount'], true);
+        $contents .=
+        '<tr>
+            <td border="1" align="center"></td>
+            <td border="1" align="center"></td>
+            <td border="1" align="right">TOTAL</td>
+            <td border="1" align="center">'.number_format($selectedAmount, 2).'</td>
+            <td border="1" align="center"> </td>
+            
+        </tr>';
+        $selectedPayment = json_decode($_GET['selectedPayment'], true);
+        $contents .=
+        '<tr>
+            <td border="1" align="center"></td>
+            <td border="1" align="center"></td>
+            <td border="1" align="right">PAYMENT</td>
+            <td border="1" align="center">'.number_format($selectedPayment, 2).'</td>
+            <td border="1" align="center"> </td>
+            
+        </tr>';
+        $selectedChange = json_decode($_GET['selectedChange'], true);
+        $contents .=
+        '<tr>
+            <td border="1" align="center"></td>
+            <td border="1" align="center"></td>
+            <td border="1" align="right">CHANGE</td>
+            <td border="1" align="center">' . number_format($selectedChange, 2). '</td>
+            <td border="1" align="center"> </td>
+            
+        </tr>';
         
         return $contents;
     }
@@ -36,7 +93,8 @@ if(isset($_GET['receiptData'])) {
     $pdf->setPrintFooter(false);  
     $pdf->SetAutoPageBreak(TRUE, 10);  
     $pdf->SetFont('helvetica', '', 7);  
-    $pdf->AddPage();  
+    $pdf->AddPage(); 
+     
 	$image = '<img src="../images/TMTFOOD.png" alt="Company Logo" width="100">';
 	//<td align="right">'.$image.'</td>
     $content = '';  
@@ -57,18 +115,22 @@ if(isset($_GET['receiptData'])) {
             </td>
         </tr>
     </table>
+    <p>Sold to: <b>'.$company_name .'</b><span style="padding-right:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Date: '.$date.'</p>
 
-    <p>Sold to: _____________________________________________<span style="padding-right:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Date: _________________________________</p>
-
-    <p>Address: _____________________________________________ D.R No.: _____________________________</p>
+    <p>Address: <b>'.$vendor_address .' </b>D.R No.: _____________________________</p>
     <p>       : _____________________________________________ P.O./S.O. No.: _____________________________</p>
     <p>TIN No.: __________________ Business Style: ________________________ Terms: ___________________</p>
     <table border="0" cellspacing="0" cellpadding="3">  
         <tr>  
-            <th width="5%"  align="center"><b>Code</b></th>
-            <th width="60%"  align="center"><b>Price</b></th>
-            <th width="8%"  align="center"><b>Quantity</b></th>
+            <th border="1" width="10%"  align="center"><b>QUANTITY</b></th>
+            <th border="1" width="10%"  align="center"><b>UNIT</b></th>
+            <th border="1" width="50%"  align="center"><b>DESCRIPTION of ARTICLES</b></th>
+            <th border="1" width="15%"  align="center"><b>UNIT PRICE</b></th>
+            <th border="1" width="15%"  align="center"><b>AMOUNT</b></th>
+            
         </tr>
+
+        
     ';  
     $content .= generateRow($receiptData);  
     $content .= '</table>';  
