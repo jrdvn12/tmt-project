@@ -8,7 +8,7 @@
               <h4 class="modal-title"><b>Check Out</b></h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" method="POST" action="#">
+                <form class="form-horizontal" method="POST" action="reciept_generate.php">
                     <input type="hidden" class="id" name="id">
                     
                     <div class="text-center">
@@ -23,7 +23,7 @@
 
             <div class="modal-footer">
               <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-              <button type="submit" class="btn btn-success btn-flat" name="delete" onclick="getAllDataFromReceiptContent()"><i class="fa fa-arrow-right"></i> Proceed</button>
+              <button type="submit" class="btn btn-success btn-flat" name="submit" ><i class="fa fa-arrow-right"></i> Proceed</button>
             </div>
         </div>
     </div>
