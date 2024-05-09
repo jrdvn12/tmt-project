@@ -1,5 +1,7 @@
+I want after enter will reload the page 
+
 <!-- Check Out -->
-<div class="modal fade" id="check">
+<div class="modal fade" id="check" >
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,7 +11,7 @@
             </div>
             <div class="modal-body">
                 <!-- <form class="form-horizontal" method="POST" action="reciept_generate.php"> -->
-                <form class="form-horizontal" method="POST" id="checkoutForm">
+                <form class="form-horizontal" method="POST">
                     <input type="hidden" class="id" name="id">
                     
                     <div class="text-center">
@@ -24,52 +26,53 @@
 
             <div class="modal-footer">
               <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-              <button type="submit" id="proceedBtn" class="btn btn-success btn-flat" name="submit"><i class="fa fa-arrow-right"></i> Proceed</button>
+              <button type="submit" id="proceedBtn" class="btn btn-success btn-flat" name="submit" ><i class="fa fa-arrow-right"></i> Proceed</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
+    
 $(document).ready(function() {
     $('#check').on('shown.bs.modal', function () {
         initializeModal();
-    });
-
-    // Handle form submission
-    $('#checkoutForm').submit(function(event) {
-        event.preventDefault(); // Prevent default form submission
-        
-        // Reload the page after a short delay
-        setTimeout(function() {
-            location.reload();
-        }, 200);
     });
 });
 
 function initializeModal() {
     // Set the initial value of the change amount to 0.00
+    //document.getElementById('changeAmount').value = "0.00";
     document.getElementById('total_amount_gross').value = "₱ 10.00";
-    var change = 0;
+    
+        var change =  0;
+    
     // Update the total amount display
     document.getElementById('changeAmount').innerText = change.toFixed(2);
+    
+
 }
+
 
 function updateTotalAmount() {
     // Get the value entered by the user
     var amount = parseFloat(document.getElementById('total_amount_gross').value.replace('₱', '').trim());
+    
     // Get the total amount
     var totalAmount = parseFloat(document.getElementById('checkoutTotal').innerText);
     if(totalAmount == 0){
         var change = isNaN(amount) ? 0.00 : totalAmount -  amount;
-        // Update the total amount display
-        document.getElementById('changeAmount').innerText = change.toFixed(2);
-    } else {
-        // Calculate the change
-        var change = isNaN(amount) ? 0.00 : amount - totalAmount;
-        // Update the total amount display
-        document.getElementById('changeAmount').innerText = change.toFixed(2);
-    }
+    
+    // Update the total amount display
+    document.getElementById('changeAmount').innerText = change.toFixed(2);
+
+    }else{
+    // Calculate the change
+    var change = isNaN(amount) ? 0.00 : amount - totalAmount;
+    
+    // Update the total amount display
+    document.getElementById('changeAmount').innerText = change.toFixed(2);
+}
 }
 
 function isNumberKey(evt) {
@@ -82,5 +85,7 @@ function isNumberKey(evt) {
     if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57))
         return false;
     return true;
+   
+
 }
 </script>
