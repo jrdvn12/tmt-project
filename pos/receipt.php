@@ -94,7 +94,7 @@ if(isset($_GET['receiptData'])) {
     $pdf->SetAutoPageBreak(TRUE, 10);  
     $pdf->SetFont('helvetica', '', 7);  
     $pdf->AddPage(); 
-     
+    
 	$image = '<img src="../images/TMTFOOD.png" alt="Company Logo" width="100">';
 	//<td align="right">'.$image.'</td>
     $content = '';  

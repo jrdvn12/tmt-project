@@ -102,7 +102,7 @@ include 'includes/header.php';
                     <div class="col-md-6">
                         <div class="box box-solid" style="box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Receipt</h3>
+                                <h3 class="box-title"><h1><center><b>RECEIPT</b></center></h1></h3>
                             </div>
                                 <div class="box-body" id="receiptContent" style="height: 450px; overflow-y: scroll;">
                                     <table class=" table-bordered">
@@ -128,13 +128,15 @@ include 'includes/header.php';
                                     <div class="box-footer">
                                         
                                             <div class="js-gtotal alert alert-success" id="totalDisplay" style="font-size:40px; font-weight:bold;">Total: ₱0.00</div>
-                                        
-                                        <div class="pull-right" >
+                                        <div class="pull-left" style="width : 49%;" >
+                                            <a href='#' data-toggle='modal' class='btn btn-primary' onclick='openCheckModal()' style="width : 100%; font-size:40px; font-weight:bold;"><i class='fa fa-check-circle-o'></i> Check Out</a>
+                                        </div>
+                                        <div class="pull-right"style="width : 49%;"  >
                                             <!-- <a href='#' data-toggle='modal' class='btn btn-primary' onclick='getAllDataFromReceiptContent()'><i class='fa fa-check-circle-o'></i> Checkout</a> -->
-                                            <a href='#' data-toggle='modal' class='btn btn-primary' onclick='openCheckModal()'><i class='fa fa-check-circle-o'></i> Checkout</a>
-                                            <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()"><i class='fa fa-trash'></i> Clear All</button>
                                             
-                                            <a href='#' data-toggle='modal' class='btn btn-primary' id="proceedBtn"><i class='fa fa-check-circle-o'></i> Checkout</a>
+                                            <button class="btn btn-danger my-2 w-100" onclick="clearReceipt()" style="width : 100%;font-size:40px; font-weight:bold;"><i class='fa fa-trash'></i> Clear All</button>
+                                            
+                                            <!-- <a href='#' data-toggle='modal' class='btn btn-primary' id="proceedBtn"><i class='fa fa-check-circle-o'></i> Checkout</a> -->
                                             
                                         </div>
                                     </div>

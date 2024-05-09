@@ -1,5 +1,3 @@
-I want after enter will reload the page 
-
 <!-- Check Out -->
 <div class="modal fade" id="check" >
     <div class="modal-dialog">
