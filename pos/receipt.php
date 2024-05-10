@@ -115,7 +115,7 @@ if(isset($_GET['receiptData'])) {
     <table border="0" cellspacing="0" cellpadding="3">  
         <tr>
        
-            <th border="0" colspan="1" rowspan="3" align="center">'.$image.'</th>
+            <th border="0" colspan="1" rowspan="3" align="center">LOGO</th>
             <th border="0" colspan="2" rowspan="3" align="left">
                 Room EF-002 4th Flr., Sitio Grande Bldg.<br>
                 409 A. Soriano Ave. Zone 69, Brgy. 656<br>
