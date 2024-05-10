@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2024 at 08:49 AM
+-- Generation Time: May 10, 2024 at 10:20 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -288,9 +288,9 @@ CREATE TABLE `main_inventory` (
 --
 
 INSERT INTO `main_inventory` (`id`, `product_id`, `product_number`, `photo`, `batch`, `piececode`, `boxcode`, `product_name`, `price`, `qty`, `soldstock`, `balance`, `dateofstock`, `product_expiration`) VALUES
-(36, 5, 'CGCC', 'clasico.png', '13131', '4806538456029', '4806538450111', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 10.5, 10980, 0, 0, '2024-04-25', '2025-04-25'),
-(39, 6, 'CGB', 'brown.png', '4234234', '4806538450012', '4806538450128', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Brown) ', 10.5, 10980, 0, 0, '2024-04-25', '2025-04-25'),
-(42, 7, 'CGW', 'white.png', '2312312', '4806538450005', '4806538450135', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (White) ', 10.5, 10980, 0, 0, '2024-04-25', '2025-04-25');
+(36, 5, 'CGCC', 'clasico.png', '13131', '4806538450029', '4806538450111', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 10.5, 10980, 0, 100, '2024-04-25', '2025-04-25'),
+(39, 6, 'CGB', 'brown.png', '4234234', '4806538450012', '4806538450128', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Brown) ', 10.5, 10980, 0, 100, '2024-04-25', '2025-04-25'),
+(42, 7, 'CGW', 'white.png', '2312312', '4806538450005', '4806538450135', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (White) ', 10.5, 10980, 0, 100, '2024-04-25', '2025-04-25');
 
 -- --------------------------------------------------------
 
@@ -331,7 +331,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `product_number`, `photo`, `piececode`, `boxcode`, `product_name`, `price`, `material_needs`, `dateofstock`) VALUES
-(5, 'CGCC', 'clasico.png', '4806538456029', '4806538450111', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 10.5, '', '2024-03-15'),
+(5, 'CGCC', 'clasico.png', '4806538450029', '4806538450111', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Clasico)', 10.5, '', '2024-03-15'),
 (6, 'CGB', 'brown.png', '4806538450012', '4806538450128', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (Brown) ', 10.5, '', '2024-03-15'),
 (7, 'CGW', 'white.png', '4806538450005', '4806538450135', 'Café Gusto 3-in-1 Premium Taste Coffee Mix (White) ', 10.5, '', '2024-03-15');
 
