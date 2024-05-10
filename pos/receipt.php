@@ -7,7 +7,7 @@ if(isset($_GET['receiptData'])) {
     $selectedVendor = json_decode($_GET['selectedVendor'], true);
     
     $date = date("F d, Y");
-   /*Employee Table Search For Employee ID*/
+   /*Employee Table Search For Vendor ID*/
    $sqlv = "SELECT * FROM vendor WHERE id = '$selectedVendor'";
    $queryv = $conn->query($sqlv);
    $rowv = $queryv->fetch_assoc();
@@ -99,22 +99,55 @@ if(isset($_GET['receiptData'])) {
 	//<td align="right">'.$image.'</td>
     $content = '';  
     $content .= '
-	
-    <table border="0" cellpadding="0" cellspacing="0">
-        <tr>
+	<style>
+    		.right-border {
+        	border-right: 1px solid black;
 			
-            <td align="left">
+    		}
+
+			.bottom-border {
+				
+				border-bottom: 1px solid black;
+				}
+			
+	</style>
+
+    <table border="0" cellspacing="0" cellpadding="3">  
+        <tr>
+       
+            <th border="0" colspan="1" rowspan="3" align="center">LOGO</th>
+            <th border="0" colspan="2" rowspan="3" align="left">
                 Room EF-002 4th Flr., Sitio Grande Bldg.<br>
                 409 A. Soriano Ave. Zone 69, Brgy. 656<br>
                 1002 Intramuros NCR, City of Manila, 1st District, Philippines<br>
                 Contact Nos.: (632) 8524-5664/(63) 917-7077978<br>
                 VAT Reg. TIN: 776-902-581-00000
-            </td>
-            <td align="left">
-            <h4 align="center">SALES INVOICE<br>No. 0001</h4>
-            </td>
+            </th>
+            <th border="0" colspan="1" rowspan="1" align="left">
+               
+                
+                <h2><b>SALES INVOICE</b></h2>
+            
+            </th>
+  
+           
         </tr>
+
+        <tr>
+            <th border="0" class="bottom-border" colspan="1" rowspan="1" align="left">
+                
+             <h2><b>NO. </b></h2>
+        
+        
+            </th>
+        </tr>
+
+
+       
+
     </table>
+
+
     <p>Sold to: <b>'.$company_name .'</b><span style="padding-right:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Date: '.$date.'</p>
 
     <p>Address: <b>'.$vendor_address .' </b>D.R No.: _____________________________</p>
