@@ -11,7 +11,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-       Orders
+       Sales
       </h1>
       <!-- <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -52,32 +52,50 @@
               <table id="example1" class="table table-bordered">
                 <thead>
                   
+                  
+                  <th>Invoice ID</th>
                   <th>Product ID</th>
-                  <th>Name</th>
-                  <th>Batch</th>
-                  <th>Expiration</th>
+                  <th>Product Code</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Total</th>
+                  <th>Time</th>
                   <th>Date</th>
-
-                  <th>Usage Materials</th>
-
                   <th>Tools</th>
                   
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT * FROM main_raw_materials";
+                   // $sql = "SELECT * FROM sale";
+
+                    $sql = "SELECT 
+                      id,
+                      invoice_id,
+                      GROUP_CONCAT(product_id SEPARATOR '<br>') AS product_ids,
+                      GROUP_CONCAT(product_code SEPARATOR '<br>') AS product_codes,
+                      GROUP_CONCAT(price SEPARATOR '<br>') AS prices,
+                      GROUP_CONCAT(qty SEPARATOR '<br>') AS qtys,
+                      GROUP_CONCAT(total_amount SEPARATOR '<br>') AS total_amounts,
+                      GROUP_CONCAT(time_sales SEPARATOR '<br>') AS time_saless,
+                      GROUP_CONCAT(date_sales SEPARATOR '<br>') AS date_saless
+                      FROM sale
+                      GROUP BY invoice_id";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                      
                       echo "
                         <tr>
                           
-                          <td>".$row['material_code']."</td>
-                          <td>".$row['name']."</td>
-                          <td>".$row['batch']."</td>  
-                          <td>".$row['expiration']."</td>
-                          <td>".$row['kilo']."</td>
-                          <td>".$row['kilo']."</td>
+                          <td>".$row['invoice_id']."</td>
+                          <td>".$row['product_ids']."</td>
+                          
+                          <td>".$row['product_codes']."</td>
+                          <td>".$row['prices']."</td>
+                          <td>".$row['qtys']."</td>  
+                          <td>".$row['total_amounts']."</td>
+                          <td>".$row['time_saless']."</td>
+                          <td>".$row['date_saless']."</td>
+
                           <td>
                           <a href='#edit' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['id']."' onclick='getRow(".$row['id'].")'><i class='fa fa-edit'></i> Edit</a>
                           <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['id']."' onclick='getRow(".$row['id'].")'><i class='fa fa-trash'></i> Delete</a>

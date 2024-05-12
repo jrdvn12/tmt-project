@@ -34,25 +34,36 @@
     
 $(document).ready(function() {
     $('#check').on('shown.bs.modal', function () {
-        initializeModal();
+        $('#changeAmount').text('0.00');
+        $('#total_amount_gross').val('0.00');
     });
+
+    $('#proceedBtn').click(function(event) {
+
+        //event.preventDefault(); // Prevent default form submission
+
+        var changechecker = document.getElementById('changeAmount').innerText;
+        if (changechecker > 0){
+            $('#check').modal('hide');
+        }
+        else {
+            $('#changeAmount').text('0.00');
+            $('#check').modal('hide');
+            $('#receiptTableBody').empty();
+            $('#searchInput').val('');
+            $('#searchInput').focus();
+       
+            calculateTotal();
+            showConsoleLogMessage("Exceeding stock<br>Available Stock for this Items<br>");
+        }
+        
+        
+    });
+
 });
 
-function initializeModal() {
-    // Set the initial value of the change amount to 0.00
-    //document.getElementById('changeAmount').value = "0.00";
-    document.getElementById('total_amount_gross').value = "₱ 10.00";
-    
-        var change =  0;
-    
-    // Update the total amount display
-    document.getElementById('changeAmount').innerText = change.toFixed(2);
-    
-
-}
-
-
 function updateTotalAmount() {
+    $('#total_amount_gross').focus();
     // Get the value entered by the user
     var amount = parseFloat(document.getElementById('total_amount_gross').value.replace('₱', '').trim());
     
@@ -73,11 +84,25 @@ function updateTotalAmount() {
 }
 }
 
+
 function isNumberKey(evt) {
     if (event.keyCode === 13) {
         // Trigger click event on the "Proceed" button
-        document.getElementById("proceedBtn").click();
-        return false; // Prevent form submission
+      
+       document.getElementById("proceedBtn").click();
+        $('#changeAmount').text('0.00');
+        $('#check').modal('hide');
+        $('#receiptTableBody').empty();
+        $('#searchInput').val('');
+        $('#searchInput').focus();
+       
+        calculateTotal();
+        //window.location.reload();
+        return false; // Prevent form submission 
+  
+            
+            showConsoleLogMessage("Exceeding stock<br>Available Stock for this Items<br>");
+        
     }
     var charCode = (evt.which) ? evt.which : evt.keyCode;
     if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57))

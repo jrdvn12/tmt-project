@@ -37,9 +37,9 @@
             </span>
         </a>
         <ul class="treeview-menu">
-            <li><a href="#" style="color: black;"><i class="fa fa-circle-o"></i> Main Sales</a></li>    
-            <li><a href="#" style="color: black;"><i class="fa fa-circle-o"></i> Distributor Sales</a></li>
-            <li><a href="#" style="color: black;"><i class="fa fa-circle-o"></i> Seller Sales</a></li>        
+            <li><a href="sales" style="color: black;"><i class="fa fa-circle-o"></i> Main Sales</a></li>    
+            <!-- <li><a href="#" style="color: black;"><i class="fa fa-circle-o"></i> Distributor Sales</a></li>
+            <li><a href="#" style="color: black;"><i class="fa fa-circle-o"></i> Seller Sales</a></li>         -->
         </ul>
     </li> 
     <!-- Add "active" class to the clicked treeview item -->

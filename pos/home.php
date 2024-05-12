@@ -185,6 +185,7 @@ document.addEventListener('click', function(event) {
                 quantity: row.querySelector('td:nth-child(4) input').value,
                 total_amount: row.querySelector('td:nth-child(6)').textContent.replace('₱', ''),
                 description: row.querySelector('td:nth-child(8)').textContent,
+                product_id: row.querySelector('td:nth-child(9)').textContent,
             };
             receiptData.push(rowData);
         });
@@ -339,6 +340,7 @@ function getRow(id) {
                         <td class="total-price">₱${price.toFixed(2)}</td>
                         <td style="width: 80px;"><button class="btn btn-danger remove-item-button"><i class='fa fa-trash'></i></button></td>
                         <td class="hidden">${response.product_name}</td>
+                        <td class="hidden">${response.product_id}</td>
                         </tr>`;
 
                 $("#receiptTableBody").append(newRow);
@@ -568,11 +570,15 @@ $('.more-button').click(function() {
 //new
 function openCheckModal() {
         // Clear the value of the input field with id "amount"
-        /**/document.getElementById("total_amount_gross").value = "";
+        $('#total_amount_gross').value = "";
         // Open the modal
+        $('#total_amount_gross').text('0.00');
+        $('#total_amount_gross').focus();
         $('#check').modal('show');
-        $('#searchInput').val('');
-        $('#searchInput').focus();
+        $('#changeAmount').text('0.00');
+       
+       // $('#searchInput').val('');
+        //$('#searchInput').focus();
 
        // window.location.href ="reciept_generate";
 }

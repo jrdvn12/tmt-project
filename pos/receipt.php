@@ -1,5 +1,9 @@
 <?php
-include 'includes/session.php';
+$timezone = 'Asia/Manila';
+date_default_timezone_set($timezone);
+require_once 'includes/session.php';
+
+
 // Check if the receiptData key exists in the $_POST array
 if(isset($_GET['receiptData'])) {
     // Decode the JSON data to PHP array
@@ -16,9 +20,16 @@ if(isset($_GET['receiptData'])) {
    $vendor_address2 = $rowv['province'].' '. $rowv['zip_code'].' '. $rowv['country'];
     
    $date = date("F d, Y");
-
+   $date_sales=date('Y-m-d');
+//creating invoice_id
+        $dates = date("Y"); 
+		$set = '1234567890';
+		$rand = substr(str_shuffle($set), 0, 15); 
+        $time_check = date('his');
+        $time_sales = date('h:i:s A');
+        $invoice_id = $dates."-".$rand."-". $time_check; 
     // Function to generate row content
-    function generateRow($company_name,$vendor_address1,$vendor_address2,$receiptData,$date){
+    function generateRow($company_name,$vendor_address1,$vendor_address2,$receiptData,$date,$date_sales,$time_sales,$invoice_id){
         $contents = '';
 
         $contents .= 
@@ -93,6 +104,25 @@ if(isset($_GET['receiptData'])) {
                 <td border="1" align="center">'. $item['price'] .' </td>
                 <td border="1" align="center">'. $item['total_amount'] .' </td>
             </tr>';
+            $product_id = $item['product_id'] ;
+            $product_code = $item['code'] ;
+            $price = $item['price'] ;
+            $qty = $item['quantity'] ;
+            $total_amount = $item['total_amount'] ;
+           
+            include 'includes/conn.php';
+
+            $sql = "INSERT INTO sale (invoice_id, product_id, product_code, price, qty, total_amount, time_sales,date_sales) 
+            
+            
+            VALUES ('$invoice_id', '$product_id', '$product_code', '$price', '$qty',  '$total_amount','$time_sales','$date_sales')";
+		if($conn->query($sql)){
+			
+			
+		}
+		else{
+			$_SESSION['error'] = $conn->error;
+		}
         }
 
         // Add the total, payment, and change rows
@@ -296,7 +326,7 @@ if(isset($_GET['receiptData'])) {
         </tr>
     ';  
 
-    $content .= generateRow($company_name,$vendor_address1,$vendor_address2,$receiptData,$date);  
+    $content .= generateRow($company_name,$vendor_address1,$vendor_address2,$receiptData,$date,$date_sales,$time_sales,$invoice_id);  
     $content .= '</table>';  
     $pdf->writeHTML($content);  
 
@@ -333,12 +363,12 @@ if(isset($_GET['receiptData'])) {
                 <h2><b>NO.</b></h2>
             </th>
             <th border="0" width="14%" class="bottom-border" colspan="1"  align="left">          
-                <h4>COMPUTER COPY</h4>
+                <h4>'.$invoice_id.'</h4>
             </th>
         </tr>
     ';  
 
-    $content .= generateRow($company_name,$vendor_address1,$vendor_address2,$receiptData,$date);  
+    $content .= generateRow($company_name,$vendor_address1,$vendor_address2,$receiptData,$date,$date_sales,$time_sales,$invoice_id);  
     $content .= '</table>';  
     $pdf->writeHTML($content);  
 
