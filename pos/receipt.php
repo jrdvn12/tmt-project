@@ -287,9 +287,10 @@ if(isset($_GET['receiptData'])) {
     //$pdf->SetAutoPageBreak(TRUE, 10);  
     $pdf->SetFont('helvetica', '', 7);  
 
-    // Add the customer copy page
+    // Add the customer copy page 
     $pdf->AddPage();
-    $image = '<img src="../images/TMTFOOD.png" alt="Company Logo" width="120">';
+    //$image = '<img src="../images/TMTFOOD.png" alt="Company Logo" width="120">';
+    $image = 'LOGO';
     $content = '';  
     $content .= '
     <style>
