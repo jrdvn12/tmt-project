@@ -158,10 +158,20 @@ include 'includes/header.php';
 <script>
 // Add an event listener to the proceed button
 document.addEventListener('click', function(event) {
+    $('#total_amount_gross').focus();
+    $('#total_amount_gross').val('');
+    $('#searchInput').val('');
+    $('#searchInput').focus();
+    $('#total_amount_gross').focus();
     if (event.target && event.target.id === 'proceedBtn') {
         // Get the selected vendor value
         $('#total_amount_gross').focus();
-        
+        $('#changeAmount').text('0.00');
+        $('#total_amount_gross').val('');
+       
+          
+       
+            calculateTotal();
         var selectedVendor = document.getElementById('vendor_name').value;
 
         // Get the selected payment value
@@ -222,6 +232,12 @@ document.addEventListener('click', function(event) {
                         window.open(url, '_blank');
 
                     }, 200);
+                    $('#check').modal('hide');
+                    $('#receiptTableBody').empty();
+                    $('#searchInput').val('');
+                    $('#searchInput').focus();
+            
+                    calculateTotal();
 
                      // 2000 milliseconds = 2 seconds
                     // Optionally, you can redirect the user or perform other actions here

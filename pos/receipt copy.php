@@ -1,12 +1,11 @@
 <?php
-    $timezone = 'Asia/Manila';
-    date_default_timezone_set($timezone);
-    require_once 'includes/session.php';
-    include 'includes/conn.php';
+$timezone = 'Asia/Manila';
+date_default_timezone_set($timezone);
+require_once 'includes/session.php';
+
 
 // Check if the receiptData key exists in the $_POST array
 if(isset($_GET['receiptData'])) {
-
     // Decode the JSON data to PHP array
     $receiptData = json_decode($_GET['receiptData'], true);
     $selectedVendor = json_decode($_GET['selectedVendor'], true);
@@ -93,31 +92,8 @@ if(isset($_GET['receiptData'])) {
             <td border="1" width="15%"  align="center"><b>UNIT PRICE</b></td>
             <td border="1" width="15%"  align="center"><b>AMOUNT</b></td>
         </tr>';
-       
 
-  
-        // Include database connection
-        include 'includes/conn.php';
-        
-        foreach ($receiptData as $item) {
-            $product_id = $item['product_id'];
-            $product_code = $item['code'];
-            $price = $item['price'];
-            $qty = $item['quantity'];
-            $total_amount = $item['total_amount'];
-        
-            // Assuming $invoice_id, $time_sales, and $date_sales are defined somewhere before this loop
-            $sql = "INSERT INTO sale (invoice_id, product_id, product_code, price, qty, total_amount, time_sales, date_sales) 
-                    VALUES ('$invoice_id', '$product_id', '$product_code', '$price', '$qty',  '$total_amount', '$time_sales', '$date_sales')";
-            if ($conn->query($sql)) {
-                //$_SESSION['success'] = 'Sales Successfully!';
-            } else {
-                $_SESSION['error'] = $conn->error;
-            }
-        }
-        
-        
-            // Loop through the array and access each item
+        // Loop through the array and access each item
         foreach($receiptData as $item) {
             /**/$contents .= 
             '
@@ -128,7 +104,25 @@ if(isset($_GET['receiptData'])) {
                 <td border="1" align="center">'. $item['price'] .' </td>
                 <td border="1" align="center">'. $item['total_amount'] .' </td>
             </tr>';
-          
+            $product_id = $item['product_id'] ;
+            $product_code = $item['code'] ;
+            $price = $item['price'] ;
+            $qty = $item['quantity'] ;
+            $total_amount = $item['total_amount'] ;
+           
+            include 'includes/conn.php';
+
+            $sql = "INSERT INTO sale (invoice_id, product_id, product_code, price, qty, total_amount, time_sales,date_sales) 
+            
+            
+            VALUES ('$invoice_id', '$product_id', '$product_code', '$price', '$qty',  '$total_amount','$time_sales','$date_sales')";
+		if($conn->query($sql)){
+			//$_SESSION['success'] = 'Sales Successfully!';
+			
+		}
+		else{
+			$_SESSION['error'] = $conn->error;
+		}
         }
 
         // Add the total, payment, and change rows
