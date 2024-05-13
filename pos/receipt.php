@@ -97,6 +97,8 @@ if(isset($_GET['receiptData'])) {
 
   
         // Include database connection
+
+        // Inserting to database
         include 'includes/conn.php';
         
         foreach ($receiptData as $item) {
