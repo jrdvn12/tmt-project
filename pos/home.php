@@ -196,6 +196,7 @@ document.addEventListener('click', function(event) {
                 total_amount: row.querySelector('td:nth-child(6)').textContent.replace('₱', ''),
                 description: row.querySelector('td:nth-child(8)').textContent,
                 product_id: row.querySelector('td:nth-child(9)').textContent,
+                pid: row.querySelector('td:nth-child(10)').textContent,
             };
             receiptData.push(rowData);
         });
@@ -357,6 +358,7 @@ function getRow(id) {
                         <td style="width: 80px;"><button class="btn btn-danger remove-item-button"><i class='fa fa-trash'></i></button></td>
                         <td class="hidden">${response.product_name}</td>
                         <td class="hidden">${response.product_id}</td>
+                        <td class="hidden">${response.id}</td>
                         </tr>`;
 
                 $("#receiptTableBody").append(newRow);
@@ -425,6 +427,7 @@ function getRow(id) {
                 }
             });
         }
+        
     }); 
 }
 

@@ -10,7 +10,7 @@
             $row = $query->fetch_assoc(); // Fetch only one row
             echo json_encode($row);
         } else {
-            echo json_encode(array("message" => "No data found."));
+            echo json_encode();
             
         }
     }

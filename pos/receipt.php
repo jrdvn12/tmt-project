@@ -107,7 +107,7 @@ if(isset($_GET['receiptData'])) {
             $price = $item['price'];
             $qty = $item['quantity'];
             $total_amount = $item['total_amount'];
-        
+            $pid = $item['pid'];
             // Check if a record with the same invoice ID and product ID exists
             $check_sql = "SELECT * FROM sale WHERE invoice_id = '$invoice_id' AND product_id = '$product_id'";
             $check_result = $conn->query($check_sql);
@@ -126,6 +126,22 @@ if(isset($_GET['receiptData'])) {
                                 VALUES ('$invoice_id', '$product_id', '$product_code', '$price', '$qty',  '$total_amount', '$time_sales', '$date_sales')";
                 if ($conn->query($insert_sql)) {
                     // Insertion successful
+                    /*main_inventory Table Search For ID*/
+                    $sqleid = "SELECT * FROM main_inventory WHERE id = '$pid'";
+                    $queryeid = $conn->query($sqleid);
+                    $roweid = $queryeid->fetch_assoc();
+
+                    $qtyid = $roweid['qty'];
+                    $soldstock = $roweid['soldstock'];
+                    $new_sold_stock = $soldstock +  $qty;
+                    $balance = $qtyid - $new_sold_stock;
+                   
+                    //Update main_inventory
+                    $sqlUpdateLoad = "UPDATE main_inventory SET soldstock = '$new_sold_stock', balance = '$balance' WHERE id = '$pid'";
+					$conn->query($sqlUpdateLoad);
+
+
+
                 } else {
                     $_SESSION['error'] = $conn->error;
                 }
