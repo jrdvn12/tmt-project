@@ -108,15 +108,30 @@ if(isset($_GET['receiptData'])) {
             $qty = $item['quantity'];
             $total_amount = $item['total_amount'];
         
-            // Assuming $invoice_id, $time_sales, and $date_sales are defined somewhere before this loop
-            $sql = "INSERT INTO sale (invoice_id, product_id, product_code, price, qty, total_amount, time_sales, date_sales) 
-                    VALUES ('$invoice_id', '$product_id', '$product_code', '$price', '$qty',  '$total_amount', '$time_sales', '$date_sales')";
-            if ($conn->query($sql)) {
-                //$_SESSION['success'] = 'Sales Successfully!';
+            // Check if a record with the same invoice ID and product ID exists
+            $check_sql = "SELECT * FROM sale WHERE invoice_id = '$invoice_id' AND product_id = '$product_id'";
+            $check_result = $conn->query($check_sql);
+        
+            if ($check_result->num_rows > 0) {
+                // If a record exists, update the existing record
+                $update_sql = "UPDATE sale SET price = '$price', qty = '$qty', total_amount = '$total_amount', time_sales = '$time_sales', date_sales = '$date_sales' WHERE invoice_id = '$invoice_id' AND product_id = '$product_id'";
+                if ($conn->query($update_sql)) {
+                    // Update successful
+                } else {
+                    $_SESSION['error'] = $conn->error;
+                }
             } else {
-                $_SESSION['error'] = $conn->error;
+                // If no record exists, insert a new record
+                $insert_sql = "INSERT INTO sale (invoice_id, product_id, product_code, price, qty, total_amount, time_sales, date_sales) 
+                                VALUES ('$invoice_id', '$product_id', '$product_code', '$price', '$qty',  '$total_amount', '$time_sales', '$date_sales')";
+                if ($conn->query($insert_sql)) {
+                    // Insertion successful
+                } else {
+                    $_SESSION['error'] = $conn->error;
+                }
             }
         }
+        
         
         
             // Loop through the array and access each item
