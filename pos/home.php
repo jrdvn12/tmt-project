@@ -158,16 +158,16 @@ include 'includes/header.php';
 <script>
 // Add an event listener to the proceed button
 document.addEventListener('click', function(event) {
-    $('#total_amount_gross').focus();
-    $('#total_amount_gross').val('');
-    $('#searchInput').val('');
-    $('#searchInput').focus();
-    $('#total_amount_gross').focus();
+   
     if (event.target && event.target.id === 'proceedBtn') {
         // Get the selected vendor value
         $('#total_amount_gross').focus();
+        
+       
+     
+        $('#total_amount_gross').focus();
         $('#changeAmount').text('0.00');
-        $('#total_amount_gross').val('');
+        $('#total_amount_gross').text('0.00');
        
           
        
