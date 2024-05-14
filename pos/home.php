@@ -360,6 +360,7 @@ function getRow(id) {
                         <td class="hidden">${response.product_id}</td>
                         <td class="hidden">${response.id}</td>
                         </tr>`;
+                        
 
                 $("#receiptTableBody").append(newRow);
             }
