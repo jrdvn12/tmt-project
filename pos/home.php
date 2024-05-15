@@ -501,6 +501,8 @@ function searchAndAddToReceipt(event) {
 
 
 /////////////////
+/////////////////
+/////////////////
 function clearReceipt() {
     // Confirmation message before clearing receipt
     if (okayToClearReceipt()) {
