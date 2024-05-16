@@ -80,7 +80,7 @@
                   <th>Sold</th>
                   <th>Balance</th>
                   <th>Date of Stock</th>
-                  <th>Date of Expirtion</th>
+                  <th>Date of Expiration</th>
                   
                   
                 </thead>
