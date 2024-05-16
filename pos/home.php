@@ -282,7 +282,7 @@ function showConsoleLogMessage(message) {
         '</div>' +
         '</div>';
 
-    // Append the modal to the body
+    // Append the modal to the body 
     $('body').append(modalContent);
 
     // Show the modal
