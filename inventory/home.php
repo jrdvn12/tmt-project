@@ -173,6 +173,31 @@
           </div>
         </div>
         <!-- ./col -->
+        
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box" style="background: #6BABD1;">
+              <div class="inner">
+                  <?php
+                  $sql = "SELECT SUM(total_amount) AS total_sales FROM sale";
+                  $result = $conn->query($sql);
+                  if ($result && $row = $result->fetch_assoc()) {
+                      $total_sales = $row['total_sales'];
+                      echo "<h3>".number_format($total_sales, 2)."</h3>";
+                  } else {
+                      echo "<h3>0</h3>"; // If there are no sales, display 0
+                  }
+                  ?>
+                  <p>Total Sales</p>
+              </div>
+              <div class="icon">
+                  <i class="fa fa-line-chart"></i>
+              </div>
+              <a href="sales" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+      </div>
+
+        <!-- ./col -->
        
         <!-- Small boxes (End box) -->
       </div>
