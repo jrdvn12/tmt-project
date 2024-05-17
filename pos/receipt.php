@@ -419,3 +419,33 @@ if(isset($_GET['receiptData'])) {
     echo "Error: No receipt data received.";
 }
 ?>
+<script>
+// Disable all reload functions
+
+// Disable reloading triggered by F5 key
+document.addEventListener('keydown', function(event) {
+    if (event.keyCode === 116) {
+        event.preventDefault();
+        alert("Reloading is disabled on this website.");
+    }
+});
+
+// Disable reloading triggered by right-click menu
+document.addEventListener('contextmenu', function(event) {
+    event.preventDefault();
+    alert("Reloading is disabled on this website.");
+});
+
+// Disable reloading triggered by browser refresh button
+window.addEventListener('beforeunload', function(event) {
+    event.preventDefault();
+    event.returnValue = '';
+});
+
+// Disable reloading triggered by other means
+window.onbeforeunload = function() {
+    return "Reloading is disabled on this website.";
+};
+
+
+</script>

@@ -345,7 +345,7 @@ function getRow(id) {
                                     <button style="height: 100px;" class="btn btn-sm btn-primary decrement-quantity"><i class="fa fa-minus"></i></button>
                                 </span>
                                 
-                                <input style="height: 100px; font-weight: bold; font-size: 80px;" type="text" class="form-control text-center quantity" value="1" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                <input style="height: 100px; font-weight: bold; font-size: 30px;" type="text" class="form-control text-center quantity" value="1" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
 
 
                                 <span class="input-group-btn">
@@ -353,7 +353,7 @@ function getRow(id) {
                                 </span>
                             </div>
                         </td>
-                        <td style="font-weight: bold; font-size: 80px;">${response.balance}</td>
+                        <td style="font-weight: bold; font-size: 30px;">${response.balance}</td>
                         <td class="total-price">₱${price.toFixed(2)}</td>
                         <td style="width: 80px;"><button class="btn btn-danger remove-item-button"><i class='fa fa-trash'></i></button></td>
                         <td class="hidden">${response.product_name}</td>
