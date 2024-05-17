@@ -328,8 +328,8 @@ if(isset($_GET['receiptData'])) {
 
     // Add the customer copy page 
     $pdf->AddPage();
-    //$image = '<img src="../images/TMTFOOD.png" alt="Company Logo" width="120">';
-    $image = 'LOGO';
+    $image = '<img src="../images/TMTFOOD.png" alt="Company Logo" width="120">';
+    //$image = 'LOGO';
     $content = '';  
     $content .= '
     <style>
