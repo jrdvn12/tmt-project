@@ -397,7 +397,7 @@ function getRow(id) {
                 }
             });
 
-            // Add event listener for quantity input changes
+            // Add event listener for quantity input changes   
             //$('.quantity').on('input', function() {
             $('#receiptTableBody tr:last-child .quantity').on('input', function() {
                 var quantity = parseInt($(this).val());
