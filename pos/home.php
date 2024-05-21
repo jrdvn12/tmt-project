@@ -269,17 +269,18 @@ function invoice_no(){
 // MODAL
 function showConsoleLogMessage(message) {
     // Create a modal or a dialog box to display the console.log message
-    var modalContent = '<div id="consoleLogModal" class="modal" tabindex="-1" role="dialog">' +
-        '<div class="modal-dialog" role="document">' +
-        '<div class="modal-content">' +
-        '<div class="modal-body">' +
-        '<h1><center>' + message + '</center></h1>' +
-        '</div>' +
-        '<div class="modal-footer">' +
-        '<button id="okButton" type="button" class="btn btn-primary" data-dismiss="modal">OK</button>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
+    var modalContent = 
+        '<div id="consoleLogModal" class="modal" tabindex="-1" role="dialog">' +
+            '<div class="modal-dialog" role="document">' +
+                '<div class="modal-content">' +
+                    '<div class="modal-body">' +
+                        '<h1><center>' + message + '</center></h1>' +
+                    '</div>' +
+                    '<div class="modal-footer">' +
+                        '<button id="okButton" type="button" class="btn btn-primary" data-dismiss="modal">OK</button>' +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
         '</div>';
 
     // Append the modal to the body 
