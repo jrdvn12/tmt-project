@@ -333,7 +333,8 @@ $('.more-button').click(function() {
             var xhr = new XMLHttpRequest();
             xhr.open("GET", "product_row.php?id=" + productId, true);
            
-            xhr.onreadystatechange = function() {
+            xhr.onreadystate
+             = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     var productDetails = JSON.parse(xhr.responseText);
                     

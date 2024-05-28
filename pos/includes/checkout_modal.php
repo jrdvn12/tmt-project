@@ -23,92 +23,85 @@
             </div>
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-              <button type="submit" id="proceedBtn" class="btn btn-success btn-flat" name="submit" ><i class="fa fa-arrow-right"></i> Proceed</button>
+                <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+                <button type="button" id="proceedBtn" class="btn btn-success btn-flat" name="submit" ><i class="fa fa-arrow-right"></i> Proceed</button>
             </div>
+
         </div>
     </div>
 </div>
 
 <script>
-    
 $(document).ready(function() {
     $('#check').on('shown.bs.modal', function () {
         $('#changeAmount').text('0.00');
         $('#total_amount_gross').val('0.00');
+        $('#proceedBtn').prop('disabled', true); // Disable the button initially
     });
 
     $('#proceedBtn').click(function(event) {
-
-        //event.preventDefault(); // Prevent default form submission
-
-        var changechecker = document.getElementById('changeAmount').innerText;
-        if (changechecker > 0){
-            $('#check').modal('hide');
+        var changeAmount = parseFloat($('#changeAmount').text());
+        if (changeAmount >= 0) {
+            var enteredAmount = parseFloat($('#total_amount_gross').val().replace('₱', '').trim());
+            var totalAmount = parseFloat($('#checkoutTotal').text());
+            if (enteredAmount >= totalAmount) {
+                $('#check').modal('hide');
+            } else {
+                // Show an alert if the entered amount is lower than the total amount
+                alert("Entered amount is lower than the total amount. Please enter a valid amount.");
+            }
+        } else {
+            // Show a message or handle the case when change is negative
+            // For example:
+            alert("Change amount cannot be negative. Please enter a valid amount.");
         }
-        else {
-            $('#changeAmount').text('0.00');
-            $('#check').modal('hide');
-            $('#receiptTableBody').empty();
-            $('#searchInput').val('');
-            $('#searchInput').focus();
-       
-            calculateTotal();
-            showConsoleLogMessage("Exceeding stock<br>Available Stock for this Items<br>");
+    });
+
+    $('#total_amount_gross').on('input', function() {
+        var enteredAmount = parseFloat($(this).val().replace('₱', '').trim());
+        var totalAmount = parseFloat($('#checkoutTotal').text());
+        if (enteredAmount < totalAmount) {
+            $('#proceedBtn').prop('disabled', true); // Disable the button
+        } else {
+            $('#proceedBtn').prop('disabled', false); // Enable the button
         }
-        
-        
+        updateTotalAmount(); // Update the change amount
+    });
+
+    $('#cancelBtn').click(function() {
+        // Clear the form and prevent the modal from closing
+        $('#total_amount_gross').val('0.00');
+        $('#changeAmount').text('0.00');
+        $('#proceedBtn').prop('disabled', true); // Disable the button
+        return false;
     });
 
 });
 
 function updateTotalAmount() {
     $('#total_amount_gross').focus();
-    // Get the value entered by the user
-    var amount = parseFloat(document.getElementById('total_amount_gross').value.replace('₱', '').trim());
-    
-    // Get the total amount
-    var totalAmount = parseFloat(document.getElementById('checkoutTotal').innerText);
-    if(totalAmount == 0){
-        var change = isNaN(amount) ? 0.00 : totalAmount -  amount;
-    
-    // Update the total amount display
-    document.getElementById('changeAmount').innerText = change.toFixed(2);
-
-    }else{
-    // Calculate the change
+    var amount = parseFloat($('#total_amount_gross').val().replace('₱', '').trim());
+    var totalAmount = parseFloat($('#checkoutTotal').text());
     var change = isNaN(amount) ? 0.00 : amount - totalAmount;
-    
-    // Update the total amount display
-    document.getElementById('changeAmount').innerText = change.toFixed(2);
-}
-}
+    $('#changeAmount').text(change.toFixed(2));
 
+    // Check if the entered amount is lower than the total amount and disable the button accordingly
+    if (amount < totalAmount) {
+        $('#proceedBtn').prop('disabled', true); // Disable the button
+    } else {
+        $('#proceedBtn').prop('disabled', false); // Enable the button
+    }
+}
 
 function isNumberKey(evt) {
     if (event.keyCode === 13) {
-        // Trigger click event on the "Proceed" button
-      
-       document.getElementById("proceedBtn").click();
-        $('#changeAmount').text('0.00');
-        $('#check').modal('hide');
-        $('#receiptTableBody').empty();
-        $('#searchInput').val('');
-        $('#searchInput').focus();
-       
-        calculateTotal();
-        //window.location.reload();
+        document.getElementById("proceedBtn").click();
         return false; // Prevent form submission 
-  
-            
-            showConsoleLogMessage("Exceeding stock<br>Available Stock for this Items<br>");
-        
     }
     var charCode = (evt.which) ? evt.which : evt.keyCode;
     if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57))
         return false;
     return true;
-   
-
 }
+
 </script>
