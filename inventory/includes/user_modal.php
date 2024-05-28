@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function checkPasswordMatch() {
         if (password.value !== repeatPassword.value) {
-            message.textContent = 'Passwords do not matchs!';
+            message.textContent = 'Passwords do not match!';
             repeatPassword.setCustomValidity('Passwords do not match');
         } else {
             message.textContent = '';
