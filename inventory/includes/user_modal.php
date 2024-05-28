@@ -36,7 +36,7 @@ include 'includes/conn.php';
                     <div class="form-group">
                         <label for="password" class="col-sm-3 control-label">Password</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input type="password" class="form-control" id="passwords" name="password" required>
                         </div>
                     </div>
 
@@ -253,13 +253,13 @@ include 'includes/conn.php';
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Function to check password match for add new user modal
-    var password = document.getElementById('password');
+    var password = document.getElementById('passwords');
     var repeatPassword = document.getElementById('repeat_password');
     var message = document.getElementById('password_match_message');
 
     function checkPasswordMatch() {
         if (password.value !== repeatPassword.value) {
-            message.textContent = 'Passwords do not match!';
+            message.textContent = 'Passwords do not matchs!';
             repeatPassword.setCustomValidity('Passwords do not match');
         } else {
             message.textContent = '';
