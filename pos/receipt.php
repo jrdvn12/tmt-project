@@ -127,11 +127,11 @@ if(isset($_GET['receiptData'])) {
                 if ($conn->query($insert_sql)) {
 
 
-                    $asql1 = "SELECT * FROM sale WHERE invoice_id = '$invoice_id'";
+                    $asql1 =   "SELECT * FROM sale WHERE invoice_id = '$invoice_id' AND product_id = '$product_id'";
                     $aquery1 = $conn->query($asql1);
                     $arow1 = $aquery1->fetch_assoc();
 
-                    if ($aquery1->num_rows < 0 ) {
+                    if ($aquery1->num_rows > 0 ) {
                          // Update successful
                         // Insertion successful
                         /*main_inventory Table Search For ID*/
