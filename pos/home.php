@@ -410,7 +410,7 @@ function getRow(id) {
                 }
                 else if  (isNaN(quantity) || quantity <= 0 ) {
                     showConsoleLogMessage("Invalid quantity<br>Available Stock for this Items<br>" + response.product_number + "<br>"+ response.balance);
-                    // Set the value of the quantity input field to the available balance
+                    // Set the value of the quantity input field to the available balance 
                     var quantity = 1;
                     $(this).closest('tr').find(".quantity").val(quantity);
                    
