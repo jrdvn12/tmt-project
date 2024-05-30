@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <label for="password" class="col-sm-3 control-label">Password</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input type="password" class="form-control" id="passwords" name="password" required>
                         </div>
                     </div>
 
@@ -234,22 +234,34 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function() {
-    // Function to clear password fields and error message
-    $('#addnew').on('shown.bs.modal', function () {
-        $('#password').val('');
-        $('#repeat_password').val('');
-        $('#password_match_message').text('');
-    });
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to check password match for add new user modal
+    var password = document.getElementById('password');
+    var repeatPassword = document.getElementById('repeat_password');
+    var message = document.getElementById('password_match_message');
 
-    // Function to validate password fields before form submission
-    $('#addUserForm').submit(function(event) {
-        var password = $('#password').val();
-        var repeatPassword = $('#repeat_password').val();
-        
-        if (password !== repeatPassword) {
-            $('#password_match_message').text('Passwords do not match!');
-            event.preventDefault(); // Prevent form submission
+    function checkPasswordMatch() {
+        if (password.value !== repeatPassword.value) {
+            message.textContent = 'Passwords do not match!';
+            repeatPassword.setCustomValidity('Passwords do not match');
+        } else {
+            message.textContent = '';
+            repeatPassword.setCustomValidity('');
+        }
+    }
+
+    password.addEventListener('input', checkPasswordMatch);
+    repeatPassword.addEventListener('input', checkPasswordMatch);
+
+    // Function to check password match for edit user password modal
+    var editPassword = document.getElementById('edit_password');
+    var editRepeatPassword = document.getElementById('edit_repeat_password');
+    var editMessage = document.getElementById('edit_password_match_message');
+
+    function checkEditPasswordMatch() {
+        if (editPassword.value !== editRepeatPassword.value) {
+            editMessage.textContent = 'Passwords do not match!';
+            editRepeatPassword.setCustomValidity('Passwords do not match');
         } else {
             $('#password_match_message').text(''); // Clear error message if passwords match
         }

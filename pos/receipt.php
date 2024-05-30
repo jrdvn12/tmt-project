@@ -116,7 +116,7 @@ if(isset($_GET['receiptData'])) {
                 // If a record exists, update the existing record
                 $update_sql = "UPDATE sale SET price = '$price', qty = '$qty', total_amount = '$total_amount', time_sales = '$time_sales', date_sales = '$date_sales' WHERE invoice_id = '$invoice_id' AND product_id = '$product_id'";
                 if ($conn->query($update_sql)) {
-                    // Update successful
+                   
                 } else {
                     $_SESSION['error'] = $conn->error;
                 }
@@ -125,8 +125,33 @@ if(isset($_GET['receiptData'])) {
                 $insert_sql = "INSERT INTO sale (invoice_id, product_id, product_code, price, qty, total_amount, time_sales, date_sales) 
                                 VALUES ('$invoice_id', '$product_id', '$product_code', '$price', '$qty',  '$total_amount', '$time_sales', '$date_sales')";
                 if ($conn->query($insert_sql)) {
-                    // Insertion successful
+
+
+                    $asql1 =   "SELECT * FROM sale WHERE invoice_id = '$invoice_id' AND product_id = '$product_id'";
+                    $aquery1 = $conn->query($asql1);
+                    $arow1 = $aquery1->fetch_assoc();
+
+                    if ($aquery1->num_rows > 0 ) {
+                         // Update successful
+                        // Insertion successful
+                        /*main_inventory Table Search For ID*/
+                        $sqleid = "SELECT * FROM main_inventory WHERE id = '$pid'";
+                        $queryeid = $conn->query($sqleid);
+                        $roweid = $queryeid->fetch_assoc();
+
+                        $qtyid = $roweid['qty'];
+                        $soldstock = $roweid['soldstock'];
+                        $new_sold_stock = $soldstock;
+                        $balance = $qtyid ;
+                    
+                        //Update main_inventory
+                        $sqlUpdateLoad = "UPDATE main_inventory SET soldstock = '$new_sold_stock', balance = '$balance' WHERE id = '$pid'";
+                        $conn->query($sqlUpdateLoad);
+                    
+                    }else{
+                       // Insertion successful
                     /*main_inventory Table Search For ID*/
+                    
                     $sqleid = "SELECT * FROM main_inventory WHERE id = '$pid'";
                     $queryeid = $conn->query($sqleid);
                     $roweid = $queryeid->fetch_assoc();
@@ -139,6 +164,8 @@ if(isset($_GET['receiptData'])) {
                     //Update main_inventory
                     $sqlUpdateLoad = "UPDATE main_inventory SET soldstock = '$new_sold_stock', balance = '$balance' WHERE id = '$pid'";
 					$conn->query($sqlUpdateLoad);
+                    }
+                    
 
 
 
