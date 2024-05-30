@@ -33,41 +33,55 @@
 
 <script>
 $(document).ready(function() {
+    // Function to initialize the modal
     $('#check').on('shown.bs.modal', function () {
         $('#changeAmount').text('0.00');
         $('#total_amount_gross').val('0.00');
         $('#proceedBtn').prop('disabled', true); // Disable the button initially
     });
 
+    // Proceed button click event
     $('#proceedBtn').click(function(event) {
         var changeAmount = parseFloat($('#changeAmount').text());
         if (changeAmount >= 0) {
-            var enteredAmount = parseFloat($('#total_amount_gross').val().replace('₱', '').trim());
-            var totalAmount = parseFloat($('#checkoutTotal').text());
-            if (enteredAmount >= totalAmount) {
-                $('#check').modal('hide');
-            } else {
-                // Show an alert if the entered amount is lower than the total amount
-                alert("Entered amount is lower than the total amount. Please enter a valid amount.");
-            }
+            $('#check').modal('hide');
         } else {
-            // Show a message or handle the case when change is negative
-            // For example:
             alert("Change amount cannot be negative. Please enter a valid amount.");
         }
     });
 
+    // Input event on the total amount input field
     $('#total_amount_gross').on('input', function() {
         var enteredAmount = parseFloat($(this).val().replace('₱', '').trim());
         var totalAmount = parseFloat($('#checkoutTotal').text());
-        if (enteredAmount < totalAmount) {
-            $('#proceedBtn').prop('disabled', true); // Disable the button
-        } else {
-            $('#proceedBtn').prop('disabled', false); // Enable the button
+
+        // Check if the input is a valid number
+        if (isNaN(enteredAmount)) {
+            $('#proceedBtn').prop('disabled', true); // Disable the button if the input is not a number
+            return;
         }
-        updateTotalAmount(); // Update the change amount
+
+        // Calculate and display the change amount
+        var change = enteredAmount - totalAmount;
+        $('#changeAmount').text(change.toFixed(2));
+
+        // Enable or disable the "Proceed" button based on the entered amount
+        if (enteredAmount < totalAmount) {
+            $('#proceedBtn').prop('disabled', true); // Disable the button if the entered amount is lower than the total amount
+
+            if (!$(this).data('lower-amount-alert-shown')) {
+                alert("Entered amount is lower than the total amount. Please enter a valid amount.");
+                $(this).val($(this).data('prev-amount')); // Revert back to the previous amount
+                $(this).data('lower-amount-alert-shown', true); // Set the flag to indicate the alert has been shown
+            }
+        } else {
+            $('#proceedBtn').prop('disabled', false); // Enable the button if the entered amount is higher or equal to the total amount
+            $(this).data('prev-amount', enteredAmount); // Save the current amount as previous amount
+            $(this).data('lower-amount-alert-shown', false); // Reset the flag for lower amount alert
+        }
     });
 
+    // Cancel button click event
     $('#cancelBtn').click(function() {
         // Clear the form and prevent the modal from closing
         $('#total_amount_gross').val('0.00');
@@ -78,30 +92,59 @@ $(document).ready(function() {
 
 });
 
+
 function updateTotalAmount() {
-    $('#total_amount_gross').focus();
     var amount = parseFloat($('#total_amount_gross').val().replace('₱', '').trim());
     var totalAmount = parseFloat($('#checkoutTotal').text());
-    var change = isNaN(amount) ? 0.00 : amount - totalAmount;
+
+    // Check if the input is a valid number
+    if (isNaN(amount)) {
+        $('#proceedBtn').prop('disabled', true); // Disable Proceed button if the input is not a number
+        $('#changeAmount').text('0.00'); // Reset change amount to 0 if input is not a number
+        return;
+    }
+
+    // Enable Proceed button for any valid number
+    $('#proceedBtn').prop('disabled', false);
+
+    // Calculate and display the change amount
+    var change = amount - totalAmount;
     $('#changeAmount').text(change.toFixed(2));
 
-    // Check if the entered amount is lower than the total amount and disable the button accordingly
+    // Check if entered amount is lower than the total amount and show alert
     if (amount < totalAmount) {
-        $('#proceedBtn').prop('disabled', true); // Disable the button
-    } else {
-        $('#proceedBtn').prop('disabled', false); // Enable the button
+        alert("Entered amount is lower than the total amount. Please enter a valid amount.");
     }
 }
 
-function isNumberKey(evt) {
-    if (event.keyCode === 13) {
-        document.getElementById("proceedBtn").click();
-        return false; // Prevent form submission 
+$('#proceedBtn').click(function(event) {
+    var changeAmount = parseFloat($('#changeAmount').text());
+    if (changeAmount >= 0) {
+        $('#check').modal('hide');
+    } else {
+        // Show a message or handle the case when change is negative
+        // For example:
+        alert("Change amount cannot be negative. Please enter a valid amount.");
     }
+});
+
+$('#total_amount_gross').on('input', function() {
+    updateTotalAmount();
+});
+
+
+function isNumberKey(evt) {
     var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57))
+    
+    // Allow digits, backspace, and delete keys
+    if (charCode == 8 || charCode == 46 || (charCode >= 48 && charCode <= 57)) {
+        return true;
+    } else {
+        // Prevent input of non-numeric characters
+        evt.preventDefault();
         return false;
-    return true;
+    }
 }
+
 
 </script>
