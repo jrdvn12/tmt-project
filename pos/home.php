@@ -331,7 +331,7 @@ function getRow(id) {
                     showConsoleLogMessage("Cannot add more than available stock<br>Available Stock for this Items<br>" + response.balance);
                 }
             } else {
-                // If the product does not exist, add a new row to the table
+                // If the product does not exist, add a new row to the table 
                 var imageSrc = response.photo ? '../images/' + response.photo : '../images/noproduct.jpg';
 
                 var price = parseFloat(response.price);
