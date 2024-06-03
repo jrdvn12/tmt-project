@@ -164,7 +164,7 @@ if (isset($_GET['receiptData'])) {
 
 
                         
-                        // Calculate the new sold stock and balance
+                        // Calculate the new sold stock and balance 
                         $soldstock = $rowMainInventory['soldstock'];
                         $newSoldStock = $soldstock + $qty;
                         $balance = $qtyid - $newSoldStock;
