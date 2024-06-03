@@ -4,8 +4,29 @@
     require_once 'includes/session.php';
     include 'includes/conn.php';
 
+
+ // Check if the form has been submitted
+ if ($_SERVER["REQUEST_METHOD"] == "POST") {
+     // Process form data and update the database
+
+     // Set a session variable to indicate that the form has been submitted
+     $_SESSION["form_submitted"] = true;
+
+     // Redirect to another page to prevent multiple form submissions
+     header("Location: success_page.php");
+     exit(); // Make sure to exit after redirecting
+ }
+
+ // Check if the session variable is set to prevent multiple updates on page refresh
+ if (isset($_SESSION["form_submitted"])) {
+     // Database update code
+
+     // Reset session variable to prevent multiple updates
+     unset($_SESSION["form_submitted"]);
+ }
+
 // Check if the receiptData key exists in the $_POST array
-if(isset($_GET['receiptData'])) {
+if (isset($_GET['receiptData'])) {
 
     // Decode the JSON data to PHP array
     $receiptData = json_decode($_GET['receiptData'], true);
@@ -135,18 +156,24 @@ if(isset($_GET['receiptData'])) {
                          // Update successful
                         // Insertion successful
                         /*main_inventory Table Search For ID*/
-                        $sqleid = "SELECT * FROM main_inventory WHERE id = '$pid'";
-                        $queryeid = $conn->query($sqleid);
-                        $roweid = $queryeid->fetch_assoc();
+                        // Fetch the current quantity of the item from the main inventory
+                        $sqlMainInventory = "SELECT * FROM main_inventory WHERE id = '$pid'";
+                        $queryMainInventory = $conn->query($sqlMainInventory);
+                        $rowMainInventory = $queryMainInventory->fetch_assoc();
+                        $qtyid = $rowMainInventory['qty'];
 
-                        $qtyid = $roweid['qty'];
-                        $soldstock = $roweid['soldstock'];
-                        $new_sold_stock = $soldstock;
-                        $balance = $qtyid ;
+
+                        
+                        // Calculate the new sold stock and balance
+                        $soldstock = $rowMainInventory['soldstock'];
+                        $newSoldStock = $soldstock + $qty;
+                        $balance = $qtyid - $newSoldStock;
+
                     
-                        //Update main_inventory
-                        $sqlUpdateLoad = "UPDATE main_inventory SET soldstock = '$new_sold_stock', balance = '$balance' WHERE id = '$pid'";
-                        $conn->query($sqlUpdateLoad);
+                        // Update the main inventory with the new sold stock and balance
+                        $sqlUpdateMainInventory = "UPDATE main_inventory SET soldstock = '$newSoldStock', balance = '$balance' WHERE id = '$pid'";
+                        $conn->query($sqlUpdateMainInventory);
+
                     
                     }else{
                        // Insertion successful
@@ -198,32 +225,7 @@ if(isset($_GET['receiptData'])) {
         $lessvat = $selectedAmount *$vat;
         $anv =$selectedAmount - $lessvat;
         $vat2 =.12;
-        /*$contents .=
-        '<tr>
-            <td border="1" align="center"></td>
-            <td border="1" align="center"></td>
-            <td border="1" align="right">TOTAL</td>
-            <td border="1" align="center">'.number_format($selectedAmount, 2).'</td>
-            <td border="1" align="center"> </td>
-        </tr>';
-        $selectedPayment = json_decode($_GET['selectedPayment'], true);
-        $contents .=
-        '<tr>
-            <td border="1" align="center"></td>
-            <td border="1" align="center"></td>
-            <td border="1" align="right">PAYMENT</td>
-            <td border="1" align="center">'.number_format($selectedPayment, 2).'</td>
-            <td border="1" align="center"> </td>
-        </tr>';
-        $selectedChange = json_decode($_GET['selectedChange'], true);
-        $contents .=
-        '<tr>
-            <td border="1" align="center"></td>
-            <td border="1" align="center"></td>
-            <td border="1" align="right">CHANGE</td>
-            <td border="1" align="center">' . number_format($selectedChange, 2). '</td>
-            <td border="1" align="center"> </td>
-        </tr>';*/
+
         $contents .=
         '
         <style>
@@ -441,38 +443,17 @@ if(isset($_GET['receiptData'])) {
 
     // Output the PDF
     $pdf->Output('TMT.pdf', 'I');
-} else {
+}else {
     // Handle case when receiptData key is not present in $_POST array
     echo "Error: No receipt data received.";
 }
+
+
 ?>
+
 <script>
-// Disable all reload functions
-
-// Disable reloading triggered by F5 key
-document.addEventListener('keydown', function(event) {
-    if (event.keyCode === 116) {
-        event.preventDefault();
-        alert("Reloading is disabled on this website.");
-    }
-});
-
-// Disable reloading triggered by right-click menu
-document.addEventListener('contextmenu', function(event) {
-    event.preventDefault();
-    alert("Reloading is disabled on this website.");
-});
-
-// Disable reloading triggered by browser refresh button
-window.addEventListener('beforeunload', function(event) {
-    event.preventDefault();
-    event.returnValue = '';
-});
-
-// Disable reloading triggered by other means
-window.onbeforeunload = function() {
-    return "Reloading is disabled on this website.";
-};
-
-
+  // Disable page reload
+  window.onbeforeunload = function() {
+        return "Reloading is disabled on this website.";
+    };
 </script>
