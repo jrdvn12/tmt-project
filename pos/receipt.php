@@ -155,7 +155,7 @@ if (isset($_GET['receiptData'])) {
                     if ($aquery1->num_rows > 0 ) {
                          // Update successful
                         // Insertion successful
-                        /*main_inventory Table Search For ID*/
+                        /*main_inventory Table Search For ID*/ 
                         // Fetch the current quantity of the item from the main inventory
                         $sqlMainInventory = "SELECT * FROM main_inventory WHERE id = '$pid'";
                         $queryMainInventory = $conn->query($sqlMainInventory);
