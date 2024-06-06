@@ -220,7 +220,7 @@ document.addEventListener('click', function(event) {
                         selectedChange: selectedChange,
                      },
                 success: function(response) {
-                    // Handle success response from the server
+                    // Handle success response from the server 
                     //showConsoleLogMessage('Receipt data sent successfully');
                     //showConsoleLogMessage(response);
                     setTimeout(function() {
