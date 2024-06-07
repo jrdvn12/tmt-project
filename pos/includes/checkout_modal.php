@@ -16,6 +16,8 @@
                         <h2 class="bold fullname"></h2>
                         <h1><b>Enter Amount</b></h1>
                         <input type="text" class="form-control" id="total_amount_gross" name="total_amount_gross" required style="text-align: center; height: 100px; font-size: 80px;" oninput="updateTotalAmount()" onkeypress="return isNumberKey(event)" placeholder="₱ 0.00">
+                        <h1><b>Enter Discount</b></h1>
+                        <input type="text" class="form-control" id="total_amount_gross" name="total_amount_gross" required style="text-align: center; height: 100px; font-size: 80px;" oninput="updateTotalAmount()" onkeypress="return isNumberKey(event)" placeholder="Discount">
                     </div>
                 </form>
             </div>
