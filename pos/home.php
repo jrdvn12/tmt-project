@@ -603,7 +603,7 @@ function openCheckModal() {
        // $('#searchInput').val('');
         //$('#searchInput').focus();
 
-       // window.location.href ="reciept_generate";
+       // window.location.href ="reciept_generate"; 
 }
 
 
